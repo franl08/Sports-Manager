@@ -99,6 +99,35 @@ public class Player {
         return new Player(this);
     }
 
+    public boolean equals(Object o){
+        if (this == o) return true;
+        else if (o == null || this.getClass() != o.getClass()) return false;
+        Player p = (Player) o;
+        return (this.id == p.getId() && this.name.equals(p.getName()) && this.number == p.getNumber() && this.currentTeam.equals(p.getCurrentTeam()) && this.teamsHistory.equals(p.getTeamsHistory()) && this.pos.equals(p.getPos())
+                && this.pace == p.getPace() && this.endurance == p.getEndurance() && this.skill == p.getSkill() && this.impulsion == p.getImpulsion() && this.heading == p.getHeading() && this.finishing == p.getFinishing() &&
+                this.passing == p.getPassing() && this.tackling == p.getTackling() && this.positioning == p.getPositioning());
+    }
+
+    public String toString(){
+        StringBuilder sb = new StringBuilder("Player: ")
+                .append("ID: ").append(id)
+                .append(" | Name: ").append(name)
+                .append(" | Number: ").append(number)
+                .append(" | Team: ").append(currentTeam)
+                .append(" | Position: ").append(pos)
+                .append("\n Attributes: \n")
+                .append("Pace: ").append(pace).append("\n")
+                .append("Endurance: ").append(endurance).append("\n")
+                .append("Skill: ").append(skill).append("\n")
+                .append("Impulsion: ").append(impulsion).append("\n")
+                .append("Heading: ").append(heading).append("\n")
+                .append("Finishing: ").append(finishing).append("\n")
+                .append("Passing: ").append(passing).append("\n")
+                .append("Tackling: ").append(tackling).append("\n")
+                .append("Positioning: ").append(positioning);
+        return sb.toString();
+    }
+
     public int getId() {
         return this.id;
     }
