@@ -4,5 +4,6 @@ public class game {
         View view = new View();
         Controller controller = new Controller(model, view);
         controller.run();
+        yes
     }
 }
