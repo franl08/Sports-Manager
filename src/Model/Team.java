@@ -1,50 +1,67 @@
 package Model;
+
 import java.util.HashSet;
 import java.util.Set;
 
 public class Team {
-    private int id;
+    private String id;
     private String name;
-    private Set<GK> gks;
-    private Set<WB> wbs;
-    private Set<DF> dfs;
-    private Set<MD> mds;
-    private Set<WA> was;
-    private Set<AT> ats;
-    private int overall;
+    private Set<GK> goalkeepers;
+    private Set<DF> defenders;
+    private Set<MD> midfielders;
+    private Set<WG> wingers;
+    private Set<FW> forwards;
 
-    public Team(String name, Set<GK> gks, Set<WB> wbs, Set<DF> dfs, Set<MD> mds, Set<WA> was, Set<AT> ats) {
-        this.setId();
-        this.name = name;
-        this.setGks(gks);
-        this.setWbs(wbs);
-        this.setDfs(dfs);
-        this.setMds(mds);
-        this.setWas(was);
-        this.setAts(ats);
+    public Team(){
+        this.id = "n/a";
+        this.name = "n/a";
+        this.goalkeepers = new HashSet<GK>();
+        this.defenders = new HashSet<DF>();
+        this.midfielders = new HashSet<MD>();
+        this.wingers = new HashSet<WG>();
+        this.forwards = new HashSet<FW>();
     }
 
-    public Team (Team t){
+    public Team(String id, String name) {
+        this.id = id;
+        this.name = name;
+        this.goalkeepers = new HashSet<GK>();
+        this.defenders = new HashSet<DF>();
+        this.midfielders = new HashSet<MD>();
+        this.wingers = new HashSet<WG>();
+        this.forwards = new HashSet<FW>();
+    }
+
+    public Team(String id, String name, Set<GK> goalkeepers, Set<DF> defenders, Set<MD> midfielders, Set<WG> wingers, Set<FW> forwards) {
+        this.id = id;
+        this.name = name;
+        this.setGoalkeepers(goalkeepers);
+        this.setDefenders(defenders);
+        this.setMidfielders(midfielders);
+        this.setWingers(wingers);
+        this.setForwards(forwards);
+    }
+
+    public Team(Team t){
         this.id = t.getId();
         this.name = t.getName();
-        this.gks = t.getGks();
-        this.wbs = t.getWbs();
-        this.dfs = t.getDfs();
-        this.mds = t.getMds();
-        this.ats = t.getAts();
-        this.overall = t.getOverall();
+        this.setGoalkeepers(t.getGoalkeepers());
+        this.setDefenders(t.getDefenders());
+        this.setMidfielders(t.getMidfielders());
+        this.setWingers(t.getWingers());
+        this.setForwards(t.getForwards());
     }
 
     public Team clone(){
         return new Team(this);
     }
 
-    public int getId() {
+    public String getId() {
         return this.id;
     }
 
-    public void setId() {
-        this.id = hashCode();
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -55,73 +72,75 @@ public class Team {
         this.name = name;
     }
 
-    public Set<GK> getGks() {
-        return this.gks;
+    public Set<GK> getGoalkeepers() {
+        Set<GK> ans = new HashSet<GK>();
+        for(GK g : this.goalkeepers)
+            ans.add(g.clone());
+        return ans;
     }
 
-    public void setGks(Set<GK> gks) {
-        this.gks = new HashSet<>();
-        for (GK p : gks) this.gks.add(p.clone());
+    public void setGoalkeepers(Set<GK> goalkeepers) {
+        this.goalkeepers = goalkeepers;
     }
 
-    public Set<WB> getWbs() {
-        return this.wbs;
+    public Set<DF> getDefenders() {
+        Set<DF> ans = new HashSet<DF>();
+        for(DF d : this.defenders)
+            ans.add(d.clone());
+        return ans;
     }
 
-    public void setWbs(Set<WB> wbs) {
-        this.wbs = new HashSet<>();
-        for (WB p : wbs) this.wbs.add(p.clone());
+    public void setDefenders(Set<DF> defenders) {
+        this.defenders = defenders;
     }
 
-    public Set<DF> getDfs() {
-        return this.dfs;
+    public Set<MD> getMidfielders() {
+        Set<MD> ans = new HashSet<MD>();
+        for(MD m : this.midfielders)
+            ans.add(m.clone());
+        return ans;
     }
 
-    public void setDfs(Set<DF> dfs) {
-        this.dfs = new HashSet<>();
-        for (DF p : dfs) this.dfs.add(p.clone());
+    public void setMidfielders(Set<MD> midfielders) {
+        this.midfielders = midfielders;
     }
 
-    public Set<MD> getMds() {
-        return this.mds;
+    public Set<WG> getWingers() {
+        Set<WG> ans = new HashSet<WG>();
+        for(WG w : this.wingers)
+            ans.add(w.clone());
+        return ans;
     }
 
-    public void setMds(Set<MD> mds) {
-        this.mds = new HashSet<>();
-        for (MD p : mds) this.mds.add(p.clone());
+    public void setWingers(Set<WG> wingers) {
+        this.wingers = wingers;
     }
 
-    public Set<WA> getWas() {
-        return this.was;
+    public Set<FW> getForwards() {
+        Set<FW> ans = new HashSet<FW>();
+        for(FW f : this.forwards)
+            ans.add(f.clone());
+        return ans;
     }
 
-    public void setWas(Set<WA> was) {
-        this.was = new HashSet<>();
-        for (WA p : was) this.was.add(p.clone());
+    public void setForwards(Set<FW> forwards) {
+        this.forwards = forwards;
     }
 
-    public Set<AT> getAts() {
-        return this.ats;
+    public String toString(){
+        StringBuilder sb = new StringBuilder("Team: ")
+                .append(name).append("\n")
+                .append("Goalkeepers: ").append(goalkeepers)
+                .append("\n Defenders: ").append(defenders)
+                .append("\n Midfielders: ").append(midfielders)
+                .append("\n Forwards: ").append(forwards);
+        return sb.toString();
     }
 
-    public void setAts(Set<AT> ats) {
-        this.ats = new HashSet<>();
-        for (AT p : ats) this.ats.add(p.clone());
-    }
-
-    public int getOverall() {
-        return this.overall;
-    }
-
-    public void setOverall(){
-        int acOv = 0;
-        int teamSize = this.gks.size() + this.wbs.size() + this.dfs.size() + this.mds.size() + this.was.size() + this.ats.size();
-        for (GK p : this.gks) acOv += p.getOverall();
-        for (WB p : this.wbs) acOv += p.getOverall();
-        for (DF p : this.dfs) acOv += p.getOverall();
-        for (MD p : this.mds) acOv += p.getOverall();
-        for (WA p : this.was) acOv += p.getOverall();
-        for (AT p : this.ats) acOv += p.getOverall();
-        this.overall = acOv / teamSize;
+    public boolean equals(Object o){
+        if(this == o) return true;
+        else if(o == null || this.getClass() != o.getClass()) return false;
+        Team t = (Team) o;
+        return (this.id.equals(t.getId()));
     }
 }

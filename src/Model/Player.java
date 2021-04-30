@@ -1,139 +1,49 @@
 package Model;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
-//TODO equals(), toString(), correct setters/getters;
-
-public class Player {
-    private int id;
+public abstract class Player {
+    private String id;
     private String name;
-    private int number;
     private Team currentTeam;
-    private Set<Team> teamsHistory;
-    private Position pos;
-    private int pace;
-    private int endurance;
-    private int skill;
-    private int impulsion;
-    private int heading;
-    private int finishing;
-    private int passing;
-    private int tackling;
-    private int positioning;
+    private List<Team> historic;
 
-    public Player(int id, String name, int number, Team currentTeam, Set<Team> teamsHistory, Position pos, int pace, int endurance, int skill, int impulsion, int heading, int finishing, int passing, int tackling, int positioning) {
+    public Player(){
+        this.id = "n/a";
+        this.name = "n/a";
+        this.currentTeam = null;
+        this.historic = null;
+    }
+
+    public Player(String id, String name, Team currentTeam, List<Team> historic) {
         this.id = id;
         this.name = name;
-        this.number = number;
-        this.currentTeam = currentTeam;
-        this.teamsHistory = teamsHistory;
-        this.pos = pos;
-        this.pace = pace;
-        this.endurance = endurance;
-        this.skill = skill;
-        this.impulsion = impulsion;
-        this.heading = heading;
-        this.finishing = finishing;
-        this.passing = passing;
-        this.tackling = tackling;
-        this.positioning = positioning;
+        this.setCurrentTeam(currentTeam);
+        this.setHistoric(historic);
     }
 
-    public Player(String name, int number, Team currentTeam, Set<Team> teamsHistory, Position pos, int pace, int endurance, int skill, int impulsion, int heading, int finishing, int passing, int tackling, int positioning) {
-        this.setId(); // TODO HASHCODE
+    public Player(String id, String name, Team currentTeam) {
+        this.id = id;
         this.name = name;
-        this.number = number;
-        this.currentTeam = currentTeam;
-        this.teamsHistory = teamsHistory;
-        this.pos = pos;
-        this.pace = pace;
-        this.endurance = endurance;
-        this.skill = skill;
-        this.impulsion = impulsion;
-        this.heading = heading;
-        this.finishing = finishing;
-        this.passing = passing;
-        this.tackling = tackling;
-        this.positioning = positioning;
-    }
-
-    public Player(String name, int number, Team currentTeam, Position pos, int pace, int endurance, int skill, int impulsion, int heading, int finishing, int passing, int tackling, int positioning) {
-        this.setId(); // TODO HASHCODE
-        this.name = name;
-        this.number = number;
-        this.currentTeam = currentTeam;
-        this.teamsHistory = new HashSet<Team>();
-        this.teamsHistory.add(currentTeam);
-        this.pos = pos;
-        this.pace = pace;
-        this.endurance = endurance;
-        this.skill = skill;
-        this.impulsion = impulsion;
-        this.heading = heading;
-        this.finishing = finishing;
-        this.passing = passing;
-        this.tackling = tackling;
-        this.positioning = positioning;
+        this.setCurrentTeam(currentTeam);
+        this.historic = new ArrayList<Team>();
     }
 
     public Player(Player p){
         this.id = p.getId();
         this.name = p.getName();
-        this.number = p.getNumber();
         this.currentTeam = p.getCurrentTeam();
-        this.teamsHistory = p.getTeamsHistory();
-        this.pos = p.getPos();
-        this.pace = p.getPace();
-        this.endurance = p.getEndurance();
-        this.skill = p.getSkill();
-        this.impulsion = p.getImpulsion();
-        this.heading = p.getHeading();
-        this.finishing = p.getFinishing();
-        this.passing = p.getPassing();
-        this.tackling = p.getTackling();
-        this.positioning = p.getPositioning();
+        this.setHistoric(p.getHistoric());
     }
 
-    public Player clone(){
-        return new Player(this);
-    }
+    public abstract Player clone();
 
-    public boolean equals(Object o){
-        if (this == o) return true;
-        else if (o == null || this.getClass() != o.getClass()) return false;
-        Player p = (Player) o;
-        return (this.id == p.getId() && this.name.equals(p.getName()) && this.number == p.getNumber() && this.currentTeam.equals(p.getCurrentTeam()) && this.teamsHistory.equals(p.getTeamsHistory()) && this.pos.equals(p.getPos())
-                && this.pace == p.getPace() && this.endurance == p.getEndurance() && this.skill == p.getSkill() && this.impulsion == p.getImpulsion() && this.heading == p.getHeading() && this.finishing == p.getFinishing() &&
-                this.passing == p.getPassing() && this.tackling == p.getTackling() && this.positioning == p.getPositioning());
-    }
-
-    public String toString(){
-        StringBuilder sb = new StringBuilder("Player: ")
-                .append("ID: ").append(id)
-                .append(" | Name: ").append(name)
-                .append(" | Number: ").append(number)
-                .append(" | Team: ").append(currentTeam)
-                .append(" | Position: ").append(pos)
-                .append("\n Attributes: \n")
-                .append("Pace: ").append(pace).append("\n")
-                .append("Endurance: ").append(endurance).append("\n")
-                .append("Skill: ").append(skill).append("\n")
-                .append("Impulsion: ").append(impulsion).append("\n")
-                .append("Heading: ").append(heading).append("\n")
-                .append("Finishing: ").append(finishing).append("\n")
-                .append("Passing: ").append(passing).append("\n")
-                .append("Tackling: ").append(tackling).append("\n")
-                .append("Positioning: ").append(positioning);
-        return sb.toString();
-    }
-
-    public int getId() {
+    public String getId() {
         return this.id;
     }
 
-    public void setId() {
-        this.id = hashCode(); //TODO HASHCODE
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -144,130 +54,48 @@ public class Player {
         this.name = name;
     }
 
-    public int getNumber() {
-        return this.number;
-    }
-
-    public void setNumber(int number) {
-        this.number = number;
-    }
-
     public Team getCurrentTeam() {
-        return this.currentTeam;
+        return this.currentTeam.clone();
     }
 
     public void setCurrentTeam(Team currentTeam) {
-        this.currentTeam = new Team(currentTeam.clone());
+        int histSize = this.historic.size();
+        this.currentTeam = currentTeam.clone();
+        if(!this.historic.get(histSize - 1).equals(currentTeam)) this.historic.add(currentTeam.clone());
     }
 
-    public Set<Team> getTeamsHistory() {
-        return this.teamsHistory;
+    public List<Team> getHistoric() {
+        List<Team> ans = new ArrayList<Team>();
+        for(Team t : this.historic)
+            ans.add(t.clone());
+        return ans;
     }
 
-    public void setTeamsHistory(Set<Team> teamsHistory) {
-        this.teamsHistory = new HashSet<>();
-        for (Team t : teamsHistory) this.teamsHistory.add(t.clone());
+    public void setHistoric(List<Team> historic) {
+        for(Team t : historic)
+            this.historic.add(t.clone());
     }
 
-    public Position getPos() {
-        return this.pos;
+    public String toString(){
+        StringBuilder sb = new StringBuilder("Player: ")
+                .append(name).append(" | ").append(currentTeam)
+                .append("Teams Historic: ").append(historic.toString());
+        return sb.toString();
     }
 
-    public void setPos(Position pos) {
-        this.pos = pos;
+    public boolean equals(Object o){
+        if(this == o) return true;
+        else if(o == null || o.getClass() != this.getClass()) return false;
+        Player p = (Player) o;
+        return (this.id.equals(p.getId()));
     }
 
-    public int getPace() {
-        return this.pace;
+    public int hashCode(){
+        return Objects.hash(id, name, historic);
     }
 
-    public void setPace(int pace) {
-        this.pace = pace;
+    public void changeTeam(Team t){
+        this.setCurrentTeam(t.clone());
     }
-
-    public int getEndurance() {
-        return this.endurance;
-    }
-
-    public void setEndurance(int endurance) {
-        this.endurance = endurance;
-    }
-
-    public int getSkill() {
-        return this.skill;
-    }
-
-    public void setSkill(int skill) {
-        this.skill = skill;
-    }
-
-    public int getImpulsion() {
-        return this.impulsion;
-    }
-
-    public void setImpulsion(int impulsion) {
-        this.impulsion = impulsion;
-    }
-
-    public int getHeading() {
-        return this.heading;
-    }
-
-    public void setHeading(int heading) {
-        this.heading = heading;
-    }
-
-    public int getFinishing() {
-        return this.finishing;
-    }
-
-    public void setFinishing(int finishing) {
-        this.finishing = finishing;
-    }
-
-    public int getPassing() {
-        return this.passing;
-    }
-
-    public void setPassing(int passing) {
-        this.passing = passing;
-    }
-
-    public int getTackling() {
-        return this.tackling;
-    }
-
-    public void setTackling(int tackling) {
-        this.tackling = tackling;
-    }
-
-    public int getPositioning() {
-        return this.positioning;
-    }
-
-    public void setPositioning(int positioning) {
-        this.positioning = positioning;
-    }
-
-    public int calOverall(Position pos) {
-        int ov = 0;
-        if (pos.equals(Position.AT)) {
-            ov = (int) (((this.pace * 15) + (this.endurance * 10) + (this.skill * 10) + (this.impulsion * 10) + (this.heading * 10) + (this.finishing * 25) + (this.passing * 10) + (this.tackling * 3) + (positioning * 7)) / 100);
-        } else if (pos.equals(Position.WA)) {
-            ov = (int) (((this.pace * 25) + (this.endurance * 15) + (this.skill * 15) + (this.impulsion * 5) + (this.heading * 5) + (this.finishing * 10) + (this.passing * 15) + (this.tackling * 3) + (this.positioning * 7)) / 100);
-        } else if (pos.equals(Position.MD)) {
-            ov = (int) (((this.pace * 10) + (this.endurance * 12) + (this.skill * 11) + (this.impulsion * 3) + (this.heading * 5) + (this.finishing * 9) + (this.passing * 25) + (this.tackling * 10) + (this.positioning * 15)) / 100);
-        } else if (pos.equals(Position.DF)) {
-            ov = (int) (((this.pace * 8) + (this.endurance * 10) + (this.skill * 7) + (this.impulsion * 15) + (this.heading * 10) + (this.finishing * 3) + (this.passing * 12) + (this.tackling * 25) + (this.positioning * 10)) / 100);
-        } else if (pos.equals(Position.WB)) {
-            ov = (int) (((this.pace * 20) + (this.endurance * 10) + (this.skill * 10) + (this.impulsion * 7) + (this.heading * 5) + (this.finishing * 3) + (this.passing * 15) + (this.tackling * 20) + (this.positioning * 10)) / 100);
-        }
-        return ov;
-    }
-
-    public int calOverall(int elasticity) {
-        return (int) ((this.pace + (this.endurance * 5) + this.skill + (this.impulsion * 15) + this.heading + this.finishing + (this.passing * 5) + (this.tackling * 5) + (this.positioning * 10) + (elasticity * 65)) / 100);
-    }
-
 
 }

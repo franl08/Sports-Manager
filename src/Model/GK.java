@@ -1,41 +1,76 @@
 package Model;
 
-import java.util.Set;
+import java.util.List;
 
-// Goalkeeper
-public class GK extends Player{
-    private int elasticity;
+public class GK extends Player {
     private int overall;
+    private int elasticity;
+    private int reflexes;
+    private int agility;
+    private int decisions;
+    private final Position position = Position.GOALKEEPER;
 
-    public GK(String name, int number, Team currentTeam, Set<Team> teamsHistory, Position pos, int pace, int endurance, int skill, int impulsion, int heading, int finishing, int passing, int tackling, int positioning, int elasticity) {
-        super(name, number, currentTeam, teamsHistory, pos, pace, endurance, skill, impulsion, heading, finishing, passing, tackling, positioning);
-        this.elasticity = elasticity;
-        this.setOverall();
+    public GK() {
+        super();
+        this.elasticity = 0;
+        this.reflexes = 0;
+        this.agility = 0;
+        this.decisions = 0;
+        this.overall = 0;
     }
 
-    public GK(String name, int number, Team currentTeam, Position pos, int pace, int endurance, int skill, int impulsion, int heading, int finishing, int passing, int tackling, int positioning, int elasticity, int overall) {
-        super(name, number, currentTeam, pos, pace, endurance, skill, impulsion, heading, finishing, passing, tackling, positioning);
-        this.elasticity = elasticity;
-        this.setOverall();
+    public GK(String id, String name, Team currentTeam, List<Team> historic) {
+        super(id, name, currentTeam, historic);
+        this.elasticity = 0;
+        this.reflexes = 0;
+        this.agility = 0;
+        this.decisions = 0;
+        this.overall = 0;
     }
 
-    public GK(String name, int number, Team currentTeam, Set<Team> teamsHistory, Position pos, int pace, int endurance, int skill, int impulsion, int heading, int finishing, int passing, int tackling, int positioning) {
-        super(name, number, currentTeam, teamsHistory, pos, pace, endurance, skill, impulsion, heading, finishing, passing, tackling, positioning);
-        this.setElasticity(0);
-        this.setOverall();
+    public GK(Player p) {
+        super(p);
+        this.elasticity = 0;
+        this.reflexes = 0;
+        this.agility = 0;
+        this.decisions = 0;
+        this.overall = 0;
     }
 
-    public GK(String name, int number, Team currentTeam, Position pos, int pace, int endurance, int skill, int impulsion, int heading, int finishing, int passing, int tackling, int positioning) {
-        super(name, number, currentTeam, pos, pace, endurance, skill, impulsion, heading, finishing, passing, tackling, positioning);
-        this.setElasticity(0);
-        this.setOverall();
+    public GK(String id, String name, Team currentTeam, List<Team> historic, int elasticity, int reflexes, int agility, int decisions) {
+        super(id, name, currentTeam, historic);
+        this.setElasticity(elasticity);
+        this.setReflexes(reflexes);
+        this.setAgility(agility);
+        this.setDecisions(decisions);
+        this.overall = calcOverall();
     }
 
-    // Isto preserva o encapsulamento?
-    public GK(GK g){
-        super(g.getId(), g.getName(), g.getNumber(), g.getCurrentTeam(), g.getTeamsHistory(), g.getPos(), g.getPace(), g.getEndurance(), g.getSkill(), g.getImpulsion(), g.getHeading(), g.getFinishing(), g.getPassing(), g.getTackling(), g.getPositioning());
-        this.elasticity = g.getElasticity();
-        this.overall = g.getOverall();
+    public GK(String id, String name, Team currentTeam, int elasticity, int reflexes, int agility, int decisions) {
+        super(id, name, currentTeam);
+        this.setElasticity(elasticity);
+        this.setReflexes(reflexes);
+        this.setAgility(agility);
+        this.setDecisions(decisions);
+        this.overall = calcOverall();
+    }
+
+    public GK(Player p, int elasticity, int reflexes, int agility, int decisions) {
+        super(p);
+        this.setElasticity(elasticity);
+        this.setReflexes(reflexes);
+        this.setAgility(agility);
+        this.setDecisions(decisions);
+        this.overall = calcOverall();
+    }
+
+    public GK(GK gk){
+        super(gk.getId(), gk.getName(), gk.getCurrentTeam(), gk.getHistoric());
+        this.setElasticity(gk.getElasticity());
+        this.setReflexes(gk.getReflexes());
+        this.setAgility(gk.getAgility());
+        this.setDecisions(gk.getDecisions());
+        this.overall = calcOverall();
     }
 
     public GK clone(){
@@ -47,15 +82,46 @@ public class GK extends Player{
     }
 
     public void setElasticity(int elasticity) {
-        this.elasticity = elasticity;
+        if(elasticity > 99) this.elasticity = 99;
+        else this.elasticity = Math.max(elasticity, 0);
+    }
+
+    public int getReflexes() {
+        return this.reflexes;
+    }
+
+    public void setReflexes(int reflexes) {
+        if(reflexes > 99) this.reflexes = 99;
+        else this.reflexes = Math.max(reflexes, 0);
+    }
+
+    public int getAgility() {
+        return this.agility;
+    }
+
+    public void setAgility(int agility) {
+        if(agility > 99) this.agility = 99;
+        else this.agility = Math.max(agility, 0);
+    }
+
+    public int getDecisions() {
+        return this.decisions;
+    }
+
+    public void setDecisions(int decisions) {
+        if(decisions > 99) this.decisions = 99;
+        else this.decisions = Math.max(decisions, 0);
+    }
+
+    public Position getPosition() {
+        return this.position;
     }
 
     public int getOverall(){
         return this.overall;
     }
 
-    public void setOverall() {
-        this.overall = calOverall(this.getElasticity());
+    public int calcOverall(){
+        return (int) (this.elasticity * 0.25 + this.reflexes * 0.25 + this.agility * 0.25 + this.decisions * 0.25);
     }
-
 }
