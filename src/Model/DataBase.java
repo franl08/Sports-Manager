@@ -72,5 +72,51 @@ public class DataBase {
         p.changeTeam(t);
     }
 
+    public void addPlayer(Player p) throws PlayerAlreadyExistsException, InvalidTeamException{
+        if(this.players.containsValue(p)) throw new PlayerAlreadyExistsException("Player " + p.getId() + " already exists in database");
+        else if(!(this.teams.containsValue(p.getCurrentTeam()))) throw new InvalidTeamException("Team " + p.getCurrentTeam().getId() + " doesn't exist on database");
+        else {
+            this.players.put(p.getId(), p.clone());
+            Team t = this.teams.get(p.getCurrentTeam());
+            try{
+                t.addPlayer(p.clone());
+            }
+            catch(InvalidPositionException i){
+                i.printStackTrace();
+            }
+        }
+    }
 
+    public void addTeam(Team t) throws TeamAlreadyExistsException, PlayerAlreadyExistsException{
+        int flag = 1;
+        if(this.teams.containsValue(t)) throw new TeamAlreadyExistsException("Team " + t.getId() + " already exists in database");
+        else {
+            for (GK g : t.getGoalkeepers()) {
+                if (this.players.containsValue(g))
+                    throw new PlayerAlreadyExistsException("Player " + g.getId() + " already exists in database");
+                else this.players.put(g.getId(), g.clone());
+            }
+            for (DF d : t.getDefenders()) {
+                if (this.players.containsValue(d))
+                    throw new PlayerAlreadyExistsException("Player " + d.getId() + " already exists in database");
+                else this.players.put(d.getId(), d.clone());
+            }
+            for (WG w : t.getWingers()) {
+                if (this.players.containsValue(w))
+                    throw new PlayerAlreadyExistsException("Player " + w.getId() + " already exists in database");
+                else this.players.put(w.getId(), w.clone());
+            }
+            for (MD m : t.getMidfielders()) {
+                if (this.players.containsValue(m))
+                    throw new PlayerAlreadyExistsException("Player " + m.getId() + " already exists in database");
+                else this.players.put(m.getId(), m.clone());
+            }
+            for(FW f : t.getForwards()) {
+                if (this.players.containsValue(f))
+                    throw new PlayerAlreadyExistsException("Player " + f.getId() + " already exists in database");
+                else this.players.put(f.getId(), f.clone());
+            }
+        }
+        this.teams.put(t.getId(), t.clone());
+    }
 }

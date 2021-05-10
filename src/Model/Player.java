@@ -5,12 +5,14 @@ import java.util.*;
 public abstract class Player {
     private String id;
     private String name;
+    private int number;
     private Team currentTeam;
     private List<Team> historic;
 
     public Player(){
         this.id = "n/a";
         this.name = "n/a";
+        this.number = -1;
         this.currentTeam = null;
         this.historic = null;
     }
@@ -18,6 +20,15 @@ public abstract class Player {
     public Player(String id, String name, Team currentTeam, List<Team> historic) {
         this.id = id;
         this.name = name;
+        this.number = -1;
+        this.setCurrentTeam(currentTeam);
+        this.setHistoric(historic);
+    }
+
+    public Player(String id, String name, int number, Team currentTeam, List<Team> historic) {
+        this.id = id;
+        this.name = name;
+        this.setNumber(number);
         this.setCurrentTeam(currentTeam);
         this.setHistoric(historic);
     }
@@ -25,6 +36,15 @@ public abstract class Player {
     public Player(String id, String name, Team currentTeam) {
         this.id = id;
         this.name = name;
+        this.number = -1;
+        this.setCurrentTeam(currentTeam);
+        this.historic = new ArrayList<Team>();
+    }
+
+    public Player(String id, String name, int number, Team currentTeam) {
+        this.id = id;
+        this.name = name;
+        this.setNumber(number);
         this.setCurrentTeam(currentTeam);
         this.historic = new ArrayList<Team>();
     }
@@ -32,6 +52,7 @@ public abstract class Player {
     public Player(Player p){
         this.id = p.getId();
         this.name = p.getName();
+        this.number = p.getNumber();
         this.currentTeam = p.getCurrentTeam();
         this.setHistoric(p.getHistoric());
     }
@@ -76,6 +97,15 @@ public abstract class Player {
             this.historic.add(t.clone());
     }
 
+    public int getNumber(){
+        return this.number;
+    }
+
+    public void setNumber(int number){
+        if(number < 1) this.number = 1;
+        else this.number = Math.min(number, 99);
+    }
+
     public String toString(){
         StringBuilder sb = new StringBuilder("Player: ")
                 .append(name).append(" | ").append(currentTeam)
@@ -88,10 +118,6 @@ public abstract class Player {
         else if(o == null || o.getClass() != this.getClass()) return false;
         Player p = (Player) o;
         return (this.id.equals(p.getId()));
-    }
-
-    public int hashCode(){
-        return Objects.hash(id, name, historic);
     }
 
     public void changeTeam(Team t){

@@ -18,23 +18,24 @@ public class GK extends Player {
         this.decisions = 0;
         this.overall = 0;
     }
-
     public GK(String id, String name, Team currentTeam, List<Team> historic) {
         super(id, name, currentTeam, historic);
-        this.elasticity = 0;
-        this.reflexes = 0;
-        this.agility = 0;
-        this.decisions = 0;
-        this.overall = 0;
+        this.elasticity = utils.setRandomAttribute();
+        this.reflexes = utils.setRandomAttribute();
+        this.agility = utils.setRandomAttribute();
+        this.decisions = utils.setRandomAttribute();
+        this.overall = utils.setRandomAttribute();
+        this.overall = calcOverall();
     }
 
     public GK(Player p) {
         super(p);
-        this.elasticity = 0;
-        this.reflexes = 0;
-        this.agility = 0;
-        this.decisions = 0;
-        this.overall = 0;
+        this.elasticity = utils.setRandomAttribute();
+        this.reflexes = utils.setRandomAttribute();
+        this.agility = utils.setRandomAttribute();
+        this.decisions = utils.setRandomAttribute();
+        this.overall = utils.setRandomAttribute();
+        this.overall = calcOverall();
     }
 
     public GK(String id, String name, Team currentTeam, List<Team> historic, int elasticity, int reflexes, int agility, int decisions) {

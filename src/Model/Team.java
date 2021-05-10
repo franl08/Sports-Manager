@@ -143,4 +143,33 @@ public class Team {
         Team t = (Team) o;
         return (this.id.equals(t.getId()));
     }
+
+    public void addPlayer(Player p) throws InvalidPositionException{
+        if(p.getClass().toString().split(" ")[1].equals("GK")){
+            GK g = (GK) p;
+            this.goalkeepers.add(g.clone());
+        }
+        else{
+            FieldPlayer fp = (FieldPlayer) p;
+            switch (fp.getPosition()) {
+                case DEFENDER -> {
+                    DF d = (DF) p;
+                    this.defenders.add(d.clone());
+                }
+                case WINGER -> {
+                    WG w = (WG) p;
+                    this.wingers.add(w.clone());
+                }
+                case MIDFIELDER -> {
+                    MD m = (MD) p;
+                    this.midfielders.add(m.clone());
+                }
+                case FORWARD -> {
+                    FW f = (FW) p;
+                    this.forwards.add(f.clone());
+                }
+                default -> throw new InvalidPositionException("Invalid Player Position");
+            }
+        }
+    }
 }

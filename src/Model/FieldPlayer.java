@@ -21,77 +21,78 @@ public abstract class FieldPlayer extends Player{
 
     public FieldPlayer() {
         super();
-        this.velocity = 0;
-        this.endurance = 0;
-        this.skill = 0;
-        this.impulsion = 0;
-        this.heading = 0;
-        this.finishing = 0;
-        this.passing = 0;
-        this.crossing = 0;
-        this.ballRecovery = 0;
-        this.positioning = 0;
-        this.creativity = 0;
-        this.aggressiveness = 0;
-        this.tackling = 0;
-        this.vision = 0;
+        this.velocity = utils.setRandomAttribute();
+        this.endurance = utils.setRandomAttribute();
+        this.skill = utils.setRandomAttribute();
+        this.impulsion = utils.setRandomAttribute();
+        this.heading = utils.setRandomAttribute();
+        this.finishing = utils.setRandomAttribute();
+        this.passing = utils.setRandomAttribute();
+        this.crossing = utils.setRandomAttribute();
+        this.ballRecovery = utils.setRandomAttribute();
+        this.positioning = utils.setRandomAttribute();
+        this.creativity = utils.setRandomAttribute();
+        this.aggressiveness = utils.setRandomAttribute();
+        this.tackling = utils.setRandomAttribute();
+        this.vision = utils.setRandomAttribute();
         this.position = null;
     }
 
     public FieldPlayer(Player p) {
         super(p);
-        this.velocity = 0;
-        this.endurance = 0;
-        this.skill = 0;
-        this.impulsion = 0;
-        this.heading = 0;
-        this.finishing = 0;
-        this.passing = 0;
-        this.crossing = 0;
-        this.ballRecovery = 0;
-        this.positioning = 0;
-        this.creativity = 0;
-        this.aggressiveness = 0;
-        this.tackling = 0;
-        this.vision = 0;
+        this.velocity = utils.setRandomAttribute();
+        this.endurance = utils.setRandomAttribute();
+        this.skill = utils.setRandomAttribute();
+        this.impulsion = utils.setRandomAttribute();
+        this.heading = utils.setRandomAttribute();
+        this.finishing = utils.setRandomAttribute();
+        this.passing = utils.setRandomAttribute();
+        this.crossing = utils.setRandomAttribute();
+        this.ballRecovery = utils.setRandomAttribute();
+        this.positioning = utils.setRandomAttribute();
+        this.creativity = utils.setRandomAttribute();
+        this.aggressiveness = utils.setRandomAttribute();
+        this.tackling = utils.setRandomAttribute();
+        this.vision = utils.setRandomAttribute();
         this.position = null;
     }
 
     public FieldPlayer(String id, String name, Team currentTeam, List<Team> historic) {
         super(id, name, currentTeam, historic);
-        this.velocity = 0;
-        this.endurance = 0;
-        this.skill = 0;
-        this.impulsion = 0;
-        this.heading = 0;
-        this.finishing = 0;
-        this.passing = 0;
-        this.crossing = 0;
-        this.ballRecovery = 0;
-        this.positioning = 0;
-        this.creativity = 0;
-        this.aggressiveness = 0;
-        this.tackling = 0;
-        this.vision = 0;
+        this.velocity = utils.setRandomAttribute();
+        this.endurance = utils.setRandomAttribute();
+        this.skill = utils.setRandomAttribute();
+        this.impulsion = utils.setRandomAttribute();
+        this.heading = utils.setRandomAttribute();
+        this.finishing = utils.setRandomAttribute();
+        this.passing = utils.setRandomAttribute();
+        this.crossing = utils.setRandomAttribute();
+        this.ballRecovery = utils.setRandomAttribute();
+        this.positioning = utils.setRandomAttribute();
+        this.creativity = utils.setRandomAttribute();
+        this.aggressiveness = utils.setRandomAttribute();
+        this.tackling = utils.setRandomAttribute();
+        this.vision = utils.setRandomAttribute();
         this.position = null;
     }
 
     public FieldPlayer(String id, String name, Team currentTeam) {
         super(id, name, currentTeam);
-        this.velocity = 0;
-        this.endurance = 0;
-        this.skill = 0;
-        this.impulsion = 0;
-        this.heading = 0;
-        this.finishing = 0;
-        this.passing = 0;
-        this.crossing = 0;
-        this.ballRecovery = 0;
-        this.positioning = 0;
-        this.creativity = 0;
-        this.aggressiveness = 0;
-        this.tackling = 0;
-        this.vision = 0;
+        this.velocity = utils.setRandomAttribute();
+        this.endurance = utils.setRandomAttribute();
+        this.skill = utils.setRandomAttribute();
+        this.impulsion = utils.setRandomAttribute();
+        this.heading = utils.setRandomAttribute();
+        this.finishing = utils.setRandomAttribute();
+        this.passing = utils.setRandomAttribute();
+        this.crossing = utils.setRandomAttribute();
+        this.ballRecovery = utils.setRandomAttribute();
+        this.positioning = utils.setRandomAttribute();
+        this.creativity = utils.setRandomAttribute();
+        this.aggressiveness = utils.setRandomAttribute();
+        this.tackling = utils.setRandomAttribute();
+        this.vision = utils.setRandomAttribute();
+        this.position = null;
     }
 
     public FieldPlayer(Player p, int velocity, int endurance, int skill, int impulsion, int heading, int finishing, int passing, int crossing, int ballRecovery, int positioning, int creativity, int aggressiveness, int tackling, int vision, Position position) {
@@ -148,6 +149,82 @@ public abstract class FieldPlayer extends Player{
         this.setAggressiveness(aggressiveness);
         this.setTackling(tackling);
         this.setVision(vision);
+        this.position = position;
+    }
+
+    public FieldPlayer(String id, String name, Team currentTeam, List<Team> historic, int velocity, int endurance, int skill, int impulsion, int heading, int finishing, int passing, int crossing) {
+        super(id, name, currentTeam, historic);
+        this.setVelocity(velocity);
+        this.setEndurance(endurance);
+        this.setSkill(skill);
+        this.setImpulsion(impulsion);
+        this.setHeading(heading);
+        this.setFinishing(finishing);
+        this.setPassing(passing);
+        this.setCrossing(crossing);
+        this.ballRecovery = utils.setRandomAttribute();
+        this.positioning = utils.setRandomAttribute();
+        this.creativity = utils.setRandomAttribute();
+        this.aggressiveness = utils.setRandomAttribute();
+        this.tackling = utils.setRandomAttribute();
+        this.vision = utils.setRandomAttribute();
+        this.position = null;
+    }
+
+    public FieldPlayer(String id, String name, Team currentTeam, List<Team> historic, int velocity, int endurance, int skill, int impulsion, int heading, int finishing, int passing, int crossing, Position position) {
+        super(id, name, currentTeam, historic);
+        this.setVelocity(velocity);
+        this.setEndurance(endurance);
+        this.setSkill(skill);
+        this.setImpulsion(impulsion);
+        this.setHeading(heading);
+        this.setFinishing(finishing);
+        this.setPassing(passing);
+        this.setCrossing(crossing);
+        this.ballRecovery = utils.setRandomAttribute();
+        this.positioning = utils.setRandomAttribute();
+        this.creativity = utils.setRandomAttribute();
+        this.aggressiveness = utils.setRandomAttribute();
+        this.tackling = utils.setRandomAttribute();
+        this.vision = utils.setRandomAttribute();
+        this.position = position;
+    }
+
+    public FieldPlayer(String id, String name, Team currentTeam, int velocity, int endurance, int skill, int impulsion, int heading, int finishing, int passing, int crossing) {
+        super(id, name, currentTeam);
+        this.setVelocity(velocity);
+        this.setEndurance(endurance);
+        this.setSkill(skill);
+        this.setImpulsion(impulsion);
+        this.setHeading(heading);
+        this.setFinishing(finishing);
+        this.setPassing(passing);
+        this.setCrossing(crossing);
+        this.ballRecovery = utils.setRandomAttribute();
+        this.positioning = utils.setRandomAttribute();
+        this.creativity = utils.setRandomAttribute();
+        this.aggressiveness = utils.setRandomAttribute();
+        this.tackling = utils.setRandomAttribute();
+        this.vision = utils.setRandomAttribute();
+        this.position = null;
+    }
+
+    public FieldPlayer(String id, String name, Team currentTeam, int velocity, int endurance, int skill, int impulsion, int heading, int finishing, int passing, int crossing, Position position) {
+        super(id, name, currentTeam);
+        this.setVelocity(velocity);
+        this.setEndurance(endurance);
+        this.setSkill(skill);
+        this.setImpulsion(impulsion);
+        this.setHeading(heading);
+        this.setFinishing(finishing);
+        this.setPassing(passing);
+        this.setCrossing(crossing);
+        this.ballRecovery = utils.setRandomAttribute();
+        this.positioning = utils.setRandomAttribute();
+        this.creativity = utils.setRandomAttribute();
+        this.aggressiveness = utils.setRandomAttribute();
+        this.tackling = utils.setRandomAttribute();
+        this.vision = utils.setRandomAttribute();
         this.position = position;
     }
 
