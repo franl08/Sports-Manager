@@ -7,6 +7,7 @@ public abstract class Player {
     private String name;
     private int number;
     private Team currentTeam;
+    private int overall;
     private List<Team> historic;
 
     public Player(){
@@ -14,6 +15,7 @@ public abstract class Player {
         this.name = "n/a";
         this.number = -1;
         this.currentTeam = null;
+        this.overall = 0;
         this.historic = null;
     }
 
@@ -22,6 +24,7 @@ public abstract class Player {
         this.name = name;
         this.number = -1;
         this.setCurrentTeam(currentTeam);
+        this.overall = 0;
         this.setHistoric(historic);
     }
 
@@ -30,6 +33,7 @@ public abstract class Player {
         this.name = name;
         this.setNumber(number);
         this.setCurrentTeam(currentTeam);
+        this.overall = 0;
         this.setHistoric(historic);
     }
 
@@ -38,6 +42,7 @@ public abstract class Player {
         this.name = name;
         this.number = -1;
         this.setCurrentTeam(currentTeam);
+        this.overall = 0;
         this.historic = new ArrayList<Team>();
     }
 
@@ -46,6 +51,7 @@ public abstract class Player {
         this.name = name;
         this.setNumber(number);
         this.setCurrentTeam(currentTeam);
+        this.overall = 0;
         this.historic = new ArrayList<Team>();
     }
 
@@ -54,6 +60,7 @@ public abstract class Player {
         this.name = p.getName();
         this.number = p.getNumber();
         this.currentTeam = p.getCurrentTeam();
+        this.overall = p.getOverall();
         this.setHistoric(p.getHistoric());
     }
 
@@ -106,10 +113,19 @@ public abstract class Player {
         else this.number = Math.min(number, 99);
     }
 
+    public int getOverall(){
+        return this.overall;
+    }
+
+    public void setOverall(int overall){
+        this.overall = overall;
+    }
+
     public String toString(){
         StringBuilder sb = new StringBuilder("Player: ")
-                .append(name).append(" | ").append(currentTeam)
-                .append("Teams Historic: ").append(historic.toString());
+                .append(name).append(" | ").append(currentTeam.getName()).append(" | ")
+                .append("Teams Historic: ").append(historic.toString())
+                .append("Overall: ").append(overall);
         return sb.toString();
     }
 

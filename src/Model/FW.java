@@ -4,58 +4,49 @@ import java.util.List;
 
 public class FW extends FieldPlayer{
     private final Position curPosition = Position.FORWARD;
-    private int overall;
 
     public FW() {
         super();
-        this.overall = calcOverall();
+        super.setOverall(calcOverall());
     }
 
     public FW(Player p) {
         super(p);
-        this.overall = calcOverall();
+        super.setOverall(calcOverall());
     }
 
     public FW(String id, String name, Team currentTeam, List<Team> historic) {
         super(id, name, currentTeam, historic);
-        this.overall = calcOverall();
+        super.setOverall(calcOverall());
     }
 
     public FW(String id, String name, Team currentTeam) {
         super(id, name, currentTeam);
-        this.overall = calcOverall();
+        super.setOverall(calcOverall());
     }
 
     public FW(Player p, int velocity, int endurance, int skill, int impulsion, int heading, int finishing, int passing, int crossing, int ballRecovery, int positioning, int creativity, int aggressiveness, int tackling, int vision, Position position) {
         super(p, velocity, endurance, skill, impulsion, heading, finishing, passing, crossing, ballRecovery, positioning, creativity, aggressiveness, tackling, vision, position);
-        this.overall = calcOverall();
+        super.setOverall(calcOverall());
     }
 
     public FW(String id, String name, Team currentTeam, List<Team> historic, int velocity, int endurance, int skill, int impulsion, int heading, int finishing, int passing, int crossing, int ballRecovery, int positioning, int creativity, int aggressiveness, int tackling, int vision, Position position) {
         super(id, name, currentTeam, historic, velocity, endurance, skill, impulsion, heading, finishing, passing, crossing, ballRecovery, positioning, creativity, aggressiveness, tackling, vision, position);
-        this.overall = calcOverall();
+        super.setOverall(calcOverall());
     }
 
     public FW(String id, String name, Team currentTeam, int velocity, int endurance, int skill, int impulsion, int heading, int finishing, int passing, int crossing, int ballRecovery, int positioning, int creativity, int aggressiveness, int tackling, int vision, Position position) {
         super(id, name, currentTeam, velocity, endurance, skill, impulsion, heading, finishing, passing, crossing, ballRecovery, positioning, creativity, aggressiveness, tackling, vision, position);
-        this.overall = calcOverall();
+        super.setOverall(calcOverall());
     }
 
     public FW(FW f){
         super(f.getId(), f.getName(), f.getCurrentTeam(), f.getHistoric(), f.getVelocity(), f.getEndurance(), f.getSkill(), f.getImpulsion(), f.getHeading(), f.getFinishing(), f.getPassing(), f.getCrossing(), f.getBallRecovery(), f.getPositioning(), f.getCreativity(), f.getAggressiveness(), f.getTackling(), f.getVision(), f.getPosition());
-        this.overall = f.getOverall();
+        super.setOverall(calcOverall());
     }
 
     public FW clone(){
         return new FW(this);
-    }
-
-    public int getOverall() {
-        return this.overall;
-    }
-
-    public void setOverall(int o){
-        this.overall = o;
     }
 
     public int calcOverall() {
@@ -81,7 +72,7 @@ public class FW extends FieldPlayer{
 
     public String toString(){
         StringBuilder sb = new StringBuilder(super.toString())
-                .append("\n Overall: ").append(overall);
+                .append(" | Forward\n");
         return sb.toString();
     }
 }

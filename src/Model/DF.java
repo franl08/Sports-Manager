@@ -4,58 +4,49 @@ import java.util.List;
 
 public class DF extends FieldPlayer{
     private final Position curPosition = Position.DEFENDER;
-    private int overall;
 
     public DF() {
         super();
-        this.overall = calcOverall();
+        super.setOverall(calcOverall());
     }
 
     public DF(Player p) {
         super(p);
-        this.overall = calcOverall();
+        super.setOverall(calcOverall());
     }
 
     public DF(String id, String name, Team currentTeam, List<Team> historic) {
         super(id, name, currentTeam, historic);
-        this.overall = calcOverall();
+        super.setOverall(calcOverall());
     }
 
     public DF(String id, String name, Team currentTeam) {
         super(id, name, currentTeam);
-        this.overall = calcOverall();
+        super.setOverall(calcOverall());
     }
 
     public DF(Player p, int velocity, int endurance, int skill, int impulsion, int heading, int finishing, int passing, int crossing, int ballRecovery, int positioning, int creativity, int aggressiveness, int tackling, int vision, Position position) {
         super(p, velocity, endurance, skill, impulsion, heading, finishing, passing, crossing, ballRecovery, positioning, creativity, aggressiveness, tackling, vision, position);
-        this.overall = calcOverall();
+        super.setOverall(calcOverall());
     }
 
     public DF(String id, String name, Team currentTeam, List<Team> historic, int velocity, int endurance, int skill, int impulsion, int heading, int finishing, int passing, int crossing, int ballRecovery, int positioning, int creativity, int aggressiveness, int tackling, int vision, Position position) {
         super(id, name, currentTeam, historic, velocity, endurance, skill, impulsion, heading, finishing, passing, crossing, ballRecovery, positioning, creativity, aggressiveness, tackling, vision, position);
-        this.overall = calcOverall();
+        super.setOverall(calcOverall());
     }
 
     public DF(String id, String name, Team currentTeam, int velocity, int endurance, int skill, int impulsion, int heading, int finishing, int passing, int crossing, int ballRecovery, int positioning, int creativity, int aggressiveness, int tackling, int vision, Position position) {
         super(id, name, currentTeam, velocity, endurance, skill, impulsion, heading, finishing, passing, crossing, ballRecovery, positioning, creativity, aggressiveness, tackling, vision, position);
-        this.overall = calcOverall();
+        super.setOverall(calcOverall());
     }
 
     public DF(DF d){
         super(d.getId(), d.getName(), d.getCurrentTeam(), d.getHistoric(), d.getVelocity(), d.getEndurance(), d.getSkill(), d.getImpulsion(), d.getHeading(), d.getFinishing(), d.getPassing(), d.getCrossing(), d.getBallRecovery(), d.getPositioning(), d.getCreativity(), d.getAggressiveness(), d.getTackling(), d.getVision(), d.getPosition());
-        this.overall = d.getOverall();
+        super.setOverall(calcOverall());
     }
 
     public DF clone(){
         return new DF(this);
-    }
-
-    public int getOverall() {
-        return this.overall;
-    }
-
-    public void setOverall(int o){
-        this.overall = o;
     }
 
     public int calcOverall() {
@@ -81,7 +72,7 @@ public class DF extends FieldPlayer{
 
     public String toString(){
         StringBuilder sb = new StringBuilder(super.toString())
-                .append("\n Overall: ").append(overall);
+                .append(" | Defender\n");
         return sb.toString();
     }
 }

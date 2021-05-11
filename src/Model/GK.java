@@ -3,7 +3,6 @@ package Model;
 import java.util.List;
 
 public class GK extends Player {
-    private int overall;
     private int elasticity;
     private int reflexes;
     private int agility;
@@ -16,7 +15,6 @@ public class GK extends Player {
         this.reflexes = 0;
         this.agility = 0;
         this.decisions = 0;
-        this.overall = 0;
     }
     public GK(String id, String name, Team currentTeam, List<Team> historic) {
         super(id, name, currentTeam, historic);
@@ -24,8 +22,7 @@ public class GK extends Player {
         this.reflexes = utils.setRandomAttribute();
         this.agility = utils.setRandomAttribute();
         this.decisions = utils.setRandomAttribute();
-        this.overall = utils.setRandomAttribute();
-        this.overall = calcOverall();
+        super.setOverall(calcOverall());
     }
 
     public GK(Player p) {
@@ -34,8 +31,7 @@ public class GK extends Player {
         this.reflexes = utils.setRandomAttribute();
         this.agility = utils.setRandomAttribute();
         this.decisions = utils.setRandomAttribute();
-        this.overall = utils.setRandomAttribute();
-        this.overall = calcOverall();
+        super.setOverall(calcOverall());
     }
 
     public GK(String id, String name, Team currentTeam, List<Team> historic, int elasticity, int reflexes, int agility, int decisions) {
@@ -44,7 +40,7 @@ public class GK extends Player {
         this.setReflexes(reflexes);
         this.setAgility(agility);
         this.setDecisions(decisions);
-        this.overall = calcOverall();
+        super.setOverall(calcOverall());
     }
 
     public GK(String id, String name, Team currentTeam, int elasticity, int reflexes, int agility, int decisions) {
@@ -53,7 +49,7 @@ public class GK extends Player {
         this.setReflexes(reflexes);
         this.setAgility(agility);
         this.setDecisions(decisions);
-        this.overall = calcOverall();
+        super.setOverall(calcOverall());
     }
 
     public GK(Player p, int elasticity, int reflexes, int agility, int decisions) {
@@ -62,7 +58,7 @@ public class GK extends Player {
         this.setReflexes(reflexes);
         this.setAgility(agility);
         this.setDecisions(decisions);
-        this.overall = calcOverall();
+        super.setOverall(calcOverall());
     }
 
     public GK(GK gk){
@@ -71,7 +67,7 @@ public class GK extends Player {
         this.setReflexes(gk.getReflexes());
         this.setAgility(gk.getAgility());
         this.setDecisions(gk.getDecisions());
-        this.overall = calcOverall();
+        super.setOverall(calcOverall());
     }
 
     public GK clone(){
@@ -118,11 +114,13 @@ public class GK extends Player {
         return this.position;
     }
 
-    public int getOverall(){
-        return this.overall;
-    }
-
     public int calcOverall(){
         return (int) (this.elasticity * 0.25 + this.reflexes * 0.25 + this.agility * 0.25 + this.decisions * 0.25);
+    }
+
+    public String toString(){
+        StringBuilder sb = new StringBuilder(super.toString())
+                .append(" | Goalkeeper\n");
+        return sb.toString();
     }
 }

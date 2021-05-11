@@ -1,55 +1,64 @@
 package Model;
 
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 public class Team {
     private String id;
     private String name;
-    private Set<GK> goalkeepers;
-    private Set<DF> defenders;
-    private Set<MD> midfielders;
-    private Set<WG> wingers;
-    private Set<FW> forwards;
+    private Map<Integer, Player> players;
+    private Set<Game> gamesHistory;
 
     public Team(){
         this.id = "n/a";
         this.name = "n/a";
-        this.goalkeepers = new HashSet<GK>();
-        this.defenders = new HashSet<DF>();
-        this.midfielders = new HashSet<MD>();
-        this.wingers = new HashSet<WG>();
-        this.forwards = new HashSet<FW>();
+        this.players = new HashMap<Integer, Player>();
+        this.gamesHistory = new HashSet<Game>();
     }
 
     public Team(String id, String name) {
         this.id = id;
         this.name = name;
-        this.goalkeepers = new HashSet<GK>();
-        this.defenders = new HashSet<DF>();
-        this.midfielders = new HashSet<MD>();
-        this.wingers = new HashSet<WG>();
-        this.forwards = new HashSet<FW>();
+        this.players = new HashMap<Integer, Player>();
+        this.gamesHistory = new HashSet<Game>();
     }
 
-    public Team(String id, String name, Set<GK> goalkeepers, Set<DF> defenders, Set<MD> midfielders, Set<WG> wingers, Set<FW> forwards) {
+    public Team(String id, String name, Map<Integer, Player> players) {
         this.id = id;
         this.name = name;
-        this.setGoalkeepers(goalkeepers);
-        this.setDefenders(defenders);
-        this.setMidfielders(midfielders);
-        this.setWingers(wingers);
-        this.setForwards(forwards);
+        try{
+            this.setPlayers(players);
+        }
+        catch (NumberAlreadyExistsInTeamException i){
+            i.printStackTrace();
+        }
+        this.gamesHistory = new HashSet<Game>();
+    }
+
+    public Team(String id, String name, Map<Integer, Player> players, Set<Game> gamesHistory) {
+        this.id = id;
+        this.name = name;
+        try{
+            this.setPlayers(players);
+        }
+        catch (NumberAlreadyExistsInTeamException i){
+            i.printStackTrace();
+        }
+        this.setGamesHistory(gamesHistory);
     }
 
     public Team(Team t){
         this.id = t.getId();
         this.name = t.getName();
-        this.setGoalkeepers(t.getGoalkeepers());
-        this.setDefenders(t.getDefenders());
-        this.setMidfielders(t.getMidfielders());
-        this.setWingers(t.getWingers());
-        this.setForwards(t.getForwards());
+        try{
+            this.setPlayers(players);
+        }
+        catch (NumberAlreadyExistsInTeamException i){
+            i.printStackTrace();
+        }
+        this.setGamesHistory(t.getGamesHistory());
     }
 
     public Team clone(){
@@ -72,68 +81,38 @@ public class Team {
         this.name = name;
     }
 
-    public Set<GK> getGoalkeepers() {
-        Set<GK> ans = new HashSet<GK>();
-        for(GK g : this.goalkeepers)
+    public void setPlayers(Map<Integer, Player> players) throws NumberAlreadyExistsInTeamException{
+        for(Player p : players.values()) {
+            if (this.players.containsKey(p.getNumber()))
+                throw new NumberAlreadyExistsInTeamException("There is already a player with number" + p.getNumber());
+            else this.players.put(p.getNumber(), p.clone());
+        }
+    }
+
+    public Map<Integer, Player> getPlayers(){
+        Map<Integer, Player> ans = new HashMap<Integer, Player>();
+        for(Player p : this.players.values())
+            ans.put(p.getNumber(), p.clone());
+        return ans;
+    }
+
+    public Set<Game> getGamesHistory(){
+        Set<Game> ans = new HashSet<>();
+        for(Game g : this.gamesHistory)
             ans.add(g.clone());
         return ans;
     }
 
-    public void setGoalkeepers(Set<GK> goalkeepers) {
-        this.goalkeepers = goalkeepers;
-    }
-
-    public Set<DF> getDefenders() {
-        Set<DF> ans = new HashSet<DF>();
-        for(DF d : this.defenders)
-            ans.add(d.clone());
-        return ans;
-    }
-
-    public void setDefenders(Set<DF> defenders) {
-        this.defenders = defenders;
-    }
-
-    public Set<MD> getMidfielders() {
-        Set<MD> ans = new HashSet<MD>();
-        for(MD m : this.midfielders)
-            ans.add(m.clone());
-        return ans;
-    }
-
-    public void setMidfielders(Set<MD> midfielders) {
-        this.midfielders = midfielders;
-    }
-
-    public Set<WG> getWingers() {
-        Set<WG> ans = new HashSet<WG>();
-        for(WG w : this.wingers)
-            ans.add(w.clone());
-        return ans;
-    }
-
-    public void setWingers(Set<WG> wingers) {
-        this.wingers = wingers;
-    }
-
-    public Set<FW> getForwards() {
-        Set<FW> ans = new HashSet<FW>();
-        for(FW f : this.forwards)
-            ans.add(f.clone());
-        return ans;
-    }
-
-    public void setForwards(Set<FW> forwards) {
-        this.forwards = forwards;
+    public void setGamesHistory(Set<Game> gamesHistory){
+        for(Game g : gamesHistory)
+            this.gamesHistory.add(g.clone());
     }
 
     public String toString(){
         StringBuilder sb = new StringBuilder("Team: ")
                 .append(name).append("\n")
-                .append("Goalkeepers: ").append(goalkeepers)
-                .append("\n Defenders: ").append(defenders)
-                .append("\n Midfielders: ").append(midfielders)
-                .append("\n Forwards: ").append(forwards);
+                .append("Players: ").append(players.toString()).append(" | ")
+                .append("Games History: ").append(gamesHistory.toString());
         return sb.toString();
     }
 
@@ -144,32 +123,20 @@ public class Team {
         return (this.id.equals(t.getId()));
     }
 
-    public void addPlayer(Player p) throws InvalidPositionException{
-        if(p.getClass().toString().split(" ")[1].equals("GK")){
-            GK g = (GK) p;
-            this.goalkeepers.add(g.clone());
-        }
+    public void addPlayer(Player p) throws NumberAlreadyExistsInTeamException{
+        if(this.players.containsKey(p.getNumber())) throw new NumberAlreadyExistsInTeamException("There is already a player with number " + p.getNumber());
         else{
-            FieldPlayer fp = (FieldPlayer) p;
-            switch (fp.getPosition()) {
-                case DEFENDER -> {
-                    DF d = (DF) p;
-                    this.defenders.add(d.clone());
-                }
-                case WINGER -> {
-                    WG w = (WG) p;
-                    this.wingers.add(w.clone());
-                }
-                case MIDFIELDER -> {
-                    MD m = (MD) p;
-                    this.midfielders.add(m.clone());
-                }
-                case FORWARD -> {
-                    FW f = (FW) p;
-                    this.forwards.add(f.clone());
-                }
-                default -> throw new InvalidPositionException("Invalid Player Position");
-            }
+            this.players.put(p.getNumber(), p.clone());
         }
+    }
+
+    public int calcTeamOverall(Set<Integer> numbers) throws InvalidPlayerException{
+        int ac = 0, howMany = 0;
+        for(Integer n : numbers){
+            if(!this.players.containsKey(n)) throw new InvalidPlayerException("Player number " + n + " doesn't exist in team " + this.getName());
+            ac += (this.players.get(n).getOverall());
+            howMany++;
+        }
+        return (int) ac / howMany;
     }
 }

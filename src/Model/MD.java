@@ -4,58 +4,49 @@ import java.util.List;
 
 public class MD extends FieldPlayer{
     private final Position curPosition = Position.MIDFIELDER;
-    private int overall;
 
     public MD() {
         super();
-        this.overall = calcOverall();
+        super.setOverall(calcOverall());
     }
 
     public MD(Player p) {
         super(p);
-        this.overall = calcOverall();
+        super.setOverall(calcOverall());
     }
 
     public MD(String id, String name, Team currentTeam, List<Team> historic) {
         super(id, name, currentTeam, historic);
-        this.overall = calcOverall();
+        super.setOverall(calcOverall());
     }
 
     public MD(String id, String name, Team currentTeam) {
         super(id, name, currentTeam);
-        this.overall = calcOverall();
+        super.setOverall(calcOverall());
     }
 
     public MD(Player p, int velocity, int endurance, int skill, int impulsion, int heading, int finishing, int passing, int crossing, int ballRecovery, int positioning, int creativity, int aggressiveness, int tackling, int vision, Position position) {
         super(p, velocity, endurance, skill, impulsion, heading, finishing, passing, crossing, ballRecovery, positioning, creativity, aggressiveness, tackling, vision, position);
-        this.overall = calcOverall();
+        super.setOverall(calcOverall());
     }
 
     public MD(String id, String name, Team currentTeam, List<Team> historic, int velocity, int endurance, int skill, int impulsion, int heading, int finishing, int passing, int crossing, int ballRecovery, int positioning, int creativity, int aggressiveness, int tackling, int vision, Position position) {
         super(id, name, currentTeam, historic, velocity, endurance, skill, impulsion, heading, finishing, passing, crossing, ballRecovery, positioning, creativity, aggressiveness, tackling, vision, position);
-        this.overall = calcOverall();
+        super.setOverall(calcOverall());
     }
 
     public MD(String id, String name, Team currentTeam, int velocity, int endurance, int skill, int impulsion, int heading, int finishing, int passing, int crossing, int ballRecovery, int positioning, int creativity, int aggressiveness, int tackling, int vision, Position position) {
         super(id, name, currentTeam, velocity, endurance, skill, impulsion, heading, finishing, passing, crossing, ballRecovery, positioning, creativity, aggressiveness, tackling, vision, position);
-        this.overall = calcOverall();
+        super.setOverall(calcOverall());
     }
 
     public MD(MD m){
         super(m.getId(), m.getName(), m.getCurrentTeam(), m.getHistoric(), m.getVelocity(), m.getEndurance(), m.getSkill(), m.getImpulsion(), m.getHeading(), m.getFinishing(), m.getPassing(), m.getCrossing(), m.getBallRecovery(), m.getPositioning(), m.getCreativity(), m.getAggressiveness(), m.getTackling(), m.getVision(), m.getPosition());
-        this.overall = m.getOverall();
+        super.setOverall(calcOverall());
     }
 
     public MD clone(){
         return new MD(this);
-    }
-
-    public int getOverall() {
-        return this.overall;
-    }
-
-    public void setOverall(int o){
-        this.overall = o;
     }
 
     public int calcOverall() {
@@ -78,7 +69,7 @@ public class MD extends FieldPlayer{
 
     public String toString(){
         StringBuilder sb = new StringBuilder(super.toString())
-                .append("\n Overall: ").append(overall);
+                .append(" | Miedfielder\n");
         return sb.toString();
     }
 }

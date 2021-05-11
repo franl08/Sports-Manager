@@ -230,6 +230,8 @@ public abstract class FieldPlayer extends Player{
 
     public abstract FieldPlayer clone();
 
+    public abstract int calcOverall();
+
     public int getVelocity() {
         return this.velocity;
     }
@@ -362,5 +364,9 @@ public abstract class FieldPlayer extends Player{
 
     public void setPosition(Position position) {
         this.position = position;
+    }
+
+    public String toString(){
+        return super.toString();
     }
 }
