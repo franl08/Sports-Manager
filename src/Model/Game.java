@@ -289,4 +289,24 @@ public class Game {
         this.awayPlayers.add(numIn);
         this.awaySubs.remove(numIn);
     }
+
+    public String toString(){
+        StringBuilder sb = new StringBuilder("Game:{\n")
+                .append("Date: ").append(ld).append(" ").append("(").append(meteorology).append(")\n")
+                .append(homeTeam).append(" ").append(homeGoals).append(" vs ").append(awayGoals).append(" ").append(awayTeam).append("\n")
+                .append("Home Players:\n")
+                .append(homePlayers.toString()).append("\n")
+                .append("Away Players:\n")
+                .append(awayPlayers.toString()).append("\n");
+        return sb.toString();
+    }
+
+    public boolean equals(Object o){
+        if(this == o) return true;
+        else if(o == null || this.getClass() != o.getClass()) return false;
+        Game g = (Game) o;
+        return(this.homeTeam.equals(g.getHomeTeam()) && this.awayTeam.equals(g.getAwayTeam()) && this.ld.equals(g.getLd()) && this.homePlayers.equals(g.getHomePlayers())
+                && this.awayPlayers.equals(g.getAwayPlayers()) && this.homeSubs.equals(g.getHomeSubs()) && this.awaySubs.equals(g.getAwaySubs()) && this.homeGoals == g.getHomeGoals()
+                && this.awayGoals == g.getAwayGoals() && this.meteorology.equals(g.getMeteorology()));
+    }
 }
