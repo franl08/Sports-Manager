@@ -49,6 +49,10 @@ public class FW extends FieldPlayer{
         return new FW(this);
     }
 
+    public Position getCurPosition(){
+        return this.curPosition;
+    }
+
     public int calcOverall() {
         int newPositioning;
         if (this.getPosition().equals(this.curPosition))
