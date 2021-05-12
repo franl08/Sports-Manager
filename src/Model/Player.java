@@ -9,6 +9,8 @@ public abstract class Player {
     private Team currentTeam;
     private int overall;
     private List<Team> historic;
+    private Position position;
+    private Position curPosition;
 
     public Player(){
         this.id = "n/a";
@@ -17,42 +19,47 @@ public abstract class Player {
         this.currentTeam = null;
         this.overall = 0;
         this.historic = null;
+        this.position = null;
     }
 
-    public Player(String id, String name, Team currentTeam, List<Team> historic) {
+    public Player(String id, String name, Team currentTeam, List<Team> historic, Position position) {
         this.id = id;
         this.name = name;
         this.number = -1;
         this.setCurrentTeam(currentTeam);
         this.overall = 0;
         this.setHistoric(historic);
+        this.position = position;
     }
 
-    public Player(String id, String name, int number, Team currentTeam, List<Team> historic) {
+    public Player(String id, String name, int number, Team currentTeam, List<Team> historic, Position position) {
         this.id = id;
         this.name = name;
         this.setNumber(number);
         this.setCurrentTeam(currentTeam);
         this.overall = 0;
         this.setHistoric(historic);
+        this.position = position;
     }
 
-    public Player(String id, String name, Team currentTeam) {
+    public Player(String id, String name, Team currentTeam, Position position) {
         this.id = id;
         this.name = name;
         this.number = -1;
         this.setCurrentTeam(currentTeam);
         this.overall = 0;
         this.historic = new ArrayList<Team>();
+        this.position = position;
     }
 
-    public Player(String id, String name, int number, Team currentTeam) {
+    public Player(String id, String name, int number, Team currentTeam, Position position) {
         this.id = id;
         this.name = name;
         this.setNumber(number);
         this.setCurrentTeam(currentTeam);
         this.overall = 0;
         this.historic = new ArrayList<Team>();
+        this.position = position;
     }
 
     public Player(Player p){
@@ -62,9 +69,14 @@ public abstract class Player {
         this.currentTeam = p.getCurrentTeam();
         this.overall = p.getOverall();
         this.setHistoric(p.getHistoric());
+        this.position = p.getPosition();
     }
 
     public abstract Player clone();
+
+    public abstract Position getPosition();
+
+    public abstract Position getCurPosition();
 
     public String getId() {
         return this.id;

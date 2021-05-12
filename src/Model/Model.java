@@ -19,27 +19,27 @@ public class Model {
     }
 
     public Map<String, Team> getTeams() {
-        Map<String, Team> ans = new HashMap<String, Team>();
+        Map<String, Team> ans = new HashMap<>();
         for(Team t : this.teams.values())
             ans.put(t.getName(), t.clone());
         return ans;
     }
 
     public void setTeams(Map<String, Team> teams) {
-        this.teams = new HashMap<String, Team>();
+        this.teams = new HashMap<>();
         for(Team t : teams.values())
             this.teams.put(t.getName(), t.clone());
     }
 
     public Map<String, Player> getPlayers() {
-        Map<String, Player> ans = new HashMap<String, Player>();
+        Map<String, Player> ans = new HashMap<>();
         for(Player p : this.players.values())
             ans.put(p.getId(), p.clone());
         return ans;
     }
 
     public void setPlayers(Map<String, Player> players) {
-        this.players = new HashMap<String, Player>();
+        this.players = new HashMap<>();
         for(Player p : players.values())
             this.players.put(p.getId(), p.clone());
     }
@@ -85,7 +85,7 @@ public class Model {
         else if(!(this.teams.containsValue(p.getCurrentTeam()))) throw new InvalidTeamException("Team " + p.getCurrentTeam().getId() + " doesn't exist on database");
         else {
             this.players.put(p.getId(), p.clone());
-            Team t = this.teams.get(p.getCurrentTeam());
+            Team t = this.teams.get(p.getCurrentTeam().getName());
             try{
                 t.addPlayer(p.clone());
             }

@@ -58,7 +58,7 @@ public abstract class FieldPlayer extends Player{
     }
 
     public FieldPlayer(String id, String name, Team currentTeam, List<Team> historic) {
-        super(id, name, currentTeam, historic);
+        super(id, name, currentTeam, historic, null);
         this.velocity = utils.setRandomAttribute();
         this.endurance = utils.setRandomAttribute();
         this.skill = utils.setRandomAttribute();
@@ -77,7 +77,7 @@ public abstract class FieldPlayer extends Player{
     }
 
     public FieldPlayer(String id, String name, Team currentTeam) {
-        super(id, name, currentTeam);
+        super(id, name, currentTeam, null);
         this.velocity = utils.setRandomAttribute();
         this.endurance = utils.setRandomAttribute();
         this.skill = utils.setRandomAttribute();
@@ -111,11 +111,11 @@ public abstract class FieldPlayer extends Player{
         this.setAggressiveness(aggressiveness);
         this.setTackling(tackling);
         this.setVision(vision);
-        this.position = position;
+
     }
 
     public FieldPlayer(String id, String name, Team currentTeam, List<Team> historic, int velocity, int endurance, int skill, int impulsion, int heading, int finishing, int passing, int crossing, int ballRecovery, int positioning, int creativity, int aggressiveness, int tackling, int vision, Position position) {
-        super(id, name, currentTeam, historic);
+        super(id, name, currentTeam, historic, position);
         this.setVelocity(velocity);
         this.setEndurance(endurance);
         this.setSkill(skill);
@@ -134,7 +134,7 @@ public abstract class FieldPlayer extends Player{
     }
 
     public FieldPlayer(String id, String name, Team currentTeam, int velocity, int endurance, int skill, int impulsion, int heading, int finishing, int passing, int crossing, int ballRecovery, int positioning, int creativity, int aggressiveness, int tackling, int vision, Position position) {
-        super(id, name, currentTeam);
+        super(id, name, currentTeam, position);
         this.setVelocity(velocity);
         this.setEndurance(endurance);
         this.setSkill(skill);
@@ -153,7 +153,7 @@ public abstract class FieldPlayer extends Player{
     }
 
     public FieldPlayer(String id, String name, Team currentTeam, List<Team> historic, int velocity, int endurance, int skill, int impulsion, int heading, int finishing, int passing, int crossing) {
-        super(id, name, currentTeam, historic);
+        super(id, name, currentTeam, historic, null);
         this.setVelocity(velocity);
         this.setEndurance(endurance);
         this.setSkill(skill);
@@ -172,7 +172,7 @@ public abstract class FieldPlayer extends Player{
     }
 
     public FieldPlayer(String id, String name, Team currentTeam, List<Team> historic, int velocity, int endurance, int skill, int impulsion, int heading, int finishing, int passing, int crossing, Position position) {
-        super(id, name, currentTeam, historic);
+        super(id, name, currentTeam, historic, position);
         this.setVelocity(velocity);
         this.setEndurance(endurance);
         this.setSkill(skill);
@@ -191,7 +191,7 @@ public abstract class FieldPlayer extends Player{
     }
 
     public FieldPlayer(String id, String name, Team currentTeam, int velocity, int endurance, int skill, int impulsion, int heading, int finishing, int passing, int crossing) {
-        super(id, name, currentTeam);
+        super(id, name, currentTeam, null);
         this.setVelocity(velocity);
         this.setEndurance(endurance);
         this.setSkill(skill);
@@ -210,7 +210,7 @@ public abstract class FieldPlayer extends Player{
     }
 
     public FieldPlayer(String id, String name, Team currentTeam, int velocity, int endurance, int skill, int impulsion, int heading, int finishing, int passing, int crossing, Position position) {
-        super(id, name, currentTeam);
+        super(id, name, currentTeam, position);
         this.setVelocity(velocity);
         this.setEndurance(endurance);
         this.setSkill(skill);
@@ -231,6 +231,8 @@ public abstract class FieldPlayer extends Player{
     public abstract FieldPlayer clone();
 
     public abstract int calcOverall();
+
+    public abstract Position getCurPosition();
 
     public int getVelocity() {
         return this.velocity;

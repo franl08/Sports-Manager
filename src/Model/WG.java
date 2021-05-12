@@ -70,6 +70,10 @@ public class WG extends FieldPlayer{
                 (this.getEndurance() * 0.07) + (this.getVelocity() * 0.15));
     }
 
+    public Position getCurPosition(){
+        return this.curPosition;
+    }
+
     public String toString(){
         StringBuilder sb = new StringBuilder(super.toString())
                 .append(" | Winger\n");

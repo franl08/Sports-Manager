@@ -70,6 +70,10 @@ public class DF extends FieldPlayer{
                 (this.getEndurance() * 0.04) + (this.getVelocity() * 0.02));
     }
 
+    public Position getCurPosition(){
+        return this.curPosition;
+    }
+
     public String toString(){
         StringBuilder sb = new StringBuilder(super.toString())
                 .append(" | Defender\n");

@@ -49,6 +49,10 @@ public class MD extends FieldPlayer{
         return new MD(this);
     }
 
+    public Position getPosition(){
+        return this.curPosition;
+    }
+
     public int calcOverall() {
         int newPositioning;
         if (this.getPosition().equals(this.curPosition))
@@ -65,6 +69,10 @@ public class MD extends FieldPlayer{
                 (newPositioning * 0.14) + (this.getVision() * 0.11) + (this.getPassing() * 0.13) +
                 (this.getHeading() * 0.01) + (this.getImpulsion() * 0.01) + (this.getSkill() * 0.08) +
                 (this.getEndurance() * 0.06) + (this.getVelocity() * 0.06));
+    }
+
+    public Position getCurPosition(){
+        return this.curPosition;
     }
 
     public String toString(){
