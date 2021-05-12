@@ -47,6 +47,14 @@ public class Outputs implements Serializable
         System.out.print("Choose an option: ");
     }
 
+    public void printMatrix(char[][] matrix, int lines)
+    {
+        for(int i = 0; i < lines; i++)
+        {
+            System.out.println(matrix[i]);
+        }
+    }
+
     private void printMenuTitle(String menuTitle, int length)
     {
         int spaces = length - menuTitle.length() - 1;
