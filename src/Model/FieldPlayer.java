@@ -17,7 +17,6 @@ public abstract class FieldPlayer extends Player{
     private int aggressiveness;
     private int tackling;
     private int vision;
-    private Position position;
 
     public FieldPlayer() {
         super();
@@ -35,7 +34,6 @@ public abstract class FieldPlayer extends Player{
         this.aggressiveness = utils.setRandomAttribute();
         this.tackling = utils.setRandomAttribute();
         this.vision = utils.setRandomAttribute();
-        this.position = null;
     }
 
     public FieldPlayer(Player p) {
@@ -54,7 +52,6 @@ public abstract class FieldPlayer extends Player{
         this.aggressiveness = utils.setRandomAttribute();
         this.tackling = utils.setRandomAttribute();
         this.vision = utils.setRandomAttribute();
-        this.position = null;
     }
 
     public FieldPlayer(String id, String name, Team currentTeam, List<Team> historic) {
@@ -73,7 +70,6 @@ public abstract class FieldPlayer extends Player{
         this.aggressiveness = utils.setRandomAttribute();
         this.tackling = utils.setRandomAttribute();
         this.vision = utils.setRandomAttribute();
-        this.position = null;
     }
 
     public FieldPlayer(String id, String name, Team currentTeam) {
@@ -92,7 +88,6 @@ public abstract class FieldPlayer extends Player{
         this.aggressiveness = utils.setRandomAttribute();
         this.tackling = utils.setRandomAttribute();
         this.vision = utils.setRandomAttribute();
-        this.position = null;
     }
 
     public FieldPlayer(Player p, int velocity, int endurance, int skill, int impulsion, int heading, int finishing, int passing, int crossing, int ballRecovery, int positioning, int creativity, int aggressiveness, int tackling, int vision, Position position) {
@@ -130,7 +125,6 @@ public abstract class FieldPlayer extends Player{
         this.setAggressiveness(aggressiveness);
         this.setTackling(tackling);
         this.setVision(vision);
-        this.position = position;
     }
 
     public FieldPlayer(String id, String name, Team currentTeam, int velocity, int endurance, int skill, int impulsion, int heading, int finishing, int passing, int crossing, int ballRecovery, int positioning, int creativity, int aggressiveness, int tackling, int vision, Position position) {
@@ -149,7 +143,6 @@ public abstract class FieldPlayer extends Player{
         this.setAggressiveness(aggressiveness);
         this.setTackling(tackling);
         this.setVision(vision);
-        this.position = position;
     }
 
     public FieldPlayer(String id, String name, Team currentTeam, List<Team> historic, int velocity, int endurance, int skill, int impulsion, int heading, int finishing, int passing, int crossing) {
@@ -168,7 +161,6 @@ public abstract class FieldPlayer extends Player{
         this.aggressiveness = utils.setRandomAttribute();
         this.tackling = utils.setRandomAttribute();
         this.vision = utils.setRandomAttribute();
-        this.position = null;
     }
 
     public FieldPlayer(String id, String name, Team currentTeam, List<Team> historic, int velocity, int endurance, int skill, int impulsion, int heading, int finishing, int passing, int crossing, Position position) {
@@ -187,7 +179,6 @@ public abstract class FieldPlayer extends Player{
         this.aggressiveness = utils.setRandomAttribute();
         this.tackling = utils.setRandomAttribute();
         this.vision = utils.setRandomAttribute();
-        this.position = position;
     }
 
     public FieldPlayer(String id, String name, Team currentTeam, int velocity, int endurance, int skill, int impulsion, int heading, int finishing, int passing, int crossing) {
@@ -206,7 +197,6 @@ public abstract class FieldPlayer extends Player{
         this.aggressiveness = utils.setRandomAttribute();
         this.tackling = utils.setRandomAttribute();
         this.vision = utils.setRandomAttribute();
-        this.position = null;
     }
 
     public FieldPlayer(String id, String name, Team currentTeam, int velocity, int endurance, int skill, int impulsion, int heading, int finishing, int passing, int crossing, Position position) {
@@ -225,7 +215,6 @@ public abstract class FieldPlayer extends Player{
         this.aggressiveness = utils.setRandomAttribute();
         this.tackling = utils.setRandomAttribute();
         this.vision = utils.setRandomAttribute();
-        this.position = position;
     }
 
     public abstract FieldPlayer clone();
@@ -358,14 +347,6 @@ public abstract class FieldPlayer extends Player{
     public void setVision(int vision) {
         if(vision > 99) this.vision = 99;
         else this.vision = Math.max(vision, 0);
-    }
-
-    public Position getPosition() {
-        return this.position;
-    }
-
-    public void setPosition(Position position) {
-        this.position = position;
     }
 
     public String toString(){

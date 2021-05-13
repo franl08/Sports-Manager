@@ -69,12 +69,17 @@ public abstract class Player {
         this.currentTeam = p.getCurrentTeam();
         this.overall = p.getOverall();
         this.setHistoric(p.getHistoric());
-        this.position = p.getPosition();
     }
 
     public abstract Player clone();
 
-    public abstract Position getPosition();
+    public Position getPosition(){
+        return this.position;
+    };
+
+    public void setPosition(Position position){
+        this.position = position;
+    }
 
     public abstract Position getCurPosition();
 
@@ -151,5 +156,6 @@ public abstract class Player {
     public void changeTeam(Team t){
         this.setCurrentTeam(t.clone());
     }
+
 
 }

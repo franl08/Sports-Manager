@@ -7,7 +7,7 @@ public class GK extends Player {
     private int reflexes;
     private int agility;
     private int decisions;
-    private final Position position = Position.GOALKEEPER;
+    private final Position curPosition = Position.GOALKEEPER;
 
     public GK() {
         super();
@@ -110,8 +110,8 @@ public class GK extends Player {
         else this.decisions = Math.max(decisions, 0);
     }
 
-    public Position getPosition() {
-        return this.position;
+    public Position getCurPosition() {
+        return this.curPosition;
     }
 
     public int calcOverall(){
@@ -124,7 +124,4 @@ public class GK extends Player {
         return sb.toString();
     }
 
-    public Position getCurPosition(){
-        return this.position;
-    }
 }

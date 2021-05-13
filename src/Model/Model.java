@@ -44,16 +44,18 @@ public class Model {
             this.players.put(p.getId(), p.clone());
     }
 
-    public void removeTeam(String ID){
-        this.teams.remove(ID);
+    public void removeTeam(String name){
+        this.teams.remove(name);
         for(Player p : this.players.values())
-            if(p.getCurrentTeam().getId().equals(ID)) this.players.remove(p.getId());
+            if(p.getCurrentTeam().getName().equals(name))
+                this.players.remove(p.getId());
     }
 
     public void removePlayerFromTeam(String pID, Team t) throws InvalidPlayerException{
         Player p = this.players.get(pID);
         if(!this.players.containsKey(pID)) throw new InvalidPlayerException("Player " + pID + " doesn't exist on database");
         else if(!this.teams.get(t.getName()).getPlayers().containsKey(p.getNumber())) throw new InvalidPlayerException("Player " + pID + " doesn't exist on team " + t.getName());
+        else t.getPlayers().remove(p.getNumber());
     }
 
     public void removePlayer(String ID){
