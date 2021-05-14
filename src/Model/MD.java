@@ -10,18 +10,21 @@ public class MD extends FieldPlayer{
         super.setOverall(calcOverall());
     }
 
-    public MD(Player p) {
+    public MD(FieldPlayer p) {
         super(p);
+        super.setPosition(p.getPosition());
         super.setOverall(calcOverall());
     }
 
-    public MD(String id, String name, Team currentTeam, List<Team> historic) {
+    public MD(String id, String name, String currentTeam, List<String> historic) {
         super(id, name, currentTeam, historic);
+        super.setPosition(curPosition);
         super.setOverall(calcOverall());
     }
 
-    public MD(String id, String name, Team currentTeam) {
+    public MD(String id, String name, String currentTeam) {
         super(id, name, currentTeam);
+        super.setPosition(curPosition);
         super.setOverall(calcOverall());
     }
 
@@ -30,18 +33,18 @@ public class MD extends FieldPlayer{
         super.setOverall(calcOverall());
     }
 
-    public MD(String id, String name, Team currentTeam, List<Team> historic, int velocity, int endurance, int skill, int impulsion, int heading, int finishing, int passing, int crossing, int ballRecovery, int positioning, int creativity, int aggressiveness, int tackling, int vision, Position position) {
+    public MD(String id, String name, String currentTeam, List<String> historic, int velocity, int endurance, int skill, int impulsion, int heading, int finishing, int passing, int crossing, int ballRecovery, int positioning, int creativity, int aggressiveness, int tackling, int vision, Position position) {
         super(id, name, currentTeam, historic, velocity, endurance, skill, impulsion, heading, finishing, passing, crossing, ballRecovery, positioning, creativity, aggressiveness, tackling, vision, position);
         super.setOverall(calcOverall());
     }
 
-    public MD(String id, String name, Team currentTeam, int velocity, int endurance, int skill, int impulsion, int heading, int finishing, int passing, int crossing, int ballRecovery, int positioning, int creativity, int aggressiveness, int tackling, int vision, Position position) {
+    public MD(String id, String name, String currentTeam, int velocity, int endurance, int skill, int impulsion, int heading, int finishing, int passing, int crossing, int ballRecovery, int positioning, int creativity, int aggressiveness, int tackling, int vision, Position position) {
         super(id, name, currentTeam, velocity, endurance, skill, impulsion, heading, finishing, passing, crossing, ballRecovery, positioning, creativity, aggressiveness, tackling, vision, position);
         super.setOverall(calcOverall());
     }
 
     public MD(MD m){
-        super(m.getId(), m.getName(), m.getCurrentTeam(), m.getHistoric(), m.getVelocity(), m.getEndurance(), m.getSkill(), m.getImpulsion(), m.getHeading(), m.getFinishing(), m.getPassing(), m.getCrossing(), m.getBallRecovery(), m.getPositioning(), m.getCreativity(), m.getAggressiveness(), m.getTackling(), m.getVision(), m.getPosition());
+        super(m.getId(), m.getName(), m.getCurrentTeamName(), m.getHistoric(), m.getVelocity(), m.getEndurance(), m.getSkill(), m.getImpulsion(), m.getHeading(), m.getFinishing(), m.getPassing(), m.getCrossing(), m.getBallRecovery(), m.getPositioning(), m.getCreativity(), m.getAggressiveness(), m.getTackling(), m.getVision(), m.getPosition());
         super.setOverall(calcOverall());
     }
 

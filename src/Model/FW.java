@@ -10,18 +10,21 @@ public class FW extends FieldPlayer{
         super.setOverall(calcOverall());
     }
 
-    public FW(Player p) {
-        super(p);
+    public FW(FieldPlayer fp) {
+        super(fp);
+        super.setPosition(fp.getPosition());
         super.setOverall(calcOverall());
     }
 
-    public FW(String id, String name, Team currentTeam, List<Team> historic) {
+    public FW(String id, String name, String currentTeam, List<String> historic) {
         super(id, name, currentTeam, historic);
+        super.setPosition(curPosition);
         super.setOverall(calcOverall());
     }
 
-    public FW(String id, String name, Team currentTeam) {
+    public FW(String id, String name, String currentTeam) {
         super(id, name, currentTeam);
+        super.setPosition(curPosition);
         super.setOverall(calcOverall());
     }
 
@@ -30,18 +33,18 @@ public class FW extends FieldPlayer{
         super.setOverall(calcOverall());
     }
 
-    public FW(String id, String name, Team currentTeam, List<Team> historic, int velocity, int endurance, int skill, int impulsion, int heading, int finishing, int passing, int crossing, int ballRecovery, int positioning, int creativity, int aggressiveness, int tackling, int vision, Position position) {
+    public FW(String id, String name, String currentTeam, List<String> historic, int velocity, int endurance, int skill, int impulsion, int heading, int finishing, int passing, int crossing, int ballRecovery, int positioning, int creativity, int aggressiveness, int tackling, int vision, Position position) {
         super(id, name, currentTeam, historic, velocity, endurance, skill, impulsion, heading, finishing, passing, crossing, ballRecovery, positioning, creativity, aggressiveness, tackling, vision, position);
         super.setOverall(calcOverall());
     }
 
-    public FW(String id, String name, Team currentTeam, int velocity, int endurance, int skill, int impulsion, int heading, int finishing, int passing, int crossing, int ballRecovery, int positioning, int creativity, int aggressiveness, int tackling, int vision, Position position) {
+    public FW(String id, String name, String currentTeam, int velocity, int endurance, int skill, int impulsion, int heading, int finishing, int passing, int crossing, int ballRecovery, int positioning, int creativity, int aggressiveness, int tackling, int vision, Position position) {
         super(id, name, currentTeam, velocity, endurance, skill, impulsion, heading, finishing, passing, crossing, ballRecovery, positioning, creativity, aggressiveness, tackling, vision, position);
         super.setOverall(calcOverall());
     }
 
     public FW(FW f){
-        super(f.getId(), f.getName(), f.getCurrentTeam(), f.getHistoric(), f.getVelocity(), f.getEndurance(), f.getSkill(), f.getImpulsion(), f.getHeading(), f.getFinishing(), f.getPassing(), f.getCrossing(), f.getBallRecovery(), f.getPositioning(), f.getCreativity(), f.getAggressiveness(), f.getTackling(), f.getVision(), f.getPosition());
+        super(f.getId(), f.getName(), f.getCurrentTeamName(), f.getHistoric(), f.getVelocity(), f.getEndurance(), f.getSkill(), f.getImpulsion(), f.getHeading(), f.getFinishing(), f.getPassing(), f.getCrossing(), f.getBallRecovery(), f.getPositioning(), f.getCreativity(), f.getAggressiveness(), f.getTackling(), f.getVision(), f.getPosition());
         super.setOverall(calcOverall());
     }
 

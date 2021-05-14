@@ -10,18 +10,21 @@ public class WG extends FieldPlayer{
         super.setOverall(calcOverall());
     }
 
-    public WG(Player p) {
+    public WG(FieldPlayer p) {
         super(p);
+        super.setPosition(p.getPosition());
         super.setOverall(calcOverall());
     }
 
-    public WG(String id, String name, Team currentTeam, List<Team> historic) {
+    public WG(String id, String name, String currentTeam, List<String> historic) {
         super(id, name, currentTeam, historic);
+        super.setPosition(curPosition);
         super.setOverall(calcOverall());
     }
 
-    public WG(String id, String name, Team currentTeam) {
+    public WG(String id, String name, String currentTeam) {
         super(id, name, currentTeam);
+        super.setPosition(curPosition);
         super.setOverall(calcOverall());
     }
 
@@ -30,18 +33,18 @@ public class WG extends FieldPlayer{
         super.setOverall(calcOverall());
     }
 
-    public WG(String id, String name, Team currentTeam, List<Team> historic, int velocity, int endurance, int skill, int impulsion, int heading, int finishing, int passing, int crossing, int ballRecovery, int positioning, int creativity, int aggressiveness, int tackling, int vision, Position position) {
+    public WG(String id, String name, String currentTeam, List<String> historic, int velocity, int endurance, int skill, int impulsion, int heading, int finishing, int passing, int crossing, int ballRecovery, int positioning, int creativity, int aggressiveness, int tackling, int vision, Position position) {
         super(id, name, currentTeam, historic, velocity, endurance, skill, impulsion, heading, finishing, passing, crossing, ballRecovery, positioning, creativity, aggressiveness, tackling, vision, position);
         super.setOverall(calcOverall());
     }
 
-    public WG(String id, String name, Team currentTeam, int velocity, int endurance, int skill, int impulsion, int heading, int finishing, int passing, int crossing, int ballRecovery, int positioning, int creativity, int aggressiveness, int tackling, int vision, Position position) {
+    public WG(String id, String name, String currentTeam, int velocity, int endurance, int skill, int impulsion, int heading, int finishing, int passing, int crossing, int ballRecovery, int positioning, int creativity, int aggressiveness, int tackling, int vision, Position position) {
         super(id, name, currentTeam, velocity, endurance, skill, impulsion, heading, finishing, passing, crossing, ballRecovery, positioning, creativity, aggressiveness, tackling, vision, position);
         super.setOverall(calcOverall());
     }
 
     public WG(WG w){
-        super(w.getId(), w.getName(), w.getCurrentTeam(), w.getHistoric(), w.getVelocity(), w.getEndurance(), w.getSkill(), w.getImpulsion(), w.getHeading(), w.getFinishing(), w.getPassing(), w.getCrossing(), w.getBallRecovery(), w.getPositioning(), w.getCreativity(), w.getAggressiveness(), w.getTackling(), w.getVision(), w.getPosition());
+        super(w.getId(), w.getName(), w.getCurrentTeamName(), w.getHistoric(), w.getVelocity(), w.getEndurance(), w.getSkill(), w.getImpulsion(), w.getHeading(), w.getFinishing(), w.getPassing(), w.getCrossing(), w.getBallRecovery(), w.getPositioning(), w.getCreativity(), w.getAggressiveness(), w.getTackling(), w.getVision(), w.getPosition());
         super.setOverall(calcOverall());
     }
 

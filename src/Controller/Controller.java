@@ -14,7 +14,7 @@ public class Controller {
         this.model = m;
         this.view = v;
     }
-
+    /*
     public int selectGoalkeeper(Team t) throws NotAGoalkeeperException, InvalidPlayerException{
         View.showPlayers(t.getPlayers());
         View.showMessage("Choose your goalkeeper inserting his/her number: ");
@@ -40,7 +40,9 @@ public class Controller {
                 Player p = tmp.getPlayers().get(nPlayer);
                 if(p.getPosition().equals(Position.GOALKEEPER)) throw new GKCantPlayOtherPosException("Goalkeeper can't play as Defender");
                 else if(!p.getPosition().equals(Position.DEFENDER)){
-                        DF toAdd = new DF(p);
+                        FieldPlayer fp = (FieldPlayer) p;
+                        DF toAdd = new DF(fp);
+                        fp.setOverall(toAdd.getOverall());
                         ans.add(nPlayer);
                         tmp.getPlayers().remove(nPlayer);
                 }
@@ -134,7 +136,7 @@ public class Controller {
         }
         return ans;
     }
-
+    */
     public void run(){
 
     }

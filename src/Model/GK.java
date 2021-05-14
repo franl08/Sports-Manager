@@ -16,7 +16,7 @@ public class GK extends Player {
         this.agility = 0;
         this.decisions = 0;
     }
-    public GK(String id, String name, Team currentTeam, List<Team> historic) {
+    public GK(String id, String name, String currentTeam, List<String> historic) {
         super(id, name, currentTeam, historic, Position.GOALKEEPER);
         this.elasticity = utils.setRandomAttribute();
         this.reflexes = utils.setRandomAttribute();
@@ -34,7 +34,7 @@ public class GK extends Player {
         super.setOverall(calcOverall());
     }
 
-    public GK(String id, String name, Team currentTeam, List<Team> historic, int elasticity, int reflexes, int agility, int decisions) {
+    public GK(String id, String name, String currentTeam, List<String> historic, int elasticity, int reflexes, int agility, int decisions) {
         super(id, name, currentTeam, historic, Position.GOALKEEPER);
         this.setElasticity(elasticity);
         this.setReflexes(reflexes);
@@ -43,7 +43,7 @@ public class GK extends Player {
         super.setOverall(calcOverall());
     }
 
-    public GK(String id, String name, Team currentTeam, int elasticity, int reflexes, int agility, int decisions) {
+    public GK(String id, String name, String currentTeam, int elasticity, int reflexes, int agility, int decisions) {
         super(id, name, currentTeam, Position.GOALKEEPER);
         this.setElasticity(elasticity);
         this.setReflexes(reflexes);
@@ -62,7 +62,7 @@ public class GK extends Player {
     }
 
     public GK(GK gk){
-        super(gk.getId(), gk.getName(), gk.getCurrentTeam(), gk.getHistoric(), gk.getPosition());
+        super(gk.getId(), gk.getName(), gk.getCurrentTeamName(), gk.getHistoric(), gk.getPosition());
         this.setElasticity(gk.getElasticity());
         this.setReflexes(gk.getReflexes());
         this.setAgility(gk.getAgility());

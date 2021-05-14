@@ -6,59 +6,58 @@ public abstract class Player {
     private String id;
     private String name;
     private int number;
-    private Team currentTeam;
+    private String currentTeamName;
     private int overall;
-    private List<Team> historic;
+    private List<String> historic;
     private Position position;
-    private Position curPosition;
 
     public Player(){
         this.id = "n/a";
         this.name = "n/a";
         this.number = -1;
-        this.currentTeam = null;
+        this.currentTeamName = null;
         this.overall = 0;
-        this.historic = null;
+        this.historic = new ArrayList<>();
         this.position = null;
     }
 
-    public Player(String id, String name, Team currentTeam, List<Team> historic, Position position) {
+    public Player(String id, String name, String currentTeamName, List<String> historic, Position position) {
         this.id = id;
         this.name = name;
         this.number = -1;
-        this.setCurrentTeam(currentTeam);
         this.overall = 0;
         this.setHistoric(historic);
+        this.setCurrentTeamName(currentTeamName);
         this.position = position;
     }
 
-    public Player(String id, String name, int number, Team currentTeam, List<Team> historic, Position position) {
+    public Player(String id, String name, int number, String currentTeamName, List<String> historic, Position position) {
         this.id = id;
         this.name = name;
         this.setNumber(number);
-        this.setCurrentTeam(currentTeam);
         this.overall = 0;
         this.setHistoric(historic);
+        this.setCurrentTeamName(currentTeamName);
         this.position = position;
     }
 
-    public Player(String id, String name, Team currentTeam, Position position) {
+    public Player(String id, String name, String currentTeamName, Position position) {
         this.id = id;
         this.name = name;
         this.number = -1;
-        this.setCurrentTeam(currentTeam);
         this.overall = 0;
-        this.historic = new ArrayList<Team>();
+        this.historic = new ArrayList<>();
+        this.setCurrentTeamName(currentTeamName);
         this.position = position;
     }
 
-    public Player(String id, String name, int number, Team currentTeam, Position position) {
+    public Player(String id, String name, int number, String currentTeamName, Position position) {
         this.id = id;
         this.name = name;
         this.setNumber(number);
-        this.setCurrentTeam(currentTeam);
+        this.setCurrentTeamName(currentTeamName);
         this.overall = 0;
-        this.historic = new ArrayList<Team>();
+        this.historic = new ArrayList<>();
         this.position = position;
     }
 
@@ -66,9 +65,9 @@ public abstract class Player {
         this.id = p.getId();
         this.name = p.getName();
         this.number = p.getNumber();
-        this.currentTeam = p.getCurrentTeam();
-        this.overall = p.getOverall();
         this.setHistoric(p.getHistoric());
+        this.setCurrentTeamName(p.getCurrentTeamName());
+        this.overall = p.getOverall();
     }
 
     public abstract Player clone();
@@ -99,26 +98,27 @@ public abstract class Player {
         this.name = name;
     }
 
-    public Team getCurrentTeam() {
-        return this.currentTeam.clone();
+    public String getCurrentTeamName() {
+        return this.currentTeamName;
     }
 
-    public void setCurrentTeam(Team currentTeam) {
-        int histSize = this.historic.size();
-        this.currentTeam = currentTeam.clone();
-        if(!this.historic.get(histSize - 1).equals(currentTeam)) this.historic.add(currentTeam.clone());
+    public void setCurrentTeamName(String currentTeamName) {
+        if(this.historic.size() > 0) {
+            if (!this.historic.get(this.historic.size() - 1).equals(currentTeamName)) {
+                this.historic.add(currentTeamName);
+            }
+        }
+        else this.historic.add(currentTeamName);
+        this.currentTeamName = currentTeamName;
     }
 
-    public List<Team> getHistoric() {
-        List<Team> ans = new ArrayList<Team>();
-        for(Team t : this.historic)
-            ans.add(t.clone());
-        return ans;
+    public List<String> getHistoric() {
+        return new ArrayList<>(this.historic);
     }
 
-    public void setHistoric(List<Team> historic) {
-        for(Team t : historic)
-            this.historic.add(t.clone());
+    public void setHistoric(List<String> historic) {
+        this.historic = new ArrayList<>();
+        if(historic != null) this.historic.addAll(historic);
     }
 
     public int getNumber(){
@@ -140,9 +140,9 @@ public abstract class Player {
 
     public String toString(){
         StringBuilder sb = new StringBuilder("Player: ")
-                .append(name).append(" | ").append(currentTeam.getName()).append(" | ")
+                .append(name).append(" | ").append(currentTeamName).append(" | ")
                 .append("Teams Historic: ").append(historic.toString())
-                .append("Overall: ").append(overall);
+                .append(" | Overall: ").append(overall);
         return sb.toString();
     }
 
@@ -153,8 +153,8 @@ public abstract class Player {
         return (this.id.equals(p.getId()));
     }
 
-    public void changeTeam(Team t){
-        this.setCurrentTeam(t.clone());
+    public void changeTeam(String newTeam){
+        this.setCurrentTeamName(newTeam);
     }
 
 

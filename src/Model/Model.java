@@ -47,15 +47,22 @@ public class Model {
     public void removeTeam(String name){
         this.teams.remove(name);
         for(Player p : this.players.values())
-            if(p.getCurrentTeam().getName().equals(name))
+            if(p.getCurrentTeamName().equals(name))
                 this.players.remove(p.getId());
     }
+
 
     public void removePlayerFromTeam(String pID, Team t) throws InvalidPlayerException{
         Player p = this.players.get(pID);
         if(!this.players.containsKey(pID)) throw new InvalidPlayerException("Player " + pID + " doesn't exist on database");
         else if(!this.teams.get(t.getName()).getPlayers().containsKey(p.getNumber())) throw new InvalidPlayerException("Player " + pID + " doesn't exist on team " + t.getName());
         else t.getPlayers().remove(p.getNumber());
+    }
+
+    public void addPlayerToTeam(String pID, Team t) throws InvalidPlayerException{
+        Player p = this.players.get(pID);
+        if(!this.players.containsKey(pID)) throw new InvalidPlayerException("Player " + pID + " doesn't exist on database");
+        else t.getPlayers().put(this.players.get(pID).getNumber(), this.players.get(pID));
     }
 
     public void removePlayer(String ID){
@@ -70,26 +77,28 @@ public class Model {
         this.players.remove(ID);
     }
 
-    public void transferPlayer(String pID, String tName){
+    public void transferPlayer(String pID, String tName, String newTeamName){
         Player p = this.players.get(pID);
         Team t = this.teams.get(tName);
+        Team nt = this.teams.get(newTeamName);
         try{
             removePlayerFromTeam(pID, t);
+            addPlayerToTeam(pID, nt);
+            p.changeTeam(newTeamName);
         }
         catch (InvalidPlayerException i){
             i.printStackTrace();
         }
-        p.changeTeam(t);
     }
 
     public void addPlayer(Player p) throws PlayerAlreadyExistsException, InvalidTeamException{
         if(this.players.containsValue(p)) throw new PlayerAlreadyExistsException("Player " + p.getId() + " already exists in database");
-        else if(!(this.teams.containsValue(p.getCurrentTeam()))) throw new InvalidTeamException("Team " + p.getCurrentTeam().getId() + " doesn't exist on database");
+        else if(!(this.teams.containsKey(p.getCurrentTeamName()))) throw new InvalidTeamException("Team " + p.getCurrentTeamName() + " doesn't exist on database");
         else {
-            this.players.put(p.getId(), p.clone());
-            Team t = this.teams.get(p.getCurrentTeam().getName());
+            this.players.put(p.getId(), p);
+            Team t = this.teams.get(p.getCurrentTeamName());
             try{
-                t.addPlayer(p.clone());
+                t.addPlayer(p);
             }
             catch(NumberAlreadyExistsInTeamException i){
                 i.printStackTrace();
@@ -104,7 +113,8 @@ public class Model {
             for(Player p : t.getPlayers().values()){
                 if(this.players.containsValue(p)) throw new PlayerAlreadyExistsException("Player " + p.getId() + " already exists in database");
             }
-            this.teams.put(t.getId(), t.clone());
+            System.out.println(t);
+            this.teams.put(t.getName(), t.clone());
         }
     }
 

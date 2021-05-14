@@ -14,15 +14,15 @@ public class Team {
     public Team(){
         this.id = "n/a";
         this.name = "n/a";
-        this.players = new HashMap<Integer, Player>();
-        this.gamesHistory = new HashSet<Game>();
+        this.players = new HashMap<>();
+        this.gamesHistory = new HashSet<>();
     }
 
     public Team(String id, String name) {
         this.id = id;
         this.name = name;
-        this.players = new HashMap<Integer, Player>();
-        this.gamesHistory = new HashSet<Game>();
+        this.players = new HashMap<>();
+        this.gamesHistory = new HashSet<>();
     }
 
     public Team(String id, String name, Map<Integer, Player> players) {
@@ -34,7 +34,7 @@ public class Team {
         catch (NumberAlreadyExistsInTeamException i){
             i.printStackTrace();
         }
-        this.gamesHistory = new HashSet<Game>();
+        this.gamesHistory = new HashSet<>();
     }
 
     public Team(String id, String name, Map<Integer, Player> players, Set<Game> gamesHistory) {
@@ -82,17 +82,22 @@ public class Team {
     }
 
     public void setPlayers(Map<Integer, Player> players) throws NumberAlreadyExistsInTeamException{
-        for(Player p : players.values()) {
-            if (this.players.containsKey(p.getNumber()))
-                throw new NumberAlreadyExistsInTeamException("There is already a player with number" + p.getNumber());
-            else this.players.put(p.getNumber(), p.clone());
-        }
+        if (players != null && !players.isEmpty())
+            for(Player p : players.values()) {
+                if (this.players.containsKey(p.getNumber()))
+                    throw new NumberAlreadyExistsInTeamException("There is already a player with number" + p.getNumber());
+                else this.players.put(p.getNumber(), p.clone());
+            }
+        else
+            this.players = new HashMap<>();
     }
 
     public Map<Integer, Player> getPlayers(){
-        Map<Integer, Player> ans = new HashMap<Integer, Player>();
-        for(Player p : this.players.values())
-            ans.put(p.getNumber(), p.clone());
+        Map<Integer, Player> ans = new HashMap<>();
+        if(this.players != null) {
+            for (Player p : this.players.values())
+                ans.put(p.getNumber(), p.clone());
+        }
         return ans;
     }
 
@@ -111,8 +116,7 @@ public class Team {
     public String toString(){
         StringBuilder sb = new StringBuilder("Team: ")
                 .append(name).append("\n")
-                .append("Players: ").append(players.toString()).append(" | ")
-                .append("Games History: ").append(gamesHistory.toString());
+                .append("Players: ").append(players.toString());
         return sb.toString();
     }
 
@@ -130,13 +134,4 @@ public class Team {
         }
     }
 
-    public int calcTeamOverall(Set<Integer> numbers) throws InvalidPlayerException{
-        int ac = 0, howMany = 0;
-        for(Integer n : numbers){
-            if(!this.players.containsKey(n)) throw new InvalidPlayerException("Player number " + n + " doesn't exist in team " + this.getName());
-            ac += (this.players.get(n).getOverall());
-            howMany++;
-        }
-        return (int) ac / howMany;
-    }
 }
