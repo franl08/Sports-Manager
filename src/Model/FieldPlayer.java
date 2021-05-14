@@ -18,6 +18,9 @@ public abstract class FieldPlayer extends Player{
     private int tackling;
     private int vision;
 
+    /**
+     * Empty Constructor
+     */
     public FieldPlayer() {
         super();
         this.velocity = utils.setRandomAttribute();

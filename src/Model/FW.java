@@ -5,57 +5,155 @@ import java.util.List;
 public class FW extends FieldPlayer{
     private final Position curPosition = Position.FORWARD;
 
+    /**
+     * Empty Constructor
+     */
     public FW() {
         super();
         super.setOverall(calcOverall());
     }
 
+    /**
+     * Constructor with field player
+     * @param fp Field Player
+     */
     public FW(FieldPlayer fp) {
         super(fp);
         super.setPosition(fp.getPosition());
         super.setOverall(calcOverall());
     }
 
+    /**
+     * Constructor with player ID, name, current team name and historic
+     * @param id Player ID
+     * @param name Player name
+     * @param currentTeam Player current team name
+     * @param historic Player historic
+     */
     public FW(String id, String name, String currentTeam, List<String> historic) {
         super(id, name, currentTeam, historic);
         super.setPosition(curPosition);
         super.setOverall(calcOverall());
     }
 
+    /**
+     * Constructor with player ID, name and current team name
+     * @param id Player ID
+     * @param name Player name
+     * @param currentTeam Player current team name
+     */
     public FW(String id, String name, String currentTeam) {
         super(id, name, currentTeam);
         super.setPosition(curPosition);
         super.setOverall(calcOverall());
     }
 
+    /**
+     * Constructor with player, attributes and position
+     * @param p Player
+     * @param velocity Player velocity
+     * @param endurance Player endurance
+     * @param skill Player skill
+     * @param impulsion Player impulsion
+     * @param heading Player heading
+     * @param finishing Player finishing
+     * @param passing Player passing
+     * @param crossing Player crossing
+     * @param ballRecovery Player ball recovery
+     * @param positioning Player positioning
+     * @param creativity Player creativity
+     * @param aggressiveness Player aggressiveness
+     * @param tackling Player tackling
+     * @param vision Player vision
+     * @param position Player position
+     */
     public FW(Player p, int velocity, int endurance, int skill, int impulsion, int heading, int finishing, int passing, int crossing, int ballRecovery, int positioning, int creativity, int aggressiveness, int tackling, int vision, Position position) {
         super(p, velocity, endurance, skill, impulsion, heading, finishing, passing, crossing, ballRecovery, positioning, creativity, aggressiveness, tackling, vision, position);
         super.setOverall(calcOverall());
     }
 
+    /**
+     * Constructor with player ID, name, current team name and historic
+     * @param id Player ID
+     * @param name Player name
+     * @param currentTeam Player current team
+     * @param historic Player historic
+     * @param velocity Player velocity
+     * @param endurance Player endurance
+     * @param skill Player skill
+     * @param impulsion Player impulsion
+     * @param heading Player heading
+     * @param finishing Player finishing
+     * @param passing Player passing
+     * @param crossing Player crossing
+     * @param ballRecovery Player ball recovery
+     * @param positioning Player positioning
+     * @param creativity Player creativity
+     * @param aggressiveness Player aggressiveness
+     * @param tackling Player tackling
+     * @param vision Player vision
+     * @param position Player position
+     */
     public FW(String id, String name, String currentTeam, List<String> historic, int velocity, int endurance, int skill, int impulsion, int heading, int finishing, int passing, int crossing, int ballRecovery, int positioning, int creativity, int aggressiveness, int tackling, int vision, Position position) {
         super(id, name, currentTeam, historic, velocity, endurance, skill, impulsion, heading, finishing, passing, crossing, ballRecovery, positioning, creativity, aggressiveness, tackling, vision, position);
         super.setOverall(calcOverall());
     }
 
+    /**
+     * Constructor with Player ID, name, current team name, attributes and position
+     * @param id Player ID
+     * @param name Player name
+     * @param currentTeam Player current team name
+     * @param velocity Player velocity
+     * @param endurance Player endurance
+     * @param skill PLayer skill
+     * @param impulsion Player impulsion
+     * @param heading Player heading
+     * @param finishing Player finishing
+     * @param passing Player passing
+     * @param crossing Player crossing
+     * @param ballRecovery Player ball recovery
+     * @param positioning Player positioning
+     * @param creativity Player creativity
+     * @param aggressiveness Player aggressiveness
+     * @param tackling Player tackling
+     * @param vision Player vision
+     * @param position Player position
+     */
     public FW(String id, String name, String currentTeam, int velocity, int endurance, int skill, int impulsion, int heading, int finishing, int passing, int crossing, int ballRecovery, int positioning, int creativity, int aggressiveness, int tackling, int vision, Position position) {
         super(id, name, currentTeam, velocity, endurance, skill, impulsion, heading, finishing, passing, crossing, ballRecovery, positioning, creativity, aggressiveness, tackling, vision, position);
         super.setOverall(calcOverall());
     }
 
+    /**
+     * Copy Constructor
+     * @param f Forward to copy
+     */
     public FW(FW f){
         super(f.getId(), f.getName(), f.getCurrentTeamName(), f.getHistoric(), f.getVelocity(), f.getEndurance(), f.getSkill(), f.getImpulsion(), f.getHeading(), f.getFinishing(), f.getPassing(), f.getCrossing(), f.getBallRecovery(), f.getPositioning(), f.getCreativity(), f.getAggressiveness(), f.getTackling(), f.getVision(), f.getPosition());
         super.setOverall(calcOverall());
     }
 
+    /**
+     * Cloning method
+     * @return Cloned forward
+     */
     public FW clone(){
         return new FW(this);
     }
 
+    /**
+     * Current player position getter
+     * @return Current player position
+     */
     public Position getCurPosition(){
         return this.curPosition;
     }
 
+    /**
+     * Method to calculate player overall playing as forward
+     * @return Player overall playing as forward
+     */
     public int calcOverall() {
         int newPositioning;
         if (this.getPosition().equals(this.curPosition))
@@ -77,6 +175,10 @@ public class FW extends FieldPlayer{
                 (this.getEndurance() * 0.04) + (this.getVelocity() * 0.11));
     }
 
+    /**
+     * Method to get Forward as String
+     * @return Forward as String
+     */
     public String toString(){
         StringBuilder sb = new StringBuilder(super.toString())
                 .append(" | Forward\n");
