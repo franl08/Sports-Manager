@@ -1,13 +1,22 @@
 package View;
 
 import java.io.Serializable;
+import java.util.Arrays;
 
-public class Outputs implements Serializable
+public final class Outputs implements Serializable
 {
-    public void clear() {
+    public static void clear() {
     }
 
-    public void printMenu(String[] menuArgs, String menuTitle, boolean isExit) {
+    public static void showMessage(String message)
+    {
+        System.out.print(message);
+    }
+
+    public static void printMenu(String[] menuArgs, String menuTitle, boolean isExit)
+    {
+        System.out.println();
+
         int length = menuTitle.length() + 10;
 
         for (String line : menuArgs)
@@ -15,39 +24,39 @@ public class Outputs implements Serializable
             length = Math.max(line.length() + 14, length);
         }
 
-        this.printLine('-', length);
+        Outputs.printLine('-', length);
         System.out.print("|");
-        this.printMenuTitle(menuTitle, length);
+        Outputs.printMenuTitle(menuTitle, length);
         System.out.println("|");
         int size = menuArgs.length;
 
         for(int i = 0; i < size; i++)
         {
-            this.printLine('-', length);
+            Outputs.printLine('-', length);
             System.out.print("| " + (i + 1) + ". " + menuArgs[i]);
-            this.printExcess(menuArgs[i].length(), length);
+            Outputs.printExcess(menuArgs[i].length(), length);
             System.out.println("|");
         }
 
-        this.printLine('-', length);
+        Outputs.printLine('-', length);
 
         if (isExit)
         {
             System.out.print("| 0. Exit.");
-            this.printExcess(5, length);
+            Outputs.printExcess(5, length);
         }
         else
         {
             System.out.print("| 0. Return.");
-            this.printExcess(7, length);
+            Outputs.printExcess(7, length);
         }
 
         System.out.println("|");
-        this.printLine('-', length);
+        Outputs.printLine('-', length);
         System.out.print("Choose an option: ");
     }
 
-    public void printMatrix(char[][] matrix, int lines)
+    public static void printMatrix(char[][] matrix, int lines)
     {
         for(int i = 0; i < lines; i++)
         {
@@ -55,7 +64,59 @@ public class Outputs implements Serializable
         }
     }
 
-    private void printMenuTitle(String menuTitle, int length)
+    public static void printStringArrayAsTable(String[] table, String[] headArgs)
+    {
+        int args = headArgs.length;
+
+        int[] lengths = new int[args];
+        for(int i = 0; i < args; i++)
+        {
+            lengths[i] = headArgs[i].length() + 10;
+        }
+
+        int lines = table.length/args;
+
+        for(int i = 0; i < lines; i++)
+        {
+            for(int j = 0; j < args; j++)
+            {
+                lengths[j] = Math.max(table[i * args + j].length() + 10,lengths[j]);
+            }
+        }
+
+        int lineLength = Arrays.stream(lengths).sum() + 1;
+
+        System.out.println();
+
+        Outputs.printLine('-', lineLength);
+
+        for(int i = 0; i < args; i++)
+        {
+            System.out.print("|");
+            Outputs.printMenuTitle(headArgs[i], lengths[i]);
+        }
+
+        System.out.println("|");
+
+        for(int i = 0;i < lines; i++)
+        {
+            Outputs.printLine('-', lineLength);
+
+            for(int j = 0; j < args; j++)
+            {
+                int spaces = lengths[j] - table[i * args + j].length() - 2;
+
+                System.out.print("| " + table[i * args + j]);
+                printSpaces(spaces);
+            }
+
+            System.out.println("|");
+        }
+
+        Outputs.printLine('-', lineLength);
+    }
+
+    private static void printMenuTitle(String menuTitle, int length)
     {
         int spaces = length - menuTitle.length() - 1;
 
@@ -72,7 +133,7 @@ public class Outputs implements Serializable
             System.out.print(" ");
     }
 
-    private void printLine(char c, int length)
+    private static void printLine(char c, int length)
     {
         for(int i = 0; i < length; i++)
             System.out.print(c);
@@ -80,7 +141,13 @@ public class Outputs implements Serializable
         System.out.println();
     }
 
-    private void printExcess(int strLength, int length)
+    private static void printSpaces(int length)
+    {
+        for(int i = 0; i < length; i++)
+            System.out.print(" ");
+    }
+
+    private static void printExcess(int strLength, int length)
     {
         for(int i = strLength + 4; i < length - 1; i++)
             System.out.print(" ");

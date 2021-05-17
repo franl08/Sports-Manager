@@ -8,11 +8,10 @@ import java.util.Set;
 
 public class Controller {
     private Model model;
-    private View view;
 
-    public Controller(Model m, View v){
+    public Controller(Model m)
+    {
         this.model = m;
-        this.view = v;
     }
     /*
     public int selectGoalkeeper(Team t) throws NotAGoalkeeperException, InvalidPlayerException{

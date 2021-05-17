@@ -129,4 +129,23 @@ public class Model {
     public Team getTeamWithName(String name){
         return this.teams.get(name).clone();
     }
+
+    public String[] getPlayersAsStringArray()
+    {
+        String[] result = new String[this.players.values().size() * 6];
+
+        int i = 0;
+
+        for(Player p : this.players.values())
+        {
+            result[i++] = p.getId();
+            result[i++] = p.getName();
+            result[i++] = Integer.toString(p.getNumber());
+            result[i++] = p.getCurrentTeamName();
+            result[i++] = Integer.toString(p.getOverall());
+            result[i++] = p.getPosition().toString();
+        }
+
+        return result;
+    }
 }
