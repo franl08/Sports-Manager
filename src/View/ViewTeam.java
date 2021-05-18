@@ -18,15 +18,23 @@ public final class ViewTeam implements Serializable
         System.out.println("The team you requested does not exist.");
     }
 
-    public static void askTeamID() {
-        System.out.println("Introduce team ID: ");
+    public static void askTeamID()
+    {
+        Outputs.showMessage("Introduce team ID: ");
     }
 
-    public static void askTeamName() {
-        System.out.println("Introduce team name: ");
+    public static void askTeamName()
+    {
+        Outputs.showMessage("Introduce team name: ");
     }
 
     public static void askNewTeamName() {
         System.out.println("Introduce new team name: ");
+    }
+
+    public static void printAllTeams(String[] allPlayers)
+    {
+        String[] headArgs = new String[] {"Team ID","Team Name"};
+        Outputs.printStringArrayAsTable(allPlayers, headArgs);
     }
 }

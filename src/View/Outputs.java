@@ -5,7 +5,10 @@ import java.util.Arrays;
 
 public final class Outputs implements Serializable
 {
-    public static void clear() {
+    public static void clear()
+    {
+        for(int i = 0; i < 10; i++)
+            System.out.println();
     }
 
     public static void showMessage(String message)

@@ -58,7 +58,7 @@ public final class ViewPlayer implements Serializable
 
     public static void askPlayerNumber()
     {
-        Outputs.showMessage("Insert player's shirt number: ");
+        Outputs.showMessage("Insert player's shirt number (1-99): ");
     }
 
     public static void askPlayerTeam()
@@ -68,77 +68,92 @@ public final class ViewPlayer implements Serializable
 
     public static void askPlayerVelocity()
     {
-        Outputs.showMessage("Insert player's velocity: ");
+        Outputs.showMessage("Insert player's velocity (1-100): ");
     }
 
     public static void askPlayerEndurance()
     {
-        Outputs.showMessage("Insert player's endurance: ");
+        Outputs.showMessage("Insert player's endurance (1-100): ");
+    }
+
+    public static void askPlayerSkill()
+    {
+        Outputs.showMessage("Insert player's skill (1-100): ");
     }
 
     public static void askPlayerImpulsion()
     {
-        Outputs.showMessage("Insert player's impulsion: ");
+        Outputs.showMessage("Insert player's impulsion (1-100): ");
     }
 
     public static void askPlayerHeading()
     {
-        Outputs.showMessage("Insert player's heading: ");
+        Outputs.showMessage("Insert player's heading (1-100): ");
+    }
+
+    public static void askPlayerFinishing()
+    {
+        Outputs.showMessage("Insert player's finishing (1-100): ");
     }
 
     public static void askPlayerPassing()
     {
-        Outputs.showMessage("Insert player's passing: ");
+        Outputs.showMessage("Insert player's passing (1-100): ");
     }
 
     public static void askPlayerCrossing()
     {
-        Outputs.showMessage("Insert player's crossing: ");
+        Outputs.showMessage("Insert player's crossing (1-100): ");
     }
 
     public static void askPlayerBallRecovery()
     {
-        Outputs.showMessage("Insert player's ball recovery: ");
+        Outputs.showMessage("Insert player's ball recovery (1-100): ");
     }
 
     public static void askPlayerPositioning()
     {
-        Outputs.showMessage("Insert player's positioning: ");
+        Outputs.showMessage("Insert player's positioning (1-100): ");
     }
 
     public static void askPlayerCreativity()
     {
-        Outputs.showMessage("Insert player's creativity: ");
+        Outputs.showMessage("Insert player's creativity (1-100): ");
     }
 
     public static void askPlayerAggressiveness()
     {
-        Outputs.showMessage("Insert player's aggressiveness: ");
+        Outputs.showMessage("Insert player's aggressiveness (1-100): ");
     }
 
     public static void askPlayerTackling()
     {
-        Outputs.showMessage("Insert player's tackling: ");
+        Outputs.showMessage("Insert player's tackling (1-100): ");
+    }
+
+    public static void askPlayerVision()
+    {
+        Outputs.showMessage("Insert player's vision (1-100): ");
     }
 
     public static void askPlayerElasticity()
     {
-        Outputs.showMessage("Insert player's elasticity: ");
+        Outputs.showMessage("Insert player's elasticity (1-100): ");
     }
 
     public static void askPlayerReflexes()
     {
-        Outputs.showMessage("Insert player's reflexes: ");
+        Outputs.showMessage("Insert player's reflexes (1-100): ");
     }
 
     public static void askPlayerAgility()
     {
-        Outputs.showMessage("Insert player's agility: ");
+        Outputs.showMessage("Insert player's agility (1-100): ");
     }
 
     public static void askPlayerDecisions()
     {
-        Outputs.showMessage("Insert player's decisions: ");
+        Outputs.showMessage("Insert player's decisions (1-100): ");
     }
 
     public static void printSuccessfulCreatedPlayer() {

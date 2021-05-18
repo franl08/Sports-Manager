@@ -148,4 +148,19 @@ public class Model {
 
         return result;
     }
+
+    public String[] getTeamsAsStringArray()
+    {
+        String[] result = new String[this.teams.values().size() * 2];
+
+        int i = 0;
+
+        for(Team t : this.teams.values())
+        {
+            result[i++] = t.getId();
+            result[i++] = t.getName();
+        }
+
+        return result;
+    }
 }

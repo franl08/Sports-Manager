@@ -104,6 +104,14 @@ public class View implements Serializable
     }
 
     /**
+     * Function that displays on the screen a phrase asking an input from the user which is supposed to be an player's starting skill.
+     */
+    public static void askPlayerSkill()
+    {
+        ViewPlayer.askPlayerSkill();
+    }
+
+    /**
      * Function that displays on the screen a phrase asking an input from the user which is supposed to be an player's starting impulsion.
      */
     public static void askPlayerImpulsion()
@@ -117,6 +125,14 @@ public class View implements Serializable
     public static void askPlayerHeading()
     {
         ViewPlayer.askPlayerHeading();
+    }
+
+    /**
+     * Function that displays on the screen a phrase asking an input from the user which is supposed to be an player's starting skill.
+     */
+    public static void askPlayerFinishing()
+    {
+        ViewPlayer.askPlayerFinishing();
     }
 
     /**
@@ -176,6 +192,14 @@ public class View implements Serializable
     }
 
     /**
+     * Function that displays on the screen a phrase asking an input from the user which is supposed to be an player's vision .
+     */
+    public static void askPlayerVision()
+    {
+        ViewPlayer.askPlayerVision();
+    }
+
+    /**
      * Function that displays on the screen a phrase asking an input from the user which is supposed to be an player's starting elasticity.
      */
     public static void askPlayerElasticity()
@@ -204,7 +228,7 @@ public class View implements Serializable
      */
     public static void askPlayerDecisions()
     {
-        ViewPlayer.askPlayerAgility();
+        ViewPlayer.askPlayerDecisions();
     }
 
     public static void printSuccessfulCreatedPlayer() {
@@ -226,6 +250,11 @@ public class View implements Serializable
         ViewTeam.printTeamMenu();
     }
 
+    public static void askTeamID()
+    {
+        ViewTeam.askTeamID();
+    }
+
     public static void askTeamName()
     {
         ViewTeam.askTeamName();
@@ -234,6 +263,14 @@ public class View implements Serializable
     public static void askNewTeamName()
     {
         ViewTeam.askNewTeamName();
+    }
+
+    /**
+     * Function that displays on the screen a table like representation of all the teams currently in the system.
+     */
+    public static void printAllTeams(String[] allTeams)
+    {
+        ViewTeam.printAllTeams(allTeams);
     }
 
     //Game GUI

@@ -6,7 +6,7 @@ import View.View;
 import java.io.Serializable;
 import java.util.Scanner;
 
-// TODO: see player history and finish function create player
+// TODO: see player history ??
 public class PlayerMenuController implements Serializable
 {
     private final Model model;
@@ -18,10 +18,10 @@ public class PlayerMenuController implements Serializable
         this.inputs = new Scanner(System.in);
     }
 
-    public PlayerMenuController(Model model,Scanner sc)
+    public PlayerMenuController(Model model,Scanner inputs)
     {
         this.model = model;
-        this.inputs = sc;
+        this.inputs = inputs;
     }
 
     public void runPlayerMenu()
@@ -38,11 +38,10 @@ public class PlayerMenuController implements Serializable
                     try
                     {
                         createPlayerController();
-                        View.printSuccessfulCreatedPlayer();
                     }
-                    catch (InvalidPlayerException e)
+                    catch (Exception e)
                     {
-                        View.printMessage(e.getMessage());
+                        e.printStackTrace();
                     }
                     break;
 
@@ -69,35 +68,164 @@ public class PlayerMenuController implements Serializable
         }
     }
 
-    private void createPlayerController() throws InvalidPlayerException
+    private void createPlayerController() throws InvalidPlayerException, InvalidPositionException
     {
+        Player newPlayer;
+
+        View.askPlayerID();
+        String id = this.inputs.next();
+
         View.askPlayerName();
-        String playerName = inputs.next();
+        String playerName = this.inputs.next();
 
         View.askPlayerNumber();
-        int number = inputs.nextInt();
+        int number = this.inputs.nextInt();
 
         View.askPlayerTeam();
-        String teamName = inputs.next();
+        String teamName = this.inputs.next();
 
         View.askPlayerPosition();
-        int playerPosition = inputs.nextInt();
-
-        switch (playerPosition)
-        {
-            case 1:
-                GK newPlayer = new GK(); // ...
-                break;
-
-            case 2:
-                break;
-        }
+        int playerPosition = this.inputs.nextInt();
 
         View.askAttributesMode();
-        int attMode = inputs.nextInt();
+        int attMode = this.inputs.nextInt();
         if(attMode == 1)
         {
-            // ...
+            if(playerPosition == 1)
+            {
+                View.askPlayerElasticity();
+                int elasticity = this.inputs.nextInt();
+
+                View.askPlayerReflexes();
+                int reflexes = this.inputs.nextInt();
+
+                View.askPlayerAgility();
+                int agility = this.inputs.nextInt();
+
+                View.askPlayerDecisions();
+                int decisions = this.inputs.nextInt();
+
+                newPlayer = new GK(id,playerName,teamName,elasticity,reflexes,agility,decisions);
+            }
+            else
+            {
+                View.askPlayerVelocity();
+                int velocity = this.inputs.nextInt();
+
+                View.askPlayerEndurance();
+                int endurance = this.inputs.nextInt();
+
+                View.askPlayerSkill();
+                int skill = this.inputs.nextInt();
+
+                View.askPlayerImpulsion();
+                int impulsion = this.inputs.nextInt();
+
+                View.askPlayerHeading();
+                int heading = this.inputs.nextInt();
+
+                View.askPlayerFinishing();
+                int finishing = this.inputs.nextInt();
+
+                View.askPlayerPassing();
+                int passing = this.inputs.nextInt();
+
+                View.askPlayerCrossing();
+                int crossing = this.inputs.nextInt();
+
+                View.askPlayerBallRecovery();
+                int ballRecovery = this.inputs.nextInt();
+
+                View.askPlayerPositioning();
+                int positioning = this.inputs.nextInt();
+
+                View.askPlayerCreativity();
+                int creativity = this.inputs.nextInt();
+
+                View.askPlayerAggressiveness();
+                int aggressiveness = this.inputs.nextInt();
+
+                View.askPlayerTackling();
+                int tackling = this.inputs.nextInt();
+
+                View.askPlayerVision();
+                int vision = this.inputs.nextInt();
+
+                switch(playerPosition)
+                {
+                    case 2:
+                        newPlayer = new DF(id,playerName,teamName,velocity,endurance,skill,impulsion,heading,finishing,
+                                passing,crossing,ballRecovery,positioning,creativity,aggressiveness,tackling,vision,Position.DEFENDER);
+                        break;
+
+                    case 3:
+                        newPlayer = new WG(id,playerName,teamName,velocity,endurance,skill,impulsion,heading,finishing,
+                                passing,crossing,ballRecovery,positioning,creativity,aggressiveness,tackling,vision,Position.WINGER);
+                        break;
+
+                    case 4:
+                        newPlayer = new MD(id,playerName,teamName,velocity,endurance,skill,impulsion,heading,finishing,
+                                passing,crossing,ballRecovery,positioning,creativity,aggressiveness,tackling,vision,Position.MIDFIELDER);
+                        break;
+
+                    case 5:
+                        newPlayer = new FW(id,playerName,teamName,velocity,endurance,skill,impulsion,heading,finishing,
+                                passing,crossing,ballRecovery,positioning,creativity,aggressiveness,tackling,vision,Position.FORWARD);
+                        break;
+
+                    default:
+                        throw new InvalidPositionException("The position you selected does not exist");
+                        break;
+                }
+            }
+        }
+        else
+        {
+            switch(playerPosition)
+            {
+                case 1:
+                    newPlayer = new GK(id,playerName,teamName); // TODO: create goalkeeper constructor that does not require a list/set for historic
+                    break;
+
+                case 2:
+                    newPlayer = new DF(id,playerName,teamName);
+                    break;
+
+                case 3:
+                    newPlayer = new WG(id,playerName,teamName);
+                    break;
+
+                case 4:
+                    newPlayer = new MD(id,playerName,teamName);
+                    break;
+
+                case 5:
+                    newPlayer = new FW(id,playerName,teamName);
+                    break;
+
+                default:
+                    throw new InvalidPositionException("The position you selected does not exist");
+                    break;
+            }
+        }
+
+        try
+        {
+            this.model.addPlayer(newPlayer);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+
+        }
+
+        View.printSuccessfulCreatedPlayer();
+
+        View.printMessage("\nY/y to go back: ");
+
+        while(!this.inputs.next().equals("Y") || !this.inputs.next().equals("y"))
+        {
+            View.printMessage("\nY/y to go back: ");
         }
     }
 
@@ -106,6 +234,13 @@ public class PlayerMenuController implements Serializable
         String[] args = this.model.getPlayersAsStringArray();
 
         View.printAllPlayers(args);
+
+        View.printMessage("\nY/y to go back: ");
+
+        while(!this.inputs.next().equals("Y") || !this.inputs.next().equals("y"))
+        {
+            View.printMessage("\nY/y to go back: ");
+        }
     }
 
     private void seePlayer()
@@ -152,6 +287,12 @@ public class PlayerMenuController implements Serializable
                 case 3:
                     this.model.removePlayer(id);
                     View.printMessage("The player has been successfully deleted.");
+                    View.printMessage("\nY/y to go back: ");
+
+                    while(!this.inputs.next().equals("Y") || !this.inputs.next().equals("y"))
+                    {
+                        View.printMessage("\nY/y to go back: ");
+                    }
                     end = false;
                     break;
 
@@ -176,6 +317,13 @@ public class PlayerMenuController implements Serializable
         this.model.transferPlayer(pID,team,newTeam);
 
         View.printMessage("The player has been successfully transferred.");
+
+        View.printMessage("\nY/y to go back: ");
+
+        while(!this.inputs.next().equals("Y") || !this.inputs.next().equals("y"))
+        {
+            View.printMessage("\nY/y to go back: ");
+        }
     }
 
     private void updatePlayer(String pID)
@@ -208,5 +356,12 @@ public class PlayerMenuController implements Serializable
         }
 
         View.printMessage("The player has been successfully updated.");
+
+        View.printMessage("\nY/y to go back: ");
+
+        while(!this.inputs.next().equals("Y") || !this.inputs.next().equals("y"))
+        {
+            View.printMessage("\nY/y to go back: ");
+        }
     }
 }

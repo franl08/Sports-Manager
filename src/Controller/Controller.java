@@ -6,8 +6,22 @@ import java.util.HashSet;
 import java.util.Scanner;
 import java.util.Set;
 
-public class Controller {
+public class Controller
+{
     private Model model;
+    private Scanner inputs;
+
+    private PlayerMenuController pmc;
+    private TeamMenuController tmc;
+
+    public Controller()
+    {
+        this.model = new Model();
+        this.inputs = new Scanner(System.in);
+
+        this.pmc = new PlayerMenuController(this.model, this.inputs);
+        this.tmc = new TeamMenuController(this.model, this.inputs);
+    }
 
     public Controller(Model m)
     {
