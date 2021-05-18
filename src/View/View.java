@@ -12,119 +12,211 @@ public class View implements Serializable
 
     //Player GUI
 
+    /**
+     * Function that displays on the screen th player menu.
+     */
     public static void PlayerMenu()
     {
         ViewPlayer.printPlayerMenu();
     }
 
+    /**
+     * Function that displays on the screen the manage player menu.
+     */
+    public static void ManagePlayer()
+    {
+        ViewPlayer.printManagePlayerMenu();
+    }
+
+    /**
+     * Function that displays on the screen the Attributes menu.
+     * @param isGoalkeeper is a boolean parameter that asserts whether the player that was requested is a goalkeeper or not.
+     */
+    public static void AttributesMenu(boolean isGoalkeeper)
+    {
+        ViewPlayer.printAttributesPlayerMenu(isGoalkeeper);
+    }
+
+    /**
+     * Function that displays on the screen a phrase asking an input from the user which is supposed to be an player's id.
+     */
+    public static void askPlayerID()
+    {
+        ViewPlayer.askPlayerID();
+    }
+
+    /**
+     * Function that displays on the screen a phrase asking an input from the user which is supposed to be an player's name.
+     */
     public static void askPlayerName()
     {
-        Outputs.showMessage("Insert player's name: ");
+        ViewPlayer.askPlayerName();
     }
 
+    /**
+     * Function that displays on the screen a phrase asking an input from the user which is supposed to be an player's shirt number.
+     */
     public static void askPlayerNumber()
     {
-        Outputs.showMessage("Insert player's shirt number: ");
+        ViewPlayer.askPlayerNumber();
     }
 
+    /**
+     * Function that displays on the screen a phrase asking an input from the user which is supposed to be an player's starting team.
+     */
     public static void askPlayerTeam()
     {
-        Outputs.showMessage("Insert player's team: ");
+        ViewPlayer.askPlayerTeam();
     }
 
+    /**
+     * Function that displays on the screen the player position mode menu that is to confirm which position shall the player that is
+     * being created is to play.
+     */
     public static void askPlayerPosition()
     {
-        PositionMenu.printPositionMenu();
+        ViewPlayer.printPositionMenu();
     }
 
+    /**
+     * Function that displays on the screen the attributes mode menu that is to assert whether the user would like to setup his/her
+     * player attributes manually or have them randomly generated.
+     */
     public static void askAttributesMode()
     {
-        AttributesMenu.printAttributesMenu();
+        ViewPlayer.printAttributesModeMenu();
     }
 
+    /**
+     * Function that displays on the screen a phrase asking an input from the user which is supposed to be an player's starting velocity.
+     */
     public static void askPlayerVelocity()
     {
-        Outputs.showMessage("Insert player's velocity: ");
+        ViewPlayer.askPlayerVelocity();
     }
 
+    /**
+     * Function that displays on the screen a phrase asking an input from the user which is supposed to be an player's starting endurance.
+     */
     public static void askPlayerEndurance()
     {
-        Outputs.showMessage("Insert player's endurance: ");
+        ViewPlayer.askPlayerEndurance();
     }
 
+    /**
+     * Function that displays on the screen a phrase asking an input from the user which is supposed to be an player's starting impulsion.
+     */
     public static void askPlayerImpulsion()
     {
-        Outputs.showMessage("Insert player's impulsion: ");
+        ViewPlayer.askPlayerImpulsion();
     }
 
+    /**
+     * Function that displays on the screen a phrase asking an input from the user which is supposed to be an player's starting heading.
+     */
     public static void askPlayerHeading()
     {
-        Outputs.showMessage("Insert player's heading: ");
+        ViewPlayer.askPlayerHeading();
     }
 
+    /**
+     * Function that displays on the screen a phrase asking an input from the user which is supposed to be an player's starting passing.
+     */
     public static void askPlayerPassing()
     {
-        Outputs.showMessage("Insert player's passing: ");
+        ViewPlayer.askPlayerPassing();
     }
 
+    /**
+     * Function that displays on the screen a phrase asking an input from the user which is supposed to be an player's starting crossing.
+     */
     public static void askPlayerCrossing()
     {
-        Outputs.showMessage("Insert player's crossing: ");
+        ViewPlayer.askPlayerCrossing();
     }
 
+    /**
+     * Function that displays on the screen a phrase asking an input from the user which is supposed to be an player's starting recovery.
+     */
     public static void askPlayerBallRecovery()
     {
-        Outputs.showMessage("Insert player's ball recovery: ");
+        ViewPlayer.askPlayerBallRecovery();
     }
 
+    /**
+     * Function that displays on the screen a phrase asking an input from the user which is supposed to be an player's starting positioning.
+     */
     public static void askPlayerPositioning()
     {
-        Outputs.showMessage("Insert player's positioning: ");
+        ViewPlayer.askPlayerPositioning();
     }
 
+    /**
+     * Function that displays on the screen a phrase asking an input from the user which is supposed to be an player's starting creativity.
+     */
     public static void askPlayerCreativity()
     {
-        Outputs.showMessage("Insert player's creativity: ");
+        ViewPlayer.askPlayerCreativity();
     }
 
+    /**
+     * Function that displays on the screen a phrase asking an input from the user which is supposed to be an player's starting aggressiveness.
+     */
     public static void askPlayerAggressiveness()
     {
-        Outputs.showMessage("Insert player's aggressiveness: ");
+        ViewPlayer.askPlayerAggressiveness();
     }
 
+    /**
+     * Function that displays on the screen a phrase asking an input from the user which is supposed to be an player's starting tackling.
+     */
     public static void askPlayerTackling()
     {
-        Outputs.showMessage("Insert player's tackling: ");
+        ViewPlayer.askPlayerTackling();
     }
 
+    /**
+     * Function that displays on the screen a phrase asking an input from the user which is supposed to be an player's starting elasticity.
+     */
     public static void askPlayerElasticity()
     {
-        Outputs.showMessage("Insert player's elasticity: ");
+        ViewPlayer.askPlayerElasticity();
     }
 
+    /**
+     * Function that displays on the screen a phrase asking an input from the user which is supposed to be an player's starting reflexes.
+     */
     public static void askPlayerReflexes()
     {
-        Outputs.showMessage("Insert player's reflexes: ");
+        ViewPlayer.askPlayerReflexes();
     }
 
+    /**
+     * Function that displays on the screen a phrase asking an input from the user which is supposed to be an player's starting agility.
+     */
     public static void askPlayerAgility()
     {
-        Outputs.showMessage("Insert player's agility: ");
+        ViewPlayer.askPlayerAgility();
     }
 
+    /**
+     * Function that displays on the screen a phrase asking an input from the user which is supposed to be an player's starting decisions.
+     */
     public static void askPlayerDecisions()
     {
-        Outputs.showMessage("Insert player's decisions: ");
+        ViewPlayer.askPlayerAgility();
     }
 
     public static void printSuccessfulCreatedPlayer() {
         Outputs.showMessage("Your player has been successfully created.");
     }
 
+    /**
+     * Function that displays on the screen a table like representation of all the players currently in the system.
+     */
     public static void printAllPlayers(String[] allPlayers)
     {
-        String[] headArgs = new String[] {"Player ID","Player Name","Player Number","Player Team","Player Overall","Player Position"};
-        Outputs.printStringArrayAsTable(allPlayers, headArgs);
+        ViewPlayer.printAllPlayers(allPlayers);
     }
 
     //Team GUI
@@ -136,7 +228,12 @@ public class View implements Serializable
 
     public static void askTeamName()
     {
-        Outputs.showMessage("Insert team's name: ");
+        ViewTeam.askTeamName();
+    }
+
+    public static void askNewTeamName()
+    {
+        ViewTeam.askNewTeamName();
     }
 
     //Game GUI

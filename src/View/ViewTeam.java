@@ -21,4 +21,12 @@ public final class ViewTeam implements Serializable
     public static void askTeamID() {
         System.out.println("Introduce team ID: ");
     }
+
+    public static void askTeamName() {
+        System.out.println("Introduce team name: ");
+    }
+
+    public static void askNewTeamName() {
+        System.out.println("Introduce new team name: ");
+    }
 }
