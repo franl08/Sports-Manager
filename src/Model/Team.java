@@ -161,8 +161,11 @@ public class Team {
      */
     public Set<Game> getGamesHistory(){
         Set<Game> ans = new HashSet<>();
-        for(Game g : this.gamesHistory)
-            ans.add(g.clone());
+        if(this.gamesHistory != null)
+        {
+            for(Game g : this.gamesHistory)
+                ans.add(g.clone());
+        }
         return ans;
     }
 

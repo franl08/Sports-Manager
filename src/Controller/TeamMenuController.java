@@ -31,6 +31,7 @@ public class TeamMenuController implements Serializable
         {
             View.TeamMenu();
             int option = this.inputs.nextInt();
+            this.inputs.nextLine();
 
             switch (option)
             {
@@ -43,10 +44,14 @@ public class TeamMenuController implements Serializable
                     break;
 
                 case 3:
-                    seeTeam();
+                    seeTeamPlayers();
                     break;
 
                 case 4:
+                    seeTeamHistory();
+                    break;
+
+                case 5:
                     deleteTeam();
                     break;
 
@@ -65,9 +70,11 @@ public class TeamMenuController implements Serializable
     {
         View.askTeamID();
         String id = this.inputs.next();
+        this.inputs.nextLine();
 
         View.askTeamName();
         String teamName = this.inputs.next();
+        teamName = teamName.concat(this.inputs.nextLine());
 
         Team newTeam = new Team(id,teamName);
 
@@ -82,11 +89,15 @@ public class TeamMenuController implements Serializable
 
         View.printSuccessfulCreatedPlayer();
 
-        View.printMessage("\nY/y to go back: ");
+        boolean go = true;
 
-        while(!this.inputs.next().equals("Y") || !this.inputs.next().equals("y"))
+        while(go)
         {
             View.printMessage("\nY/y to go back: ");
+            String yes = this.inputs.next();
+            this.inputs.nextLine();
+
+            if(yes.equals("Y") || yes.equals("y")) go = false;
         }
     }
 
@@ -96,45 +107,77 @@ public class TeamMenuController implements Serializable
 
         View.printAllTeams(allTeams);
 
-        View.printMessage("\nY/y to go back: ");
+        boolean go = true;
 
-        while(!this.inputs.next().equals("Y") || !this.inputs.next().equals("y"))
+        while(go)
         {
             View.printMessage("\nY/y to go back: ");
+            String yes = this.inputs.next();
+            this.inputs.nextLine();
+
+            if(yes.equals("Y") || yes.equals("y")) go = false;
         }
     }
 
-    private void seeTeam()
+    private void seeTeamPlayers()
     {
         View.askTeamName();
-        String name = this.inputs.next();
+        String teamName = this.inputs.next();
+        teamName = teamName.concat(this.inputs.nextLine());
 
-        String teamInfo = this.model.getTeamWithName(name).toString();
+        View.printTeamPlayers(this.model.getPlayersTeamAsStringArray(teamName));
 
-        View.printMessage(teamInfo);
+        boolean go = true;
 
-        View.printMessage("\nY/y to go back: ");
-
-        while(!this.inputs.next().equals("Y") || !this.inputs.next().equals("y"))
+        while(go)
         {
             View.printMessage("\nY/y to go back: ");
+            String yes = this.inputs.next();
+            this.inputs.nextLine();
+
+            if(yes.equals("Y") || yes.equals("y")) go = false;
+        }
+    }
+
+    private void seeTeamHistory()
+    {
+        View.askTeamName();
+        String teamName = this.inputs.next();
+        teamName = teamName.concat(this.inputs.nextLine());
+
+        View.printTeamHistory(this.model.getHistoryTeamAsStringArray(teamName));
+
+        boolean go = true;
+
+        while(go)
+        {
+            View.printMessage("\nY/y to go back: ");
+            String yes = this.inputs.next();
+            this.inputs.nextLine();
+
+            if(yes.equals("Y") || yes.equals("y")) go = false;
         }
     }
 
     private void deleteTeam()
     {
         View.askTeamName();
-        String name = this.inputs.next();
+        String teamName = this.inputs.next();
+        teamName = teamName.concat(this.inputs.nextLine());
 
-        this.model.removeTeam(name);
+        this.model.removeTeam(teamName);
 
         View.printSuccessfulDeletedTeam();
 
-        View.printMessage("\nY/y to go back: ");
+        boolean go = true;
 
-        while(!this.inputs.next().equals("Y") || !this.inputs.next().equals("y"))
+        while(go)
         {
             View.printMessage("\nY/y to go back: ");
+            String yes = this.inputs.next();
+            this.inputs.nextLine();
+
+            if(yes.equals("Y") || yes.equals("y")) go = false;
         }
     }
 }

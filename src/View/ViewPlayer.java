@@ -31,7 +31,7 @@ public final class ViewPlayer implements Serializable
 
         }
 
-        Outputs.printOptionList(attributesPlayerMenuArgs,"Attributes List");
+        Outputs.printMenu(attributesPlayerMenuArgs,"Attributes List",false);
     }
 
     public static void printPositionMenu()

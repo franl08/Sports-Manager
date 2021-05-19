@@ -284,6 +284,22 @@ public class View implements Serializable
         ViewTeam.printAllTeams(allTeams);
     }
 
+    /**
+     * Function that displays on the screen a table like representation of the history of a team currently in the system.
+     */
+    public static void printTeamPlayers(String[] teamPlayers)
+    {
+        ViewTeam.printTeamPlayers(teamPlayers);
+    }
+
+    /**
+     * Function that displays on the screen a table like representation of the history of a team currently in the system.
+     */
+    public static void printTeamHistory(String[] teamHistory)
+    {
+        ViewTeam.printTeamHistory(teamHistory);
+    }
+
     //Game GUI
 
     public static void GameMenu()

@@ -176,6 +176,90 @@ public class WG extends FieldPlayer{
     }
 
     /**
+     * Updates an attribute to a new value
+     * @param attribute Attribute signature
+     * @param newValue New value
+     */
+    public void updateAttribute(int attribute, int newValue) throws InvalidAttributeException
+    {
+        switch (attribute)
+        {
+            case 1:
+                this.setVelocity(newValue);
+                this.calcOverall();
+                break;
+
+            case 2:
+                this.setEndurance(newValue);
+                this.calcOverall();
+                break;
+
+            case 3:
+                this.setSkill(newValue);
+                this.calcOverall();
+                break;
+
+            case 4:
+                this.setImpulsion(newValue);
+                this.calcOverall();
+                break;
+
+            case 5:
+                this.setHeading(newValue);
+                this.calcOverall();
+                break;
+
+            case 6:
+                this.setFinishing(newValue);
+                this.calcOverall();
+                break;
+
+            case 7:
+                this.setPassing(newValue);
+                this.calcOverall();
+                break;
+
+            case 8:
+                this.setCrossing(newValue);
+                this.calcOverall();
+                break;
+
+            case 9:
+                this.setBallRecovery(newValue);
+                this.calcOverall();
+                break;
+
+            case 10:
+                this.setPositioning(newValue);
+                this.calcOverall();
+                break;
+
+            case 11:
+                this.setCreativity(newValue);
+                this.calcOverall();
+                break;
+
+            case 12:
+                this.setAggressiveness(newValue);
+                this.calcOverall();
+                break;
+
+            case 13:
+                this.setTackling(newValue);
+                this.calcOverall();
+                break;
+
+            case 14:
+                this.setVision(newValue);
+                this.calcOverall();
+                break;
+
+            default:
+                throw new InvalidAttributeException("The attribute your inserted doesn't exist.");
+        }
+    }
+
+    /**
      * Method to pass a winger to string
      * @return winger as a string
      */

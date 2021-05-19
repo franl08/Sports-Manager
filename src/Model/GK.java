@@ -226,6 +226,40 @@ public class GK extends Player {
     }
 
     /**
+     * Updates an attribute to a new value
+     * @param attribute Attribute signature
+     * @param newValue New value
+     */
+    public void updateAttribute(int attribute, int newValue) throws InvalidAttributeException
+    {
+        switch (attribute)
+        {
+            case 1:
+                this.setElasticity(newValue);
+                this.calcOverall();
+                break;
+
+            case 2:
+                this.setReflexes(newValue);
+                this.calcOverall();
+                break;
+
+            case 3:
+                this.setAgility(newValue);
+                this.calcOverall();
+                break;
+
+            case 4:
+                this.setDecisions(newValue);
+                this.calcOverall();
+                break;
+
+            default:
+                throw new InvalidAttributeException("The attribute your inserted doesn't exist.");
+        }
+    }
+
+    /**
      * Method to get Goalkeeper as a String
      * @return Goalkeeper as a String
      */

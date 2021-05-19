@@ -163,4 +163,56 @@ public class Model {
 
         return result;
     }
+
+    public String[] getPlayersTeamAsStringArray(String teamName)
+    {
+        String[] result = new String[getTeamWithName(teamName).getPlayers().values().size() * 5];
+
+        int i = 0;
+
+        for(Player p : getTeamWithName(teamName).getPlayers().values())
+        {
+            result[i++] = p.getId();
+            result[i++] = p.getName();
+            result[i++] = Integer.toString(p.getNumber());
+            result[i++] = Integer.toString(p.getOverall());
+            result[i++] = p.getPosition().toString();
+        }
+
+        return result;
+    }
+
+    public String[] getHistoryTeamAsStringArray(String teamName)
+    {
+        String[] result = new String[getTeamWithName(teamName).getGamesHistory().size() * 4];
+
+        int i = 0;
+
+        for(Game g : getTeamWithName(teamName).getGamesHistory())
+        {
+            result[i++] = g.getLd().toString();
+            result[i++] = g.getHomeTeam().getName();
+            result[i++] = g.getAwayTeam().getName();
+            result[i++] = Integer.toString(g.getHomeGoals());
+            result[i++] = Integer.toString(g.getAwayGoals());
+        }
+
+        return result;
+    }
+
+    /**
+     * Function that updates a certain player's attribute to a new value.
+     * @param playerID
+     * @param attribute
+     * @param newValue
+     */
+    public void updatePlayer(String playerID,int attribute,int newValue) throws InvalidAttributeException, PlayerAlreadyExistsException, InvalidTeamException
+    {
+        Player p = getPlayerWithID(playerID);
+
+        p.updateAttribute(attribute,newValue);
+
+        removePlayer(playerID);
+        addPlayer(p);
+    }
 }

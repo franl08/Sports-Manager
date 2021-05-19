@@ -274,4 +274,10 @@ public abstract class Player {
     }
 
 
+    /**
+     * Method to change a player's attribute
+     * @param attribute Attribute signature
+     * @param newValue New value
+     */
+    public abstract void updateAttribute(int attribute, int newValue) throws InvalidAttributeException;
 }

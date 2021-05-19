@@ -13,6 +13,7 @@ public class Controller
 
     private PlayerMenuController pmc;
     private TeamMenuController tmc;
+    private GameMenuController gmc;
 
     public Controller()
     {
@@ -21,6 +22,7 @@ public class Controller
 
         this.pmc = new PlayerMenuController(this.model, this.inputs);
         this.tmc = new TeamMenuController(this.model, this.inputs);
+        this.gmc = new GameMenuController(this.model, this.inputs);
     }
 
     public Controller(Model m)
@@ -45,6 +47,10 @@ public class Controller
 
                 case 2:
                     this.tmc.runTeamMenu();
+                    break;
+
+                case 3:
+                    this.gmc.runGameMenu();
                     break;
 
                 case 0:

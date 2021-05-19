@@ -68,8 +68,7 @@ public class PlayerMenuController implements Serializable
         }
     }
 
-    private void createPlayerController() throws InvalidPositionException
-    {
+    private void createPlayerController() throws InvalidPositionException, PlayerAlreadyExistsException, InvalidTeamException {
         Player newPlayer;
 
         View.askPlayerID();
@@ -101,15 +100,19 @@ public class PlayerMenuController implements Serializable
             {
                 View.askPlayerElasticity();
                 int elasticity = this.inputs.nextInt();
+                this.inputs.nextLine();
 
                 View.askPlayerReflexes();
                 int reflexes = this.inputs.nextInt();
+                this.inputs.nextLine();
 
                 View.askPlayerAgility();
                 int agility = this.inputs.nextInt();
+                this.inputs.nextLine();
 
                 View.askPlayerDecisions();
                 int decisions = this.inputs.nextInt();
+                this.inputs.nextLine();
 
                 newPlayer = new GK(id,playerName,teamName,elasticity,reflexes,agility,decisions);
             }
@@ -117,45 +120,59 @@ public class PlayerMenuController implements Serializable
             {
                 View.askPlayerVelocity();
                 int velocity = this.inputs.nextInt();
+                this.inputs.nextLine();
 
                 View.askPlayerEndurance();
                 int endurance = this.inputs.nextInt();
+                this.inputs.nextLine();
 
                 View.askPlayerSkill();
                 int skill = this.inputs.nextInt();
+                this.inputs.nextLine();
 
                 View.askPlayerImpulsion();
                 int impulsion = this.inputs.nextInt();
+                this.inputs.nextLine();
 
                 View.askPlayerHeading();
                 int heading = this.inputs.nextInt();
+                this.inputs.nextLine();
 
                 View.askPlayerFinishing();
                 int finishing = this.inputs.nextInt();
+                this.inputs.nextLine();
 
                 View.askPlayerPassing();
                 int passing = this.inputs.nextInt();
+                this.inputs.nextLine();
 
                 View.askPlayerCrossing();
                 int crossing = this.inputs.nextInt();
+                this.inputs.nextLine();
 
                 View.askPlayerBallRecovery();
                 int ballRecovery = this.inputs.nextInt();
+                this.inputs.nextLine();
 
                 View.askPlayerPositioning();
                 int positioning = this.inputs.nextInt();
+                this.inputs.nextLine();
 
                 View.askPlayerCreativity();
                 int creativity = this.inputs.nextInt();
+                this.inputs.nextLine();
 
                 View.askPlayerAggressiveness();
                 int aggressiveness = this.inputs.nextInt();
+                this.inputs.nextLine();
 
                 View.askPlayerTackling();
                 int tackling = this.inputs.nextInt();
+                this.inputs.nextLine();
 
                 View.askPlayerVision();
                 int vision = this.inputs.nextInt();
+                this.inputs.nextLine();
 
                 switch(playerPosition)
                 {
@@ -213,14 +230,7 @@ public class PlayerMenuController implements Serializable
             }
         }
 
-        try
-        {
-            this.model.addPlayer(newPlayer);
-        }
-        catch (Exception e)
-        {
-            View.printMessage(e.toString());
-        }
+        this.model.addPlayer(newPlayer);
 
         View.printSuccessfulCreatedPlayer();
 
@@ -230,6 +240,7 @@ public class PlayerMenuController implements Serializable
         {
             View.printMessage("\nY/y to go back: ");
             String yes = this.inputs.next();
+            this.inputs.nextLine();
 
             if(yes.equals("Y") || yes.equals("y")) go = false;
         }
@@ -247,6 +258,7 @@ public class PlayerMenuController implements Serializable
         {
             View.printMessage("\nY/y to go back: ");
             String yes = this.inputs.next();
+            this.inputs.nextLine();
 
             if(yes.equals("Y") || yes.equals("y")) go = false;
         }
@@ -256,6 +268,7 @@ public class PlayerMenuController implements Serializable
     {
         View.askPlayerID();
         String id = this.inputs.next();
+        this.inputs.nextLine();
 
         String playerInfo = this.model.getPlayerWithID(id).toString();
 
@@ -267,6 +280,7 @@ public class PlayerMenuController implements Serializable
         {
             View.printMessage("\nY/y to go back: ");
             String yes = this.inputs.next();
+            this.inputs.nextLine();
 
             if(yes.equals("Y") || yes.equals("y")) go = false;
         }
@@ -276,6 +290,7 @@ public class PlayerMenuController implements Serializable
     {
         View.askPlayerID();
         String id = this.inputs.next();
+        this.inputs.nextLine();
 
         boolean end = true;
 
@@ -285,6 +300,8 @@ public class PlayerMenuController implements Serializable
 
             View.ManagePlayer();
             int option = this.inputs.nextInt();
+            this.inputs.nextLine();
+
 
             switch(option)
             {
@@ -305,6 +322,7 @@ public class PlayerMenuController implements Serializable
                     {
                         View.printMessage("\nY/y to go back: ");
                         String yes = this.inputs.next();
+                        this.inputs.nextLine();
 
                         if(yes.equals("Y") || yes.equals("y")) go = false;
                     }
@@ -326,6 +344,7 @@ public class PlayerMenuController implements Serializable
     {
         View.askNewTeamName();
         String newTeam = this.inputs.next();
+        this.inputs.nextLine();
 
         String team = this.model.getPlayerWithID(pID).getCurrentTeamName();
 
@@ -356,16 +375,23 @@ public class PlayerMenuController implements Serializable
             View.AttributesMenu(isGoalkeeper);
 
             int attribute = this.inputs.nextInt();
+            this.inputs.nextLine();
 
             if(attribute != 0)
             {
                 View.printMessage("Introduce new value: ");
 
                 int newValue = this.inputs.nextInt();
+                this.inputs.nextLine();
 
-                //this.model.updatePlayer(pID,attribute,newValue); //TODO: function updatePlayer that takes an String with a player id
-                //TODO: an int that represents an attribute(see view.player.AttributesMenu)
-                //TODO: and a newValue and updates the said player's given attribute to the new value
+                try
+                {
+                    this.model.updatePlayer(pID, attribute, newValue);
+                }
+                catch (Exception e)
+                {
+                    e.printStackTrace();
+                }
             }
             else
             {
@@ -381,6 +407,7 @@ public class PlayerMenuController implements Serializable
         {
             View.printMessage("\nY/y to go back: ");
             String yes = this.inputs.next();
+            this.inputs.nextLine();
 
             if(yes.equals("Y") || yes.equals("y")) go = false;
         }
