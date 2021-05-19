@@ -59,6 +59,36 @@ public final class Outputs implements Serializable
         System.out.print("Choose an option: ");
     }
 
+    public static void printOptionList(String[] menuArgs, String menuTitle)
+    {
+        System.out.println();
+
+        int length = menuTitle.length() + 10;
+
+        for (String line : menuArgs)
+        {
+            length = Math.max(line.length() + 14, length);
+        }
+
+        Outputs.printLine('-', length);
+        System.out.print("|");
+        Outputs.printMenuTitle(menuTitle, length);
+        System.out.println("|");
+        int size = menuArgs.length;
+
+        for(int i = 0; i < size; i++)
+        {
+            Outputs.printLine('-', length);
+            System.out.print("| " + (i + 1) + ". " + menuArgs[i]);
+            Outputs.printExcess(menuArgs[i].length(), length);
+            System.out.println("|");
+        }
+
+        Outputs.printLine('-', length);
+
+        System.out.print("\nChoose an option: ");
+    }
+
     public static void printMatrix(char[][] matrix, int lines)
     {
         for(int i = 0; i < lines; i++)

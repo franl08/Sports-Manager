@@ -231,8 +231,9 @@ public class View implements Serializable
         ViewPlayer.askPlayerDecisions();
     }
 
-    public static void printSuccessfulCreatedPlayer() {
-        Outputs.showMessage("Your player has been successfully created.");
+    public static void printSuccessfulCreatedPlayer()
+    {
+        ViewPlayer.printSuccessfulCreatedPlayer();
     }
 
     /**
@@ -265,6 +266,16 @@ public class View implements Serializable
         ViewTeam.askNewTeamName();
     }
 
+    public static void printSuccessfulCreatedTeam()
+    {
+        ViewTeam.printSuccessfulCreatedTeam();
+    }
+
+    public static void printSuccessfulDeletedTeam()
+    {
+        ViewTeam.printSuccessfulDeletedTeam();
+    }
+
     /**
      * Function that displays on the screen a table like representation of all the teams currently in the system.
      */
@@ -278,6 +289,41 @@ public class View implements Serializable
     public static void GameMenu()
     {
         ViewGame.printGameMenu();
+    }
+
+    public static void TacticsMenu(String teamName)
+    {
+        ViewGame.printGameTactics(teamName);
+    }
+
+    public static void MeteorologyMenu()
+    {
+        ViewGame.printGameMeteorology();
+    }
+
+    public static void askHomeTeamName()
+    {
+        ViewGame.askHomeTeamName();
+    }
+
+    public static void askAwayTeamName()
+    {
+        ViewGame.askAwayTeamName();
+    }
+
+    public static void askGameDay()
+    {
+        ViewGame.askGameDay();
+    }
+
+    public static void askGameMonth()
+    {
+        ViewGame.askGameMonth();
+    }
+
+    public static void askGameYear()
+    {
+        ViewGame.askGameYear();
     }
 
     //Util

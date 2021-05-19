@@ -6,8 +6,6 @@ import View.View;
 import java.io.Serializable;
 import java.util.Scanner;
 
-
-// TODO: update team
 public class TeamMenuController implements Serializable
 {
     private final Model model;
@@ -48,6 +46,10 @@ public class TeamMenuController implements Serializable
                     seeTeam();
                     break;
 
+                case 4:
+                    deleteTeam();
+                    break;
+
                 case 0:
                     returnFlag = false;
                     break;
@@ -77,6 +79,15 @@ public class TeamMenuController implements Serializable
         {
             e.printStackTrace();
         }
+
+        View.printSuccessfulCreatedPlayer();
+
+        View.printMessage("\nY/y to go back: ");
+
+        while(!this.inputs.next().equals("Y") || !this.inputs.next().equals("y"))
+        {
+            View.printMessage("\nY/y to go back: ");
+        }
     }
 
     private void seeAllTeams()
@@ -101,6 +112,23 @@ public class TeamMenuController implements Serializable
         String teamInfo = this.model.getTeamWithName(name).toString();
 
         View.printMessage(teamInfo);
+
+        View.printMessage("\nY/y to go back: ");
+
+        while(!this.inputs.next().equals("Y") || !this.inputs.next().equals("y"))
+        {
+            View.printMessage("\nY/y to go back: ");
+        }
+    }
+
+    private void deleteTeam()
+    {
+        View.askTeamName();
+        String name = this.inputs.next();
+
+        this.model.removeTeam(name);
+
+        View.printSuccessfulDeletedTeam();
 
         View.printMessage("\nY/y to go back: ");
 
