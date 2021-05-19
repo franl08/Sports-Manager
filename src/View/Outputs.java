@@ -27,7 +27,7 @@ public final class Outputs implements Serializable
             length = Math.max(line.length() + 14, length);
         }
 
-        Outputs.printLine('-', length);
+        Outputs.printLine('-', length+1);
         System.out.print("|");
         Outputs.printMenuTitle(menuTitle, length);
         System.out.println("|");
@@ -35,13 +35,13 @@ public final class Outputs implements Serializable
 
         for(int i = 0; i < size; i++)
         {
-            Outputs.printLine('-', length);
+            Outputs.printLine('-', length+1);
             System.out.print("| " + (i + 1) + ". " + menuArgs[i]);
             Outputs.printExcess(menuArgs[i].length(), length);
             System.out.println("|");
         }
 
-        Outputs.printLine('-', length);
+        Outputs.printLine('-', length+1);
 
         if (isExit)
         {
@@ -55,7 +55,7 @@ public final class Outputs implements Serializable
         }
 
         System.out.println("|");
-        Outputs.printLine('-', length);
+        Outputs.printLine('-', length+1);
         System.out.print("Choose an option: ");
     }
 

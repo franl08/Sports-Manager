@@ -68,28 +68,34 @@ public class PlayerMenuController implements Serializable
         }
     }
 
-    private void createPlayerController() throws InvalidPlayerException, InvalidPositionException
+    private void createPlayerController() throws InvalidPositionException
     {
         Player newPlayer;
 
         View.askPlayerID();
         String id = this.inputs.next();
+        this.inputs.nextLine();
 
         View.askPlayerName();
         String playerName = this.inputs.next();
+        playerName = playerName.concat(this.inputs.nextLine());
 
         View.askPlayerNumber();
         int number = this.inputs.nextInt();
+        this.inputs.nextLine();
 
         View.askPlayerTeam();
         String teamName = this.inputs.next();
+        teamName = teamName.concat(this.inputs.nextLine());
 
         View.askPlayerPosition();
         int playerPosition = this.inputs.nextInt();
+        this.inputs.nextLine();
 
         View.askAttributesMode();
         int attMode = this.inputs.nextInt();
-        if(attMode == 1)
+        this.inputs.nextLine();
+        if(attMode == 2)
         {
             if(playerPosition == 1)
             {
@@ -175,7 +181,6 @@ public class PlayerMenuController implements Serializable
 
                     default:
                         throw new InvalidPositionException("The position you selected does not exist");
-                        break;
                 }
             }
         }
@@ -184,7 +189,7 @@ public class PlayerMenuController implements Serializable
             switch(playerPosition)
             {
                 case 1:
-                    newPlayer = new GK(id,playerName,teamName); // TODO: create goalkeeper constructor that does not require a list/set for historic
+                    newPlayer = new GK(id,playerName,teamName);
                     break;
 
                 case 2:
@@ -205,7 +210,6 @@ public class PlayerMenuController implements Serializable
 
                 default:
                     throw new InvalidPositionException("The position you selected does not exist");
-                    break;
             }
         }
 
@@ -215,17 +219,19 @@ public class PlayerMenuController implements Serializable
         }
         catch (Exception e)
         {
-            e.printStackTrace();
-
+            View.printMessage(e.toString());
         }
 
         View.printSuccessfulCreatedPlayer();
 
-        View.printMessage("\nY/y to go back: ");
+        boolean go = true;
 
-        while(!this.inputs.next().equals("Y") || !this.inputs.next().equals("y"))
+        while(go)
         {
             View.printMessage("\nY/y to go back: ");
+            String yes = this.inputs.next();
+
+            if(yes.equals("Y") || yes.equals("y")) go = false;
         }
     }
 
@@ -235,11 +241,14 @@ public class PlayerMenuController implements Serializable
 
         View.printAllPlayers(args);
 
-        View.printMessage("\nY/y to go back: ");
+        boolean go = true;
 
-        while(!this.inputs.next().equals("Y") || !this.inputs.next().equals("y"))
+        while(go)
         {
             View.printMessage("\nY/y to go back: ");
+            String yes = this.inputs.next();
+
+            if(yes.equals("Y") || yes.equals("y")) go = false;
         }
     }
 
@@ -252,11 +261,14 @@ public class PlayerMenuController implements Serializable
 
         View.printMessage(playerInfo);
 
-        View.printMessage("\nY/y to go back: ");
+        boolean go = true;
 
-        while(!this.inputs.next().equals("Y") || !this.inputs.next().equals("y"))
+        while(go)
         {
             View.printMessage("\nY/y to go back: ");
+            String yes = this.inputs.next();
+
+            if(yes.equals("Y") || yes.equals("y")) go = false;
         }
     }
 
@@ -287,11 +299,14 @@ public class PlayerMenuController implements Serializable
                 case 3:
                     this.model.removePlayer(id);
                     View.printMessage("The player has been successfully deleted.");
-                    View.printMessage("\nY/y to go back: ");
+                    boolean go = true;
 
-                    while(!this.inputs.next().equals("Y") || !this.inputs.next().equals("y"))
+                    while(go)
                     {
                         View.printMessage("\nY/y to go back: ");
+                        String yes = this.inputs.next();
+
+                        if(yes.equals("Y") || yes.equals("y")) go = false;
                     }
                     end = false;
                     break;
@@ -318,11 +333,14 @@ public class PlayerMenuController implements Serializable
 
         View.printMessage("The player has been successfully transferred.");
 
-        View.printMessage("\nY/y to go back: ");
+        boolean go = true;
 
-        while(!this.inputs.next().equals("Y") || !this.inputs.next().equals("y"))
+        while(go)
         {
             View.printMessage("\nY/y to go back: ");
+            String yes = this.inputs.next();
+
+            if(yes.equals("Y") || yes.equals("y")) go = false;
         }
     }
 
@@ -345,7 +363,7 @@ public class PlayerMenuController implements Serializable
 
                 int newValue = this.inputs.nextInt();
 
-                this.model.updatePlayer(pID,attribute,newValue); //TODO: function updatePlayer that takes an String with a player id
+                //this.model.updatePlayer(pID,attribute,newValue); //TODO: function updatePlayer that takes an String with a player id
                 //TODO: an int that represents an attribute(see view.player.AttributesMenu)
                 //TODO: and a newValue and updates the said player's given attribute to the new value
             }
@@ -357,11 +375,14 @@ public class PlayerMenuController implements Serializable
 
         View.printMessage("The player has been successfully updated.");
 
-        View.printMessage("\nY/y to go back: ");
+        boolean go = true;
 
-        while(!this.inputs.next().equals("Y") || !this.inputs.next().equals("y"))
+        while(go)
         {
             View.printMessage("\nY/y to go back: ");
+            String yes = this.inputs.next();
+
+            if(yes.equals("Y") || yes.equals("y")) go = false;
         }
     }
 }

@@ -31,19 +31,19 @@ public final class ViewPlayer implements Serializable
 
         }
 
-        Outputs.printMenu(attributesPlayerMenuArgs,"Attributes List",false);
+        Outputs.printOptionList(attributesPlayerMenuArgs,"Attributes List");
     }
 
     public static void printPositionMenu()
     {
         String[] positionMenuArgs = new String[]{"Goalkeeper.", "Defender.", "Winger.", "Midfielder.", "Forward."};
-        Outputs.printMenu(positionMenuArgs, "Positions", false);
+        Outputs.printOptionList(positionMenuArgs, "Positions");
     }
 
     public static void printAttributesModeMenu()
     {
         String[] positionMenuArgs = new String[]{"Automatic.", "Manual."};
-        Outputs.printMenu(positionMenuArgs, "Attribute", false);
+        Outputs.printOptionList(positionMenuArgs, "Attribute");
     }
 
     public static void askPlayerID()

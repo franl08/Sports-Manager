@@ -21,6 +21,21 @@ public class GK extends Player {
     }
 
     /**
+     * Constructor with player ID, name and current team name
+     * @param id
+     * @param name
+     * @param currentTeam
+     */
+    public GK(String id, String name, String currentTeam) {
+        super(id, name, currentTeam, Position.GOALKEEPER);
+        this.elasticity = utils.setRandomAttribute();
+        this.reflexes = utils.setRandomAttribute();
+        this.agility = utils.setRandomAttribute();
+        this.decisions = utils.setRandomAttribute();
+        super.setOverall(calcOverall());
+    }
+
+    /**
      * Constructor with player ID, name, current team name and historic
      * @param id
      * @param name

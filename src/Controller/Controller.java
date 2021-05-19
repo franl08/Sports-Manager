@@ -27,6 +27,32 @@ public class Controller
     {
         this.model = m;
     }
+
+    public void run()
+    {
+        boolean exit = true;
+
+        while(exit)
+        {
+            View.MainMenu();
+            int option = this.inputs.nextInt();
+
+            switch (option)
+            {
+                case 1:
+                    this.pmc.runPlayerMenu();
+                    break;
+
+                case 2:
+                    this.tmc.runTeamMenu();
+                    break;
+
+                case 0:
+                    exit = false;
+                    break;
+            }
+        }
+    }
     /*
     public int selectGoalkeeper(Team t) throws NotAGoalkeeperException, InvalidPlayerException{
         View.showPlayers(t.getPlayers());
@@ -150,7 +176,4 @@ public class Controller
         return ans;
     }
     */
-    public void run(){
-
-    }
 }
