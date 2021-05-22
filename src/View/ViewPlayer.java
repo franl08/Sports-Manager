@@ -1,6 +1,7 @@
 package View;
 
 import java.io.Serializable;
+import java.lang.reflect.Method;
 
 public final class ViewPlayer implements Serializable
 {

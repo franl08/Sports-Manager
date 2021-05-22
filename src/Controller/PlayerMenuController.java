@@ -72,24 +72,19 @@ public class PlayerMenuController implements Serializable
         Player newPlayer;
 
         View.askPlayerID();
-        String id = this.inputs.next();
-        this.inputs.nextLine();
+        String id = Inputs.askForStringInput(this.inputs);
 
         View.askPlayerName();
-        String playerName = this.inputs.next();
-        playerName = playerName.concat(this.inputs.nextLine());
+        String playerName = Inputs.askForStringInput(this.inputs);
 
         View.askPlayerNumber();
-        int number = this.inputs.nextInt();
-        this.inputs.nextLine();
+        int number = Inputs.askForIntOneToNNInput(this.inputs);
 
         View.askPlayerTeam();
-        String teamName = this.inputs.next();
-        teamName = teamName.concat(this.inputs.nextLine());
+        String teamName = Inputs.askForStringInput(this.inputs);
 
         View.askPlayerPosition();
-        int playerPosition = this.inputs.nextInt();
-        this.inputs.nextLine();
+        int playerPosition = Inputs.askForIntOneToNNInput(this.inputs);
 
         View.askAttributesMode();
         int attMode = this.inputs.nextInt();

@@ -1,6 +1,7 @@
 package View;
 
 import java.io.Serializable;
+import java.lang.reflect.Method;
 
 // TODO showPlayers && showMessage, see Controller to know what is supposed to do.
 public class View implements Serializable
@@ -39,6 +40,7 @@ public class View implements Serializable
 
     /**
      * Function that displays on the screen a phrase asking an input from the user which is supposed to be an player's id.
+     * @return
      */
     public static void askPlayerID()
     {
