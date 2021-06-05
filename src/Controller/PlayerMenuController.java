@@ -5,6 +5,7 @@ import View.View;
 
 import java.io.Serializable;
 import java.util.Scanner;
+import java.util.Set;
 
 // TODO: see player history ??
 public class PlayerMenuController implements Serializable
@@ -109,7 +110,23 @@ public class PlayerMenuController implements Serializable
                 int decisions = this.inputs.nextInt();
                 this.inputs.nextLine();
 
-                newPlayer = new GK(id,playerName,teamName,elasticity,reflexes,agility,decisions);
+                View.askPlayerVelocity();
+                int velocity = this.inputs.nextInt();
+                this.inputs.nextLine();
+
+                View.askPlayerPassing();
+                int passing = this.inputs.nextInt();
+                this.inputs.nextLine();
+
+                View.askPlayerCourage();
+                int courage = this.inputs.nextInt();
+                this.inputs.nextLine();
+
+                View.askPlayerEndurance();
+                int endurance = this.inputs.nextInt();
+                this.inputs.nextLine();
+
+                newPlayer = new GK(id,playerName,number,teamName,elasticity,reflexes,agility,decisions,velocity,passing,courage,endurance);
             }
             else
             {
@@ -339,11 +356,15 @@ public class PlayerMenuController implements Serializable
     {
         View.askNewTeamName();
         String newTeam = this.inputs.next();
+        Set<Integer> availableNums = this.model.availableNumbersInTeam(newTeam);
         this.inputs.nextLine();
 
         String team = this.model.getPlayerWithID(pID).getCurrentTeamName();
 
-        this.model.transferPlayer(pID,team,newTeam);
+        // Print Available Numbers && Ask new number
+        int newNumber = -1;
+
+        this.model.transferPlayer(pID,team,newTeam, newNumber);
 
         View.printMessage("The player has been successfully transferred.");
 

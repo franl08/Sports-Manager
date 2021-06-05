@@ -233,6 +233,11 @@ public class View implements Serializable
         ViewPlayer.askPlayerDecisions();
     }
 
+    /**
+     * Function that displays on the screen a phrase asking an input from the user which is supposed to be an player's starting courage.
+     */
+    public static void askPlayerCourage(){ViewPlayer.askPlayerCourage();}
+
     public static void printSuccessfulCreatedPlayer()
     {
         ViewPlayer.printSuccessfulCreatedPlayer();

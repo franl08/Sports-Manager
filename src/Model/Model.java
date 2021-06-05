@@ -1,21 +1,25 @@
 package Model;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
 public class Model {
     private Map<String, Team> teams;
     private Map<String, Player> players;
+    private Map<String, Game> games;
 
     public Model(){
         this.teams = new HashMap<>();
         this.players = new HashMap<>();
+        this.games = new HashMap<>();
     }
 
-    public Model(Map<String, Team> teams, Map<String, Player> players) {
+    public Model(Map<String, Team> teams, Map<String, Player> players, Map<String, Game> games) {
         this.setTeams(teams);
         this.setPlayers(players);
+        this.setGames(games);
     }
 
     public Map<String, Team> getTeams() {
@@ -33,15 +37,24 @@ public class Model {
 
     public Map<String, Player> getPlayers() {
         Map<String, Player> ans = new HashMap<>();
-        for(Player p : this.players.values())
-            ans.put(p.getId(), p.clone());
+        this.players.forEach((k,v) -> ans.put(k, v.clone()));
         return ans;
     }
 
     public void setPlayers(Map<String, Player> players) {
         this.players = new HashMap<>();
-        for(Player p : players.values())
-            this.players.put(p.getId(), p.clone());
+        players.forEach((k,v) -> this.players.put(k, v.clone()));
+    }
+
+    public Map<String, Game> getGames() {
+        Map<String, Game> ans = new HashMap<>();
+        this.games.forEach((k,v) -> ans.put(k, v.clone()));
+        return ans;
+    }
+
+    public void setGames(Map<String, Game> games) {
+        this.games = new HashMap<>();
+        games.forEach((k,v) -> this.games.put(k, v.clone()));
     }
 
     public void removeTeam(String name){
@@ -77,8 +90,9 @@ public class Model {
         this.players.remove(ID);
     }
 
-    public void transferPlayer(String pID, String tName, String newTeamName){
+    public void transferPlayer(String pID, String tName, String newTeamName, int newNumber){
         Player p = this.players.get(pID);
+        p.setNumber(newNumber);
         Team t = this.teams.get(tName);
         Team nt = this.teams.get(newTeamName);
         try{
@@ -214,5 +228,13 @@ public class Model {
 
         removePlayer(playerID);
         addPlayer(p);
+    }
+
+    public Set<Integer> availableNumbersInTeam(String teamName){
+        Set<Integer> numbers = this.teams.get(teamName).usedNumbers();
+        Set<Integer> ans = new HashSet<>();
+        for(int i = 1; i <= 99; i++)
+            if(!numbers.contains(i)) ans.add(i);
+        return ans;
     }
 }

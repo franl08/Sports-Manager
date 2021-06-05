@@ -213,4 +213,12 @@ public class Team {
         }
     }
 
+    /**
+     * Method to see what numbers a team currently has
+     * @return Used numbers
+     */
+    public Set<Integer> usedNumbers(){
+       return new HashSet<>(this.players.keySet());
+    }
+
 }

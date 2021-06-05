@@ -7,6 +7,10 @@ public class GK extends Player {
     private int reflexes;
     private int agility;
     private int decisions;
+    private int velocity;
+    private int passing;
+    private int courage;
+    private int endurance;
     private final Position curPosition = Position.GOALKEEPER;
 
     /**
@@ -32,6 +36,10 @@ public class GK extends Player {
         this.reflexes = utils.setRandomAttribute();
         this.agility = utils.setRandomAttribute();
         this.decisions = utils.setRandomAttribute();
+        this.velocity = utils.setRandomAttribute();
+        this.passing = utils.setRandomAttribute();
+        this.courage = utils.setRandomAttribute();
+        this.endurance = utils.setRandomAttribute();
         super.setOverall(calcOverall());
     }
 
@@ -48,6 +56,10 @@ public class GK extends Player {
         this.reflexes = utils.setRandomAttribute();
         this.agility = utils.setRandomAttribute();
         this.decisions = utils.setRandomAttribute();
+        this.velocity = utils.setRandomAttribute();
+        this.passing = utils.setRandomAttribute();
+        this.courage = utils.setRandomAttribute();
+        this.endurance = utils.setRandomAttribute();
         super.setOverall(calcOverall());
     }
 
@@ -61,63 +73,23 @@ public class GK extends Player {
         this.reflexes = utils.setRandomAttribute();
         this.agility = utils.setRandomAttribute();
         this.decisions = utils.setRandomAttribute();
+        this.velocity = utils.setRandomAttribute();
+        this.passing = utils.setRandomAttribute();
+        this.courage = utils.setRandomAttribute();
+        this.endurance = utils.setRandomAttribute();
         super.setOverall(calcOverall());
     }
 
-    /**
-     * Constructor with player ID, name, current team, historic and attributes
-     * @param id
-     * @param name
-     * @param currentTeam
-     * @param historic
-     * @param elasticity
-     * @param reflexes
-     * @param agility
-     * @param decisions
-     */
-    public GK(String id, String name, String currentTeam, List<String> historic, int elasticity, int reflexes, int agility, int decisions) {
-        super(id, name, currentTeam, historic, Position.GOALKEEPER);
-        this.setElasticity(elasticity);
-        this.setReflexes(reflexes);
-        this.setAgility(agility);
-        this.setDecisions(decisions);
-        super.setOverall(calcOverall());
-    }
-
-    /**
-     * Constructor with player ID, name, current team and attributes
-     * @param id
-     * @param name
-     * @param currentTeam
-     * @param elasticity
-     * @param reflexes
-     * @param agility
-     * @param decisions
-     */
-    public GK(String id, String name, String currentTeam, int elasticity, int reflexes, int agility, int decisions) {
-        super(id, name, currentTeam, Position.GOALKEEPER);
-        this.setElasticity(elasticity);
-        this.setReflexes(reflexes);
-        this.setAgility(agility);
-        this.setDecisions(decisions);
-        super.setOverall(calcOverall());
-    }
-
-    /**
-     * Constructor with player and attributes
-     * @param p
-     * @param elasticity
-     * @param reflexes
-     * @param agility
-     * @param decisions
-     */
-    public GK(Player p, int elasticity, int reflexes, int agility, int decisions) {
-        super(p);
-        this.setElasticity(elasticity);
-        this.setReflexes(reflexes);
-        this.setAgility(agility);
-        this.setDecisions(decisions);
-        super.setOverall(calcOverall());
+    public GK(String id, String name, int number, String currentTeamName, int elasticity, int reflexes, int agility, int decisions, int velocity, int passing, int courage, int endurance) {
+        super(id, name, number, currentTeamName, Position.GOALKEEPER);
+        this.elasticity = elasticity;
+        this.reflexes = reflexes;
+        this.agility = agility;
+        this.decisions = decisions;
+        this.velocity = velocity;
+        this.passing = passing;
+        this.courage = courage;
+        this.endurance = endurance;
     }
 
     /**
@@ -130,6 +102,10 @@ public class GK extends Player {
         this.setReflexes(gk.getReflexes());
         this.setAgility(gk.getAgility());
         this.setDecisions(gk.getDecisions());
+        this.setVelocity(gk.getVelocity());
+        this.setPassing(gk.getPassing());
+        this.setCourage(gk.getCourage());
+        this.setEndurance(gk.getEndurance());
         super.setOverall(calcOverall());
     }
 
@@ -210,6 +186,70 @@ public class GK extends Player {
     }
 
     /**
+     * Velocity getter
+     * @return Player velocity
+     */
+    public int getVelocity() {
+        return this.velocity;
+    }
+
+    /**
+     * Velocity Setter
+     * @param velocity Velocity to set
+     */
+    public void setVelocity(int velocity) {
+        this.velocity = velocity;
+    }
+
+    /**
+     * Passing getter
+     * @return Player passing
+     */
+    public int getPassing() {
+        return this.passing;
+    }
+
+    /**
+     * Passing setter
+     * @param passing Passing to set
+     */
+    public void setPassing(int passing) {
+        this.passing = passing;
+    }
+
+    /**
+     * Courage getter
+     * @return Player's courage
+     */
+    public int getCourage() {
+        return this.courage;
+    }
+
+    /**
+     * Courage Setter
+     * @param courage Courage to set
+     */
+    public void setCourage(int courage) {
+        this.courage = courage;
+    }
+
+    /**
+     * Endurance Getter
+     * @return Player's endurance
+     */
+    public int getEndurance() {
+        return this.endurance;
+    }
+
+    /**
+     * Endurance Setter
+     * @param endurance Endurance to set
+     */
+    public void setEndurance(int endurance) {
+        this.endurance = endurance;
+    }
+
+    /**
      * Current player position getter
      * @return Current player position
      */
@@ -222,7 +262,8 @@ public class GK extends Player {
      * @return Player overall playing as goalkeeper
      */
     public int calcOverall(){
-        return (int) (this.elasticity * 0.25 + this.reflexes * 0.25 + this.agility * 0.25 + this.decisions * 0.25);
+        return (int) (this.elasticity * 0.15 + this.reflexes * 0.15 + this.agility * 0.15 + this.decisions * 0.15 + this.velocity * 0.10
+         + this.passing * 0.10 + this.courage * 0.10 + this.endurance * 0.10);
     }
 
     /**
@@ -253,9 +294,25 @@ public class GK extends Player {
                 this.setDecisions(newValue);
                 this.calcOverall();
                 break;
+            case 5:
+                this.setVelocity(newValue);
+                this.calcOverall();
+                break;
+            case 6:
+                this.setPassing(newValue);
+                this.calcOverall();
+                break;
+            case 7:
+                this.setCourage(newValue);
+                this.calcOverall();
+                break;
+            case 8:
+                this.setEndurance(newValue);
+                this.calcOverall();
+                break;
 
             default:
-                throw new InvalidAttributeException("The attribute your inserted doesn't exist.");
+                throw new InvalidAttributeException("The attribute you inserted doesn't exist.");
         }
     }
 
