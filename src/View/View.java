@@ -29,17 +29,10 @@ public class View implements Serializable
         ViewPlayer.printManagePlayerMenu();
     }
 
-    /**
-     * Function that displays on the screen the Attributes menu.
-     * @param isGoalkeeper is a boolean parameter that asserts whether the player that was requested is a goalkeeper or not.
-     */
-    public static void AttributesMenu(boolean isGoalkeeper)
-    {
-        ViewPlayer.printAttributesPlayerMenu(isGoalkeeper);
-    }
-
     public static void askParam(String param, boolean isGoalkeeper)
     {
+        // Player
+
         if(param.equals("player_name"))
             ViewPlayer.askPlayerName();
 
@@ -117,6 +110,14 @@ public class View implements Serializable
 
         if(param.equals("player_courage"))
             ViewPlayer.askPlayerCourage();
+
+        // Team
+
+        if(param.equals("new_team_name"))
+            ViewTeam.askNewTeamName();
+
+        if(param.equals("team_name"))
+            ViewTeam.askTeamName();
     }
 
     public static void printSuccessfulCreatedPlayer()
@@ -137,16 +138,6 @@ public class View implements Serializable
     public static void TeamMenu()
     {
         ViewTeam.printTeamMenu();
-    }
-
-    public static void askTeamName()
-    {
-        ViewTeam.askTeamName();
-    }
-
-    public static void askNewTeamName()
-    {
-        ViewTeam.askNewTeamName();
     }
 
     public static void printSuccessfulCreatedTeam()

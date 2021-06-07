@@ -68,10 +68,7 @@ public class TeamMenuController implements Serializable
 
     private void createTeam()
     {
-
-        View.askTeamName();
-        String teamName = this.inputs.next();
-        teamName = teamName.concat(this.inputs.nextLine());
+        String teamName = Inputs.askForStringInput(this.inputs, "team_name");
 
         Team newTeam = new Team(teamName);
 
@@ -118,9 +115,7 @@ public class TeamMenuController implements Serializable
 
     private void seeTeamPlayers()
     {
-        View.askTeamName();
-        String teamName = this.inputs.next();
-        teamName = teamName.concat(this.inputs.nextLine());
+        String teamName = Inputs.askForStringInput(this.inputs, "team_name");
 
         View.printTeamPlayers(this.model.getPlayersTeamAsStringArray(teamName));
 
@@ -133,14 +128,14 @@ public class TeamMenuController implements Serializable
             this.inputs.nextLine();
 
             if(yes.equals("Y") || yes.equals("y")) go = false;
+
+            View.clear();
         }
     }
 
     private void seeTeamHistory()
     {
-        View.askTeamName();
-        String teamName = this.inputs.next();
-        teamName = teamName.concat(this.inputs.nextLine());
+        String teamName = Inputs.askForStringInput(this.inputs, "team_name");
 
         View.printTeamHistory(this.model.getHistoryTeamAsStringArray(teamName));
 
@@ -153,14 +148,14 @@ public class TeamMenuController implements Serializable
             this.inputs.nextLine();
 
             if(yes.equals("Y") || yes.equals("y")) go = false;
+
+            View.clear();
         }
     }
 
     private void deleteTeam()
     {
-        View.askTeamName();
-        String teamName = this.inputs.next();
-        teamName = teamName.concat(this.inputs.nextLine());
+        String teamName = Inputs.askForStringInput(this.inputs, "team_name");
 
         this.model.removeTeam(teamName);
 
@@ -175,6 +170,8 @@ public class TeamMenuController implements Serializable
             this.inputs.nextLine();
 
             if(yes.equals("Y") || yes.equals("y")) go = false;
+
+            View.clear();
         }
     }
 }
