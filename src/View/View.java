@@ -38,7 +38,7 @@ public class View implements Serializable
         ViewPlayer.printAttributesPlayerMenu(isGoalkeeper);
     }
 
-    public static void askParam(String param)
+    public static void askParam(String param, boolean isGoalkeeper)
     {
         if(param.equals("player_name"))
             ViewPlayer.askPlayerName();
@@ -54,6 +54,12 @@ public class View implements Serializable
 
         if(param.equals("attributes_mode"))
             ViewPlayer.printAttributesModeMenu();
+
+        if(param.equals("player_attributes"))
+            ViewPlayer.printAttributesPlayerMenu(isGoalkeeper);
+
+        if(param.equals("player_attributes_value"))
+            ViewPlayer.askAttributeNewValue();
 
         if(param.equals("player_velocity"))
             ViewPlayer.askPlayerVelocity();

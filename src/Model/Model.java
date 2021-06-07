@@ -209,6 +209,20 @@ public class Model {
         return result;
     }
 
+    public String[] getPlayerHistoryAsStringArray(String playerName)
+    {
+        String[] result = new String[getPlayerWithName(playerName).getHistoric().size()];
+
+        int i = 0;
+
+        for(String t : getPlayerWithName(playerName).getHistoric())
+        {
+            result[i++] = t;
+        }
+
+        return result;
+    }
+
     /**
      * Function that updates a certain player's attribute to a new value.
      * @param playerName

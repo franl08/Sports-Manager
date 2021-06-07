@@ -55,6 +55,10 @@ public class PlayerMenuController implements Serializable
                     break;
 
                 case 4:
+                    seePlayerHistory();
+                    break;
+
+                case 5:
                     managePlayer();
                     break;
 
@@ -78,61 +82,61 @@ public class PlayerMenuController implements Serializable
 
         int number = Inputs.askForPlayerNumber(this.inputs, this.model.availableNumbersAsString(teamName), "player_number");
 
-        int playerPosition = Inputs.askForInt(this.inputs, 1, 5, "player_position");
+        int playerPosition = Inputs.askForInt(this.inputs, 1, 5, "player_position", false);
 
-        int attMode = Inputs.askForInt(this.inputs, 1, 2, "attributes_mode");
+        int attMode = Inputs.askForInt(this.inputs, 1, 2, "attributes_mode", false);
 
         if(attMode == 2)
         {
             if(playerPosition == 1)
             {
-                int elasticity = Inputs.askForInt(this.inputs, 1, 99, "player_elasticity");
+                int elasticity = Inputs.askForInt(this.inputs, 1, 99, "player_elasticity", false);
 
-                int reflexes = Inputs.askForInt(this.inputs, 1, 99, "player_reflexes");
+                int reflexes = Inputs.askForInt(this.inputs, 1, 99, "player_reflexes", false);
 
-                int agility = Inputs.askForInt(this.inputs, 1, 99, "player_agility");
+                int agility = Inputs.askForInt(this.inputs, 1, 99, "player_agility", false);
 
-                int decisions = Inputs.askForInt(this.inputs, 1, 99, "player_decisions");
+                int decisions = Inputs.askForInt(this.inputs, 1, 99, "player_decisions", false);
 
-                int velocity = Inputs.askForInt(this.inputs, 1, 99, "player_velocity");
+                int velocity = Inputs.askForInt(this.inputs, 1, 99, "player_velocity", false);
 
-                int passing = Inputs.askForInt(this.inputs, 1, 99, "player_passing");
+                int passing = Inputs.askForInt(this.inputs, 1, 99, "player_passing", false);
 
-                int courage = Inputs.askForInt(this.inputs, 1, 99, "player_courage");
+                int courage = Inputs.askForInt(this.inputs, 1, 99, "player_courage", false);
 
-                int endurance = Inputs.askForInt(this.inputs, 1, 99, "player_endurance");
+                int endurance = Inputs.askForInt(this.inputs, 1, 99, "player_endurance", false);
 
                 newPlayer = new GK(playerName,number,teamName,elasticity,reflexes,agility,decisions,velocity,passing,courage,endurance);
             }
             else
             {
-                int velocity = Inputs.askForInt(this.inputs, 1, 99, "player_velocity");
+                int velocity = Inputs.askForInt(this.inputs, 1, 99, "player_velocity",false);
 
-                int endurance = Inputs.askForInt(this.inputs, 1, 99, "player_endurance");
+                int endurance = Inputs.askForInt(this.inputs, 1, 99, "player_endurance",false);
 
-                int skill = Inputs.askForInt(this.inputs, 1, 99, "player_skill");
+                int skill = Inputs.askForInt(this.inputs, 1, 99, "player_skill",false);
 
-                int impulsion = Inputs.askForInt(this.inputs, 1, 99, "player_impulsion");
+                int impulsion = Inputs.askForInt(this.inputs, 1, 99, "player_impulsion",false);
 
-                int heading = Inputs.askForInt(this.inputs, 1, 99, "player_heading");
+                int heading = Inputs.askForInt(this.inputs, 1, 99, "player_heading",false);
 
-                int finishing = Inputs.askForInt(this.inputs, 1, 99, "player_finishing");
+                int finishing = Inputs.askForInt(this.inputs, 1, 99, "player_finishing",false);
 
-                int passing = Inputs.askForInt(this.inputs, 1, 99, "player_passing");
+                int passing = Inputs.askForInt(this.inputs, 1, 99, "player_passing",false);
 
-                int crossing = Inputs.askForInt(this.inputs, 1, 99, "player_crossing");
+                int crossing = Inputs.askForInt(this.inputs, 1, 99, "player_crossing",false);
 
-                int ballRecovery = Inputs.askForInt(this.inputs, 1, 99, "player_ball_recovery");
+                int ballRecovery = Inputs.askForInt(this.inputs, 1, 99, "player_ball_recovery",false);
 
-                int positioning = Inputs.askForInt(this.inputs, 1, 99, "player_positioning");
+                int positioning = Inputs.askForInt(this.inputs, 1, 99, "player_positioning",false);
 
-                int creativity = Inputs.askForInt(this.inputs, 1, 99, "player_creativity");
+                int creativity = Inputs.askForInt(this.inputs, 1, 99, "player_creativity",false);
 
-                int aggressiveness = Inputs.askForInt(this.inputs, 1, 99, "player_aggressiveness");
+                int aggressiveness = Inputs.askForInt(this.inputs, 1, 99, "player_aggressiveness",false);
 
-                int tackling = Inputs.askForInt(this.inputs, 1, 99, "player_tackling");
+                int tackling = Inputs.askForInt(this.inputs, 1, 99, "player_tackling",false);
 
-                int vision = Inputs.askForInt(this.inputs, 1, 99, "player_vision");
+                int vision = Inputs.askForInt(this.inputs, 1, 99, "player_vision",false);
 
                 switch(playerPosition)
                 {
@@ -250,6 +254,29 @@ public class PlayerMenuController implements Serializable
         }
     }
 
+    private void seePlayerHistory()
+    {
+        String playerName = Inputs.askForStringInput(this.inputs, "player_name");
+
+        String[] playerHistory = this.model.getPlayerHistoryAsStringArray(playerName);
+
+        View.clear();
+        View.printAllTeams(playerHistory);
+
+        boolean go = true;
+
+        while(go)
+        {
+            View.printMessage("\nY/y to go back: ");
+            String yes = this.inputs.next();
+            this.inputs.nextLine();
+
+            if(yes.equals("Y") || yes.equals("y")) go = false;
+
+            View.clear();
+        }
+    }
+
     private void managePlayer()
     {
         String playerName = Inputs.askForStringInput(this.inputs, "player_name");
@@ -340,17 +367,16 @@ public class PlayerMenuController implements Serializable
         while (end)
         {
             View.printMessage(this.model.getPlayerWithName(playerName).toString());
-            View.AttributesMenu(isGoalkeeper);
 
-            int attribute = this.inputs.nextInt();
-            this.inputs.nextLine();
+            int attribute;
+
+            if(isGoalkeeper) attribute = Inputs.askForInt(this.inputs, 0, 8, "player_attributes",true);
+
+            else attribute = Inputs.askForInt(this.inputs, 0, 15, "player_attributes",false);
 
             if(attribute != 0)
             {
-                View.printMessage("Introduce new value: ");
-
-                int newValue = this.inputs.nextInt();
-                this.inputs.nextLine();
+                int newValue = Inputs.askForInt(this.inputs, 1, 99, "player_attributes_value",false);
 
                 try
                 {
@@ -358,7 +384,7 @@ public class PlayerMenuController implements Serializable
                 }
                 catch (Exception e)
                 {
-                    e.printStackTrace();
+                    View.printMessage(e.getMessage());
                 }
             }
             else

@@ -20,15 +20,15 @@ public final class ViewPlayer implements Serializable
     public static void printAttributesPlayerMenu(boolean isGoalkeeper)
     {
         String[] attributesPlayerMenuArgs;
-        if (isGoalkeeper)
+        if (!isGoalkeeper)
         {
-            attributesPlayerMenuArgs = new String[]{"Velocity.", "Endurance.", "Skill.", "Impulsion.", "Heading.", "Finishing", "Passing.", "Crossing.",
+            attributesPlayerMenuArgs = new String[]{"Velocity.", "Endurance.", "Skill.", "Impulsion.", "Heading.", "Finishing.", "Passing.", "Crossing.",
                     "Ball Recovery.", "Positioning.", "Creativity.", "Aggressiveness.", "Tackling.", "Vision."};
 
         }
         else
         {
-            attributesPlayerMenuArgs = new String[]{"Elasticity.", "Reflexes.", "Agility.", "Decisions."};
+            attributesPlayerMenuArgs = new String[]{"Elasticity.", "Reflexes.", "Agility.", "Decisions.", "Velocity.", "Passing.", "Courage.", "Endurance."};
 
         }
 
@@ -153,6 +153,11 @@ public final class ViewPlayer implements Serializable
     }
 
     public static void askPlayerCourage(){Outputs.showMessage("Insert player's courage (1-99): ");}
+
+    public static void askAttributeNewValue()
+    {
+        Outputs.showMessage("Insert new value (1-99): ");
+    }
 
     public static void printSuccessfulCreatedPlayer() {
         Outputs.showMessage("Your player has been successfully created.");

@@ -20,7 +20,7 @@ public final class Inputs implements Serializable
             View.printMessage("\n");
             View.printTeamAvailableNumbers(args);
             View.printMessage("\n");
-            View.askParam(param);
+            View.askParam(param, false);
 
             try
             {
@@ -50,7 +50,7 @@ public final class Inputs implements Serializable
         return result;
     }
 
-    public static int askForInt(Scanner inputs, int lower_limit, int upper_limit, String param)
+    public static int askForInt(Scanner inputs, int lower_limit, int upper_limit, String param, boolean isGoalkeeper)
     {
         View.clear();
         boolean isValidInput = true;
@@ -59,7 +59,7 @@ public final class Inputs implements Serializable
         while(isValidInput)
         {
             View.printMessage("\n");
-            View.askParam(param);
+            View.askParam(param, isGoalkeeper);
 
             try
             {
@@ -98,7 +98,7 @@ public final class Inputs implements Serializable
         while(!isValidInput)
         {
             View.printMessage("\n");
-            View.askParam(param);
+            View.askParam(param, false);
 
             try
             {
