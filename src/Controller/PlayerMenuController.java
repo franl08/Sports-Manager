@@ -74,9 +74,9 @@ public class PlayerMenuController implements Serializable
 
         String playerName = Inputs.askForStringInput(this.inputs, "player_name");
 
-        int number = Inputs.askForInt(this.inputs, 1, 99, "player_number");
-
         String teamName = Inputs.askForStringInput(this.inputs, "player_team");
+
+        int number = Inputs.askForPlayerNumber(this.inputs, this.model.availableNumbersAsString(teamName), "player_number");
 
         int playerPosition = Inputs.askForInt(this.inputs, 1, 5, "player_position");
 
@@ -230,11 +230,9 @@ public class PlayerMenuController implements Serializable
 
     private void seePlayer()
     {
-        View.askParam("player_id");
-        String id = this.inputs.next();
-        this.inputs.nextLine();
+        String playerName = Inputs.askForStringInput(this.inputs, "player_name");
 
-        String playerInfo = this.model.getPlayerWithID(id).toString();
+        String playerInfo = this.model.getPlayerWithName(playerName).toString();
 
         View.printMessage(playerInfo);
 
@@ -247,20 +245,20 @@ public class PlayerMenuController implements Serializable
             this.inputs.nextLine();
 
             if(yes.equals("Y") || yes.equals("y")) go = false;
+
+            View.clear();
         }
     }
 
     private void managePlayer()
     {
-        View.askParam("player_id");
-        String id = this.inputs.next();
-        this.inputs.nextLine();
+        String playerName = Inputs.askForStringInput(this.inputs, "player_name");
 
         boolean end = true;
 
         while (end)
         {
-            View.printMessage(this.model.getPlayerWithID(id).toString());
+            View.printMessage(this.model.getPlayerWithName(playerName).toString());
 
             View.ManagePlayer();
             int option = this.inputs.nextInt();
@@ -270,15 +268,15 @@ public class PlayerMenuController implements Serializable
             switch(option)
             {
                 case 1:
-                    transferPlayer(id);
+                    transferPlayer(playerName);
                     break;
 
                 case 2:
-                    updatePlayer(id);
+                    updatePlayer(playerName);
                     break;
 
                 case 3:
-                    this.model.removePlayer(id);
+                    this.model.removePlayer(playerName);
                     View.printMessage("The player has been successfully deleted.");
                     boolean go = true;
 
@@ -289,6 +287,8 @@ public class PlayerMenuController implements Serializable
                         this.inputs.nextLine();
 
                         if(yes.equals("Y") || yes.equals("y")) go = false;
+
+                        View.clear();
                     }
                     end = false;
                     break;
@@ -304,19 +304,17 @@ public class PlayerMenuController implements Serializable
         }
     }
 
-    private void transferPlayer(String pID)
+    private void transferPlayer(String playerName)
     {
         View.askNewTeamName();
         String newTeam = this.inputs.next();
-        Set<Integer> availableNums = this.model.availableNumbersInTeam(newTeam);
         this.inputs.nextLine();
 
-        String team = this.model.getPlayerWithID(pID).getCurrentTeamName();
+        String team = this.model.getPlayerWithName(playerName).getCurrentTeamName();
 
-        // Print Available Numbers && Ask new number
-        int newNumber = -1;
+        int newNumber = Inputs.askForPlayerNumber(this.inputs, this.model.availableNumbersAsString(newTeam), "player_number");
 
-        this.model.transferPlayer(pID,team,newTeam, newNumber);
+        this.model.transferPlayer(playerName,team,newTeam, newNumber);
 
         View.printMessage("The player has been successfully transferred.");
 
@@ -328,18 +326,20 @@ public class PlayerMenuController implements Serializable
             String yes = this.inputs.next();
 
             if(yes.equals("Y") || yes.equals("y")) go = false;
+
+            View.clear();
         }
     }
 
-    private void updatePlayer(String pID)
+    private void updatePlayer(String playerName)
     {
         boolean end = true;
 
-        boolean isGoalkeeper = this.model.getPlayerWithID(pID).getCurPosition().equals(Position.GOALKEEPER);
+        boolean isGoalkeeper = this.model.getPlayerWithName(playerName).getCurPosition().equals(Position.GOALKEEPER);
 
         while (end)
         {
-            View.printMessage(this.model.getPlayerWithID(pID).toString());
+            View.printMessage(this.model.getPlayerWithName(playerName).toString());
             View.AttributesMenu(isGoalkeeper);
 
             int attribute = this.inputs.nextInt();
@@ -354,7 +354,7 @@ public class PlayerMenuController implements Serializable
 
                 try
                 {
-                    this.model.updatePlayer(pID, attribute, newValue);
+                    this.model.updatePlayer(playerName, attribute, newValue);
                 }
                 catch (Exception e)
                 {
@@ -378,6 +378,8 @@ public class PlayerMenuController implements Serializable
             this.inputs.nextLine();
 
             if(yes.equals("Y") || yes.equals("y")) go = false;
+
+            View.clear();
         }
     }
 }

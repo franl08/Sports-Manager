@@ -215,9 +215,9 @@ public class Model {
      * @param attribute
      * @param newValue
      */
-    public void updatePlayer(String playerName ,int attribute,int newValue) throws InvalidAttributeException, PlayerAlreadyExistsException, InvalidTeamException
+    public void updatePlayer(String playerName , int attribute, int newValue) throws InvalidAttributeException, PlayerAlreadyExistsException, InvalidTeamException
     {
-        Player p = getPlayerWithID(playerName);
+        Player p = getPlayerWithName(playerName);
 
         p.updateAttribute(attribute,newValue);
 
@@ -235,10 +235,17 @@ public class Model {
 
     public String[] availableNumbersAsString(String teamName){
         Set<Integer> availableNums = availableNumbersInTeam(teamName);
-        String[] ans = new String[availableNums.size()];
-        for(int i = 0; i < availableNums.size(); i++)
-            ans[i] = "" + availableNums;
-        return ans;
+
+        String[] result = new String[availableNums.size()];
+
+        int i = 0;
+
+        for(Integer x : availableNums)
+        {
+            result[i++] = String.valueOf(x);
+        }
+
+        return result;
     }
 
     public void saveObject(String objectPath) throws IOException {

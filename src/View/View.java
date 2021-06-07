@@ -40,9 +40,6 @@ public class View implements Serializable
 
     public static void askParam(String param)
     {
-        if(param.equals("player_id"))
-            ViewPlayer.askPlayerID();
-
         if(param.equals("player_name"))
             ViewPlayer.askPlayerName();
 
@@ -136,11 +133,6 @@ public class View implements Serializable
         ViewTeam.printTeamMenu();
     }
 
-    public static void askTeamID()
-    {
-        ViewTeam.askTeamID();
-    }
-
     public static void askTeamName()
     {
         ViewTeam.askTeamName();
@@ -183,6 +175,14 @@ public class View implements Serializable
     public static void printTeamHistory(String[] teamHistory)
     {
         ViewTeam.printTeamHistory(teamHistory);
+    }
+
+    /**
+     * Function that displays on the screen a table like representation of the numbers currently available in the team.
+     */
+    public static void printTeamAvailableNumbers(String[] numbers)
+    {
+        ViewTeam.printTeamAvailableNumbers(numbers);
     }
 
     //Game GUI

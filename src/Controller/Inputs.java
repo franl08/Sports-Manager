@@ -9,6 +9,47 @@ import java.util.Scanner;
 
 public final class Inputs implements Serializable
 {
+    public static int askForPlayerNumber(Scanner inputs, String[] args, String param)
+    {
+        View.clear();
+        boolean isValidInput = true;
+        int result = 0;
+
+        while(isValidInput)
+        {
+            View.printMessage("\n");
+            View.printTeamAvailableNumbers(args);
+            View.printMessage("\n");
+            View.askParam(param);
+
+            try
+            {
+                result = inputs.nextInt();
+                inputs.nextLine();
+
+                try
+                {
+                    contains(result, args);
+                    isValidInput = false;
+                }
+                catch (ValueOutofBoundsException e)
+                {
+                    View.clear();
+                    View.printMessage(e.getMessage());
+                    inputs.nextLine();
+                }
+            }
+            catch(InputMismatchException e)
+            {
+                View.clear();
+                View.printMessage("\nInvalid input. The program is expecting a Integer value.");
+                inputs.nextLine();
+            }
+        }
+
+        return result;
+    }
+
     public static int askForInt(Scanner inputs, int lower_limit, int upper_limit, String param)
     {
         View.clear();
@@ -34,6 +75,7 @@ public final class Inputs implements Serializable
                 {
                     View.clear();
                     View.printMessage(e.getMessage());
+                    inputs.nextLine();
                 }
             }
             catch(InputMismatchException e)
@@ -98,5 +140,21 @@ public final class Inputs implements Serializable
     private static void inBounds(int x, int lower_limit, int upper_limit) throws ValueOutofBoundsException
     {
         if(lower_limit != -1 && (x < lower_limit || x > upper_limit)) throw new ValueOutofBoundsException("Expected value between " + lower_limit + " and " + upper_limit + ".");
+    }
+
+    private static void contains(int number, String[] args) throws ValueOutofBoundsException
+    {
+        String num = String.valueOf(number);
+        boolean available = false;
+
+        for(String s: args)
+        {
+            if (s.equals(num)) {
+                available = true;
+                break;
+            }
+        }
+
+        if(!available) throw new ValueOutofBoundsException("Number is not available in the team.");
     }
 }
