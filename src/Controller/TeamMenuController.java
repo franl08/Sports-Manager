@@ -68,15 +68,12 @@ public class TeamMenuController implements Serializable
 
     private void createTeam()
     {
-        View.askTeamID();
-        String id = this.inputs.next();
-        this.inputs.nextLine();
 
         View.askTeamName();
         String teamName = this.inputs.next();
         teamName = teamName.concat(this.inputs.nextLine());
 
-        Team newTeam = new Team(id,teamName);
+        Team newTeam = new Team(teamName);
 
         try
         {

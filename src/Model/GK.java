@@ -25,45 +25,6 @@ public class GK extends Player {
     }
 
     /**
-     * Constructor with player ID, name and current team name
-     * @param id
-     * @param name
-     * @param currentTeam
-     */
-    public GK(String id, String name, String currentTeam) {
-        super(id, name, currentTeam, Position.GOALKEEPER);
-        this.elasticity = utils.setRandomAttribute();
-        this.reflexes = utils.setRandomAttribute();
-        this.agility = utils.setRandomAttribute();
-        this.decisions = utils.setRandomAttribute();
-        this.velocity = utils.setRandomAttribute();
-        this.passing = utils.setRandomAttribute();
-        this.courage = utils.setRandomAttribute();
-        this.endurance = utils.setRandomAttribute();
-        super.setOverall(calcOverall());
-    }
-
-    /**
-     * Constructor with player ID, name, current team name and historic
-     * @param id
-     * @param name
-     * @param currentTeam
-     * @param historic
-     */
-    public GK(String id, String name, String currentTeam, List<String> historic) {
-        super(id, name, currentTeam, historic, Position.GOALKEEPER);
-        this.elasticity = utils.setRandomAttribute();
-        this.reflexes = utils.setRandomAttribute();
-        this.agility = utils.setRandomAttribute();
-        this.decisions = utils.setRandomAttribute();
-        this.velocity = utils.setRandomAttribute();
-        this.passing = utils.setRandomAttribute();
-        this.courage = utils.setRandomAttribute();
-        this.endurance = utils.setRandomAttribute();
-        super.setOverall(calcOverall());
-    }
-
-    /**
      * Constructor with player
      * @param p Player
      */
@@ -78,18 +39,95 @@ public class GK extends Player {
         this.courage = utils.setRandomAttribute();
         this.endurance = utils.setRandomAttribute();
         super.setOverall(calcOverall());
+        this.setPosition(curPosition);
     }
 
-    public GK(String id, String name, int number, String currentTeamName, int elasticity, int reflexes, int agility, int decisions, int velocity, int passing, int courage, int endurance) {
-        super(id, name, number, currentTeamName, Position.GOALKEEPER);
-        this.elasticity = elasticity;
-        this.reflexes = reflexes;
-        this.agility = agility;
-        this.decisions = decisions;
-        this.velocity = velocity;
-        this.passing = passing;
-        this.courage = courage;
-        this.endurance = endurance;
+    /**
+     * Constructor with player name, number, current team name and historic
+     * @param name
+     * @param number
+     * @param currentTeam
+     * @param historic
+     */
+    public GK(String name, int number, String currentTeam, List<String> historic) {
+        super(name, number, currentTeam, historic, Position.GOALKEEPER);
+        this.elasticity = utils.setRandomAttribute();
+        this.reflexes = utils.setRandomAttribute();
+        this.agility = utils.setRandomAttribute();
+        this.decisions = utils.setRandomAttribute();
+        this.velocity = utils.setRandomAttribute();
+        this.passing = utils.setRandomAttribute();
+        this.courage = utils.setRandomAttribute();
+        this.endurance = utils.setRandomAttribute();
+        super.setOverall(calcOverall());
+    }
+
+    /**
+     * Constructor with player name, number and current team name
+     * @param name
+     * @param number
+     * @param currentTeam
+     */
+    public GK(String name, int number, String currentTeam) {
+        super(name, number, currentTeam, Position.GOALKEEPER);
+        this.elasticity = utils.setRandomAttribute();
+        this.reflexes = utils.setRandomAttribute();
+        this.agility = utils.setRandomAttribute();
+        this.decisions = utils.setRandomAttribute();
+        this.velocity = utils.setRandomAttribute();
+        this.passing = utils.setRandomAttribute();
+        this.courage = utils.setRandomAttribute();
+        this.endurance = utils.setRandomAttribute();
+        super.setOverall(calcOverall());
+    }
+
+    public GK(String name, int number){
+        super(name, number, Position.GOALKEEPER);
+        this.elasticity = utils.setRandomAttribute();
+        this.reflexes = utils.setRandomAttribute();
+        this.agility = utils.setRandomAttribute();
+        this.decisions = utils.setRandomAttribute();
+        this.velocity = utils.setRandomAttribute();
+        this.passing = utils.setRandomAttribute();
+        this.courage = utils.setRandomAttribute();
+        this.endurance = utils.setRandomAttribute();
+        super.setOverall(calcOverall());
+    }
+
+    public GK(String name, int number, String currentTeamName, int elasticity, int reflexes, int agility, int decisions, int velocity, int passing, int courage, int endurance) {
+        super(name, number, currentTeamName, Position.GOALKEEPER);
+        this.setElasticity(elasticity);
+        this.setReflexes(reflexes);
+        this.setAgility(agility);
+        this.setDecisions(decisions);
+        this.setVelocity(velocity);
+        this.setPassing(passing);
+        this.setCourage(courage);
+        this.setEndurance(endurance);
+    }
+
+    public GK(String name, int number, String currentTeamName, List<String> historic, int elasticity, int reflexes, int agility, int decisions, int velocity, int passing, int courage, int endurance) {
+        super(name, number, currentTeamName, historic, Position.GOALKEEPER);
+        this.setElasticity(elasticity);
+        this.setReflexes(reflexes);
+        this.setAgility(agility);
+        this.setDecisions(decisions);
+        this.setVelocity(velocity);
+        this.setPassing(passing);
+        this.setCourage(courage);
+        this.setEndurance(endurance);
+    }
+
+    public GK(String name, int number, int elasticity, int reflexes, int agility, int decisions, int velocity, int passing, int courage, int endurance) {
+        super(name, number, Position.GOALKEEPER);
+        this.setElasticity(elasticity);
+        this.setReflexes(reflexes);
+        this.setAgility(agility);
+        this.setDecisions(decisions);
+        this.setVelocity(velocity);
+        this.setPassing(passing);
+        this.setCourage(courage);
+        this.setEndurance(endurance);
     }
 
     /**
@@ -97,7 +135,7 @@ public class GK extends Player {
      * @param gk Goalkeeper to copy
      */
     public GK(GK gk){
-        super(gk.getId(), gk.getName(), gk.getCurrentTeamName(), gk.getHistoric(), gk.getPosition());
+        super(gk.getName(), gk.getNumber(), gk.getCurrentTeamName(), gk.getHistoric(), gk.getPosition());
         this.setElasticity(gk.getElasticity());
         this.setReflexes(gk.getReflexes());
         this.setAgility(gk.getAgility());
@@ -198,7 +236,8 @@ public class GK extends Player {
      * @param velocity Velocity to set
      */
     public void setVelocity(int velocity) {
-        this.velocity = velocity;
+        if(velocity > 99) this.velocity = 99;
+        else this.velocity = Math.max(velocity, 0);
     }
 
     /**
@@ -214,7 +253,8 @@ public class GK extends Player {
      * @param passing Passing to set
      */
     public void setPassing(int passing) {
-        this.passing = passing;
+        if(passing > 99) this.passing = 99;
+        else this.passing = Math.max(passing, 0);
     }
 
     /**
@@ -230,7 +270,8 @@ public class GK extends Player {
      * @param courage Courage to set
      */
     public void setCourage(int courage) {
-        this.courage = courage;
+        if(courage > 99) this.courage = 99;
+        else this.courage = Math.max(courage, 0);
     }
 
     /**
@@ -246,7 +287,8 @@ public class GK extends Player {
      * @param endurance Endurance to set
      */
     public void setEndurance(int endurance) {
-        this.endurance = endurance;
+        if(endurance > 99) this.endurance = 99;
+        else this.endurance = Math.max(endurance, 0);
     }
 
     /**

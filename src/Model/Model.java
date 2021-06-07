@@ -1,5 +1,6 @@
 package Model;
 
+import java.io.*;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -61,33 +62,33 @@ public class Model {
         this.teams.remove(name);
         for(Player p : this.players.values())
             if(p.getCurrentTeamName().equals(name))
-                this.players.remove(p.getId());
+                this.players.remove(p.getName());
     }
 
 
-    public void removePlayerFromTeam(String pID, Team t) throws InvalidPlayerException{
-        Player p = this.players.get(pID);
-        if(!this.players.containsKey(pID)) throw new InvalidPlayerException("Player " + pID + " doesn't exist on database");
-        else if(!this.teams.get(t.getName()).getPlayers().containsKey(p.getNumber())) throw new InvalidPlayerException("Player " + pID + " doesn't exist on team " + t.getName());
+    public void removePlayerFromTeam(String pName, Team t) throws InvalidPlayerException{
+        Player p = this.players.get(pName);
+        if(!this.players.containsKey(pName)) throw new InvalidPlayerException(pName + " doesn't exist on database");
+        else if(!this.teams.get(t.getName()).getPlayers().containsKey(p.getNumber())) throw new InvalidPlayerException(pName + " doesn't play on " + t.getName());
         else t.getPlayers().remove(p.getNumber());
     }
 
-    public void addPlayerToTeam(String pID, Team t) throws InvalidPlayerException{
-        Player p = this.players.get(pID);
-        if(!this.players.containsKey(pID)) throw new InvalidPlayerException("Player " + pID + " doesn't exist on database");
-        else t.getPlayers().put(this.players.get(pID).getNumber(), this.players.get(pID));
+    public void addPlayerToTeam(String pName, Team t) throws InvalidPlayerException{
+        Player p = this.players.get(pName);
+        if(!this.players.containsKey(pName)) throw new InvalidPlayerException(pName + " doesn't exist on database");
+        else t.getPlayers().put(this.players.get(pName).getNumber(), this.players.get(pName));
     }
 
-    public void removePlayer(String ID){
+    public void removePlayer(String name){
         for(Team t : this.teams.values()){
             try{
-                removePlayerFromTeam(ID, t);
+                removePlayerFromTeam(name, t);
             }
             catch (InvalidPlayerException i){
                 i.printStackTrace();
             }
         }
-        this.players.remove(ID);
+        this.players.remove(name);
     }
 
     public void transferPlayer(String pID, String tName, String newTeamName, int newNumber){
@@ -106,10 +107,10 @@ public class Model {
     }
 
     public void addPlayer(Player p) throws PlayerAlreadyExistsException, InvalidTeamException{
-        if(this.players.containsValue(p)) throw new PlayerAlreadyExistsException("Player " + p.getId() + " already exists in database");
+        if(this.players.containsValue(p)) throw new PlayerAlreadyExistsException(p.getName() + " already exists in database");
         else if(!(this.teams.containsKey(p.getCurrentTeamName()))) throw new InvalidTeamException("Team " + p.getCurrentTeamName() + " doesn't exist on database");
         else {
-            this.players.put(p.getId(), p);
+            this.players.put(p.getName(), p);
             Team t = this.teams.get(p.getCurrentTeamName());
             try{
                 t.addPlayer(p);
@@ -122,18 +123,18 @@ public class Model {
 
     public void addTeam(Team t) throws TeamAlreadyExistsException, PlayerAlreadyExistsException{
         int flag = 1;
-        if(this.teams.containsValue(t)) throw new TeamAlreadyExistsException("Team " + t.getId() + " already exists in database");
+        if(this.teams.containsValue(t)) throw new TeamAlreadyExistsException("Team " + t.getName() + " already exists in database");
         else {
             for(Player p : t.getPlayers().values()){
-                if(this.players.containsValue(p)) throw new PlayerAlreadyExistsException("Player " + p.getId() + " already exists in database");
+                if(this.players.containsValue(p)) throw new PlayerAlreadyExistsException(p.getName() + " already exists in database");
             }
             System.out.println(t);
             this.teams.put(t.getName(), t.clone());
         }
     }
 
-    public Player getPlayerWithID(String ID){
-        return this.players.get(ID).clone();
+    public Player getPlayerWithID(String name){
+        return this.players.get(name).clone();
     }
 
     public boolean containsPlayerInTeam(String teamName, int playerNum){
@@ -152,7 +153,6 @@ public class Model {
 
         for(Player p : this.players.values())
         {
-            result[i++] = p.getId();
             result[i++] = p.getName();
             result[i++] = Integer.toString(p.getNumber());
             result[i++] = p.getCurrentTeamName();
@@ -171,7 +171,6 @@ public class Model {
 
         for(Team t : this.teams.values())
         {
-            result[i++] = t.getId();
             result[i++] = t.getName();
         }
 
@@ -186,7 +185,6 @@ public class Model {
 
         for(Player p : getTeamWithName(teamName).getPlayers().values())
         {
-            result[i++] = p.getId();
             result[i++] = p.getName();
             result[i++] = Integer.toString(p.getNumber());
             result[i++] = Integer.toString(p.getOverall());
@@ -216,17 +214,17 @@ public class Model {
 
     /**
      * Function that updates a certain player's attribute to a new value.
-     * @param playerID
+     * @param playerName
      * @param attribute
      * @param newValue
      */
-    public void updatePlayer(String playerID,int attribute,int newValue) throws InvalidAttributeException, PlayerAlreadyExistsException, InvalidTeamException
+    public void updatePlayer(String playerName ,int attribute,int newValue) throws InvalidAttributeException, PlayerAlreadyExistsException, InvalidTeamException
     {
-        Player p = getPlayerWithID(playerID);
+        Player p = getPlayerWithID(playerName);
 
         p.updateAttribute(attribute,newValue);
 
-        removePlayer(playerID);
+        removePlayer(playerName);
         addPlayer(p);
     }
 
@@ -236,5 +234,21 @@ public class Model {
         for(int i = 1; i <= 99; i++)
             if(!numbers.contains(i)) ans.add(i);
         return ans;
+    }
+
+    public void saveObject(String objectPath) throws IOException {
+        FileOutputStream fos = new FileOutputStream(objectPath);
+        BufferedOutputStream bos = new BufferedOutputStream(fos);
+        ObjectOutputStream oos = new ObjectOutputStream(bos);
+        oos.writeObject(this);
+        oos.flush();
+        oos.close();
+    }
+
+    public Model readObject (String filename) throws IOException, ClassNotFoundException{
+        ObjectInputStream file = new ObjectInputStream((new FileInputStream(filename)));
+        Model t = (Model) file.readObject();
+        file.close();
+        return t;
     }
 }

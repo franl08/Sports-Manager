@@ -72,9 +72,6 @@ public class PlayerMenuController implements Serializable
     private void createPlayerController() throws InvalidPositionException, PlayerAlreadyExistsException, InvalidTeamException {
         Player newPlayer;
 
-        View.askPlayerID();
-        String id = Inputs.askForStringInput(this.inputs);
-
         View.askPlayerName();
         String playerName = Inputs.askForStringInput(this.inputs);
 
@@ -126,7 +123,7 @@ public class PlayerMenuController implements Serializable
                 int endurance = this.inputs.nextInt();
                 this.inputs.nextLine();
 
-                newPlayer = new GK(id,playerName,number,teamName,elasticity,reflexes,agility,decisions,velocity,passing,courage,endurance);
+                newPlayer = new GK(playerName,number,teamName,elasticity,reflexes,agility,decisions,velocity,passing,courage,endurance);
             }
             else
             {
@@ -189,22 +186,22 @@ public class PlayerMenuController implements Serializable
                 switch(playerPosition)
                 {
                     case 2:
-                        newPlayer = new DF(id,playerName,teamName,velocity,endurance,skill,impulsion,heading,finishing,
+                        newPlayer = new DF(playerName,number,teamName,velocity,endurance,skill,impulsion,heading,finishing,
                                 passing,crossing,ballRecovery,positioning,creativity,aggressiveness,tackling,vision,Position.DEFENDER);
                         break;
 
                     case 3:
-                        newPlayer = new WG(id,playerName,teamName,velocity,endurance,skill,impulsion,heading,finishing,
+                        newPlayer = new WG(playerName,number,teamName,velocity,endurance,skill,impulsion,heading,finishing,
                                 passing,crossing,ballRecovery,positioning,creativity,aggressiveness,tackling,vision,Position.WINGER);
                         break;
 
                     case 4:
-                        newPlayer = new MD(id,playerName,teamName,velocity,endurance,skill,impulsion,heading,finishing,
+                        newPlayer = new MD(playerName,number,teamName,velocity,endurance,skill,impulsion,heading,finishing,
                                 passing,crossing,ballRecovery,positioning,creativity,aggressiveness,tackling,vision,Position.MIDFIELDER);
                         break;
 
                     case 5:
-                        newPlayer = new FW(id,playerName,teamName,velocity,endurance,skill,impulsion,heading,finishing,
+                        newPlayer = new FW(playerName,number,teamName,velocity,endurance,skill,impulsion,heading,finishing,
                                 passing,crossing,ballRecovery,positioning,creativity,aggressiveness,tackling,vision,Position.FORWARD);
                         break;
 
@@ -218,23 +215,23 @@ public class PlayerMenuController implements Serializable
             switch(playerPosition)
             {
                 case 1:
-                    newPlayer = new GK(id,playerName,teamName);
+                    newPlayer = new GK(playerName,number,teamName);
                     break;
 
                 case 2:
-                    newPlayer = new DF(id,playerName,teamName);
+                    newPlayer = new DF(playerName,number,teamName);
                     break;
 
                 case 3:
-                    newPlayer = new WG(id,playerName,teamName);
+                    newPlayer = new WG(playerName,number,teamName);
                     break;
 
                 case 4:
-                    newPlayer = new MD(id,playerName,teamName);
+                    newPlayer = new MD(playerName,number,teamName);
                     break;
 
                 case 5:
-                    newPlayer = new FW(id,playerName,teamName);
+                    newPlayer = new FW(playerName,number,teamName);
                     break;
 
                 default:

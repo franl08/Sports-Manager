@@ -24,26 +24,26 @@ public class MD extends FieldPlayer{
     }
 
     /**
-     * Constructor with player ID, name, current team name and historic
-     * @param id Player ID
+     * Constructor with player name, number, current team name and historic
      * @param name Player name
+     * @param number Player number
      * @param currentTeam Player current team name
      * @param historic Player historic
      */
-    public MD(String id, String name, String currentTeam, List<String> historic) {
-        super(id, name, currentTeam, historic);
+    public MD(String name, int number, String currentTeam, List<String> historic) {
+        super(name, number, currentTeam, historic);
         super.setPosition(curPosition);
         super.setOverall(calcOverall());
     }
 
     /**
-     * Constructor with player ID, name and current team name
-     * @param id Player ID
+     * Constructor with player name, number and current team name
      * @param name Player name
+     * @param number Player number
      * @param currentTeam Player current team name
      */
-    public MD(String id, String name, String currentTeam) {
-        super(id, name, currentTeam);
+    public MD(String name, int number, String currentTeam) {
+        super(name, number, currentTeam);
         super.setPosition(curPosition);
         super.setOverall(calcOverall());
     }
@@ -73,9 +73,9 @@ public class MD extends FieldPlayer{
     }
 
     /**
-     * Constructor with player ID, name, current team name, historic, attributes and position
-     * @param id Player ID
+     * Constructor with player name, number, current team name, historic, attributes and position
      * @param name Player name
+     * @param number Player number
      * @param currentTeam Player current team
      * @param historic Player historic
      * @param velocity Player velocity
@@ -94,15 +94,15 @@ public class MD extends FieldPlayer{
      * @param vision Player vision
      * @param position Player position
      */
-    public MD(String id, String name, String currentTeam, List<String> historic, int velocity, int endurance, int skill, int impulsion, int heading, int finishing, int passing, int crossing, int ballRecovery, int positioning, int creativity, int aggressiveness, int tackling, int vision, Position position) {
-        super(id, name, currentTeam, historic, velocity, endurance, skill, impulsion, heading, finishing, passing, crossing, ballRecovery, positioning, creativity, aggressiveness, tackling, vision, position);
+    public MD(String name, int number, String currentTeam, List<String> historic, int velocity, int endurance, int skill, int impulsion, int heading, int finishing, int passing, int crossing, int ballRecovery, int positioning, int creativity, int aggressiveness, int tackling, int vision, Position position) {
+        super(name, number, currentTeam, historic, velocity, endurance, skill, impulsion, heading, finishing, passing, crossing, ballRecovery, positioning, creativity, aggressiveness, tackling, vision, position);
         super.setOverall(calcOverall());
     }
 
     /**
-     * Constructor with player ID, name, current team name, attributes and position
-     * @param id Player ID
+     * Constructor with player name, number, current team name, attributes and position
      * @param name Player name
+     * @param number Player number
      * @param currentTeam Player current team name
      * @param velocity Player velocity
      * @param endurance Player endurance
@@ -120,8 +120,25 @@ public class MD extends FieldPlayer{
      * @param vision Player vision
      * @param position Player position
      */
-    public MD(String id, String name, String currentTeam, int velocity, int endurance, int skill, int impulsion, int heading, int finishing, int passing, int crossing, int ballRecovery, int positioning, int creativity, int aggressiveness, int tackling, int vision, Position position) {
-        super(id, name, currentTeam, velocity, endurance, skill, impulsion, heading, finishing, passing, crossing, ballRecovery, positioning, creativity, aggressiveness, tackling, vision, position);
+    public MD(String name, int number, String currentTeam, int velocity, int endurance, int skill, int impulsion, int heading, int finishing, int passing, int crossing, int ballRecovery, int positioning, int creativity, int aggressiveness, int tackling, int vision, Position position) {
+        super(name, number, currentTeam, velocity, endurance, skill, impulsion, heading, finishing, passing, crossing, ballRecovery, positioning, creativity, aggressiveness, tackling, vision, position);
+        super.setOverall(calcOverall());
+    }
+
+    /**
+     * Constructor for logs
+     * @param name Player name
+     * @param number Player number
+     * @param velocity Player velocity
+     * @param endurance Player endurance
+     * @param skill Player skill
+     * @param impulsion Player impulsion
+     * @param heading Player heading
+     * @param finishing Player finishing
+     * @param passing Player passing
+     */
+    public MD(String name, int number, int velocity, int endurance, int skill, int impulsion, int heading, int finishing, int passing, int crossing) {
+        super(name, number, velocity, endurance, skill, impulsion, heading, finishing, passing, crossing, Position.MIDFIELDER);
         super.setOverall(calcOverall());
     }
 
@@ -130,7 +147,7 @@ public class MD extends FieldPlayer{
      * @param m Midfielder to copy
      */
     public MD(MD m){
-        super(m.getId(), m.getName(), m.getCurrentTeamName(), m.getHistoric(), m.getVelocity(), m.getEndurance(), m.getSkill(), m.getImpulsion(), m.getHeading(), m.getFinishing(), m.getPassing(), m.getCrossing(), m.getBallRecovery(), m.getPositioning(), m.getCreativity(), m.getAggressiveness(), m.getTackling(), m.getVision(), m.getPosition());
+        super(m.getName(), m.getNumber(), m.getCurrentTeamName(), m.getHistoric(), m.getVelocity(), m.getEndurance(), m.getSkill(), m.getImpulsion(), m.getHeading(), m.getFinishing(), m.getPassing(), m.getCrossing(), m.getBallRecovery(), m.getPositioning(), m.getCreativity(), m.getAggressiveness(), m.getTackling(), m.getVision(), m.getPosition());
         super.setOverall(calcOverall());
     }
 

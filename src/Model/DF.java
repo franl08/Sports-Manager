@@ -24,26 +24,26 @@ public class DF extends FieldPlayer{
     }
 
     /**
-     * Constructor with player ID, name, current team name and historic
-     * @param id Player ID
+     * Constructor with player name, number, current team name and historic
      * @param name Player name
+     * @param number Player number
      * @param currentTeam Player current team name
      * @param historic Historic of player teams
      */
-    public DF(String id, String name, String currentTeam, List<String> historic) {
-        super(id, name, currentTeam, historic);
+    public DF(String name, int number, String currentTeam, List<String> historic) {
+        super(name, number, currentTeam, historic);
         super.setPosition(curPosition);
         super.setOverall(calcOverall());
     }
 
     /**
-     * Constructor with player ID, name and current team name
-     * @param id Player ID
+     * Constructor with player name, number and current team name
      * @param name Player name
+     * @param number Player number
      * @param currentTeam Player current team name
      */
-    public DF(String id, String name, String currentTeam) {
-        super(id, name, currentTeam);
+    public DF(String name, int number, String currentTeam) {
+        super(name, number, currentTeam);
         super.setPosition(curPosition);
         super.setOverall(calcOverall());
     }
@@ -73,9 +73,9 @@ public class DF extends FieldPlayer{
     }
 
     /**
-     * Constructor with player ID, name, current team name, historic, attributes and position
-     * @param id Player ID
+     * Constructor with player name, number, current team name, historic, attributes and position
      * @param name Player name
+     * @param number Player number
      * @param currentTeam Player current team name
      * @param historic Player historic
      * @param velocity Player velocity
@@ -94,43 +94,60 @@ public class DF extends FieldPlayer{
      * @param vision Player vision
      * @param position Player position
      */
-    public DF(String id, String name, String currentTeam, List<String> historic, int velocity, int endurance, int skill, int impulsion, int heading, int finishing, int passing, int crossing, int ballRecovery, int positioning, int creativity, int aggressiveness, int tackling, int vision, Position position) {
-        super(id, name, currentTeam, historic, velocity, endurance, skill, impulsion, heading, finishing, passing, crossing, ballRecovery, positioning, creativity, aggressiveness, tackling, vision, position);
+    public DF(String name, int number, String currentTeam, List<String> historic, int velocity, int endurance, int skill, int impulsion, int heading, int finishing, int passing, int crossing, int ballRecovery, int positioning, int creativity, int aggressiveness, int tackling, int vision, Position position) {
+        super(name, number, currentTeam, historic, velocity, endurance, skill, impulsion, heading, finishing, passing, crossing, ballRecovery, positioning, creativity, aggressiveness, tackling, vision, position);
         super.setOverall(calcOverall());
     }
 
     /**
-     * Constructor with player ID, name, current team, attributes and position
-     * @param id
-     * @param name
-     * @param currentTeam
-     * @param velocity
-     * @param endurance
-     * @param skill
-     * @param impulsion
-     * @param heading
-     * @param finishing
-     * @param passing
-     * @param crossing
-     * @param ballRecovery
-     * @param positioning
-     * @param creativity
-     * @param aggressiveness
-     * @param tackling
-     * @param vision
-     * @param position
+     * Constructor with player name, number, current team, attributes and position
+     * @param name Player name
+     * @param number Player number
+     * @param currentTeam Player current team name
+     * @param velocity Player velocity
+     * @param endurance Player endurance
+     * @param skill Player skill
+     * @param impulsion Player impulsion
+     * @param heading Player heading
+     * @param finishing Player finishing
+     * @param passing Player passing
+     * @param crossing Player crossing
+     * @param ballRecovery Player ball recovery
+     * @param positioning Player positioning
+     * @param creativity Player creativity
+     * @param aggressiveness Player aggressiveness
+     * @param tackling Player tackling
+     * @param vision Player vision
+     * @param position Player position
      */
-    public DF(String id, String name, String currentTeam, int velocity, int endurance, int skill, int impulsion, int heading, int finishing, int passing, int crossing, int ballRecovery, int positioning, int creativity, int aggressiveness, int tackling, int vision, Position position) {
-        super(id, name, currentTeam, velocity, endurance, skill, impulsion, heading, finishing, passing, crossing, ballRecovery, positioning, creativity, aggressiveness, tackling, vision, position);
+    public DF(String name, int number, String currentTeam, int velocity, int endurance, int skill, int impulsion, int heading, int finishing, int passing, int crossing, int ballRecovery, int positioning, int creativity, int aggressiveness, int tackling, int vision, Position position) {
+        super(name, number, currentTeam, velocity, endurance, skill, impulsion, heading, finishing, passing, crossing, ballRecovery, positioning, creativity, aggressiveness, tackling, vision, position);
+        super.setOverall(calcOverall());
+    }
+
+    /**
+     * Constructor for logs
+     * @param name Player name
+     * @param number Player number
+     * @param velocity Player velocity
+     * @param endurance Player endurance
+     * @param skill Player skill
+     * @param impulsion Player impulsion
+     * @param heading Player heading
+     * @param finishing Player finishing
+     * @param passing Player passing
+     */
+    public DF(String name, int number, int velocity, int endurance, int skill, int impulsion, int heading, int finishing, int passing, int crossing) {
+        super(name, number, velocity, endurance, skill, impulsion, heading, finishing, passing, crossing, Position.DEFENDER);
         super.setOverall(calcOverall());
     }
 
     /**
      * Copy constructor
-     * @param d
+     * @param d Defender to copy
      */
     public DF(DF d){
-        super(d.getId(), d.getName(), d.getCurrentTeamName(), d.getHistoric(), d.getVelocity(), d.getEndurance(), d.getSkill(), d.getImpulsion(), d.getHeading(), d.getFinishing(), d.getPassing(), d.getCrossing(), d.getBallRecovery(), d.getPositioning(), d.getCreativity(), d.getAggressiveness(), d.getTackling(), d.getVision(), d.getPosition());
+        super(d.getName(), d.getNumber(), d.getCurrentTeamName(), d.getHistoric(), d.getVelocity(), d.getEndurance(), d.getSkill(), d.getImpulsion(), d.getHeading(), d.getFinishing(), d.getPassing(), d.getCrossing(), d.getBallRecovery(), d.getPositioning(), d.getCreativity(), d.getAggressiveness(), d.getTackling(), d.getVision(), d.getPosition());
         super.setOverall(calcOverall());
     }
 
@@ -168,7 +185,7 @@ public class DF extends FieldPlayer{
     }
 
     /**
-     * Current player postion getter
+     * Current player position getter
      * @return Player current position
      */
     public Position getCurPosition(){

@@ -24,32 +24,32 @@ public class WG extends FieldPlayer{
     }
 
     /**
-     * Constructor with player ID, name, current team and historic
-     * @param id player ID
-     * @param name player name
-     * @param currentTeam player current team name
-     * @param historic historic of player teams
+     * Constructor with player name, number, current team name and historic
+     * @param name Player name
+     * @param number Player number
+     * @param currentTeam Player current team name
+     * @param historic Historic of player teams
      */
-    public WG(String id, String name, String currentTeam, List<String> historic) {
-        super(id, name, currentTeam, historic);
+    public WG(String name, int number, String currentTeam, List<String> historic) {
+        super(name, number, currentTeam, historic);
         super.setPosition(curPosition);
         super.setOverall(calcOverall());
     }
 
     /**
-     * Constructor with player ID, name and current team
-     * @param id player ID
-     * @param name player name
-     * @param currentTeam player current team name
+     * Constructor with player name, number and current team name
+     * @param name Player name
+     * @param number Player number
+     * @param currentTeam Player current team name
      */
-    public WG(String id, String name, String currentTeam) {
-        super(id, name, currentTeam);
+    public WG(String name, int number, String currentTeam) {
+        super(name, number, currentTeam);
         super.setPosition(curPosition);
         super.setOverall(calcOverall());
     }
 
     /**
-     * Construct with player, attributes and position
+     * Constructor with player, attributes and position
      * @param p Player
      * @param velocity Player velocity
      * @param endurance Player endurance
@@ -73,9 +73,9 @@ public class WG extends FieldPlayer{
     }
 
     /**
-     * Constructor with player ID, name, current team, historic, attributes and position
-     * @param id Player ID
+     * Constructor with player name, number, current team name, historic, attributes and position
      * @param name Player name
+     * @param number Player number
      * @param currentTeam Player current team name
      * @param historic Player historic
      * @param velocity Player velocity
@@ -94,16 +94,16 @@ public class WG extends FieldPlayer{
      * @param vision Player vision
      * @param position Player position
      */
-    public WG(String id, String name, String currentTeam, List<String> historic, int velocity, int endurance, int skill, int impulsion, int heading, int finishing, int passing, int crossing, int ballRecovery, int positioning, int creativity, int aggressiveness, int tackling, int vision, Position position) {
-        super(id, name, currentTeam, historic, velocity, endurance, skill, impulsion, heading, finishing, passing, crossing, ballRecovery, positioning, creativity, aggressiveness, tackling, vision, position);
+    public WG(String name, int number, String currentTeam, List<String> historic, int velocity, int endurance, int skill, int impulsion, int heading, int finishing, int passing, int crossing, int ballRecovery, int positioning, int creativity, int aggressiveness, int tackling, int vision, Position position) {
+        super(name, number, currentTeam, historic, velocity, endurance, skill, impulsion, heading, finishing, passing, crossing, ballRecovery, positioning, creativity, aggressiveness, tackling, vision, position);
         super.setOverall(calcOverall());
     }
 
     /**
-     * Constructor with player ID, name, current team, attributes and position
-     * @param id Player ID
+     * Constructor with player name, number, current team, attributes and position
      * @param name Player name
-     * @param currentTeam Player current team
+     * @param number Player number
+     * @param currentTeam Player current team name
      * @param velocity Player velocity
      * @param endurance Player endurance
      * @param skill Player skill
@@ -120,8 +120,25 @@ public class WG extends FieldPlayer{
      * @param vision Player vision
      * @param position Player position
      */
-    public WG(String id, String name, String currentTeam, int velocity, int endurance, int skill, int impulsion, int heading, int finishing, int passing, int crossing, int ballRecovery, int positioning, int creativity, int aggressiveness, int tackling, int vision, Position position) {
-        super(id, name, currentTeam, velocity, endurance, skill, impulsion, heading, finishing, passing, crossing, ballRecovery, positioning, creativity, aggressiveness, tackling, vision, position);
+    public WG(String name, int number, String currentTeam, int velocity, int endurance, int skill, int impulsion, int heading, int finishing, int passing, int crossing, int ballRecovery, int positioning, int creativity, int aggressiveness, int tackling, int vision, Position position) {
+        super(name, number, currentTeam, velocity, endurance, skill, impulsion, heading, finishing, passing, crossing, ballRecovery, positioning, creativity, aggressiveness, tackling, vision, position);
+        super.setOverall(calcOverall());
+    }
+
+    /**
+     * Constructor for logs
+     * @param name Player name
+     * @param number Player number
+     * @param velocity Player velocity
+     * @param endurance Player endurance
+     * @param skill Player skill
+     * @param impulsion Player impulsion
+     * @param heading Player heading
+     * @param finishing Player finishing
+     * @param passing Player passing
+     */
+    public WG(String name, int number, int velocity, int endurance, int skill, int impulsion, int heading, int finishing, int passing, int crossing) {
+        super(name, number, velocity, endurance, skill, impulsion, heading, finishing, passing, crossing, Position.MIDFIELDER);
         super.setOverall(calcOverall());
     }
 
@@ -130,7 +147,7 @@ public class WG extends FieldPlayer{
      * @param w Winger to copy
      */
     public WG(WG w){
-        super(w.getId(), w.getName(), w.getCurrentTeamName(), w.getHistoric(), w.getVelocity(), w.getEndurance(), w.getSkill(), w.getImpulsion(), w.getHeading(), w.getFinishing(), w.getPassing(), w.getCrossing(), w.getBallRecovery(), w.getPositioning(), w.getCreativity(), w.getAggressiveness(), w.getTackling(), w.getVision(), w.getPosition());
+        super(w.getName(), w.getNumber(), w.getCurrentTeamName(), w.getHistoric(), w.getVelocity(), w.getEndurance(), w.getSkill(), w.getImpulsion(), w.getHeading(), w.getFinishing(), w.getPassing(), w.getCrossing(), w.getBallRecovery(), w.getPositioning(), w.getCreativity(), w.getAggressiveness(), w.getTackling(), w.getVision(), w.getPosition());
         super.setOverall(calcOverall());
     }
 

@@ -1,46 +1,37 @@
 package Model;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class Team {
-    private String id;
     private String name;
     private Map<Integer, Player> players;
-    private Set<Game> gamesHistory;
+    private List<Game> gamesHistory;
 
     /**
      * Empty Constructor
      */
     public Team(){
-        this.id = "n/a";
         this.name = "n/a";
         this.players = new HashMap<>();
-        this.gamesHistory = new HashSet<>();
+        this.gamesHistory = new ArrayList<Game>();
     }
 
     /**
-     * Constructor with team ID and team name
-     * @param id Team ID
+     * Constructor with team name
      * @param name Team name
      */
-    public Team(String id, String name) {
-        this.id = id;
+    public Team(String name) {
         this.name = name;
         this.players = new HashMap<>();
-        this.gamesHistory = new HashSet<>();
+        this.gamesHistory = new ArrayList<Game>();
     }
 
     /**
-     * Constructor with team ID, name and players
-     * @param id Team ID
+     * Constructor with team name and players
      * @param name Team name
      * @param players Team players
      */
     public Team(String id, String name, Map<Integer, Player> players) {
-        this.id = id;
         this.name = name;
         try{
             this.setPlayers(players);
@@ -48,18 +39,16 @@ public class Team {
         catch (NumberAlreadyExistsInTeamException i){
             i.printStackTrace();
         }
-        this.gamesHistory = new HashSet<>();
+        this.gamesHistory = new ArrayList<Game>();
     }
 
     /**
-     * Constructor with team ID, name, players and games history
-     * @param id Team ID
+     * Constructor with team name, players and games history
      * @param name Team Name
      * @param players Team Players
      * @param gamesHistory Team games history
      */
-    public Team(String id, String name, Map<Integer, Player> players, Set<Game> gamesHistory) {
-        this.id = id;
+    public Team(String id, String name, Map<Integer, Player> players, List<Game> gamesHistory) {
         this.name = name;
         try{
             this.setPlayers(players);
@@ -75,7 +64,6 @@ public class Team {
      * @param t Team to copy
      */
     public Team(Team t){
-        this.id = t.getId();
         this.name = t.getName();
         try{
             this.setPlayers(players);
@@ -92,22 +80,6 @@ public class Team {
      */
     public Team clone(){
         return new Team(this);
-    }
-
-    /**
-     * ID getter
-     * @return Team ID
-     */
-    public String getId() {
-        return this.id;
-    }
-
-    /**
-     * ID setter
-     * @param id ID to set
-     */
-    public void setId(String id) {
-        this.id = id;
     }
 
     /**
@@ -159,8 +131,8 @@ public class Team {
      * Games history getter
      * @return Games history
      */
-    public Set<Game> getGamesHistory(){
-        Set<Game> ans = new HashSet<>();
+    public List<Game> getGamesHistory(){
+        List<Game> ans = new ArrayList<>();
         if(this.gamesHistory != null)
         {
             for(Game g : this.gamesHistory)
@@ -173,7 +145,7 @@ public class Team {
      * Games history setter
      * @param gamesHistory Games history to set
      */
-    public void setGamesHistory(Set<Game> gamesHistory){
+    public void setGamesHistory(List<Game> gamesHistory){
         for(Game g : gamesHistory)
             this.gamesHistory.add(g.clone());
     }
@@ -198,7 +170,7 @@ public class Team {
         if(this == o) return true;
         else if(o == null || this.getClass() != o.getClass()) return false;
         Team t = (Team) o;
-        return (this.id.equals(t.getId()));
+        return (this.name.equals(t.getName()) && this.players.equals(t.getPlayers()) && this.gamesHistory.equals(t.getGamesHistory()));
     }
 
     /**

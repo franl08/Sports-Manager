@@ -57,8 +57,8 @@ public abstract class FieldPlayer extends Player{
         this.vision = utils.setRandomAttribute();
     }
 
-    public FieldPlayer(String id, String name, String currentTeam, List<String> historic) {
-        super(id, name, currentTeam, historic, null);
+    public FieldPlayer(String name, int number, String currentTeam, List<String> historic) {
+        super(name, number, currentTeam, historic, null);
         this.velocity = utils.setRandomAttribute();
         this.endurance = utils.setRandomAttribute();
         this.skill = utils.setRandomAttribute();
@@ -75,8 +75,26 @@ public abstract class FieldPlayer extends Player{
         this.vision = utils.setRandomAttribute();
     }
 
-    public FieldPlayer(String id, String name, String currentTeam) {
-        super(id, name, currentTeam, null);
+    public FieldPlayer(String name, int number, String currentTeam) {
+        super(name, number, currentTeam, null);
+        this.velocity = utils.setRandomAttribute();
+        this.endurance = utils.setRandomAttribute();
+        this.skill = utils.setRandomAttribute();
+        this.impulsion = utils.setRandomAttribute();
+        this.heading = utils.setRandomAttribute();
+        this.finishing = utils.setRandomAttribute();
+        this.passing = utils.setRandomAttribute();
+        this.crossing = utils.setRandomAttribute();
+        this.ballRecovery = utils.setRandomAttribute();
+        this.positioning = utils.setRandomAttribute();
+        this.creativity = utils.setRandomAttribute();
+        this.aggressiveness = utils.setRandomAttribute();
+        this.tackling = utils.setRandomAttribute();
+        this.vision = utils.setRandomAttribute();
+    }
+
+    public FieldPlayer(String name, int number) {
+        super(name, number,null);
         this.velocity = utils.setRandomAttribute();
         this.endurance = utils.setRandomAttribute();
         this.skill = utils.setRandomAttribute();
@@ -112,8 +130,8 @@ public abstract class FieldPlayer extends Player{
 
     }
 
-    public FieldPlayer(String id, String name, String currentTeam, List<String> historic, int velocity, int endurance, int skill, int impulsion, int heading, int finishing, int passing, int crossing, int ballRecovery, int positioning, int creativity, int aggressiveness, int tackling, int vision, Position position) {
-        super(id, name, currentTeam, historic, position);
+    public FieldPlayer(String name, int number, String currentTeam, List<String> historic, int velocity, int endurance, int skill, int impulsion, int heading, int finishing, int passing, int crossing, int ballRecovery, int positioning, int creativity, int aggressiveness, int tackling, int vision, Position position) {
+        super(name, number, currentTeam, historic, position);
         this.setVelocity(velocity);
         this.setEndurance(endurance);
         this.setSkill(skill);
@@ -130,8 +148,8 @@ public abstract class FieldPlayer extends Player{
         this.setVision(vision);
     }
 
-    public FieldPlayer(String id, String name, String currentTeam, int velocity, int endurance, int skill, int impulsion, int heading, int finishing, int passing, int crossing, int ballRecovery, int positioning, int creativity, int aggressiveness, int tackling, int vision, Position position) {
-        super(id, name, currentTeam, position);
+    public FieldPlayer(String name, int number, String currentTeam, int velocity, int endurance, int skill, int impulsion, int heading, int finishing, int passing, int crossing, int ballRecovery, int positioning, int creativity, int aggressiveness, int tackling, int vision, Position position) {
+        super(name, number, currentTeam, position);
         this.setVelocity(velocity);
         this.setEndurance(endurance);
         this.setSkill(skill);
@@ -148,8 +166,8 @@ public abstract class FieldPlayer extends Player{
         this.setVision(vision);
     }
 
-    public FieldPlayer(String id, String name, String currentTeam, List<String> historic, int velocity, int endurance, int skill, int impulsion, int heading, int finishing, int passing, int crossing) {
-        super(id, name, currentTeam, historic, null);
+    public FieldPlayer(String name, int number, int velocity, int endurance, int skill, int impulsion, int heading, int finishing, int passing, int crossing, int ballRecovery, int positioning, int creativity, int aggressiveness, int tackling, int vision, Position position) {
+        super(name, number, position);
         this.setVelocity(velocity);
         this.setEndurance(endurance);
         this.setSkill(skill);
@@ -158,52 +176,17 @@ public abstract class FieldPlayer extends Player{
         this.setFinishing(finishing);
         this.setPassing(passing);
         this.setCrossing(crossing);
-        this.ballRecovery = utils.setRandomAttribute();
-        this.positioning = utils.setRandomAttribute();
-        this.creativity = utils.setRandomAttribute();
-        this.aggressiveness = utils.setRandomAttribute();
-        this.tackling = utils.setRandomAttribute();
-        this.vision = utils.setRandomAttribute();
+        this.setBallRecovery(ballRecovery);
+        this.setPositioning(positioning);
+        this.setCreativity(creativity);
+        this.setAggressiveness(aggressiveness);
+        this.setTackling(tackling);
+        this.setVision(vision);
     }
 
-    public FieldPlayer(String id, String name, String currentTeam, List<String> historic, int velocity, int endurance, int skill, int impulsion, int heading, int finishing, int passing, int crossing, Position position) {
-        super(id, name, currentTeam, historic, position);
-        this.setVelocity(velocity);
-        this.setEndurance(endurance);
-        this.setSkill(skill);
-        this.setImpulsion(impulsion);
-        this.setHeading(heading);
-        this.setFinishing(finishing);
-        this.setPassing(passing);
-        this.setCrossing(crossing);
-        this.ballRecovery = utils.setRandomAttribute();
-        this.positioning = utils.setRandomAttribute();
-        this.creativity = utils.setRandomAttribute();
-        this.aggressiveness = utils.setRandomAttribute();
-        this.tackling = utils.setRandomAttribute();
-        this.vision = utils.setRandomAttribute();
-    }
 
-    public FieldPlayer(String id, String name, String currentTeam, int velocity, int endurance, int skill, int impulsion, int heading, int finishing, int passing, int crossing) {
-        super(id, name, currentTeam, null);
-        this.setVelocity(velocity);
-        this.setEndurance(endurance);
-        this.setSkill(skill);
-        this.setImpulsion(impulsion);
-        this.setHeading(heading);
-        this.setFinishing(finishing);
-        this.setPassing(passing);
-        this.setCrossing(crossing);
-        this.ballRecovery = utils.setRandomAttribute();
-        this.positioning = utils.setRandomAttribute();
-        this.creativity = utils.setRandomAttribute();
-        this.aggressiveness = utils.setRandomAttribute();
-        this.tackling = utils.setRandomAttribute();
-        this.vision = utils.setRandomAttribute();
-    }
-
-    public FieldPlayer(String id, String name, String currentTeam, int velocity, int endurance, int skill, int impulsion, int heading, int finishing, int passing, int crossing, Position position) {
-        super(id, name, currentTeam, position);
+    public FieldPlayer(String name, int number, int velocity, int endurance, int skill, int impulsion, int heading, int finishing, int passing, int crossing, Position position) {
+        super(name, number, position);
         this.setVelocity(velocity);
         this.setEndurance(endurance);
         this.setSkill(skill);
@@ -221,7 +204,7 @@ public abstract class FieldPlayer extends Player{
     }
 
     public FieldPlayer(FieldPlayer fp){
-        super(fp.getId(), fp.getName(), fp.getCurrentTeamName(), fp.getHistoric(), fp.getCurPosition());
+        super(fp.getName(), fp.getNumber(), fp.getCurrentTeamName(), fp.getHistoric(), fp.getCurPosition());
         this.setVelocity(fp.getVelocity());
         this.setEndurance(fp.getEndurance());
         this.setSkill(fp.getSkill());

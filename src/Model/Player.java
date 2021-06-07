@@ -3,7 +3,6 @@ package Model;
 import java.util.*;
 
 public abstract class Player {
-    private String id;
     private String name;
     private int number;
     private String currentTeamName;
@@ -15,7 +14,6 @@ public abstract class Player {
      * Empty constructor
      */
     public Player(){
-        this.id = "n/a";
         this.name = "n/a";
         this.number = -1;
         this.currentTeamName = null;
@@ -25,34 +23,14 @@ public abstract class Player {
     }
 
     /**
-     * Constructor with player ID, name, current team name, historic and position
-     * @param id Player ID
-     * @param name Player Name
-     * @param currentTeamName Player current team name
-     * @param historic Player historic
-     * @param position Player position
-     */
-    public Player(String id, String name, String currentTeamName, List<String> historic, Position position) {
-        this.id = id;
-        this.name = name;
-        this.number = -1;
-        this.overall = 0;
-        this.setHistoric(historic);
-        this.setCurrentTeamName(currentTeamName);
-        this.position = position;
-    }
-
-    /**
-     * Constructor with player ID, name, number, current team name, historic and position
-     * @param id Player ID
+     * Constructor with player name, number, current team name, historic and position
      * @param name Player name
      * @param number Player number
      * @param currentTeamName Player current team name
      * @param historic Player historic
      * @param position Player position
      */
-    public Player(String id, String name, int number, String currentTeamName, List<String> historic, Position position) {
-        this.id = id;
+    public Player(String name, int number, String currentTeamName, List<String> historic, Position position) {
         this.name = name;
         this.setNumber(number);
         this.overall = 0;
@@ -62,35 +40,31 @@ public abstract class Player {
     }
 
     /**
-     * Constructor with player ID, name, current team name and position
-     * @param id Player ID
+     * Constructor with player name, number, current team name and position
      * @param name Player name
+     * @param number Player number
      * @param currentTeamName Player current team name
      * @param position Player position
      */
-    public Player(String id, String name, String currentTeamName, Position position) {
-        this.id = id;
+    public Player(String name, int number, String currentTeamName, Position position) {
         this.name = name;
-        this.number = -1;
+        this.setNumber(number);
+        this.setCurrentTeamName(currentTeamName);
         this.overall = 0;
         this.historic = new ArrayList<>();
-        this.setCurrentTeamName(currentTeamName);
         this.position = position;
     }
 
     /**
-     * Constructor with player ID, name, number, current team name and position
-     * @param id Player ID
+     * Contructor with player name, number and position
      * @param name Player name
      * @param number Player number
-     * @param currentTeamName Player current team name
      * @param position Player position
      */
-    public Player(String id, String name, int number, String currentTeamName, Position position) {
-        this.id = id;
+    public Player(String name, int number, Position position){
         this.name = name;
         this.setNumber(number);
-        this.setCurrentTeamName(currentTeamName);
+        this.currentTeamName = "n/a";
         this.overall = 0;
         this.historic = new ArrayList<>();
         this.position = position;
@@ -101,7 +75,6 @@ public abstract class Player {
      * @param p Player to copy
      */
     public Player(Player p){
-        this.id = p.getId();
         this.name = p.getName();
         this.number = p.getNumber();
         this.setHistoric(p.getHistoric());
@@ -136,22 +109,6 @@ public abstract class Player {
      * @return Current position
      */
     public abstract Position getCurPosition();
-
-    /**
-     * ID getter
-     * @return Player ID
-     */
-    public String getId() {
-        return this.id;
-    }
-
-    /**
-     * ID setter
-     * @param id ID to set
-     */
-    public void setId(String id) {
-        this.id = id;
-    }
 
     /**
      * Name getter
@@ -262,7 +219,7 @@ public abstract class Player {
         if(this == o) return true;
         else if(o == null || o.getClass() != this.getClass()) return false;
         Player p = (Player) o;
-        return (this.id.equals(p.getId()));
+        return (this.name.equals(p.getName()) && this.number == p.getNumber() && this.currentTeamName.equals(p.getCurrentTeamName()));
     }
 
     /**
