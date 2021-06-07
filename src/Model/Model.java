@@ -147,7 +147,7 @@ public class Model {
 
     public String[] getPlayersAsStringArray()
     {
-        String[] result = new String[this.players.values().size() * 6];
+        String[] result = new String[this.players.values().size() * 5];
 
         int i = 0;
 
@@ -165,7 +165,7 @@ public class Model {
 
     public String[] getTeamsAsStringArray()
     {
-        String[] result = new String[this.teams.values().size() * 2];
+        String[] result = new String[this.teams.values().size()];
 
         int i = 0;
 

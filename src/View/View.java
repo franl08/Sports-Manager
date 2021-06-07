@@ -38,205 +38,83 @@ public class View implements Serializable
         ViewPlayer.printAttributesPlayerMenu(isGoalkeeper);
     }
 
-    /**
-     * Function that displays on the screen a phrase asking an input from the user which is supposed to be an player's id.
-     * @return
-     */
-    public static void askPlayerID()
+    public static void askParam(String param)
     {
-        ViewPlayer.askPlayerID();
-    }
+        if(param.equals("player_id"))
+            ViewPlayer.askPlayerID();
 
-    /**
-     * Function that displays on the screen a phrase asking an input from the user which is supposed to be an player's name.
-     */
-    public static void askPlayerName()
-    {
-        ViewPlayer.askPlayerName();
-    }
+        if(param.equals("player_name"))
+            ViewPlayer.askPlayerName();
 
-    /**
-     * Function that displays on the screen a phrase asking an input from the user which is supposed to be an player's shirt number.
-     */
-    public static void askPlayerNumber()
-    {
-        ViewPlayer.askPlayerNumber();
-    }
+        if(param.equals("player_number"))
+            ViewPlayer.askPlayerNumber();
 
-    /**
-     * Function that displays on the screen a phrase asking an input from the user which is supposed to be an player's starting team.
-     */
-    public static void askPlayerTeam()
-    {
-        ViewPlayer.askPlayerTeam();
-    }
+        if(param.equals("player_team"))
+            ViewPlayer.askPlayerTeam();
 
-    /**
-     * Function that displays on the screen the player position mode menu that is to confirm which position shall the player that is
-     * being created is to play.
-     */
-    public static void askPlayerPosition()
-    {
-        ViewPlayer.printPositionMenu();
-    }
+        if(param.equals("player_position"))
+            ViewPlayer.printPositionMenu();
 
-    /**
-     * Function that displays on the screen the attributes mode menu that is to assert whether the user would like to setup his/her
-     * player attributes manually or have them randomly generated.
-     */
-    public static void askAttributesMode()
-    {
-        ViewPlayer.printAttributesModeMenu();
-    }
+        if(param.equals("attributes_mode"))
+            ViewPlayer.printAttributesModeMenu();
 
-    /**
-     * Function that displays on the screen a phrase asking an input from the user which is supposed to be an player's starting velocity.
-     */
-    public static void askPlayerVelocity()
-    {
-        ViewPlayer.askPlayerVelocity();
-    }
+        if(param.equals("player_velocity"))
+            ViewPlayer.askPlayerVelocity();
 
-    /**
-     * Function that displays on the screen a phrase asking an input from the user which is supposed to be an player's starting endurance.
-     */
-    public static void askPlayerEndurance()
-    {
-        ViewPlayer.askPlayerEndurance();
-    }
+        if(param.equals("player_endurance"))
+            ViewPlayer.askPlayerEndurance();
 
-    /**
-     * Function that displays on the screen a phrase asking an input from the user which is supposed to be an player's starting skill.
-     */
-    public static void askPlayerSkill()
-    {
-        ViewPlayer.askPlayerSkill();
-    }
+        if(param.equals("player_skill"))
+            ViewPlayer.askPlayerSkill();
 
-    /**
-     * Function that displays on the screen a phrase asking an input from the user which is supposed to be an player's starting impulsion.
-     */
-    public static void askPlayerImpulsion()
-    {
-        ViewPlayer.askPlayerImpulsion();
-    }
+        if(param.equals("player_impulsion"))
+            ViewPlayer.askPlayerImpulsion();
 
-    /**
-     * Function that displays on the screen a phrase asking an input from the user which is supposed to be an player's starting heading.
-     */
-    public static void askPlayerHeading()
-    {
-        ViewPlayer.askPlayerHeading();
-    }
+        if(param.equals("player_heading"))
+            ViewPlayer.askPlayerHeading();
 
-    /**
-     * Function that displays on the screen a phrase asking an input from the user which is supposed to be an player's starting skill.
-     */
-    public static void askPlayerFinishing()
-    {
-        ViewPlayer.askPlayerFinishing();
-    }
+        if(param.equals("player_finishing"))
+            ViewPlayer.askPlayerFinishing();
 
-    /**
-     * Function that displays on the screen a phrase asking an input from the user which is supposed to be an player's starting passing.
-     */
-    public static void askPlayerPassing()
-    {
-        ViewPlayer.askPlayerPassing();
-    }
+        if(param.equals("player_passing"))
+            ViewPlayer.askPlayerPassing();
 
-    /**
-     * Function that displays on the screen a phrase asking an input from the user which is supposed to be an player's starting crossing.
-     */
-    public static void askPlayerCrossing()
-    {
-        ViewPlayer.askPlayerCrossing();
-    }
+        if(param.equals("player_crossing"))
+            ViewPlayer.askPlayerCrossing();
 
-    /**
-     * Function that displays on the screen a phrase asking an input from the user which is supposed to be an player's starting recovery.
-     */
-    public static void askPlayerBallRecovery()
-    {
-        ViewPlayer.askPlayerBallRecovery();
-    }
+        if(param.equals("player_ball_recovery"))
+            ViewPlayer.askPlayerBallRecovery();
 
-    /**
-     * Function that displays on the screen a phrase asking an input from the user which is supposed to be an player's starting positioning.
-     */
-    public static void askPlayerPositioning()
-    {
-        ViewPlayer.askPlayerPositioning();
-    }
+        if(param.equals("player_positioning"))
+            ViewPlayer.askPlayerPositioning();
 
-    /**
-     * Function that displays on the screen a phrase asking an input from the user which is supposed to be an player's starting creativity.
-     */
-    public static void askPlayerCreativity()
-    {
-        ViewPlayer.askPlayerCreativity();
-    }
+        if(param.equals("player_creativity"))
+            ViewPlayer.askPlayerCreativity();
 
-    /**
-     * Function that displays on the screen a phrase asking an input from the user which is supposed to be an player's starting aggressiveness.
-     */
-    public static void askPlayerAggressiveness()
-    {
-        ViewPlayer.askPlayerAggressiveness();
-    }
+        if(param.equals("player_aggressiveness"))
+            ViewPlayer.askPlayerAggressiveness();
 
-    /**
-     * Function that displays on the screen a phrase asking an input from the user which is supposed to be an player's starting tackling.
-     */
-    public static void askPlayerTackling()
-    {
-        ViewPlayer.askPlayerTackling();
-    }
+        if(param.equals("player_tackling"))
+            ViewPlayer.askPlayerTackling();
 
-    /**
-     * Function that displays on the screen a phrase asking an input from the user which is supposed to be an player's vision .
-     */
-    public static void askPlayerVision()
-    {
-        ViewPlayer.askPlayerVision();
-    }
+        if(param.equals("player_vision"))
+            ViewPlayer.askPlayerVision();
 
-    /**
-     * Function that displays on the screen a phrase asking an input from the user which is supposed to be an player's starting elasticity.
-     */
-    public static void askPlayerElasticity()
-    {
-        ViewPlayer.askPlayerElasticity();
-    }
+        if(param.equals("player_elasticity"))
+            ViewPlayer.askPlayerElasticity();
 
-    /**
-     * Function that displays on the screen a phrase asking an input from the user which is supposed to be an player's starting reflexes.
-     */
-    public static void askPlayerReflexes()
-    {
-        ViewPlayer.askPlayerReflexes();
-    }
+        if(param.equals("player_reflexes"))
+            ViewPlayer.askPlayerReflexes();
 
-    /**
-     * Function that displays on the screen a phrase asking an input from the user which is supposed to be an player's starting agility.
-     */
-    public static void askPlayerAgility()
-    {
-        ViewPlayer.askPlayerAgility();
-    }
+        if(param.equals("player_agility"))
+            ViewPlayer.askPlayerAgility();
 
-    /**
-     * Function that displays on the screen a phrase asking an input from the user which is supposed to be an player's starting decisions.
-     */
-    public static void askPlayerDecisions()
-    {
-        ViewPlayer.askPlayerDecisions();
-    }
+        if(param.equals("player_decisions"))
+            ViewPlayer.askPlayerDecisions();
 
-    /**
-     * Function that displays on the screen a phrase asking an input from the user which is supposed to be an player's starting courage.
-     */
-    public static void askPlayerCourage(){ViewPlayer.askPlayerCourage();}
+        if(param.equals("player_courage"))
+            ViewPlayer.askPlayerCourage();
+    }
 
     public static void printSuccessfulCreatedPlayer()
     {
