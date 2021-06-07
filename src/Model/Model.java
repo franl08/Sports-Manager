@@ -236,6 +236,14 @@ public class Model {
         return ans;
     }
 
+    public String[] availableNumbersAsString(String teamName){
+        Set<Integer> availableNums = availableNumbersInTeam(teamName);
+        String[] ans = new String[availableNums.size()];
+        for(int i = 0; i < availableNums.size(); i++)
+            ans[i] = "" + availableNums;
+        return ans;
+    }
+
     public void saveObject(String objectPath) throws IOException {
         FileOutputStream fos = new FileOutputStream(objectPath);
         BufferedOutputStream bos = new BufferedOutputStream(fos);

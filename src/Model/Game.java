@@ -22,7 +22,7 @@ public class Game {
     private int awayAttackingOverall;
     private int homeControllingOverall;
     private int awayControllingOverall;
-    private String meteorology;
+    private Meteorology meteorology;
     private LocalDate ld;
 
     /**
@@ -44,90 +44,10 @@ public class Game {
         this.awayAttackingOverall = 0;
         this.homeControllingOverall = 0;
         this.awayControllingOverall = 0;
-        this.meteorology = "Sun";
+        setRandomMeteorology();
         this.ld = LocalDate.now();
     }
 
-    /**
-     * Constructor for teams
-     * @param homeTeam Home team
-     * @param awayTeam Away team
-     */
-    public Game(Team homeTeam, Team awayTeam){
-        this.homeTeam = homeTeam;
-        this.awayTeam = awayTeam;
-        this.homePlayers = new HashSet<>();
-        this.awayPlayers = new HashSet<>();
-        this.homeGoals = 0;
-        this.awayGoals = 0;
-        this.homeSubs = new HashMap<>();
-        this.awaySubs = new HashMap<>();
-        this.timer = 0;
-        this.homeDefenseOverall = 0;
-        this.awayDefenseOverall = 0;
-        this.homeAttackingOverall = 0;
-        this.awayAttackingOverall = 0;
-        this.homeControllingOverall = 0;
-        this.awayControllingOverall = 0;
-        this.meteorology = "Sun";
-        this.ld = LocalDate.now();
-    }
-
-    /**
-     * Constructor with teams and players
-     * @param homeTeam Home team
-     * @param awayTeam Away team
-     * @param homePlayers Home lineup
-     * @param awayPlayers Away lineup
-     */
-    public Game(Team homeTeam, Team awayTeam, Set<Integer> homePlayers, Set<Integer> awayPlayers){
-        this.homeTeam = homeTeam;
-        this.awayTeam = awayTeam;
-        this.setHomePlayers(homePlayers);
-        this.setAwayPlayers(awayPlayers);
-        this.homeGoals = 0;
-        this.awayGoals = 0;
-        this.homeSubs = new HashMap<>();
-        this.awaySubs = new HashMap<>();
-        try{
-            this.homeDefenseOverall = calcDefenseOverall(homeTeam, homePlayers);
-        }
-        catch (InvalidPlayerException i){
-            this.homeDefenseOverall = 0;
-        }
-        try{
-            this.homeAttackingOverall = calcAttackingOverall(homeTeam, homePlayers);
-        }
-        catch (InvalidPlayerException i){
-            this.homeAttackingOverall = 0;
-        }
-        try{
-            this.awayDefenseOverall = calcDefenseOverall(homeTeam, homePlayers);
-        }
-        catch (InvalidPlayerException i){
-            this.awayDefenseOverall = 0;
-        }
-        try{
-            this.awayAttackingOverall = calcAttackingOverall(awayTeam, awayPlayers);
-        }
-        catch (InvalidPlayerException i){
-            this.awayAttackingOverall = 0;
-        }
-        try{
-            this.homeControllingOverall = calcControllingOverall(homeTeam, homePlayers);
-        }
-        catch (InvalidPlayerException i){
-            this.homeControllingOverall = 0;
-        }
-        try{
-            this.awayControllingOverall = calcControllingOverall(awayTeam, awayPlayers);
-        }
-        catch (InvalidPlayerException i){
-            this.awayControllingOverall = 0;
-        }
-        this.meteorology = "Sun";
-        this.ld = LocalDate.now();
-    }
 
     /**
      * Constructor with teams, players, and substitutions
@@ -184,21 +104,23 @@ public class Game {
             this.awayControllingOverall = 0;
         }
         this.timer = 0;
-        this.meteorology = "Sun";
+        setRandomMeteorology();
         this.ld = LocalDate.now();
     }
 
     /**
-     * Constructor with teams, players, substitutions and game date
-     * @param homeTeam Home team
-     * @param awayTeam Away team
-     * @param homePlayers Home lineup
-     * @param awayPlayers Away lineup
-     * @param homeSubs Home substitutions
-     * @param awaySubs Away substitutions
-     * @param ld Game date
+     * Constructor for logs
+     * @param homeTeam Home Team
+     * @param awayTeam Away Team
+     * @param homeGoals Home Team goals
+     * @param awayGoals Away Team goals
+     * @param ld Date of the game
+     * @param homePlayers Home Team players
+     * @param homeSubs Home Team substitutions
+     * @param awayPlayers Away Team players
+     * @param awaySubs Away Team substitutions
      */
-    public Game(Team homeTeam, Team awayTeam, Set<Integer> homePlayers, Set<Integer> awayPlayers, HashMap<Integer, Integer> homeSubs, HashMap<Integer, Integer> awaySubs, LocalDate ld){
+    public Game(Team homeTeam, Team awayTeam, int homeGoals, int awayGoals, LocalDate ld, Set<Integer> homePlayers,  HashMap<Integer, Integer> homeSubs, Set<Integer> awayPlayers, HashMap<Integer, Integer> awaySubs){
         this.homeTeam = homeTeam;
         this.awayTeam = awayTeam;
         this.setHomePlayers(homePlayers);
@@ -243,129 +165,10 @@ public class Game {
         catch (InvalidPlayerException i){
             this.awayControllingOverall = 0;
         }
-        this.timer = 0;
-        this.meteorology = "Sun";
-        this.ld = ld;
-    }
-
-    /**
-     * Constructor with teams, players, substitutions and meteorology
-     * @param homeTeam Home team
-     * @param awayTeam Away team
-     * @param homePlayers Home players
-     * @param awayPlayers Away players
-     * @param homeSubs Home substitutions
-     * @param awaySubs Away substitutions
-     * @param meteorology Meteorology
-     */
-    public Game(Team homeTeam, Team awayTeam, Set<Integer> homePlayers, Set<Integer> awayPlayers, HashMap<Integer, Integer> homeSubs, HashMap<Integer, Integer> awaySubs, String meteorology){
-        this.homeTeam = homeTeam;
-        this.awayTeam = awayTeam;
-        this.setHomePlayers(homePlayers);
-        this.setAwayPlayers(awayPlayers);
+        this.timer = 90;
         this.homeGoals = 0;
         this.awayGoals = 0;
-        this.setHomeSubs(homeSubs);
-        this.setAwaySubs(awaySubs);
-        try{
-            this.homeDefenseOverall = calcDefenseOverall(homeTeam, homePlayers);
-        }
-        catch (InvalidPlayerException i){
-            this.homeDefenseOverall = 0;
-        }
-        try{
-            this.homeAttackingOverall = calcAttackingOverall(homeTeam, homePlayers);
-        }
-        catch (InvalidPlayerException i){
-            this.homeAttackingOverall = 0;
-        }
-        try{
-            this.awayDefenseOverall = calcDefenseOverall(homeTeam, homePlayers);
-        }
-        catch (InvalidPlayerException i){
-            this.awayDefenseOverall = 0;
-        }
-        try{
-            this.awayAttackingOverall = calcAttackingOverall(homeTeam, homePlayers);
-        }
-        catch (InvalidPlayerException i){
-            this.awayAttackingOverall = 0;
-        }
-        try{
-            this.homeControllingOverall = calcControllingOverall(homeTeam, homePlayers);
-        }
-        catch (InvalidPlayerException i){
-            this.homeControllingOverall = 0;
-        }
-        try{
-            this.awayControllingOverall = calcControllingOverall(awayTeam, awayPlayers);
-        }
-        catch (InvalidPlayerException i){
-            this.awayControllingOverall = 0;
-        }
-        this.timer = 0;
-        this.meteorology = meteorology;
-        this.ld = LocalDate.now();
-    }
-
-    /**
-     * Constructor with teams, players, substitutions, meteorology and game date
-     * @param homeTeam Home team
-     * @param awayTeam Away team
-     * @param homePlayers Home lineup
-     * @param awayPlayers Away lineup
-     * @param homeSubs Home substitutions
-     * @param awaySubs Away substitutions
-     * @param meteorology Meteorology
-     * @param ld Game date
-     */
-    public Game(Team homeTeam, Team awayTeam, Set<Integer> homePlayers, Set<Integer> awayPlayers, HashMap<Integer, Integer> homeSubs, HashMap<Integer, Integer> awaySubs, String meteorology, LocalDate ld){
-        this.homeTeam = homeTeam;
-        this.awayTeam = awayTeam;
-        this.setHomePlayers(homePlayers);
-        this.setAwayPlayers(awayPlayers);
-        this.homeGoals = 0;
-        this.awayGoals = 0;
-        this.setHomeSubs(homeSubs);
-        this.setAwaySubs(awaySubs);
-        try{
-            this.homeDefenseOverall = calcDefenseOverall(homeTeam, homePlayers);
-        }
-        catch (InvalidPlayerException i){
-            this.homeDefenseOverall = 0;
-        }
-        try{
-            this.homeAttackingOverall = calcAttackingOverall(homeTeam, homePlayers);
-        }
-        catch (InvalidPlayerException i){
-            this.homeAttackingOverall = 0;
-        }
-        try{
-            this.awayDefenseOverall = calcDefenseOverall(homeTeam, homePlayers);
-        }
-        catch (InvalidPlayerException i){
-            this.awayDefenseOverall = 0;
-        }
-        try{
-            this.awayAttackingOverall = calcAttackingOverall(homeTeam, homePlayers);
-        }
-        catch (InvalidPlayerException i){
-            this.awayAttackingOverall = 0;
-        }
-        try{
-            this.homeControllingOverall = calcControllingOverall(homeTeam, homePlayers);
-        }
-        catch (InvalidPlayerException i){
-            this.homeControllingOverall = 0;
-        }
-        try{
-            this.awayControllingOverall = calcControllingOverall(awayTeam, awayPlayers);
-        }
-        catch (InvalidPlayerException i){
-            this.awayControllingOverall = 0;
-        }
-        this.timer = 0;
-        this.meteorology = meteorology;
+        setRandomMeteorology();
         this.ld = ld;
     }
 
@@ -383,7 +186,7 @@ public class Game {
      * @param meteorology Meteorology
      * @param ld Game date
      */
-    public Game(Team homeTeam, Team awayTeam, Set<Integer> homePlayers, Set<Integer> awayPlayers, Map<Integer, Integer> homeSubs, Map<Integer, Integer> awaySubs, int homeGoals, int awayGoals, int timer, String meteorology, LocalDate ld) {
+    public Game(Team homeTeam, Team awayTeam, Set<Integer> homePlayers, Set<Integer> awayPlayers, Map<Integer, Integer> homeSubs, Map<Integer, Integer> awaySubs, int homeGoals, int awayGoals, int timer, Meteorology meteorology, LocalDate ld) {
         this.homeTeam = homeTeam;
         this.awayTeam = awayTeam;
         this.setHomePlayers(homePlayers);
@@ -613,7 +416,7 @@ public class Game {
      * Getter of game meteorology
      * @return Game meteorology
      */
-    public String getMeteorology() {
+    public Meteorology getMeteorology() {
         return this.meteorology;
     }
 
@@ -621,7 +424,7 @@ public class Game {
      * Setter of game meteorology
      * @param meteorology Meteorology to set
      */
-    public void setMeteorology(String meteorology) {
+    public void setMeteorology(Meteorology meteorology) {
         this.meteorology = meteorology;
     }
 
@@ -888,6 +691,17 @@ public class Game {
                     if (utils.randGoal(this.homeAttackingOverall, this.awayDefenseOverall)) addHomeGoal();
                 } else if (utils.randGoal(this.awayAttackingOverall, this.homeDefenseOverall)) addAwayGoal();
             }
+        }
+    }
+
+    public void setRandomMeteorology(){
+        int bingo = utils.getRandNum(5);
+        switch (bingo) {
+            case 1 -> this.meteorology = Meteorology.RAIN;
+            case 2 -> this.meteorology = Meteorology.FOGGY;
+            case 3 -> this.meteorology = Meteorology.WINDY;
+            case 4 -> this.meteorology = Meteorology.SNOWY;
+            default -> this.meteorology = Meteorology.SUN;
         }
     }
 

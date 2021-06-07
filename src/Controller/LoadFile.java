@@ -6,10 +6,8 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.time.LocalDate;
+import java.util.*;
 
 public class LoadFile {
 
@@ -120,6 +118,31 @@ public class LoadFile {
         String[] fields = input.split(",");
         return new FW(fields[0], Integer.parseInt(fields[1]), Integer.parseInt(fields[2]), Integer.parseInt(fields[3]), Integer.parseInt(fields[4]),
                 Integer.parseInt(fields[5]), Integer.parseInt(fields[6]), Integer.parseInt(fields[7]), Integer.parseInt(fields[8]), Integer.parseInt(fields[9]));
+    }
+
+    public static Game buildGame(String input){
+        String[] fields = input.split(",");
+        String[] data = fields[4].split("-");
+        Set<Integer> hp = new HashSet<>();
+        Set<Integer> ap = new HashSet<>();
+        Map<Integer, Integer> subsH = new HashMap<>();
+        Map<Integer, Integer> subsA = new HashMap<>();
+        for(int i = 5; i < 16; i++)
+            hp.add(Integer.parseInt(fields[i]));
+        for(int j = 16; j < 19; j++) {
+            String[] sub = fields[j].split("->");
+            subsH.put(Integer.parseInt(sub[0]), Integer.parseInt(sub[1]));
+        }
+        for(int k = 19; k < 30; k++)
+            ap.add(Integer.parseInt(fields[k]));
+        for(int m = 30; m < 33; m++){
+            String[] sub = fields[m].split("->");
+            subsA.put(Integer.parseInt(sub[0]), Integer.parseInt(sub[1]));
+        }
+        return new Game(fields[0], fields[1], Integer.parseInt(fields[2]), Integer.parseInt(fields[3]), LocalDate.of(Integer.parseInt(data[0]), Integer.parseInt(data[1]), Integer.parseInt(data[2])),
+                        hp, subsH, ap, subsA);
+
+
     }
 
 }
