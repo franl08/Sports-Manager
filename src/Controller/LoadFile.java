@@ -75,7 +75,7 @@ public class LoadFile {
                     last.addPlayer(pFW.clone());
                     break;
                 case "Jogo":
-                    Game game = buildGame(startLine[1]);
+                    Game game = buildGame(startLine[1], teams);
                     games.add(game);
                     break;
                 default:
@@ -120,7 +120,7 @@ public class LoadFile {
                 Integer.parseInt(fields[5]), Integer.parseInt(fields[6]), Integer.parseInt(fields[7]), Integer.parseInt(fields[8]), Integer.parseInt(fields[9]));
     }
 
-    public static Game buildGame(String input){
+    public static Game buildGame(String input, Map<String, Team> ts){
         String[] fields = input.split(",");
         String[] data = fields[4].split("-");
         Set<Integer> hp = new HashSet<>();
@@ -139,10 +139,8 @@ public class LoadFile {
             String[] sub = fields[m].split("->");
             subsA.put(Integer.parseInt(sub[0]), Integer.parseInt(sub[1]));
         }
-        return new Game(fields[0], fields[1], Integer.parseInt(fields[2]), Integer.parseInt(fields[3]), LocalDate.of(Integer.parseInt(data[0]), Integer.parseInt(data[1]), Integer.parseInt(data[2])),
+        return new Game(ts.get(fields[0]), ts.get(fields[1]), Integer.parseInt(fields[2]), Integer.parseInt(fields[3]), LocalDate.of(Integer.parseInt(data[0]), Integer.parseInt(data[1]), Integer.parseInt(data[2])),
                         hp, subsH, ap, subsA);
-
-
     }
 
 }

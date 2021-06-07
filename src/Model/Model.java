@@ -133,7 +133,7 @@ public class Model {
         }
     }
 
-    public Player getPlayerWithID(String name){
+    public Player getPlayerWithName(String name){
         return this.players.get(name).clone();
     }
 

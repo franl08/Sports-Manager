@@ -120,7 +120,7 @@ public class Game {
      * @param awayPlayers Away Team players
      * @param awaySubs Away Team substitutions
      */
-    public Game(Team homeTeam, Team awayTeam, int homeGoals, int awayGoals, LocalDate ld, Set<Integer> homePlayers,  HashMap<Integer, Integer> homeSubs, Set<Integer> awayPlayers, HashMap<Integer, Integer> awaySubs){
+    public Game(Team homeTeam, Team awayTeam, int homeGoals, int awayGoals, LocalDate ld, Set<Integer> homePlayers,  Map<Integer, Integer> homeSubs, Set<Integer> awayPlayers, Map<Integer, Integer> awaySubs){
         this.homeTeam = homeTeam;
         this.awayTeam = awayTeam;
         this.setHomePlayers(homePlayers);
