@@ -56,7 +56,7 @@ public abstract class Player {
     }
 
     /**
-     * Contructor with player name, number and position
+     * Constructor with player name, number and position
      * @param name Player name
      * @param number Player number
      * @param position Player position

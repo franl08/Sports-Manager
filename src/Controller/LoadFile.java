@@ -18,7 +18,8 @@ public class LoadFile {
         return lines;
     }
 
-    public static void parse() throws IncorrectLineException, NumberAlreadyExistsInTeamException {
+    public static Model parse() throws IncorrectLineException, NumberAlreadyExistsInTeamException {
+        Model model = new Model();
         List<String> lines = readFile("data/logs.txt");
         Map<String, Team> teams = new HashMap<>();
         Map<String, Player> players = new HashMap<>();
@@ -83,6 +84,10 @@ public class LoadFile {
 
             }
         }
+        model.setPlayers(players);
+        model.setTeams(teams);
+        model.setGames(games);
+        return model;
     }
 
     public static Team buildTeam(String input){
