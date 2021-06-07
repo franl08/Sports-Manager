@@ -193,4 +193,11 @@ public class Team {
        return new HashSet<>(this.players.keySet());
     }
 
+    /**
+     *
+     */
+    public void removePlayer(int number){
+        this.players.remove(number);
+    }
+
 }

@@ -67,7 +67,7 @@ public class Model {
         Player p = this.players.get(pName);
         if(!this.players.containsKey(pName)) throw new InvalidPlayerException(pName + " doesn't exist on database");
         else if(!this.teams.get(t.getName()).getPlayers().containsKey(p.getNumber())) throw new InvalidPlayerException(pName + " doesn't play on " + t.getName());
-        else t.getPlayers().remove(p.getNumber());
+        else t.removePlayer(this.players.get(pName).getNumber());
     }
 
     public void addPlayerToTeam(String pName, Team t) throws InvalidPlayerException{

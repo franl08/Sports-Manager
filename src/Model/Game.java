@@ -688,7 +688,8 @@ public class Game {
             }
             for (int i = 0; i < numberOfActions; i++) {
                 if (utils.randPossession(this.homeControllingOverall, this.awayControllingOverall)) {
-                    if (utils.randGoal(this.homeAttackingOverall, this.awayDefenseOverall)) addHomeGoal();
+                    if (utils.randGoal(this.homeAttackingOverall, this.awayDefenseOverall))
+                        addHomeGoal();
                 } else if (utils.randGoal(this.awayAttackingOverall, this.homeDefenseOverall)) addAwayGoal();
             }
         }
