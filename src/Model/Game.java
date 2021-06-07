@@ -879,7 +879,7 @@ public class Game {
     public void advancePartInGame(int parts, int gameTime){
         int timeToAdv = (int) (gameTime / parts), numberOfActions = 1;
         advanceTime(timeToAdv, gameTime);
-        if(this.timer != 90) {
+        if(this.timer != gameTime) {
             if (timeToAdv > 10) {
                 numberOfActions = utils.getRandNum(timeToAdv / 10);
             }
