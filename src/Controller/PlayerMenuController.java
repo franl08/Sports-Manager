@@ -72,116 +72,67 @@ public class PlayerMenuController implements Serializable
     private void createPlayerController() throws InvalidPositionException, PlayerAlreadyExistsException, InvalidTeamException {
         Player newPlayer;
 
-        View.askPlayerName();
-        String playerName = Inputs.askForStringInput(this.inputs);
+        String playerName = Inputs.askForStringInput(this.inputs, "player_name");
 
-        View.askPlayerNumber();
-        int number = Inputs.askForIntOneToNNInput(this.inputs);
+        int number = Inputs.askForInt(this.inputs, 1, 99, "player_number");
 
-        View.askPlayerTeam();
-        String teamName = Inputs.askForStringInput(this.inputs);
+        String teamName = Inputs.askForStringInput(this.inputs, "player_team");
 
-        View.askPlayerPosition();
-        int playerPosition = Inputs.askForIntOneToNNInput(this.inputs);
+        int playerPosition = Inputs.askForInt(this.inputs, 1, 5, "player_position");
 
-        View.askAttributesMode();
-        int attMode = this.inputs.nextInt();
-        this.inputs.nextLine();
+        int attMode = Inputs.askForInt(this.inputs, 1, 2, "attributes_mode");
+
         if(attMode == 2)
         {
             if(playerPosition == 1)
             {
-                View.askPlayerElasticity();
-                int elasticity = this.inputs.nextInt();
-                this.inputs.nextLine();
+                int elasticity = Inputs.askForInt(this.inputs, 1, 99, "player_elasticity");
 
-                View.askPlayerReflexes();
-                int reflexes = this.inputs.nextInt();
-                this.inputs.nextLine();
+                int reflexes = Inputs.askForInt(this.inputs, 1, 99, "player_reflexes");
 
-                View.askPlayerAgility();
-                int agility = this.inputs.nextInt();
-                this.inputs.nextLine();
+                int agility = Inputs.askForInt(this.inputs, 1, 99, "player_agility");
 
-                View.askPlayerDecisions();
-                int decisions = this.inputs.nextInt();
-                this.inputs.nextLine();
+                int decisions = Inputs.askForInt(this.inputs, 1, 99, "player_decisions");
 
-                View.askPlayerVelocity();
-                int velocity = this.inputs.nextInt();
-                this.inputs.nextLine();
+                int velocity = Inputs.askForInt(this.inputs, 1, 99, "player_velocity");
 
-                View.askPlayerPassing();
-                int passing = this.inputs.nextInt();
-                this.inputs.nextLine();
+                int passing = Inputs.askForInt(this.inputs, 1, 99, "player_passing");
 
-                View.askPlayerCourage();
-                int courage = this.inputs.nextInt();
-                this.inputs.nextLine();
+                int courage = Inputs.askForInt(this.inputs, 1, 99, "player_courage");
 
-                View.askPlayerEndurance();
-                int endurance = this.inputs.nextInt();
-                this.inputs.nextLine();
+                int endurance = Inputs.askForInt(this.inputs, 1, 99, "player_endurance");
 
                 newPlayer = new GK(playerName,number,teamName,elasticity,reflexes,agility,decisions,velocity,passing,courage,endurance);
             }
             else
             {
-                View.askPlayerVelocity();
-                int velocity = this.inputs.nextInt();
-                this.inputs.nextLine();
+                int velocity = Inputs.askForInt(this.inputs, 1, 99, "player_velocity");
 
-                View.askPlayerEndurance();
-                int endurance = this.inputs.nextInt();
-                this.inputs.nextLine();
+                int endurance = Inputs.askForInt(this.inputs, 1, 99, "player_endurance");
 
-                View.askPlayerSkill();
-                int skill = this.inputs.nextInt();
-                this.inputs.nextLine();
+                int skill = Inputs.askForInt(this.inputs, 1, 99, "player_skill");
 
-                View.askPlayerImpulsion();
-                int impulsion = this.inputs.nextInt();
-                this.inputs.nextLine();
+                int impulsion = Inputs.askForInt(this.inputs, 1, 99, "player_impulsion");
 
-                View.askPlayerHeading();
-                int heading = this.inputs.nextInt();
-                this.inputs.nextLine();
+                int heading = Inputs.askForInt(this.inputs, 1, 99, "player_heading");
 
-                View.askPlayerFinishing();
-                int finishing = this.inputs.nextInt();
-                this.inputs.nextLine();
+                int finishing = Inputs.askForInt(this.inputs, 1, 99, "player_finishing");
 
-                View.askPlayerPassing();
-                int passing = this.inputs.nextInt();
-                this.inputs.nextLine();
+                int passing = Inputs.askForInt(this.inputs, 1, 99, "player_passing");
 
-                View.askPlayerCrossing();
-                int crossing = this.inputs.nextInt();
-                this.inputs.nextLine();
+                int crossing = Inputs.askForInt(this.inputs, 1, 99, "player_crossing");
 
-                View.askPlayerBallRecovery();
-                int ballRecovery = this.inputs.nextInt();
-                this.inputs.nextLine();
+                int ballRecovery = Inputs.askForInt(this.inputs, 1, 99, "player_ball_recovery");
 
-                View.askPlayerPositioning();
-                int positioning = this.inputs.nextInt();
-                this.inputs.nextLine();
+                int positioning = Inputs.askForInt(this.inputs, 1, 99, "player_positioning");
 
-                View.askPlayerCreativity();
-                int creativity = this.inputs.nextInt();
-                this.inputs.nextLine();
+                int creativity = Inputs.askForInt(this.inputs, 1, 99, "player_creativity");
 
-                View.askPlayerAggressiveness();
-                int aggressiveness = this.inputs.nextInt();
-                this.inputs.nextLine();
+                int aggressiveness = Inputs.askForInt(this.inputs, 1, 99, "player_aggressiveness");
 
-                View.askPlayerTackling();
-                int tackling = this.inputs.nextInt();
-                this.inputs.nextLine();
+                int tackling = Inputs.askForInt(this.inputs, 1, 99, "player_tackling");
 
-                View.askPlayerVision();
-                int vision = this.inputs.nextInt();
-                this.inputs.nextLine();
+                int vision = Inputs.askForInt(this.inputs, 1, 99, "player_vision");
 
                 switch(playerPosition)
                 {
@@ -252,6 +203,8 @@ public class PlayerMenuController implements Serializable
             this.inputs.nextLine();
 
             if(yes.equals("Y") || yes.equals("y")) go = false;
+
+            View.clear();
         }
     }
 
@@ -270,12 +223,14 @@ public class PlayerMenuController implements Serializable
             this.inputs.nextLine();
 
             if(yes.equals("Y") || yes.equals("y")) go = false;
+
+            View.clear();
         }
     }
 
     private void seePlayer()
     {
-        View.askPlayerID();
+        View.askParam("player_id");
         String id = this.inputs.next();
         this.inputs.nextLine();
 
@@ -297,7 +252,7 @@ public class PlayerMenuController implements Serializable
 
     private void managePlayer()
     {
-        View.askPlayerID();
+        View.askParam("player_id");
         String id = this.inputs.next();
         this.inputs.nextLine();
 
