@@ -78,12 +78,13 @@ public class Model {
 
     public void removePlayer(String name){
         for(Team t : this.teams.values()){
-            try{
-                removePlayerFromTeam(name, t);
-            }
-            catch (InvalidPlayerException i){
-                i.printStackTrace();
-            }
+            if(t.getPlayers().containsKey(this.players.get(name).getNumber()))
+                try{
+                    removePlayerFromTeam(name, t);
+                }
+                catch (InvalidPlayerException i){
+                    i.printStackTrace();
+                }
         }
         this.players.remove(name);
     }
