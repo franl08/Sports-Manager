@@ -139,12 +139,16 @@ public abstract class Player {
      * @param currentTeamName Team name to set
      */
     public void setCurrentTeamName(String currentTeamName) {
-        if(this.historic.size() > 0) {
+        if(this.historic != null && this.historic.size() > 0) {
             if (!this.historic.get(this.historic.size() - 1).equals(currentTeamName)) {
                 this.historic.add(currentTeamName);
             }
         }
-        else this.historic.add(currentTeamName);
+        else
+        {
+            this.historic = new ArrayList<>();
+            this.historic.add(currentTeamName);
+        }
         this.currentTeamName = currentTeamName;
     }
 

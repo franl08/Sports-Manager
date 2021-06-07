@@ -7,7 +7,7 @@ public final class ViewPlayer implements Serializable
 {
     public static void printPlayerMenu()
     {
-        String[] playerMenuArgs = new String[]{"Create new player.", "See all players.", "Look player information with ID.", "Manage player through ID."};
+        String[] playerMenuArgs = new String[]{"Create new player.", "See all players.", "Look player information with name.", "See player's team history with name.", "Manage player through name."};
         Outputs.printMenu(playerMenuArgs, "Player Menu", false);
     }
 
@@ -45,11 +45,6 @@ public final class ViewPlayer implements Serializable
     {
         String[] positionMenuArgs = new String[]{"Automatic.", "Manual."};
         Outputs.printOptionList(positionMenuArgs, "Attribute");
-    }
-
-    public static void askPlayerID()
-    {
-        Outputs.showMessage("Insert player's ID: ");
     }
 
     public static void askPlayerName()
@@ -165,7 +160,7 @@ public final class ViewPlayer implements Serializable
 
     public static void printAllPlayers(String[] allPlayers)
     {
-        String[] headArgs = new String[] {"Player ID","Player Name","Player Number","Player Team","Player Overall","Player Position"};
+        String[] headArgs = new String[] {"Player Name","Player Number","Player Team","Player Overall","Player Position"};
         Outputs.printStringArrayAsTable(allPlayers, headArgs);
     }
 }

@@ -20,11 +20,6 @@ public final class ViewTeam implements Serializable
         System.out.println("Your team has been successfully deleted.");
     }
 
-    public static void askTeamID()
-    {
-        Outputs.showMessage("Introduce team ID: ");
-    }
-
     public static void askTeamName()
     {
         Outputs.showMessage("Introduce team name: ");
@@ -36,13 +31,13 @@ public final class ViewTeam implements Serializable
 
     public static void printAllTeams(String[] allTeams)
     {
-        String[] headArgs = new String[] {"Team ID","Team Name"};
+        String[] headArgs = new String[] {"Team Name"};
         Outputs.printStringArrayAsTable(allTeams, headArgs);
     }
 
     public static void printTeamPlayers(String[] teamPlayer)
     {
-        String[] headArgs = new String[] {"Player ID","Player Name","Player Number","Player Overall","Player Position"};
+        String[] headArgs = new String[] {"Player Name","Player Number","Player Overall","Player Position"};
         Outputs.printStringArrayAsTable(teamPlayer, headArgs);
     }
 
@@ -50,5 +45,11 @@ public final class ViewTeam implements Serializable
     {
         String[] headArgs = new String[] {"Date","Home Team","Away Team","Home Team Goals","Away Team Goals"};
         Outputs.printStringArrayAsTable(teamHistory, headArgs);
+    }
+
+    public static void printTeamAvailableNumbers(String[] numbers)
+    {
+        String[] headArgs = new String[] {"Available Numbers"};
+        Outputs.printStringArrayAsTable(numbers, headArgs);
     }
 }
