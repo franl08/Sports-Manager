@@ -1,23 +1,20 @@
 package Model;
 
 import java.io.*;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class Model {
     private Map<String, Team> teams;
     private Map<String, Player> players;
-    private Map<String, Game> games;
+    private List<Game> games;
 
     public Model(){
         this.teams = new HashMap<>();
         this.players = new HashMap<>();
-        this.games = new HashMap<>();
+        this.games = new ArrayList<>();
     }
 
-    public Model(Map<String, Team> teams, Map<String, Player> players, Map<String, Game> games) {
+    public Model(Map<String, Team> teams, Map<String, Player> players, List<Game> games) {
         this.setTeams(teams);
         this.setPlayers(players);
         this.setGames(games);
@@ -47,15 +44,15 @@ public class Model {
         players.forEach((k,v) -> this.players.put(k, v.clone()));
     }
 
-    public Map<String, Game> getGames() {
-        Map<String, Game> ans = new HashMap<>();
-        this.games.forEach((k,v) -> ans.put(k, v.clone()));
+    public List<Game> getGames() {
+        List<Game> ans = new ArrayList<>();
+        for(Game g : this.games) ans.add(g.clone());
         return ans;
     }
 
-    public void setGames(Map<String, Game> games) {
-        this.games = new HashMap<>();
-        games.forEach((k,v) -> this.games.put(k, v.clone()));
+    public void setGames(List<Game> games) {
+        this.games = new ArrayList<>();
+        for(Game g : games) this.games.add(g.clone());
     }
 
     public void removeTeam(String name){
