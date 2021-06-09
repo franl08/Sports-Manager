@@ -6,7 +6,7 @@ public final class ViewTeam implements Serializable
 {
     public static void printTeamMenu()
     {
-        String[] teamMenuArgs = new String[]{"Create new team.", "See all teams.", "See team players.", "See team history.","Delete team through ID."};
+        String[] teamMenuArgs = new String[]{"Create new team.", "See all teams.", "See team players.", "See team history.","Delete team through name."};
         Outputs.printMenu(teamMenuArgs, "Team Menu", false);
     }
 
@@ -26,7 +26,7 @@ public final class ViewTeam implements Serializable
     }
 
     public static void askNewTeamName() {
-        System.out.println("Introduce new team name: ");
+        Outputs.showMessage("Introduce new team name: ");
     }
 
     public static void printAllTeams(String[] allTeams)

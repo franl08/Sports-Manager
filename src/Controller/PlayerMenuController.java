@@ -333,9 +333,7 @@ public class PlayerMenuController implements Serializable
 
     private void transferPlayer(String playerName)
     {
-        View.askNewTeamName();
-        String newTeam = this.inputs.next();
-        this.inputs.nextLine();
+        String newTeam = Inputs.askForStringInput(this.inputs, "new_team_name");
 
         String team = this.model.getPlayerWithName(playerName).getCurrentTeamName();
 
@@ -366,8 +364,6 @@ public class PlayerMenuController implements Serializable
 
         while (end)
         {
-            View.printMessage(this.model.getPlayerWithName(playerName).toString());
-
             int attribute;
 
             if(isGoalkeeper) attribute = Inputs.askForInt(this.inputs, 0, 8, "player_attributes",true);
