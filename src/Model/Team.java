@@ -15,7 +15,10 @@ public class Team {
      * Team's games history
      */
     private List<Game> gamesHistory;
-
+    /**
+     * Team's overall
+     */
+    private int overall;
     /**
      * Empty Constructor
      */
@@ -23,6 +26,7 @@ public class Team {
         this.name = "n/a";
         this.players = new HashMap<>();
         this.gamesHistory = new ArrayList<Game>();
+        this.overall = 0;
     }
 
     /**
@@ -33,6 +37,7 @@ public class Team {
         this.name = name;
         this.players = new HashMap<>();
         this.gamesHistory = new ArrayList<Game>();
+        this.overall = 0;
     }
 
     /**
@@ -49,6 +54,7 @@ public class Team {
             i.printStackTrace();
         }
         this.gamesHistory = new ArrayList<Game>();
+        this.calcOverall();
     }
 
     /**
@@ -66,6 +72,7 @@ public class Team {
             i.printStackTrace();
         }
         this.setGamesHistory(gamesHistory);
+        this.calcOverall();
     }
 
     /**
@@ -81,6 +88,7 @@ public class Team {
             i.printStackTrace();
         }
         this.setGamesHistory(t.getGamesHistory());
+        this.overall = t.getOverall();
     }
 
     /**
@@ -160,13 +168,38 @@ public class Team {
     }
 
     /**
+     * Overall getter
+     * @return Team overall
+     */
+    public int getOverall(){
+        if(this.overall == 0) calcOverall();
+        return this.overall;
+    }
+
+    /**
+     * Method to calculate a team overall
+     */
+    public void calcOverall(){
+        int res = 0, ac = 0, nPlayers = 0;
+        if(this.players != null){
+            for(Player p : this.players.values()){
+                ac += p.getOverall();
+                nPlayers++;
+            }
+            if(nPlayers != 0) res = (int) (ac / nPlayers);
+        }
+        this.overall = res;
+    }
+
+    /**
      * Method to get team as a String
      * @return Team as a string
      */
     public String toString(){
         StringBuilder sb = new StringBuilder("Team: ")
                 .append(name).append("\n")
-                .append("Players: ").append(players.toString());
+                .append("Players: ").append(players.toString()).append("\n")
+                .append("Overall: ").append(overall);
         return sb.toString();
     }
 
@@ -189,9 +222,8 @@ public class Team {
      */
     public void addPlayer(Player p) throws NumberAlreadyExistsInTeamException{
         if(this.players.containsKey(p.getNumber())) throw new NumberAlreadyExistsInTeamException("There is already a player with number " + p.getNumber());
-        else{
-            this.players.put(p.getNumber(), p.clone());
-        }
+        this.players.put(p.getNumber(), p.clone());
+        this.calcOverall();
     }
 
     /**
@@ -208,6 +240,7 @@ public class Team {
      */
     public void removePlayer(int number){
         this.players.remove(number);
+        this.calcOverall();
     }
 
     /**
