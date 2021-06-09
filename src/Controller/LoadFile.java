@@ -46,6 +46,7 @@ public final class LoadFile
                     Team t = buildTeam(startLine[1]);
                     if(teams.containsKey(t.getName())) throw new TeamAlreadyExistsException();
                     teams.put(t.getName(), t);
+                    System.out.println(t.getName());
                     last = t;
                     break;
                 case "Guarda-Redes":
@@ -126,6 +127,7 @@ public final class LoadFile
      * @return created Goalkeeper
      */
     public static GK buildGK(String input){
+        System.out.println(input.toString());
         String[] fields = input.split(",");
         return new GK(fields[0], Integer.parseInt(fields[1]), Integer.parseInt(fields[2]), Integer.parseInt(fields[3]), Integer.parseInt(fields[4]),
                         Integer.parseInt(fields[5]), Integer.parseInt(fields[6]), Integer.parseInt(fields[7]), Integer.parseInt(fields[8]), Integer.parseInt(fields[9]));
@@ -137,9 +139,10 @@ public final class LoadFile
      * @return created Defender
      */
     public static DF buildDF(String input){
+        System.out.println(input.toString());
         String[] fields = input.split(",");
         return new DF(fields[0], Integer.parseInt(fields[1]), Integer.parseInt(fields[2]), Integer.parseInt(fields[3]), Integer.parseInt(fields[4]),
-                Integer.parseInt(fields[5]), Integer.parseInt(fields[6]), Integer.parseInt(fields[7]), Integer.parseInt(fields[8]), Integer.parseInt(fields[9]));
+                Integer.parseInt(fields[5]), Integer.parseInt(fields[6]), Integer.parseInt(fields[7]), Integer.parseInt(fields[8]));
     }
 
     /**
@@ -148,6 +151,7 @@ public final class LoadFile
      * @return created Midfielder
      */
     public static MD buildMD(String input){
+        System.out.println(input.toString());
         String[] fields = input.split(",");
         return new MD(fields[0], Integer.parseInt(fields[1]), Integer.parseInt(fields[2]), Integer.parseInt(fields[3]), Integer.parseInt(fields[4]),
                 Integer.parseInt(fields[5]), Integer.parseInt(fields[6]), Integer.parseInt(fields[7]), Integer.parseInt(fields[8]), Integer.parseInt(fields[9]));
@@ -159,6 +163,7 @@ public final class LoadFile
      * @return created Winger
      */
     public static WG buildWG(String input){
+        System.out.println(input.toString());
         String[] fields = input.split(",");
         return new WG(fields[0], Integer.parseInt(fields[1]), Integer.parseInt(fields[2]), Integer.parseInt(fields[3]), Integer.parseInt(fields[4]),
                 Integer.parseInt(fields[5]), Integer.parseInt(fields[6]), Integer.parseInt(fields[7]), Integer.parseInt(fields[8]), Integer.parseInt(fields[9]));
@@ -170,9 +175,10 @@ public final class LoadFile
      * @return created Forward
      */
     public static FW buildFW(String input){
+        System.out.println(input.toString());
         String[] fields = input.split(",");
         return new FW(fields[0], Integer.parseInt(fields[1]), Integer.parseInt(fields[2]), Integer.parseInt(fields[3]), Integer.parseInt(fields[4]),
-                Integer.parseInt(fields[5]), Integer.parseInt(fields[6]), Integer.parseInt(fields[7]), Integer.parseInt(fields[8]), Integer.parseInt(fields[9]));
+                Integer.parseInt(fields[5]), Integer.parseInt(fields[6]), Integer.parseInt(fields[7]), Integer.parseInt(fields[8]));
     }
 
     /**
@@ -183,6 +189,7 @@ public final class LoadFile
      * @throws InvalidTeamException Exception to control if the teams who played really exists on database
      */
     public static Game buildGame(String input, Map<String, Team> ts) throws InvalidTeamException{
+        System.out.println(input.toString());
         String[] fields = input.split(",");
         String[] data = fields[4].split("-");
         Set<Integer> hp = new HashSet<>();
