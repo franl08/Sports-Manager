@@ -3,7 +3,6 @@ package View;
 import java.io.Serializable;
 import java.lang.reflect.Method;
 
-// TODO showPlayers && showMessage, see Controller to know what is supposed to do.
 public class View implements Serializable
 {
     public static void MainMenu()
@@ -138,6 +137,12 @@ public class View implements Serializable
 
         if(param.equals("game_year"))
             ViewGame.askGameYear();
+
+        if(param.equals("home_team_tactics"))
+            ViewGame.printGameTactics("Home Team");
+
+        if(param.equals("away_team_tactics"))
+            ViewGame.printGameTactics("Away Team");
     }
 
     public static void printSuccessfulCreatedPlayer()

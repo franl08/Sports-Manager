@@ -5,6 +5,7 @@ import View.View;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.Scanner;
 
 public class GameMenuController implements Serializable
@@ -80,12 +81,40 @@ public class GameMenuController implements Serializable
 
         LocalDate gameDay = LocalDate.of(year, month, day);
 
+        // Home team def.
+
         String homeTeam = Inputs.askForStringInput(this.inputs, "home_team");
 
-        View.TacticsMenu(homeTeam);
-        int homeTactic = this.inputs.nextInt();
+        int homeTactic = Inputs.askForInt(this.inputs, 1, 2, "home_team_tactics", false);
+
+        int[] home_players_num;
+
+        if(homeTactic == 1)
+        {
+            home_players_num = new int[]{1,4,4,2};
+        }
+        else home_players_num = new int[]{1,4,3,3};
+
+        HashSet<Integer> home_players = new HashSet<>();
+
+        for(int gk_num = 0; gk_num < home_players_num[0]; gk_num++)
+        {
+            //int gk = Inputs.askForInt(this.inputs, -1, 0, );
+        }
+
+        // Away team def.
 
         String awayTeam = Inputs.askForStringInput(this.inputs, "away_team");
+
+        int awayTactic = Inputs.askForInt(this.inputs, 1, 2, "away_team_tactics", false);
+
+        int[] away_players_num;
+
+        if(awayTactic == 1)
+        {
+            away_players_num = new int[]{1,4,4,2};
+        }
+        else away_players_num = new int[]{1,4,3,3};
     }
 
     private boolean isLeapYear(int year)

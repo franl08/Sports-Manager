@@ -9,8 +9,15 @@ import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.util.*;
 
-public final class LoadFile
+public class LoadFile
 {
+    private Model model;
+
+    public LoadFile(Model m)
+    {
+        this.model = m;
+    }
+
     /**
      * Method to read a file to our database
      * @param fileName Path of the file
@@ -30,8 +37,8 @@ public final class LoadFile
      * @throws NumberAlreadyExistsInTeamException Exception of a player with a certain number already exists in the team
      * @throws InvalidTeamException Exception of an invalid team (p.e. nonexistent team who played one (or more) game(s))
      */
-    public static Model parse() throws IncorrectLineException, NumberAlreadyExistsInTeamException, InvalidTeamException, PlayerAlreadyExistsException, TeamAlreadyExistsException {
-        Model model = new Model();
+    public void parse() throws IncorrectLineException, NumberAlreadyExistsInTeamException, InvalidTeamException, PlayerAlreadyExistsException, TeamAlreadyExistsException
+    {
         List<String> lines = readFile("data/logs.txt");
         Map<String, Team> teams = new HashMap<>();
         Map<String, Player> players = new HashMap<>();
@@ -46,7 +53,6 @@ public final class LoadFile
                     Team t = buildTeam(startLine[1]);
                     if(teams.containsKey(t.getName())) throw new TeamAlreadyExistsException();
                     teams.put(t.getName(), t);
-                    System.out.println(t.getName());
                     last = t;
                     break;
                 case "Guarda-Redes":
@@ -96,19 +102,17 @@ public final class LoadFile
                     break;
                 case "Jogo":
                     Game game = buildGame(startLine[1], teams);
-                    games.add(game);
-                    teams.get(game.getHomeTeam().getName()).addGame(game);
-                    teams.get(game.getAwayTeam().getName()).addGame(game);
+                    teams.get(game.getHomeTeam().getName()).addGameToHistory(game);
+                    teams.get(game.getAwayTeam().getName()).addGameToHistory(game);
                     break;
                 default:
                     throw new IncorrectLineException();
 
             }
         }
-        model.setPlayers(players);
-        model.setTeams(teams);
-        model.setGames(games);
-        return model;
+        this.model.setPlayers(players);
+        this.model.setTeams(teams);
+        this.model.setGames(games);
     }
 
     /**
@@ -127,7 +131,6 @@ public final class LoadFile
      * @return created Goalkeeper
      */
     public static GK buildGK(String input){
-        System.out.println(input.toString());
         String[] fields = input.split(",");
         return new GK(fields[0], Integer.parseInt(fields[1]), Integer.parseInt(fields[2]), Integer.parseInt(fields[3]), Integer.parseInt(fields[4]),
                         Integer.parseInt(fields[5]), Integer.parseInt(fields[6]), Integer.parseInt(fields[7]), Integer.parseInt(fields[8]), Integer.parseInt(fields[9]));
@@ -139,7 +142,6 @@ public final class LoadFile
      * @return created Defender
      */
     public static DF buildDF(String input){
-        System.out.println(input.toString());
         String[] fields = input.split(",");
         return new DF(fields[0], Integer.parseInt(fields[1]), Integer.parseInt(fields[2]), Integer.parseInt(fields[3]), Integer.parseInt(fields[4]),
                 Integer.parseInt(fields[5]), Integer.parseInt(fields[6]), Integer.parseInt(fields[7]), Integer.parseInt(fields[8]));
@@ -151,7 +153,6 @@ public final class LoadFile
      * @return created Midfielder
      */
     public static MD buildMD(String input){
-        System.out.println(input.toString());
         String[] fields = input.split(",");
         return new MD(fields[0], Integer.parseInt(fields[1]), Integer.parseInt(fields[2]), Integer.parseInt(fields[3]), Integer.parseInt(fields[4]),
                 Integer.parseInt(fields[5]), Integer.parseInt(fields[6]), Integer.parseInt(fields[7]), Integer.parseInt(fields[8]), Integer.parseInt(fields[9]));
@@ -163,7 +164,6 @@ public final class LoadFile
      * @return created Winger
      */
     public static WG buildWG(String input){
-        System.out.println(input.toString());
         String[] fields = input.split(",");
         return new WG(fields[0], Integer.parseInt(fields[1]), Integer.parseInt(fields[2]), Integer.parseInt(fields[3]), Integer.parseInt(fields[4]),
                 Integer.parseInt(fields[5]), Integer.parseInt(fields[6]), Integer.parseInt(fields[7]), Integer.parseInt(fields[8]), Integer.parseInt(fields[9]));
@@ -175,7 +175,6 @@ public final class LoadFile
      * @return created Forward
      */
     public static FW buildFW(String input){
-        System.out.println(input.toString());
         String[] fields = input.split(",");
         return new FW(fields[0], Integer.parseInt(fields[1]), Integer.parseInt(fields[2]), Integer.parseInt(fields[3]), Integer.parseInt(fields[4]),
                 Integer.parseInt(fields[5]), Integer.parseInt(fields[6]), Integer.parseInt(fields[7]), Integer.parseInt(fields[8]));
@@ -189,7 +188,6 @@ public final class LoadFile
      * @throws InvalidTeamException Exception to control if the teams who played really exists on database
      */
     public static Game buildGame(String input, Map<String, Team> ts) throws InvalidTeamException{
-        System.out.println(input.toString());
         String[] fields = input.split(",");
         String[] data = fields[4].split("-");
         Set<Integer> hp = new HashSet<>();
@@ -212,8 +210,7 @@ public final class LoadFile
         Team home = ts.get(fields[0]);
         Team away = ts.get(fields[1]);
         if(home == null || away == null) throw new InvalidTeamException();
-        return new Game(home, away, Integer.parseInt(fields[2]), Integer.parseInt(fields[3]), LocalDate.of(Integer.parseInt(data[0]), Integer.parseInt(data[1]), Integer.parseInt(data[2])),
-                        hp, subsH, ap, subsA);
+        return new Game(home, away, Integer.parseInt(fields[2]), Integer.parseInt(fields[3]), LocalDate.of(Integer.parseInt(data[0]), Integer.parseInt(data[1]), Integer.parseInt(data[2])), hp, subsH, ap, subsA);
     }
 
 }

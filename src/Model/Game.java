@@ -125,8 +125,8 @@ public class Game {
         this.awayTeam = awayTeam;
         this.setHomePlayers(homePlayers);
         this.setAwayPlayers(awayPlayers);
-        this.homeGoals = 0;
-        this.awayGoals = 0;
+        this.homeGoals = homeGoals;
+        this.awayGoals = awayGoals;
         this.setHomeSubs(homeSubs);
         this.setAwaySubs(awaySubs);
         try{
@@ -166,8 +166,6 @@ public class Game {
             this.awayControllingOverall = 0;
         }
         this.timer = 90;
-        this.homeGoals = 0;
-        this.awayGoals = 0;
         setRandomMeteorology();
         this.ld = ld;
     }
@@ -281,7 +279,7 @@ public class Game {
      * @param homePlayers Set of numbers
      */
     public void setHomePlayers(Set<Integer> homePlayers){
-        this.homePlayers.addAll(homePlayers);
+        this.homePlayers = new HashSet<>(homePlayers);
     }
 
     /**
@@ -297,7 +295,7 @@ public class Game {
      * @param awayPlayers Set of numbers
      */
     public void setAwayPlayers(Set<Integer> awayPlayers){
-        this.awayPlayers.addAll(awayPlayers);
+        this.awayPlayers = new HashSet<>(awayPlayers);
     }
 
     /**
@@ -345,7 +343,7 @@ public class Game {
      * @param homeSubs Map to set
      */
     public void setHomeSubs(Map<Integer, Integer> homeSubs) {
-        this.homeSubs = homeSubs;
+        this.homeSubs = new HashMap<>(homeSubs);
     }
 
     /**
@@ -361,7 +359,7 @@ public class Game {
      * @param awaySubs Map to set
      */
     public void setAwaySubs(Map<Integer, Integer> awaySubs) {
-        this.awaySubs = awaySubs;
+        this.awaySubs = new HashMap<>(awaySubs);
     }
 
     /**
@@ -713,11 +711,12 @@ public class Game {
     public String toString(){
         StringBuilder sb = new StringBuilder("Game:{\n")
                 .append("Date: ").append(ld).append(" ").append("(").append(meteorology).append(")\n")
-                .append(homeTeam).append(" ").append(homeGoals).append(" vs ").append(awayGoals).append(" ").append(awayTeam).append("\n")
+                .append(homeTeam.getName()).append(" ").append(homeGoals).append(" vs ").append(awayGoals).append(" ").append(awayTeam.getName()).append("\n")
                 .append("Home Players:\n")
                 .append(homePlayers.toString()).append("\n")
                 .append("Away Players:\n")
-                .append(awayPlayers.toString()).append("\n");
+                .append(awayPlayers.toString()).append("\n")
+                .append("}");
         return sb.toString();
     }
 

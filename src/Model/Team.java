@@ -14,7 +14,7 @@ public class Team {
     /**
      * Team's games history
      */
-    private List<Game> gamesHistory;
+    private List<HistoryGame> gamesHistory;
     /**
      * Team's overall
      */
@@ -25,7 +25,7 @@ public class Team {
     public Team(){
         this.name = "n/a";
         this.players = new HashMap<>();
-        this.gamesHistory = new ArrayList<Game>();
+        this.gamesHistory = new ArrayList<>();
         this.overall = 0;
     }
 
@@ -36,7 +36,7 @@ public class Team {
     public Team(String name) {
         this.name = name;
         this.players = new HashMap<>();
-        this.gamesHistory = new ArrayList<Game>();
+        this.gamesHistory = new ArrayList<>();
         this.overall = 0;
     }
 
@@ -53,7 +53,7 @@ public class Team {
         catch (NumberAlreadyExistsInTeamException i){
             i.printStackTrace();
         }
-        this.gamesHistory = new ArrayList<Game>();
+        this.gamesHistory = new ArrayList<>();
         this.calcOverall();
     }
 
@@ -63,7 +63,7 @@ public class Team {
      * @param players Team Players
      * @param gamesHistory Team games history
      */
-    public Team(String id, String name, Map<Integer, Player> players, List<Game> gamesHistory) {
+    public Team(String id, String name, Map<Integer, Player> players, List<HistoryGame> gamesHistory) {
         this.name = name;
         try{
             this.setPlayers(players);
@@ -82,7 +82,7 @@ public class Team {
     public Team(Team t){
         this.name = t.getName();
         try{
-            this.setPlayers(players);
+            this.setPlayers(t.getPlayers());
         }
         catch (NumberAlreadyExistsInTeamException i){
             i.printStackTrace();
@@ -121,6 +121,7 @@ public class Team {
      * @throws NumberAlreadyExistsInTeamException Exception to prevent players with the same number
      */
     public void setPlayers(Map<Integer, Player> players) throws NumberAlreadyExistsInTeamException{
+        this.players = new HashMap<>();
         if (players != null && !players.isEmpty())
             for(Player p : players.values()) {
                 if (this.players.containsKey(p.getNumber()))
@@ -148,13 +149,12 @@ public class Team {
      * Games history getter
      * @return Games history
      */
-    public List<Game> getGamesHistory(){
-        List<Game> ans = new ArrayList<>();
+    public List<HistoryGame> getGamesHistory(){
+        List<HistoryGame> ans = new ArrayList<>();
         if(this.gamesHistory != null)
-        {
-            for(Game g : this.gamesHistory)
+            for(HistoryGame g : this.gamesHistory)
                 ans.add(g.clone());
-        }
+        else return null;
         return ans;
     }
 
@@ -162,8 +162,9 @@ public class Team {
      * Games history setter
      * @param gamesHistory Games history to set
      */
-    public void setGamesHistory(List<Game> gamesHistory){
-        for(Game g : gamesHistory)
+    public void setGamesHistory(List<HistoryGame> gamesHistory){
+        this.gamesHistory = new ArrayList<>();
+        for(HistoryGame g : gamesHistory)
             this.gamesHistory.add(g.clone());
     }
 
@@ -243,16 +244,12 @@ public class Team {
         this.calcOverall();
     }
 
-    /**
-     * Method to add a game to the games history of the team
-     * @param g Game to add
-     */
-    public void addGame(Game g){
-        if(this.gamesHistory == null){
-            this.gamesHistory = new ArrayList<>();
-            this.gamesHistory.add(g.clone());
-        }
-        else this.gamesHistory.add(g.clone());
+    public void addGameToHistory(Game g){
+        HistoryGame h = new HistoryGame(g);
+        this.gamesHistory.add(h);
     }
 
+    public void addHistoryGame(HistoryGame h){
+        this.gamesHistory.add(h.clone());
+    }
 }

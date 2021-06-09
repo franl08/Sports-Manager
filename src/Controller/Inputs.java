@@ -133,7 +133,7 @@ public final class Inputs implements Serializable
 
         for(char c : aux)
         {
-            if(!Character.isLetter(c) && c != ' ') throw new ValueOutofBoundsException("Expected a string without non-letters.");
+            if(!Character.isLetter(c) && c != ' ' && c != '.') throw new ValueOutofBoundsException("Expected a string without non-letters.");
         }
     }
 

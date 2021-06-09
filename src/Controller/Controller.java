@@ -12,6 +12,7 @@ public class Controller
     private PlayerMenuController pmc;
     private TeamMenuController tmc;
     private GameMenuController gmc;
+    private LoadFile lf;
 
     public Controller()
     {
@@ -21,6 +22,8 @@ public class Controller
         this.pmc = new PlayerMenuController(this.model, this.inputs);
         this.tmc = new TeamMenuController(this.model, this.inputs);
         this.gmc = new GameMenuController(this.model, this.inputs);
+
+        this.lf = new LoadFile(this.model);
     }
 
     public Controller(Model m)
@@ -54,7 +57,7 @@ public class Controller
                 case 4:
                     try
                     {
-                        this.model = LoadFile.parse();
+                        this.lf.parse();
                     }
                     catch (Exception e)
                     {

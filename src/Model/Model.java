@@ -29,6 +29,12 @@ public class Model {
         this.setGames(games);
     }
 
+    public Model(Model m){
+        this.setTeams(m.getTeams());
+        this.setPlayers(m.getPlayers());
+        this.setGames(m.getGames());
+    }
+
     /**
      * Teams getter
      * @return Map of model's teams
@@ -46,8 +52,9 @@ public class Model {
      */
     public void setTeams(Map<String, Team> teams) {
         this.teams = new HashMap<>();
-        for(Team t : teams.values())
+        for(Team t : teams.values()) {
             this.teams.put(t.getName(), t.clone());
+        }
     }
 
     /**
@@ -281,7 +288,7 @@ public class Model {
      */
     public String[] getPlayersTeamAsStringArray(String teamName)
     {
-        String[] result = new String[getTeamWithName(teamName).getPlayers().values().size() * 5];
+        String[] result = new String[getTeamWithName(teamName).getPlayers().values().size() * 4];
 
         int i = 0;
 
@@ -303,15 +310,15 @@ public class Model {
      */
     public String[] getHistoryTeamAsStringArray(String teamName)
     {
-        String[] result = new String[getTeamWithName(teamName).getGamesHistory().size() * 4];
+        String[] result = new String[getTeamWithName(teamName).getGamesHistory().size() * 5];
 
         int i = 0;
 
-        for(Game g : getTeamWithName(teamName).getGamesHistory())
+        for(HistoryGame g : getTeamWithName(teamName).getGamesHistory())
         {
-            result[i++] = g.getLd().toString();
-            result[i++] = g.getHomeTeam().getName();
-            result[i++] = g.getAwayTeam().getName();
+            result[i++] = g.getGameDate().toString();
+            result[i++] = g.getHomeTeam();
+            result[i++] = g.getAwayTeam();
             result[i++] = Integer.toString(g.getHomeGoals());
             result[i++] = Integer.toString(g.getAwayGoals());
         }
@@ -382,6 +389,102 @@ public class Model {
         for(Integer x : availableNums)
         {
             result[i++] = String.valueOf(x);
+        }
+
+        return result;
+    }
+
+    public Set<Player> getTeamGK(String team_name)
+    {
+        HashSet<Player> result = new HashSet<>();
+        Team team = getTeamWithName(team_name);
+
+        for(Player p : team.getPlayers().values())
+        {
+            if(p.getPosition().equals(Position.GOALKEEPER)) result.add(p.clone());
+        }
+
+        return result;
+    }
+
+    public String[] getTeamGKAsStringArray(String team_name)
+    {
+        Set<Player> GKList = getTeamGK(team_name);
+
+        String[] result = new String[GKList.size() * 4];
+
+        int i = 0;
+
+        for(Player x : GKList)
+        {
+            result[i++] = x.getName();
+            result[i++] = String.valueOf(x.getNumber());
+            result[i++] = String.valueOf(x.getOverall());
+            result[i++] = x.getPosition().toString();
+        }
+
+        return result;
+    }
+
+    public Set<Player> getTeamWG(String team_name)
+    {
+        HashSet<Player> result = new HashSet<>();
+        Team team = getTeamWithName(team_name);
+
+        for(Player p : team.getPlayers().values())
+        {
+            if(p.getPosition().equals(Position.WINGER)) result.add(p.clone());
+        }
+
+        return result;
+    }
+
+    public String[] getTeamWGAsStringArray(String team_name)
+    {
+        Set<Player> WGList = getTeamWG(team_name);
+
+        String[] result = new String[WGList.size() * 4];
+
+        int i = 0;
+
+        for(Player x : WGList)
+        {
+            result[i++] = x.getName();
+            result[i++] = String.valueOf(x.getNumber());
+            result[i++] = String.valueOf(x.getOverall());
+            result[i++] = x.getPosition().toString();
+        }
+
+        return result;
+    }
+
+    public Set<Player> getTeamExchangeable(String team_name)
+    {
+        HashSet<Player> result = new HashSet<>();
+        Team team = getTeamWithName(team_name);
+
+        for(Player p : team.getPlayers().values())
+        {
+            if(!p.getPosition().equals(Position.WINGER) && !p.getPosition().equals(Position.GOALKEEPER)) result.add(p.clone());
+        }
+
+        return result;
+    }
+
+    public String[] getTeamExchangeableAsStringArray(String team_name)
+    {
+        Set<Player> ExchangeableList = getTeamExchangeable(team_name);
+
+        String[] result = new String[ExchangeableList.size() * 4];
+
+        int i = 0;
+
+        for(Player x : ExchangeableList)
+        {
+            result[i++] = x.getName();
+            result[i++] = String.valueOf(x.getNumber());
+            result[i++] = String.valueOf(x.getOverall());
+            result[i++] = x.getPosition().toString();
         }
 
         return result;

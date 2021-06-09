@@ -279,7 +279,7 @@ public class MD extends FieldPlayer{
      */
     public String toString(){
         StringBuilder sb = new StringBuilder(super.toString())
-                .append(" | Miedfielder\n");
+                .append(" | Midfielder\n");
         return sb.toString();
     }
 }
