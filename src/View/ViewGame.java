@@ -18,7 +18,7 @@ public final class ViewGame implements Serializable
 
     public static void printGameMeteorology()
     {
-        String[] gameMeteorologyArgs = new String[]{"Sun.", "Rain.", "Snow."};
+        String[] gameMeteorologyArgs = new String[]{"Rainy.", "Foggy.", "Windy.", "Snowy.", "Sunny."};
         Outputs.printOptionList(gameMeteorologyArgs, "Game Weather");
     }
 

@@ -57,29 +57,43 @@ public class GameMenuController implements Serializable
     //TODO
     private void runGame()
     {
-        View.MeteorologyMenu();
-        String meteorology = this.inputs.next();
+        int meteorology = Inputs.askForInt(this.inputs, 1, 5, "game_meteorology", false);
 
-        View.askGameDay();
-        int day = this.inputs.nextInt();
+        int year = Inputs.askForInt(this.inputs, LocalDate.now().getYear(), LocalDate.MAX.getYear(), "game_day", false);
 
-        View.askGameMonth();
-        int month = this.inputs.nextInt();
+        boolean isLeapYear = isLeapYear(year);
 
-        View.askGameYear();
-        int year = this.inputs.nextInt();
+        int month = Inputs.askForInt(this.inputs, LocalDate.now().getMonthValue(), 12, "game_month", false);
+
+        int day;
+
+        if(month == 2 && isLeapYear)
+            day = Inputs.askForInt(this.inputs, LocalDate.now().getDayOfMonth(), 29, "game_day", false);
+
+        else if(month == 2)
+            day = Inputs.askForInt(this.inputs, LocalDate.now().getDayOfMonth(), 28, "game_day", false);
+
+        else if(month == 4 || month == 6 || month == 9 || month == 11)
+            day = Inputs.askForInt(this.inputs, LocalDate.now().getDayOfMonth(), 30, "game_day", false);
+
+        else day = Inputs.askForInt(this.inputs, LocalDate.now().getDayOfMonth(), 31, "game_day", false);
 
         LocalDate gameDay = LocalDate.of(year, month, day);
 
-        View.askHomeTeamName();
-        String homeTeam = this.inputs.next();
+        String homeTeam = Inputs.askForStringInput(this.inputs, "home_team");
 
         View.TacticsMenu(homeTeam);
         int homeTactic = this.inputs.nextInt();
 
+        String awayTeam = Inputs.askForStringInput(this.inputs, "away_team");
+    }
 
-        View.askAwayTeamName();
-        String awayTeam = this.inputs.next();
+    private boolean isLeapYear(int year)
+    {
+        if(year % 400 == 0)
+            return true;
+
+        else return (year % 4 == 0) && (year % 100 == 0);
     }
 
     private void loadGame()

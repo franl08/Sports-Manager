@@ -9,8 +9,8 @@ import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.util.*;
 
-public class LoadFile {
-
+public final class LoadFile
+{
     /**
      * Method to read a file to our database
      * @param fileName Path of the file

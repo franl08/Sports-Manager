@@ -203,6 +203,24 @@ public abstract class FieldPlayer extends Player{
         this.vision = utils.setRandomAttribute();
     }
 
+    public FieldPlayer(String name, int number, int velocity, int endurance, int skill, int impulsion, int heading, int finishing, int passing, Position position) {
+        super(name, number, position);
+        this.setVelocity(velocity);
+        this.setEndurance(endurance);
+        this.setSkill(skill);
+        this.setImpulsion(impulsion);
+        this.setHeading(heading);
+        this.setFinishing(finishing);
+        this.setPassing(passing);
+        this.crossing = utils.setRandomAttribute();
+        this.ballRecovery = utils.setRandomAttribute();
+        this.positioning = utils.setRandomAttribute();
+        this.creativity = utils.setRandomAttribute();
+        this.aggressiveness = utils.setRandomAttribute();
+        this.tackling = utils.setRandomAttribute();
+        this.vision = utils.setRandomAttribute();
+    }
+
     public FieldPlayer(FieldPlayer fp){
         super(fp.getName(), fp.getNumber(), fp.getCurrentTeamName(), fp.getHistoric(), fp.getCurPosition());
         this.setVelocity(fp.getVelocity());

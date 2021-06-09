@@ -261,13 +261,14 @@ public class Model {
      */
     public String[] getTeamsAsStringArray()
     {
-        String[] result = new String[this.teams.values().size()];
+        String[] result = new String[this.teams.values().size() * 2];
 
         int i = 0;
 
         for(Team t : this.teams.values())
         {
             result[i++] = t.getName();
+            result[i++] = String.valueOf(t.getOverall());
         }
 
         return result;
@@ -361,7 +362,7 @@ public class Model {
     public Set<Integer> availableNumbersInTeam(String teamName){
         Set<Integer> numbers = this.teams.get(teamName).usedNumbers();
         Set<Integer> ans = new HashSet<>();
-        for(int i = 1; i <= 99; i++)
+        for(int i = 0; i <= 99; i++)
             if(!numbers.contains(i)) ans.add(i);
         return ans;
     }

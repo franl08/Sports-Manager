@@ -118,6 +118,26 @@ public class View implements Serializable
 
         if(param.equals("team_name"))
             ViewTeam.askTeamName();
+
+        // Game
+
+        if(param.equals("home_team"))
+            ViewGame.askHomeTeamName();
+
+        if(param.equals("away_team"))
+            ViewGame.askAwayTeamName();
+
+        if(param.equals("game_meteorology"))
+            ViewGame.printGameMeteorology();
+
+        if(param.equals("game_month"))
+            ViewGame.askGameMonth();
+
+        if(param.equals("game_day"))
+            ViewGame.askGameDay();
+
+        if(param.equals("game_year"))
+            ViewGame.askGameYear();
     }
 
     public static void printSuccessfulCreatedPlayer()
@@ -192,36 +212,6 @@ public class View implements Serializable
     public static void TacticsMenu(String teamName)
     {
         ViewGame.printGameTactics(teamName);
-    }
-
-    public static void MeteorologyMenu()
-    {
-        ViewGame.printGameMeteorology();
-    }
-
-    public static void askHomeTeamName()
-    {
-        ViewGame.askHomeTeamName();
-    }
-
-    public static void askAwayTeamName()
-    {
-        ViewGame.askAwayTeamName();
-    }
-
-    public static void askGameDay()
-    {
-        ViewGame.askGameDay();
-    }
-
-    public static void askGameMonth()
-    {
-        ViewGame.askGameMonth();
-    }
-
-    public static void askGameYear()
-    {
-        ViewGame.askGameYear();
     }
 
     //Util

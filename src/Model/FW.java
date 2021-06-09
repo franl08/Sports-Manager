@@ -137,8 +137,8 @@ public class FW extends FieldPlayer{
      * @param finishing Player finishing
      * @param passing Player passing
      */
-    public FW(String name, int number, int velocity, int endurance, int skill, int impulsion, int heading, int finishing, int passing, int crossing) {
-        super(name, number, velocity, endurance, skill, impulsion, heading, finishing, passing, crossing, Position.FORWARD);
+    public FW(String name, int number, int velocity, int endurance, int skill, int impulsion, int heading, int finishing, int passing) {
+        super(name, number, velocity, endurance, skill, impulsion, heading, finishing, passing,Position.FORWARD);
         super.setOverall(calcOverall());
     }
 

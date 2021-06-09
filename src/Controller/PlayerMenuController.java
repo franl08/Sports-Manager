@@ -5,9 +5,7 @@ import View.View;
 
 import java.io.Serializable;
 import java.util.Scanner;
-import java.util.Set;
 
-// TODO: see player history ??
 public class PlayerMenuController implements Serializable
 {
     private final Model model;
@@ -27,6 +25,7 @@ public class PlayerMenuController implements Serializable
 
     public void runPlayerMenu()
     {
+        View.clear();
         boolean returnFlag = true;
 
         while(returnFlag)
@@ -64,9 +63,11 @@ public class PlayerMenuController implements Serializable
 
                 case 0:
                     returnFlag = false;
+                    View.clear();
                     break;
 
                 default:
+                    View.clear();
                     View.printMessage("Your action could not be identified. Try again please.\n");
                     break;
             }

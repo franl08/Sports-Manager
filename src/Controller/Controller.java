@@ -2,9 +2,7 @@ package Controller;
 import Model.*;
 import View.*;
 
-import java.util.HashSet;
 import java.util.Scanner;
-import java.util.Set;
 
 public class Controller
 {
@@ -51,6 +49,18 @@ public class Controller
 
                 case 3:
                     this.gmc.runGameMenu();
+                    break;
+
+                case 4:
+                    try
+                    {
+                        this.model = LoadFile.parse();
+                    }
+                    catch (Exception e)
+                    {
+                        View.printMessage(e.getMessage());
+                    }
+
                     break;
 
                 case 0:

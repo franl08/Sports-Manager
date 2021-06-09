@@ -188,7 +188,7 @@ public abstract class Player {
      * @param number Number to set
      */
     public void setNumber(int number){
-        if(number < 1) this.number = 1;
+        if(number < 0) this.number = 0;
         else this.number = Math.min(number, 99);
     }
 

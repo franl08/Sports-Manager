@@ -25,6 +25,7 @@ public class TeamMenuController implements Serializable
 
     public void runTeamMenu()
     {
+        View.clear();
         boolean returnFlag = true;
 
         while(returnFlag)
@@ -57,9 +58,11 @@ public class TeamMenuController implements Serializable
 
                 case 0:
                     returnFlag = false;
+                    View.clear();
                     break;
 
                 default:
+                    View.clear();
                     View.printMessage("Your action could not be identified. Try again please.\n");
                     break;
             }

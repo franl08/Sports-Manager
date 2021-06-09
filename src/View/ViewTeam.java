@@ -31,7 +31,7 @@ public final class ViewTeam implements Serializable
 
     public static void printAllTeams(String[] allTeams)
     {
-        String[] headArgs = new String[] {"Team Name"};
+        String[] headArgs = new String[] {"Team Name", "Team Overall"};
         Outputs.printStringArrayAsTable(allTeams, headArgs);
     }
 
