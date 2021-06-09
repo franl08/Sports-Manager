@@ -18,7 +18,7 @@ public class LoadFile {
         return lines;
     }
 
-    public static Model parse() throws IncorrectLineException, NumberAlreadyExistsInTeamException {
+    public static Model parse() throws IncorrectLineException, NumberAlreadyExistsInTeamException, InvalidTeamException {
         Model model = new Model();
         List<String> lines = readFile("data/logs.txt");
         Map<String, Team> teams = new HashMap<>();
@@ -78,6 +78,8 @@ public class LoadFile {
                 case "Jogo":
                     Game game = buildGame(startLine[1], teams);
                     games.add(game);
+                    teams.get(game.getHomeTeam().getName()).addGame(game);
+                    teams.get(game.getAwayTeam().getName()).addGame(game);
                     break;
                 default:
                     throw new IncorrectLineException();
@@ -125,7 +127,7 @@ public class LoadFile {
                 Integer.parseInt(fields[5]), Integer.parseInt(fields[6]), Integer.parseInt(fields[7]), Integer.parseInt(fields[8]), Integer.parseInt(fields[9]));
     }
 
-    public static Game buildGame(String input, Map<String, Team> ts){
+    public static Game buildGame(String input, Map<String, Team> ts) throws InvalidTeamException{
         String[] fields = input.split(",");
         String[] data = fields[4].split("-");
         Set<Integer> hp = new HashSet<>();
@@ -144,7 +146,11 @@ public class LoadFile {
             String[] sub = fields[m].split("->");
             subsA.put(Integer.parseInt(sub[0]), Integer.parseInt(sub[1]));
         }
-        return new Game(ts.get(fields[0]), ts.get(fields[1]), Integer.parseInt(fields[2]), Integer.parseInt(fields[3]), LocalDate.of(Integer.parseInt(data[0]), Integer.parseInt(data[1]), Integer.parseInt(data[2])),
+        if(ts == null) throw new InvalidTeamException();
+        Team home = ts.get(fields[0]);
+        Team away = ts.get(fields[1]);
+        if(home == null || away == null) throw new InvalidTeamException();
+        return new Game(home, away, Integer.parseInt(fields[2]), Integer.parseInt(fields[3]), LocalDate.of(Integer.parseInt(data[0]), Integer.parseInt(data[1]), Integer.parseInt(data[2])),
                         hp, subsH, ap, subsA);
     }
 

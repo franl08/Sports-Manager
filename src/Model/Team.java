@@ -200,4 +200,12 @@ public class Team {
         this.players.remove(number);
     }
 
+    public void addGame(Game g){
+        if(this.gamesHistory == null){
+            this.gamesHistory = new ArrayList<>();
+            this.gamesHistory.add(g.clone());
+        }
+        else this.gamesHistory.add(g.clone());
+    }
+
 }
