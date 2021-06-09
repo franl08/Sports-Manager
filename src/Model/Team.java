@@ -3,8 +3,17 @@ package Model;
 import java.util.*;
 
 public class Team {
+    /**
+     * Team's name
+     */
     private String name;
+    /**
+     * Team's players
+     */
     private Map<Integer, Player> players;
+    /**
+     * Team's games history
+     */
     private List<Game> gamesHistory;
 
     /**
@@ -194,12 +203,17 @@ public class Team {
     }
 
     /**
-     *
+     * Method to remove a player from a team given is number
+     * @param number Player number to remove
      */
     public void removePlayer(int number){
         this.players.remove(number);
     }
 
+    /**
+     * Method to add a game to the games history of the team
+     * @param g Game to add
+     */
     public void addGame(Game g){
         if(this.gamesHistory == null){
             this.gamesHistory = new ArrayList<>();
