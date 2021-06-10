@@ -138,7 +138,7 @@ public class WG extends FieldPlayer{
      * @param passing Player passing
      */
     public WG(String name, int number, int velocity, int endurance, int skill, int impulsion, int heading, int finishing, int passing, int crossing) {
-        super(name, number, velocity, endurance, skill, impulsion, heading, finishing, passing, crossing, Position.MIDFIELDER);
+        super(name, number, velocity, endurance, skill, impulsion, heading, finishing, passing, crossing, Position.WINGER);
         super.setOverall(calcOverall());
     }
 

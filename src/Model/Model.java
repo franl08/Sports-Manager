@@ -125,8 +125,21 @@ public class Model {
     public void removePlayerFromTeam(String pName, Team t) throws InvalidPlayerException{
         Player p = this.players.get(pName);
         if(!this.players.containsKey(pName)) throw new InvalidPlayerException(pName + " doesn't exist on database");
-        else if(this.teams.get(t.getName()).getPlayers().containsKey(p.getNumber())) throw new InvalidPlayerException(pName + " doesn't play on " + t.getName());
+        else if(!this.teams.get(t.getName()).getPlayers().containsKey(p.getNumber())) throw new InvalidPlayerException(pName + " doesn't play on " + t.getName());
         else t.removePlayer(this.players.get(pName).getNumber());
+    }
+
+    /**
+     * Method to remove a player from a team given his number
+     * @param pName Player's to remove name
+     * @param t Player's to remove team
+     * @param number Player's number
+     * @throws InvalidPlayerException Exception to prevent cases of an nonexistent player / remove a player from a team for which he doesn't play
+     */
+    public void removePlayerFromTeam(String pName, Team t, int number) throws InvalidPlayerException{
+        if(!this.players.containsKey(pName)) throw new InvalidPlayerException(pName + " doesn't exist on database");
+        else if(!this.teams.get(t.getName()).getPlayers().containsKey(number)) throw new InvalidPlayerException(pName + " doesn't play on " + t.getName());
+        else t.removePlayer(number);
     }
 
     /**
@@ -135,10 +148,10 @@ public class Model {
      * @param t Player's new team
      * @throws InvalidPlayerException Exception to prevent cases of an nonexistent player
      */
-    public void addPlayerToTeam(String pName, Team t) throws InvalidPlayerException{
+    public void addPlayerToTeam(String pName, Team t) throws InvalidPlayerException, NumberAlreadyExistsInTeamException {
         Player p = this.players.get(pName);
         if(!this.players.containsKey(pName)) throw new InvalidPlayerException(pName + " doesn't exist on database");
-        else t.getPlayers().put(this.players.get(pName).getNumber(), this.players.get(pName));
+        else t.addPlayer(p);
     }
 
     /**
@@ -167,15 +180,16 @@ public class Model {
      */
     public void transferPlayer(String pName, String tName, String newTeamName, int newNumber){
         Player p = this.players.get(pName);
+        int oldNumber = p.getNumber();
         p.setNumber(newNumber);
         Team t = this.teams.get(tName);
         Team nt = this.teams.get(newTeamName);
         try{
-            removePlayerFromTeam(pName, t);
+            removePlayerFromTeam(pName, t, oldNumber);
             addPlayerToTeam(pName, nt);
             p.changeTeam(newTeamName);
         }
-        catch (InvalidPlayerException i){
+        catch (InvalidPlayerException | NumberAlreadyExistsInTeamException i){
             i.printStackTrace();
         }
     }

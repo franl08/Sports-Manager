@@ -74,7 +74,7 @@ public class PlayerMenuController implements Serializable
         }
     }
 
-    private void createPlayerController() throws InvalidPositionException, PlayerAlreadyExistsException, InvalidTeamException {
+    private void createPlayerController() throws InvalidPositionException, PlayerAlreadyExistsException, InvalidTeamException, NumberAlreadyExistsInTeamException {
         Player newPlayer;
 
         String playerName = Inputs.askForStringInput(this.inputs, "player_name");
@@ -108,6 +108,7 @@ public class PlayerMenuController implements Serializable
                 int endurance = Inputs.askForInt(this.inputs, 1, 99, "player_endurance", false);
 
                 newPlayer = new GK(playerName,number,teamName,elasticity,reflexes,agility,decisions,velocity,passing,courage,endurance);
+                this.model.getTeams().get(teamName).addPlayer(newPlayer);
             }
             else
             {
@@ -144,21 +145,25 @@ public class PlayerMenuController implements Serializable
                     case 2:
                         newPlayer = new DF(playerName,number,teamName,velocity,endurance,skill,impulsion,heading,finishing,
                                 passing,crossing,ballRecovery,positioning,creativity,aggressiveness,tackling,vision,Position.DEFENDER);
+                        this.model.getTeams().get(teamName).addPlayer(newPlayer);
                         break;
 
                     case 3:
                         newPlayer = new WG(playerName,number,teamName,velocity,endurance,skill,impulsion,heading,finishing,
                                 passing,crossing,ballRecovery,positioning,creativity,aggressiveness,tackling,vision,Position.WINGER);
+                        this.model.getTeams().get(teamName).addPlayer(newPlayer);
                         break;
 
                     case 4:
                         newPlayer = new MD(playerName,number,teamName,velocity,endurance,skill,impulsion,heading,finishing,
                                 passing,crossing,ballRecovery,positioning,creativity,aggressiveness,tackling,vision,Position.MIDFIELDER);
+                        this.model.getTeams().get(teamName).addPlayer(newPlayer);
                         break;
 
                     case 5:
                         newPlayer = new FW(playerName,number,teamName,velocity,endurance,skill,impulsion,heading,finishing,
                                 passing,crossing,ballRecovery,positioning,creativity,aggressiveness,tackling,vision,Position.FORWARD);
+                        this.model.getTeams().get(teamName).addPlayer(newPlayer);
                         break;
 
                     default:
@@ -172,22 +177,27 @@ public class PlayerMenuController implements Serializable
             {
                 case 1:
                     newPlayer = new GK(playerName,number,teamName);
+                    this.model.getTeams().get(teamName).addPlayer(newPlayer);
                     break;
 
                 case 2:
                     newPlayer = new DF(playerName,number,teamName);
+                    this.model.getTeams().get(teamName).addPlayer(newPlayer);
                     break;
 
                 case 3:
                     newPlayer = new WG(playerName,number,teamName);
+                    this.model.getTeams().get(teamName).addPlayer(newPlayer);
                     break;
 
                 case 4:
                     newPlayer = new MD(playerName,number,teamName);
+                    this.model.getTeams().get(teamName).addPlayer(newPlayer);
                     break;
 
                 case 5:
                     newPlayer = new FW(playerName,number,teamName);
+                    this.model.getTeams().get(teamName).addPlayer(newPlayer);
                     break;
 
                 default:
