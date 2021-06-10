@@ -315,46 +315,40 @@ public class GK extends Player {
      */
     public void updateAttribute(int attribute, int newValue) throws InvalidAttributeException
     {
-        switch (attribute)
-        {
-            case 1:
+        switch (attribute) {
+            case 1 -> {
                 this.setElasticity(newValue);
                 this.calcOverall();
-                break;
-
-            case 2:
+            }
+            case 2 -> {
                 this.setReflexes(newValue);
                 this.calcOverall();
-                break;
-
-            case 3:
+            }
+            case 3 -> {
                 this.setAgility(newValue);
                 this.calcOverall();
-                break;
-
-            case 4:
+            }
+            case 4 -> {
                 this.setDecisions(newValue);
                 this.calcOverall();
-                break;
-            case 5:
+            }
+            case 5 -> {
                 this.setVelocity(newValue);
                 this.calcOverall();
-                break;
-            case 6:
+            }
+            case 6 -> {
                 this.setPassing(newValue);
                 this.calcOverall();
-                break;
-            case 7:
+            }
+            case 7 -> {
                 this.setCourage(newValue);
                 this.calcOverall();
-                break;
-            case 8:
+            }
+            case 8 -> {
                 this.setEndurance(newValue);
                 this.calcOverall();
-                break;
-
-            default:
-                throw new InvalidAttributeException("The attribute you inserted doesn't exist.");
+            }
+            default -> throw new InvalidAttributeException("The attribute you inserted doesn't exist.");
         }
     }
 

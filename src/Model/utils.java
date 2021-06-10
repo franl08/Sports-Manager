@@ -12,7 +12,7 @@ public class utils {
      * @return a random int between 1 and 99
      */
     public static int setRandomAttribute(){
-        return(getRandNum(99) + 1);
+        return(getRandNum(max) + 1);
     }
 
     /**
@@ -25,7 +25,7 @@ public class utils {
         Random n = new Random();
         boolean ans = false;
         int dif = attOv - defOv;
-        int bingo = n.nextInt(99);
+        int bingo = n.nextInt(max);
         List<Integer> randNumsAtt = new ArrayList<>();
         List<Integer> randNumsDef = new ArrayList<>();
         if(dif > 0){

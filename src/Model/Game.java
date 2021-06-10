@@ -7,22 +7,73 @@ import java.util.Map;
 import java.util.Set;
 
 public class Game {
+    /**
+     * Home Team
+     */
     private Team homeTeam;
+    /**
+     * Away Team
+     */
     private Team awayTeam;
+    /**
+     * Home lineup
+     */
     private Set<Integer> homePlayers;
+    /**
+     * Away lineup
+     */
     private Set<Integer> awayPlayers;
+    /**
+     * Home substitutions
+     */
     private Map<Integer, Integer> homeSubs;
+    /**
+     * Away substitutions
+     */
     private Map<Integer, Integer> awaySubs;
+    /**
+     * Home goals
+     */
     private int homeGoals;
+    /**
+     * Away goals
+     */
     private int awayGoals;
+    /**
+     * Game timer
+     */
     private int timer;
+    /**
+     * Home defensive overall
+     */
     private int homeDefenseOverall;
+    /**
+     * Away defensive overall
+     */
     private int awayDefenseOverall;
+    /**
+     * Home attacking overall
+     */
     private int homeAttackingOverall;
+    /**
+     * Away attacking overall
+     */
     private int awayAttackingOverall;
+    /**
+     * Home controlling overall
+     */
     private int homeControllingOverall;
+    /**
+     * Away controlling overall
+     */
     private int awayControllingOverall;
+    /**
+     * Game Meteorology
+     */
     private Meteorology meteorology;
+    /**
+     * Game date
+     */
     private LocalDate ld;
 
     /**
@@ -673,11 +724,51 @@ public class Game {
     }
 
     /**
+     * Method to get one string simulating a goal in the game
+     * @param team Team's with possession name
+     * @return String with the goal
+     */
+    public String getStringGoal(String team){
+        StringBuilder ans = new StringBuilder();
+        int bingo = utils.getRandNum(5);
+        switch(bingo){
+            case 1 -> ans.append("GOAAAAAAL! What a mistake by the opposite team! It was too easy for them...  ").append(team).append(" add one goal to the result.\n");
+            case 2 -> ans.append("GOAAAAAAL! What a long shot, the goalkeeper couldn't see it! Pure moment of inspiration by them, it's a goal for ").append(team).append("\n");
+            case 3 -> ans.append("GOAAAAAAL! Fantastic individual play, no one couldn't stop this player. Magician! And with this we have one goal to ").append(team).append("\n");
+            case 4 -> ans.append("GOAAAAAAL! This is how we play! Beautiful play by the team, tiki-taka style. I bet all of them touched the ball! Goal for ").append(team).append("\n");
+            case 5 -> ans.append("GOAAAAAAL! Fantastic shot, but I guess the goalkeeper should have done a better job... Goal for ").append(team).append("\n");
+        }
+        return ans.toString();
+    }
+
+    /**
+     * Method to get one string simulating one action in the game
+     * @param team Team's with possession name
+     * @return String with the action
+     */
+    public String getStringNoGoal(String team){
+        StringBuilder ans = new StringBuilder();
+        int bingo = utils.getRandNum(5);
+        switch(bingo){
+            case 1 -> ans.append("Oh no... What a miss by them! This should be illegal on this sport. ").append(team).append(" had the ball but lost a great opportunity.\n");
+            case 2 -> ans.append("What a tackle! And they say: Nothing will pass this wall! ").append(team).append(" had the ball but couldn't make anything against their defense.\n");
+            case 3 -> ans.append("Too much, only too much. Tried to do everything alone. Lost it! Of course... The next time, pass the ball!! ").append(team).append(" had the ball but lost it.\n");
+            case 4 -> ans.append("So close!! What a nice shot, but the lucky wasn't with them! ").append(team).append(" almost scored, but they will take only the almost.\n");
+            case 5 -> ans.append("And what a keeper we have here! The crowd was already screaming goal! Nothing will enter there if he has more of this to offer!").append(team).append(" almost scored, but the opposite keeper says no to them.\n");
+        }
+        return ans.toString();
+    }
+
+    /**
      * Method to advance a part in a game and execute actions
      * @param parts Number of parts that the game is divided in
      * @param gameTime Maximum time of the game
+     * @return String with the occurrences of the simulated part
      */
-    public void advancePartInGame(int parts, int gameTime){
+    public String advancePartInGame(int parts, int gameTime){
+        StringBuilder ocs = new StringBuilder();
+        String hT = this.homeTeam.getName();
+        String aT = this.awayTeam.getName();
         int timeToAdv = (int) (gameTime / parts), numberOfActions = 1;
         advanceTime(timeToAdv, gameTime);
         if(this.timer != gameTime) {
@@ -686,13 +777,31 @@ public class Game {
             }
             for (int i = 0; i < numberOfActions; i++) {
                 if (utils.randPossession(this.homeControllingOverall, this.awayControllingOverall)) {
-                    if (utils.randGoal(this.homeAttackingOverall, this.awayDefenseOverall))
+                    if (utils.randGoal(this.homeAttackingOverall, this.awayDefenseOverall)) {
                         addHomeGoal();
-                } else if (utils.randGoal(this.awayAttackingOverall, this.homeDefenseOverall)) addAwayGoal();
+                        ocs.append(getStringGoal(hT));
+                    }
+                    else ocs.append(getStringNoGoal(hT));
+                }
+                else if (utils.randGoal(this.awayAttackingOverall, this.homeDefenseOverall)){
+                    addAwayGoal();
+                    ocs.append(getStringGoal(aT));
+                }
+                else ocs.append(getStringNoGoal(aT));
             }
         }
+        else{
+            ocs = new StringBuilder("That's it! End of game and the final result is: ")
+                    .append(hT).append(" ").append(this.homeGoals)
+                    .append(" vs ")
+                    .append(this.awayGoals).append(" ").append(aT).append(" \n");
+        }
+        return ocs.toString();
     }
 
+    /**
+     * Method to get a random meteorology for the game
+     */
     public void setRandomMeteorology(){
         int bingo = utils.getRandNum(5);
         switch (bingo) {

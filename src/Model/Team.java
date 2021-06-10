@@ -244,11 +244,19 @@ public class Team {
         this.calcOverall();
     }
 
+    /**
+     * Method to add one game to team's history
+     * @param g Game to add
+     */
     public void addGameToHistory(Game g){
         HistoryGame h = new HistoryGame(g);
         this.gamesHistory.add(h);
     }
 
+    /**
+     * Method to add an already formatted game to team's history
+     * @param h History Game to add
+     */
     public void addHistoryGame(HistoryGame h){
         this.gamesHistory.add(h.clone());
     }

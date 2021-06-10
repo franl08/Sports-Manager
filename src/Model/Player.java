@@ -80,6 +80,7 @@ public abstract class Player {
         this.setHistoric(p.getHistoric());
         this.setCurrentTeamName(p.getCurrentTeamName());
         this.overall = p.getOverall();
+        this.position = p.getPosition();
     }
 
     /**

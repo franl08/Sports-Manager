@@ -4,8 +4,17 @@ import java.io.*;
 import java.util.*;
 
 public class Model {
+    /**
+     * Database teams
+     */
     private Map<String, Team> teams;
+    /**
+     * Database players
+     */
     private Map<String, Player> players;
+    /**
+     * Database games
+     */
     private List<Game> games;
 
     /**
