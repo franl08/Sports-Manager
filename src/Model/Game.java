@@ -725,38 +725,48 @@ public class Game implements Serializable {
      * Method to execute a substitution for home team
      * @param numIn Number of the player to enter
      * @param numOut Number of the player to be taken
+     * @return String telling the substitution
      * @throws InvalidPlayerException Exception to control if the player to enter is in the bench and if the player to get out is playing
      * @throws NumberOfMaximumSubsException Exception to control number of substitutions
      */
-    public void executeHomeSubstitution(int numIn, int numOut) throws InvalidPlayerException, NumberOfMaximumSubsException{
+    public String executeHomeSubstitution(int numIn, int numOut) throws InvalidPlayerException, NumberOfMaximumSubsException{
         if(this.nHomeSubs >= 3) throw new NumberOfMaximumSubsException("Number of maximum substitutions for the home team already reached");
         if(this.homePlayers.contains(numIn)) throw new InvalidPlayerException("Player with number " + numIn + " is playing");
         else if(!this.homePlayers.contains(numOut)) throw new InvalidPlayerException("Player with number " + numOut + " isn't playing");
+        StringBuilder sb = new StringBuilder("Substitution on ").append(this.homeTeam.getName()).append(": ")
+                .append(this.homeTeam.getPlayers().get(numOut).getName()).append(" will be replaced by ")
+                .append(this.homeTeam.getPlayers().get(numIn).getName());
         this.homePlayers.add(numIn);
         this.homePlayers.remove(numOut);
         this.homeSubs.put(numOut, numIn);
         this.nHomeSubs++;
         this.calcAttackingOverall(this.homeTeam, this.homePlayers);
         this.calcDefenseOverall(this.homeTeam, this.homePlayers);
+        return sb.toString();
     }
 
     /**
      * Method to execute a substitution for home team
      * @param numIn Number of the player to enter
      * @param numOut Number of the player to be taken
+     * @return String telling the substitution
      * @throws InvalidPlayerException Exception to control if the player to enter is in the bench and if the player to get out is playing
      * @throws NumberOfMaximumSubsException Exception to control number of substitutions
      */
-    public void executeAwaySubstitution(int numIn, int numOut) throws InvalidPlayerException, NumberOfMaximumSubsException{
+    public String executeAwaySubstitution(int numIn, int numOut) throws InvalidPlayerException, NumberOfMaximumSubsException{
         if(this.nAwaySubs >= 3) throw new NumberOfMaximumSubsException("Number of maximum substitutions for the home team already reached");
         if(this.awayPlayers.contains(numIn)) throw new InvalidPlayerException("Player with number " + numIn + " is playing");
         else if(!this.awayPlayers.contains(numOut)) throw new InvalidPlayerException("Player with number " + numOut + " isn't playing");
+        StringBuilder sb = new StringBuilder("Substitution on ").append(this.homeTeam.getName()).append(": ")
+                .append(this.homeTeam.getPlayers().get(numOut).getName()).append(" will be replaced by ")
+                .append(this.homeTeam.getPlayers().get(numIn).getName());
         this.awayPlayers.add(numIn);
         this.awayPlayers.remove(numOut);
         this.awaySubs.put(numOut, numIn);
         this.nAwaySubs++;
         this.calcAttackingOverall(this.awayTeam, this.awayPlayers);
         this.calcDefenseOverall(this.awayTeam, this.awayPlayers);
+        return sb.toString();
     }
 
     /**
