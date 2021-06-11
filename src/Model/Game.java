@@ -1,12 +1,13 @@
 package Model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-public class Game {
+public class Game implements Serializable {
     /**
      * Home Team
      */

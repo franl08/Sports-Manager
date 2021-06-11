@@ -1,9 +1,8 @@
 package Model;
 
-import java.io.Serializable;
 import java.util.List;
 
-public abstract class FieldPlayer extends Player implements Serializable {
+public abstract class FieldPlayer extends Player {
     /**
      * Player's velocity
      */

@@ -3,7 +3,7 @@ package Model;
 import java.io.*;
 import java.util.*;
 
-public class Model {
+public class Model implements Serializable{
     /**
      * Database teams
      */

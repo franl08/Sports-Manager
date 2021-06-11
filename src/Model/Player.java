@@ -1,8 +1,9 @@
 package Model;
 
+import java.io.Serializable;
 import java.util.*;
 
-public abstract class Player {
+public abstract class Player implements Serializable {
     private String name;
     private int number;
     private String currentTeamName;
