@@ -973,7 +973,11 @@ public class Game implements Serializable {
         switch(this.meteorology){
             case SUN -> sb.append("We have a magnificent day of sun to a great day of sport.\n");
             case FOGGY -> sb.append("The day is completely cloudy and players will have difficulty seeing the ball.\n");
+            case WINDY -> sb.append("Control the ball will be one challenge on this weather conditions. The wing will be a great opponent today.\n");
+            case SNOWY -> sb.append("And we see snow! The pitch is white, the players are ready and it's very very cold! Let it start, we need to heat up!\n");
+            case RAIN -> sb.append("A lot of rain today will make it harder to us all...\n");
         }
+        return sb.toString();
     }
 
     /**
