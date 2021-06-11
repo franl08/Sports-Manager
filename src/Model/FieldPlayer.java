@@ -417,7 +417,7 @@ public abstract class FieldPlayer extends Player {
 
     /**
      * Cloning method
-     * @return
+     * @return Cloned FieldPlayer
      */
     public abstract FieldPlayer clone();
 

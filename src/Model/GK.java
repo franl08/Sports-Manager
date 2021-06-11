@@ -43,11 +43,11 @@ public class GK extends Player {
     }
 
     /**
-     * Constructor with player name, number, current team name and historic
-     * @param name
-     * @param number
-     * @param currentTeam
-     * @param historic
+     * Constructor with goalkeeper's name, number, current team name and historic
+     * @param name Goalkeeper's name
+     * @param number Goalkeeper's number
+     * @param currentTeam Goalkeeper's current team name
+     * @param historic Goalkeeper's historic
      */
     public GK(String name, int number, String currentTeam, List<String> historic) {
         super(name, number, currentTeam, historic, Position.GOALKEEPER);
@@ -64,9 +64,9 @@ public class GK extends Player {
 
     /**
      * Constructor with player name, number and current team name
-     * @param name
-     * @param number
-     * @param currentTeam
+     * @param name Goalkeeper's name
+     * @param number Goalkeeper's number
+     * @param currentTeam Goalkeeper's current team name
      */
     public GK(String name, int number, String currentTeam) {
         super(name, number, currentTeam, Position.GOALKEEPER);
@@ -81,6 +81,11 @@ public class GK extends Player {
         super.setOverall(calcOverall());
     }
 
+    /**
+     * Constructor with goalkeeper's name and number
+     * @param name Goalkeeper's name
+     * @param number Goalkeeper's number
+     */
     public GK(String name, int number){
         super(name, number, Position.GOALKEEPER);
         this.elasticity = utils.setRandomAttribute();
@@ -94,6 +99,20 @@ public class GK extends Player {
         super.setOverall(calcOverall());
     }
 
+    /**
+     * Constructor with goalkeeper's name, number, current team name and attributes
+     * @param name Goalkeeper's name
+     * @param number Goalkeeper's number
+     * @param currentTeamName Goalkeeper's current team name
+     * @param elasticity Goalkeeper's elasticity
+     * @param reflexes Goalkeeper's reflexes
+     * @param agility Goalkeeper's agility
+     * @param decisions Goalkeeper's decisions
+     * @param velocity Goalkeeper's velocity
+     * @param passing Goalkeeper's passing
+     * @param courage Goalkeeper's courage
+     * @param endurance Goalkeeper's endurance
+     */
     public GK(String name, int number, String currentTeamName, int elasticity, int reflexes, int agility, int decisions, int velocity, int passing, int courage, int endurance) {
         super(name, number, currentTeamName, Position.GOALKEEPER);
         this.setElasticity(elasticity);
@@ -106,6 +125,21 @@ public class GK extends Player {
         this.setEndurance(endurance);
     }
 
+    /**
+     * Parametrized constructor
+     * @param name Goalkeeper's name
+     * @param number Goalkeeper's number
+     * @param currentTeamName Goalkeeper's current team name
+     * @param historic Goalkeeper's historic
+     * @param elasticity Goalkeeper's elasticity
+     * @param reflexes Goalkeeper's reflexes
+     * @param agility Goalkeeper's agility
+     * @param decisions Goalkeeper's decisions
+     * @param velocity Goalkeeper's velocity
+     * @param passing Goalkeeper's passing
+     * @param courage Goalkeeper's courage
+     * @param endurance Goalkeeper's endurance
+     */
     public GK(String name, int number, String currentTeamName, List<String> historic, int elasticity, int reflexes, int agility, int decisions, int velocity, int passing, int courage, int endurance) {
         super(name, number, currentTeamName, historic, Position.GOALKEEPER);
         this.setElasticity(elasticity);
@@ -118,6 +152,19 @@ public class GK extends Player {
         this.setEndurance(endurance);
     }
 
+    /**
+     * Constructor for logs
+     * @param name Goalkeeper's name
+     * @param number Goalkeeper's number
+     * @param elasticity Goalkeeper's elasticity
+     * @param reflexes Goalkeeper's reflexes
+     * @param agility Goalkeeper's agility
+     * @param decisions Goalkeeper's decisions
+     * @param velocity Goalkeeper's velocity
+     * @param passing Goalkeeper's passing
+     * @param courage Goalkeeper's courage
+     * @param endurance Goalkeeper's endurance
+     */
     public GK(String name, int number, int elasticity, int reflexes, int agility, int decisions, int velocity, int passing, int courage, int endurance) {
         super(name, number, Position.GOALKEEPER);
         this.setElasticity(elasticity);

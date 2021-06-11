@@ -515,7 +515,7 @@ public class Model implements Serializable{
 
     /**
      * Method to save current object state
-     * @param objectPath Path to save
+     * @param objectPath Path to the file to save
      * @throws IOException Exception of I/O
      */
     public void saveObject(String objectPath) throws IOException {
@@ -529,7 +529,7 @@ public class Model implements Serializable{
 
     /**
      * Method to read an object file
-     * @param filename Path to the file to rad
+     * @param filename Path to the file to read
      * @return new Database
      * @throws IOException Exception of I/O
      * @throws ClassNotFoundException Exception of a class not found

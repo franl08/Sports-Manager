@@ -76,6 +76,14 @@ public class Game implements Serializable {
      * Game date
      */
     private LocalDate ld;
+    /**
+     * Number of executed substitutions by the home team
+     */
+    private int nHomeSubs;
+    /**
+     * Number of executed substitutions by the away team
+     */
+    private int nAwaySubs;
 
     /**
      * Empty Constructor
@@ -98,6 +106,8 @@ public class Game implements Serializable {
         this.awayControllingOverall = 0;
         setRandomMeteorology();
         this.ld = LocalDate.now();
+        this.nAwaySubs = 0;
+        this.nHomeSubs = 0;
     }
 
 
@@ -158,6 +168,65 @@ public class Game implements Serializable {
         this.timer = 0;
         setRandomMeteorology();
         this.ld = LocalDate.now();
+    }
+
+    /**
+     * Constructor with teams and lineups
+     * @param homeTeam Home team
+     * @param awayTeam Away team
+     * @param homePlayers Home lineup
+     * @param awayPlayers Away lineup
+     */
+    public Game(Team homeTeam, Team awayTeam, Set<Integer> homePlayers, Set<Integer> awayPlayers){
+        this.homeTeam = homeTeam;
+        this.awayTeam = awayTeam;
+        this.setHomePlayers(homePlayers);
+        this.setAwayPlayers(awayPlayers);
+        this.homeGoals = 0;
+        this.awayGoals = 0;
+        this.homeSubs = new HashMap<>();
+        this.awaySubs = new HashMap<>();
+        try{
+            this.homeDefenseOverall = calcDefenseOverall(homeTeam, homePlayers);
+        }
+        catch (InvalidPlayerException i){
+            this.homeDefenseOverall = 0;
+        }
+        try{
+            this.homeAttackingOverall = calcAttackingOverall(homeTeam, homePlayers);
+        }
+        catch (InvalidPlayerException i){
+            this.homeAttackingOverall = 0;
+        }
+        try{
+            this.awayDefenseOverall = calcDefenseOverall(homeTeam, homePlayers);
+        }
+        catch (InvalidPlayerException i){
+            this.awayDefenseOverall = 0;
+        }
+        try{
+            this.awayAttackingOverall = calcAttackingOverall(homeTeam, homePlayers);
+        }
+        catch (InvalidPlayerException i){
+            this.awayAttackingOverall = 0;
+        }
+        try{
+            this.homeControllingOverall = calcControllingOverall(homeTeam, homePlayers);
+        }
+        catch (InvalidPlayerException i){
+            this.homeControllingOverall = 0;
+        }
+        try{
+            this.awayControllingOverall = calcControllingOverall(awayTeam, awayPlayers);
+        }
+        catch (InvalidPlayerException i){
+            this.awayControllingOverall = 0;
+        }
+        this.timer = 0;
+        setRandomMeteorology();
+        this.ld = LocalDate.now();
+        this.nHomeSubs = 0;
+        this.nAwaySubs = 0;
     }
 
     /**
@@ -284,6 +353,8 @@ public class Game implements Serializable {
         this.timer = timer;
         this.meteorology = meteorology;
         this.ld = ld;
+        this.nHomeSubs = homeSubs.size();
+        this.nAwaySubs = awaySubs.size();
     }
 
     /**
@@ -308,6 +379,8 @@ public class Game implements Serializable {
         this.timer = g.getTimer();
         this.meteorology = g.getMeteorology();
         this.ld = g.getLd();
+        this.nHomeSubs = g.getnHomeSubs();
+        this.nAwaySubs = g.getnAwaySubs();
     }
 
     /**
@@ -591,6 +664,38 @@ public class Game implements Serializable {
     }
 
     /**
+     * Number of home substitutions getter
+     * @return Number of executed substitutions by the home team
+     */
+    public int getnHomeSubs() {
+        return this.nHomeSubs;
+    }
+
+    /**
+     * Number of home substitutions setter
+     * @param nHomeSubs Number of substitutions to set
+     */
+    public void setnHomeSubs(int nHomeSubs) {
+        this.nHomeSubs = nHomeSubs;
+    }
+
+    /**
+     * Number of away substitutions getter
+     * @return Number of executed substitutions by the away team
+     */
+    public int getnAwaySubs() {
+        return this.nAwaySubs;
+    }
+
+    /**
+     * Number of away substitutions setter
+     * @param nAwaySubs Number of substitutions to set
+     */
+    public void setnAwaySubs(int nAwaySubs) {
+        this.nAwaySubs = nAwaySubs;
+    }
+
+    /**
      * Method to advance timer
      * @param time Time to add to timer
      * @param max Max time of the game
@@ -618,13 +723,16 @@ public class Game implements Serializable {
      * Method to execute a substitution for home team
      * @param numIn Number of the player to enter
      * @throws InvalidPlayerException Exception to control if the player to enter is in the bench and if the player to get out is playing
+     * @throws NumberOfMaximumSubsException Exception to control number of substitutions
      */
-    public void executeHomeSubstitution(int numIn) throws InvalidPlayerException{
+    public void executeHomeSubstitution(int numIn) throws InvalidPlayerException, NumberOfMaximumSubsException{
+        if(this.nHomeSubs >= 3) throw new NumberOfMaximumSubsException("Number of maximum substitutions for the home team already reached");
         if(!this.homeSubs.containsKey(numIn)) throw new InvalidPlayerException("Player with number " + numIn + " isn't in the bench");
         else if(!this.homePlayers.contains(this.homeSubs.get(numIn))) throw new InvalidPlayerException("Player with number " + this.homeSubs.get(numIn) + " isn't playing");
         this.homePlayers.remove(this.homeSubs.get(numIn));
         this.homePlayers.add(numIn);
         this.homeSubs.remove(numIn);
+        this.nHomeSubs++;
         this.calcAttackingOverall(this.homeTeam, this.homePlayers);
         this.calcDefenseOverall(this.homeTeam, this.homePlayers);
     }
@@ -633,13 +741,16 @@ public class Game implements Serializable {
      * Method to execute a substitution for away team
      * @param numIn Number of the player to enter
      * @throws InvalidPlayerException Exception to control if the player to enter is in the bench and if the player to get out is playing
+     * @throws NumberOfMaximumSubsException Exception to control number of substitutions
      */
-    public void executeAwaySubstitution(int numIn) throws InvalidPlayerException{
+    public void executeAwaySubstitution(int numIn) throws InvalidPlayerException, NumberOfMaximumSubsException{
+        if(this.nHomeSubs >= 3) throw new NumberOfMaximumSubsException("Number of maximum substitutions for the home team already reached");
         if(!this.awaySubs.containsKey(numIn)) throw new InvalidPlayerException("Player with number " + numIn + " isn't in the bench");
         else if(!this.awayPlayers.contains(this.awaySubs.get(numIn))) throw new InvalidPlayerException("Player with number " + this.homeSubs.get(numIn) + " isn't playing");
         this.awayPlayers.remove(this.awaySubs.get(numIn));
         this.awayPlayers.add(numIn);
         this.awaySubs.remove(numIn);
+        this.nAwaySubs++;
         this.calcAttackingOverall(this.awayTeam, this.awayPlayers);
         this.calcDefenseOverall(this.awayTeam, this.awayPlayers);
     }
