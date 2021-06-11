@@ -604,6 +604,12 @@ public class Model implements Serializable{
         }
     }
 
+    public void updateTeamsHistory(String hT, String aT, Game g){
+        HistoryGame hg = new HistoryGame(g);
+        this.teams.get(hT).addHistoryGame(hg);
+        this.teams.get(aT).addHistoryGame(hg);
+    }
+
     /**
      * Method to save current object state
      * @param objectPath Path to the file to save
