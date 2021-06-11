@@ -279,7 +279,7 @@ public class Model implements Serializable{
             result[i++] = Integer.toString(p.getNumber());
             result[i++] = p.getCurrentTeamName();
             result[i++] = Integer.toString(p.getOverall());
-            result[i++] = p.getPosition().toString();
+            result[i++] = p.getCurPosition().toString();
         }
 
         return result;
@@ -320,7 +320,7 @@ public class Model implements Serializable{
             result[i++] = p.getName();
             result[i++] = Integer.toString(p.getNumber());
             result[i++] = Integer.toString(p.getOverall());
-            result[i++] = p.getPosition().toString();
+            result[i++] = p.getCurPosition().toString();
         }
 
         return result;
@@ -436,7 +436,7 @@ public class Model implements Serializable{
 
         for(Player p : team.getPlayers().values())
         {
-            if(p.getPosition().equals(Position.GOALKEEPER)) result.add(p.clone());
+            if(p.getCurPosition().equals(Position.GOALKEEPER)) result.add(p.clone());
         }
 
         return result;
@@ -455,7 +455,7 @@ public class Model implements Serializable{
             result[i++] = x.getName();
             result[i++] = String.valueOf(x.getNumber());
             result[i++] = String.valueOf(x.getOverall());
-            result[i++] = x.getPosition().toString();
+            result[i++] = x.getCurPosition().toString();
         }
 
         return result;
@@ -468,7 +468,7 @@ public class Model implements Serializable{
 
         for(Player p : team.getPlayers().values())
         {
-            if(p.getPosition().equals(Position.WINGER)) result.add(p.clone());
+            if(p.getCurPosition().equals(Position.WINGER)) result.add(p.clone());
         }
 
         return result;
@@ -487,7 +487,7 @@ public class Model implements Serializable{
             result[i++] = x.getName();
             result[i++] = String.valueOf(x.getNumber());
             result[i++] = String.valueOf(x.getOverall());
-            result[i++] = x.getPosition().toString();
+            result[i++] = x.getCurPosition().toString();
         }
 
         return result;
@@ -500,7 +500,7 @@ public class Model implements Serializable{
 
         for(Player p : team.getPlayers().values())
         {
-            if(!p.getPosition().equals(Position.WINGER) && !p.getPosition().equals(Position.GOALKEEPER)) result.add(p.clone());
+            if(!p.getCurPosition().equals(Position.WINGER) && !p.getCurPosition().equals(Position.GOALKEEPER)) result.add(p.clone());
         }
 
         return result;
@@ -519,7 +519,7 @@ public class Model implements Serializable{
             result[i++] = x.getName();
             result[i++] = String.valueOf(x.getNumber());
             result[i++] = String.valueOf(x.getOverall());
-            result[i++] = x.getPosition().toString();
+            result[i++] = x.getCurPosition().toString();
         }
 
         return result;
@@ -529,7 +529,7 @@ public class Model implements Serializable{
         Set<Player> ans = new HashSet<>();
         Team t = this.teams.get(team_name);
         for(Player p : t.getPlayers().values())
-            if(players.contains(p.getNumber()) && p.getPosition().equals(Position.GOALKEEPER)) ans.add(p.clone());
+            if(players.contains(p.getNumber()) && p.getCurPosition().equals(Position.GOALKEEPER)) ans.add(p.clone());
         return ans;
     }
 
@@ -543,7 +543,7 @@ public class Model implements Serializable{
             result[i++] = x.getName();
             result[i++] = String.valueOf(x.getNumber());
             result[i++] = String.valueOf(x.getOverall());
-            result[i++] = x.getPosition().toString();
+            result[i++] = x.getCurPosition().toString();
         }
 
         return result;
@@ -553,7 +553,7 @@ public class Model implements Serializable{
         Set<Player> ans = new HashSet<>();
         Team t = this.teams.get(team_name);
         for(Player p : t.getPlayers().values())
-            if(players.contains(p.getNumber()) && p.getPosition().equals(Position.WINGER)) ans.add(p.clone());
+            if(players.contains(p.getNumber()) && p.getCurPosition().equals(Position.WINGER)) ans.add(p.clone());
         return ans;
     }
 
@@ -567,7 +567,7 @@ public class Model implements Serializable{
             result[i++] = x.getName();
             result[i++] = String.valueOf(x.getNumber());
             result[i++] = String.valueOf(x.getOverall());
-            result[i++] = x.getPosition().toString();
+            result[i++] = x.getCurPosition().toString();
         }
 
         return result;
@@ -577,7 +577,7 @@ public class Model implements Serializable{
         Set<Player> ans = new HashSet<>();
         Team t = this.teams.get(team_name);
         for(Player p : t.getPlayers().values())
-            if(players.contains(p.getNumber()) && !p.getPosition().equals(Position.WINGER) && !p.getPosition().equals(Position.GOALKEEPER)) ans.add(p.clone());
+            if(players.contains(p.getNumber()) && !p.getCurPosition().equals(Position.WINGER) && !p.getCurPosition().equals(Position.GOALKEEPER)) ans.add(p.clone());
         return ans;
     }
 
@@ -591,7 +591,7 @@ public class Model implements Serializable{
             result[i++] = x.getName();
             result[i++] = String.valueOf(x.getNumber());
             result[i++] = String.valueOf(x.getOverall());
-            result[i++] = x.getPosition().toString();
+            result[i++] = x.getCurPosition().toString();
         }
 
         return result;
@@ -602,6 +602,30 @@ public class Model implements Serializable{
         Set<Integer> ans = new HashSet<>();
         for(Integer i : t.getPlayers().keySet())
             if(!playingPlayers.contains(i)) ans.add(i);
+        return ans;
+    }
+
+    public String[] getTeamPlayingPlayersAsStringArray(String team_name, Set<Integer> players){
+        Set<Player> PlayerList = getPlayingPlayers(team_name, players);
+        String[] result = new String[PlayerList.size() * 4];
+
+        int i = 0;
+        for(Player x : PlayerList)
+        {
+            result[i++] = x.getName();
+            result[i++] = String.valueOf(x.getNumber());
+            result[i++] = String.valueOf(x.getOverall());
+            result[i++] = x.getCurPosition().toString();
+        }
+
+        return result;
+    }
+
+    public Set<Player> getPlayingPlayers(String team, Set<Integer> playingPlayers){
+        Team t = this.teams.get(team);
+        Set<Player> ans = new HashSet<>();
+        for(Integer i : t.getPlayers().keySet())
+            if(playingPlayers.contains(i)) ans.add(t.getPlayers().get(i).clone());
         return ans;
     }
 

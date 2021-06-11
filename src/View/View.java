@@ -131,6 +131,12 @@ public class View implements Serializable
 
         if(param.equals("away_team_tactics"))
             ViewGame.printGameTactics("Away Team");
+
+        if(param.equals("team_to_replace"))
+            ViewGame.askTeamReplace();
+
+        if(param.equals("parts"))
+            ViewGame.askHowManyParts();
     }
 
     public static void printSuccessfulCreatedPlayer()
@@ -210,6 +216,11 @@ public class View implements Serializable
     public static void printAllTeamPos(String[] allPos, String position)
     {
         ViewGame.printAllTeamPos(allPos, position);
+    }
+
+    public static void printTeams(String[] teams)
+    {
+        ViewGame.printTeams(teams);
     }
 
     //Util

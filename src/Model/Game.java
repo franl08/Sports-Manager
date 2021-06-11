@@ -959,6 +959,14 @@ public class Game implements Serializable {
         return ocs.toString();
     }
 
+    public String partGameMessage(){
+        StringBuilder ocs = new StringBuilder("Current result at minute ").append(this.timer).append(": ")
+                .append(this.homeTeam.getName()).append(" ").append(this.homeGoals)
+                .append(" vs ")
+                .append(this.awayGoals).append(" ").append(this.awayTeam.getName()).append(" \n");
+        return ocs.toString();
+    }
+
 public String finalGameMessage(){
        StringBuilder ocs = new StringBuilder("That's it! End of the game and the final result is: ")
                 .append(this.homeTeam.getName()).append(" ").append(this.homeGoals)
