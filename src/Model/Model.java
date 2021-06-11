@@ -513,6 +513,86 @@ public class Model implements Serializable{
         return result;
     }
 
+    public Set<Player> getTeamGK(String team_name, Set<Integer> players){
+        Set<Player> ans = new HashSet<>();
+        Team t = this.teams.get(team_name);
+        for(Player p : t.getPlayers().values())
+            if(players.contains(p.getNumber()) && p.getPosition().equals(Position.GOALKEEPER)) ans.add(p.clone());
+        return ans;
+    }
+
+    public String[] getTeamGKAsStringArray(String team_name, Set<Integer> players){
+        Set<Player> GoalkeepersList = getTeamGK(team_name, getNonPlayingPlayers(team_name, players));
+        String[] result = new String[GoalkeepersList.size() * 4];
+
+        int i = 0;
+        for(Player x : GoalkeepersList)
+        {
+            result[i++] = x.getName();
+            result[i++] = String.valueOf(x.getNumber());
+            result[i++] = String.valueOf(x.getOverall());
+            result[i++] = x.getPosition().toString();
+        }
+
+        return result;
+    }
+
+    public Set<Player> getTeamWG(String team_name, Set<Integer> players){
+        Set<Player> ans = new HashSet<>();
+        Team t = this.teams.get(team_name);
+        for(Player p : t.getPlayers().values())
+            if(players.contains(p.getNumber()) && p.getPosition().equals(Position.WINGER)) ans.add(p.clone());
+        return ans;
+    }
+
+    public String[] getTeamWGAsStringArray(String team_name, Set<Integer> players){
+        Set<Player> WingersList = getTeamExchangeable(team_name, getNonPlayingPlayers(team_name, players));
+        String[] result = new String[WingersList.size() * 4];
+
+        int i = 0;
+        for(Player x : WingersList)
+        {
+            result[i++] = x.getName();
+            result[i++] = String.valueOf(x.getNumber());
+            result[i++] = String.valueOf(x.getOverall());
+            result[i++] = x.getPosition().toString();
+        }
+
+        return result;
+    }
+
+    public Set<Player> getTeamExchangeable(String team_name, Set<Integer> players){
+        Set<Player> ans = new HashSet<>();
+        Team t = this.teams.get(team_name);
+        for(Player p : t.getPlayers().values())
+            if(players.contains(p.getNumber()) && !p.getPosition().equals(Position.WINGER) && !p.getPosition().equals(Position.GOALKEEPER)) ans.add(p.clone());
+        return ans;
+    }
+
+    public String[] getTeamExchangeableAsStringArray(String team_name, Set<Integer> players){
+        Set<Player> ExchangeableList = getTeamExchangeable(team_name, getNonPlayingPlayers(team_name, players));
+        String[] result = new String[ExchangeableList.size() * 4];
+
+        int i = 0;
+        for(Player x : ExchangeableList)
+        {
+            result[i++] = x.getName();
+            result[i++] = String.valueOf(x.getNumber());
+            result[i++] = String.valueOf(x.getOverall());
+            result[i++] = x.getPosition().toString();
+        }
+
+        return result;
+    }
+
+    public Set<Integer> getNonPlayingPlayers(String team, Set<Integer> playingPlayers){
+        Team t = this.teams.get(team);
+        Set<Integer> ans = new HashSet<>();
+        for(Integer i : t.getPlayers().keySet())
+            if(!playingPlayers.contains(i)) ans.add(i);
+        return ans;
+    }
+
     /**
      * Method to save current object state
      * @param objectPath Path to the file to save
