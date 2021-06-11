@@ -16,12 +16,6 @@ public final class ViewGame implements Serializable
         Outputs.printOptionList(gameTacticsArgs, "Game Tactics - " + teamName);
     }
 
-    public static void printGameMeteorology()
-    {
-        String[] gameMeteorologyArgs = new String[]{"Rainy.", "Foggy.", "Windy.", "Snowy.", "Sunny."};
-        Outputs.printOptionList(gameMeteorologyArgs, "Game Weather");
-    }
-
     public static void askHomeTeamName()
     {
         Outputs.showMessage("Introduce home team name: ");
@@ -32,18 +26,11 @@ public final class ViewGame implements Serializable
         Outputs.showMessage("Introduce away team name: ");
     }
 
-    public static void askGameDay()
+    public static void printAllTeamPos(String[] allPos, String position)
     {
-        Outputs.showMessage("Introduce the day the game is to be played: ");
-    }
+        String[] headArgs = new String[] {"Player Name","Player Number","Player Overall","Player Position"};
+        Outputs.printStringArrayAsTable(allPos, headArgs);
 
-    public static void askGameMonth()
-    {
-        Outputs.showMessage("Introduce the month the game is to be played: ");
-    }
-
-    public static void askGameYear()
-    {
-        Outputs.showMessage("Introduce the day the year is to be played: ");
+        Outputs.showMessage("\nIntroduce the number of the player that will play as " + position + ": ");
     }
 }
