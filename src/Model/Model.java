@@ -417,6 +417,18 @@ public class Model implements Serializable{
         return result;
     }
 
+    public Set<Integer> getPlayersNum(Set<Player> players)
+    {
+        HashSet<Integer> players_num = new HashSet<>();
+
+        for(Player p : players)
+        {
+            players_num.add(p.getNumber());
+        }
+
+        return players_num;
+    }
+
     public Set<Player> getTeamGK(String team_name)
     {
         HashSet<Player> result = new HashSet<>();

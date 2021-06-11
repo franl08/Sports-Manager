@@ -1,5 +1,7 @@
 package Model;
 
+import View.View;
+
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.HashMap;
@@ -884,7 +886,7 @@ public class Game implements Serializable {
      */
     public String getStringGoal(String team){
         StringBuilder ans = new StringBuilder();
-        int bingo = utils.getRandNum(5);
+        int bingo = utils.getRandNum(5) + 1;
         switch(bingo){
             case 1 -> ans.append("GOAAAAAAL! What a mistake by the opposite team! It was too easy for them...  ").append(team).append(" add one goal to the result.\n");
             case 2 -> ans.append("GOAAAAAAL! What a long shot, the goalkeeper couldn't see it! Pure moment of inspiration by them, it's a goal for ").append(team).append("\n");
@@ -902,7 +904,7 @@ public class Game implements Serializable {
      */
     public String getStringNoGoal(String team){
         StringBuilder ans = new StringBuilder();
-        int bingo = utils.getRandNum(5);
+        int bingo = utils.getRandNum(5) + 1;
         switch(bingo){
             case 1 -> ans.append("Oh no... What a miss by them! This should be illegal on this sport. ").append(team).append(" had the ball but lost a great opportunity.\n");
             case 2 -> ans.append("What a tackle! And they say: Nothing will pass this wall! ").append(team).append(" had the ball but couldn't make anything against their defense.\n");
@@ -927,7 +929,7 @@ public class Game implements Serializable {
         advanceTime(timeToAdv, gameTime);
         if(this.timer != gameTime) {
             if (timeToAdv > 10) {
-                numberOfActions = utils.getRandNum(timeToAdv / 10);
+                numberOfActions = utils.getRandNum(timeToAdv) + 1;
             }
             for (int i = 0; i < numberOfActions; i++) {
                 if (utils.randPossession(this.homeControllingOverall, this.awayControllingOverall)) {
