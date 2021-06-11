@@ -722,34 +722,36 @@ public class Game implements Serializable {
     /**
      * Method to execute a substitution for home team
      * @param numIn Number of the player to enter
+     * @param numOut Number of the player to be taken
      * @throws InvalidPlayerException Exception to control if the player to enter is in the bench and if the player to get out is playing
      * @throws NumberOfMaximumSubsException Exception to control number of substitutions
      */
-    public void executeHomeSubstitution(int numIn) throws InvalidPlayerException, NumberOfMaximumSubsException{
+    public void executeHomeSubstitution(int numIn, int numOut) throws InvalidPlayerException, NumberOfMaximumSubsException{
         if(this.nHomeSubs >= 3) throw new NumberOfMaximumSubsException("Number of maximum substitutions for the home team already reached");
-        if(!this.homeSubs.containsKey(numIn)) throw new InvalidPlayerException("Player with number " + numIn + " isn't in the bench");
-        else if(!this.homePlayers.contains(this.homeSubs.get(numIn))) throw new InvalidPlayerException("Player with number " + this.homeSubs.get(numIn) + " isn't playing");
-        this.homePlayers.remove(this.homeSubs.get(numIn));
+        if(this.homePlayers.contains(numIn)) throw new InvalidPlayerException("Player with number " + numIn + " is playing");
+        else if(!this.homePlayers.contains(numOut)) throw new InvalidPlayerException("Player with number " + numOut + " isn't playing");
         this.homePlayers.add(numIn);
-        this.homeSubs.remove(numIn);
+        this.homePlayers.remove(numOut);
+        this.homeSubs.put(numOut, numIn);
         this.nHomeSubs++;
         this.calcAttackingOverall(this.homeTeam, this.homePlayers);
         this.calcDefenseOverall(this.homeTeam, this.homePlayers);
     }
 
     /**
-     * Method to execute a substitution for away team
+     * Method to execute a substitution for home team
      * @param numIn Number of the player to enter
+     * @param numOut Number of the player to be taken
      * @throws InvalidPlayerException Exception to control if the player to enter is in the bench and if the player to get out is playing
      * @throws NumberOfMaximumSubsException Exception to control number of substitutions
      */
-    public void executeAwaySubstitution(int numIn) throws InvalidPlayerException, NumberOfMaximumSubsException{
-        if(this.nHomeSubs >= 3) throw new NumberOfMaximumSubsException("Number of maximum substitutions for the home team already reached");
-        if(!this.awaySubs.containsKey(numIn)) throw new InvalidPlayerException("Player with number " + numIn + " isn't in the bench");
-        else if(!this.awayPlayers.contains(this.awaySubs.get(numIn))) throw new InvalidPlayerException("Player with number " + this.homeSubs.get(numIn) + " isn't playing");
-        this.awayPlayers.remove(this.awaySubs.get(numIn));
+    public void executeAwaySubstitution(int numIn, int numOut) throws InvalidPlayerException, NumberOfMaximumSubsException{
+        if(this.nAwaySubs >= 3) throw new NumberOfMaximumSubsException("Number of maximum substitutions for the home team already reached");
+        if(this.awayPlayers.contains(numIn)) throw new InvalidPlayerException("Player with number " + numIn + " is playing");
+        else if(!this.awayPlayers.contains(numOut)) throw new InvalidPlayerException("Player with number " + numOut + " isn't playing");
         this.awayPlayers.add(numIn);
-        this.awaySubs.remove(numIn);
+        this.awayPlayers.remove(numOut);
+        this.awaySubs.put(numOut, numIn);
         this.nAwaySubs++;
         this.calcAttackingOverall(this.awayTeam, this.awayPlayers);
         this.calcDefenseOverall(this.awayTeam, this.awayPlayers);
@@ -767,11 +769,23 @@ public class Game implements Serializable {
         for(Integer n : playersNums){
             if(!team.getPlayers().containsKey(n)) throw new InvalidPlayerException("There isn't a player with number " + n + " playing for " + team.getName());
             if(team.getPlayers().get(n).getCurPosition().equals(Position.GOALKEEPER) || team.getPlayers().get(n).getCurPosition().equals(Position.DEFENDER)){
-                acDef += team.getPlayers().get(n).getOverall();
+                Player p = team.getPlayers().get(n);
+                if(p.getPosition() != p.getCurPosition()){
+                    FieldPlayer fp = (FieldPlayer) p;
+                    DF d = new DF(fp);
+                    acDef += d.calcOverall();
+                }
+                else acDef += team.getPlayers().get(n).getOverall();
                 nDefs++;
             }
             else if(team.getPlayers().get(n).getCurPosition().equals(Position.MIDFIELDER) || team.getPlayers().get(n).getCurPosition().equals(Position.WINGER)){
-                acMd += team.getPlayers().get(n).getOverall();
+                Player p = team.getPlayers().get(n);
+                if(p.getPosition() != p.getCurPosition()){
+                    FieldPlayer fp = (FieldPlayer) p;
+                    MD m = new MD(fp);
+                    acMd += m.calcOverall();
+                }
+                else acMd += team.getPlayers().get(n).getOverall();
                 nMds++;
             }
         }
@@ -794,11 +808,23 @@ public class Game implements Serializable {
         for(Integer n : playerNums){
             if(!team.getPlayers().containsKey(n)) throw new InvalidPlayerException("There isn't a player with number " + n + " playing for " + team.getName());
             if(team.getPlayers().get(n).getCurPosition().equals(Position.FORWARD)){
-                acAtt += team.getPlayers().get(n).getOverall();
+                Player p = team.getPlayers().get(n);
+                if(p.getPosition() != p.getCurPosition()){
+                    FieldPlayer fp = (FieldPlayer) p;
+                    FW f = new FW(fp);
+                    acAtt += f.calcOverall();
+                }
+                else acAtt += team.getPlayers().get(n).getOverall();
                 nAtt++;
             }
             else if(team.getPlayers().get(n).getCurPosition().equals(Position.MIDFIELDER) || team.getPlayers().get(n).getCurPosition().equals(Position.WINGER)){
-                acMd += team.getPlayers().get(n).getOverall();
+                Player p = team.getPlayers().get(n);
+                if(p.getPosition() != p.getCurPosition()){
+                    FieldPlayer fp = (FieldPlayer) p;
+                    MD m = new MD(fp);
+                    acMd += m.calcOverall();
+                }
+                else acMd += team.getPlayers().get(n).getOverall();
                 nMds++;
             }
         }
@@ -821,11 +847,27 @@ public class Game implements Serializable {
         for(Integer n : playerNums){
             if(!team.getPlayers().containsKey(n)) throw new InvalidPlayerException("There isn't a player with number " + n + " playing for " + team.getName());
             if(team.getPlayers().get(n).getCurPosition().equals(Position.MIDFIELDER) || team.getPlayers().get(n).getCurPosition().equals(Position.WINGER)){
-                acCont += team.getPlayers().get(n).getOverall();
+                Player p = team.getPlayers().get(n);
+                if(p.getPosition() != p.getCurPosition()){
+                    FieldPlayer fp = (FieldPlayer) p;
+                    MD m = new MD(fp);
+                    acCont += m.calcOverall();
+                }
+                else acCont += team.getPlayers().get(n).getOverall();
                 nCont++;
             }
             else if(team.getPlayers().get(n).getCurPosition().equals(Position.FORWARD) || team.getPlayers().get(n).getCurPosition().equals(Position.DEFENDER)){
-                acAD += team.getPlayers().get(n).getOverall();
+                Player p = team.getPlayers().get(n);
+                if(p.getPosition() != p.getCurPosition()){
+                    FieldPlayer fp = (FieldPlayer) p;
+                    if (p.getCurPosition() == Position.FORWARD) {
+                        FW f = new FW(fp);
+                        acAD += f.calcOverall();
+                    }
+                    DF d = new DF(fp);
+                    acAD += d.calcOverall();
+                }
+                else acAD += team.getPlayers().get(n).getOverall();
                 nAD++;
             }
         }
