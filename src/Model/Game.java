@@ -944,14 +944,16 @@ public class Game implements Serializable {
                 else ocs.append(getStringNoGoal(aT));
             }
         }
-        else{
-            ocs = new StringBuilder("That's it! End of the game and the final result is: ")
-                    .append(hT).append(" ").append(this.homeGoals)
-                    .append(" vs ")
-                    .append(this.awayGoals).append(" ").append(aT).append(" \n");
-        }
         return ocs.toString();
     }
+
+public String finalGameMessage(){
+       StringBuilder ocs = new StringBuilder("That's it! End of the game and the final result is: ")
+                .append(this.homeTeam.getName()).append(" ").append(this.homeGoals)
+                .append(" vs ")
+                .append(this.awayGoals).append(" ").append(this.awayTeam.getName()).append(" \n");
+       return ocs.toString();
+}
 
     /**
      * Method to get a random meteorology for the game
@@ -967,7 +969,7 @@ public class Game implements Serializable {
         }
     }
 
-    public String getGameConditions(){
+    public String getInitialGameConditions(){
         StringBuilder sb = new StringBuilder("Hello everybody and welcome to a great day of football! And the game for today is:\n")
                 .append(homeTeam.getName()).append(" vs ").append(awayTeam.getName()).append("\n");
         switch(this.meteorology){
