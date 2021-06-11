@@ -593,6 +593,17 @@ public class Model implements Serializable{
         return ans;
     }
 
+    public void setPlayerPositionForGame(String team, int nPlayer, int posCode){
+        Player p = this.teams.get(team).getPlayers().get(nPlayer);
+        switch (posCode) {
+            case 0 -> p.setPosition(Position.GOALKEEPER);
+            case 1 -> p.setPosition(Position.DEFENDER);
+            case 2 -> p.setPosition(Position.WINGER);
+            case 3 -> p.setPosition(Position.MIDFIELDER);
+            case 4 -> p.setPosition(Position.FORWARD);
+        }
+    }
+
     /**
      * Method to save current object state
      * @param objectPath Path to the file to save

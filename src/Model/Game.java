@@ -945,7 +945,7 @@ public class Game implements Serializable {
             }
         }
         else{
-            ocs = new StringBuilder("That's it! End of game and the final result is: ")
+            ocs = new StringBuilder("That's it! End of the game and the final result is: ")
                     .append(hT).append(" ").append(this.homeGoals)
                     .append(" vs ")
                     .append(this.awayGoals).append(" ").append(aT).append(" \n");
@@ -964,6 +964,15 @@ public class Game implements Serializable {
             case 3 -> this.meteorology = Meteorology.WINDY;
             case 4 -> this.meteorology = Meteorology.SNOWY;
             default -> this.meteorology = Meteorology.SUN;
+        }
+    }
+
+    public String getGameConditions(){
+        StringBuilder sb = new StringBuilder("Hello everybody and welcome to a great day of football! And the game for today is:\n")
+                .append(homeTeam.getName()).append(" vs ").append(awayTeam.getName()).append("\n");
+        switch(this.meteorology){
+            case SUN -> sb.append("We have a magnificent day of sun to a great day of sport.\n");
+            case FOGGY -> sb.append("The day is completely cloudy and players will have difficulty seeing the ball.\n");
         }
     }
 

@@ -3,7 +3,7 @@ package Model;
 import java.util.List;
 
 public class DF extends FieldPlayer{
-    private final Position curPosition = Position.DEFENDER;
+    private Position curPosition = Position.DEFENDER;
 
     /**
      * Empty Constructor
