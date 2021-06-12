@@ -9,29 +9,42 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.Set;
 
+/**
+ * Class that's in charge of controlling every aspect regarding games.
+ */
 public class GameMenuController implements Serializable
 {
+    /**
+     * Model that holds all the information.
+     */
     private Model model;
+
+    /**
+     * Scanner that's in charge of taking in the user inputs.
+     */
     private Scanner inputs;
 
-    public GameMenuController()
-    {
-        this.model = new Model();
-        this.inputs = new Scanner(System.in);
-    }
-
+    /**
+     * Parameterized constructor that receives a model and a scanner.
+     * @param model Parameter that holds all the information.
+     * @param inputs Parameter that's in charge of taking in the user inputs.
+     */
     public GameMenuController(Model model, Scanner inputs)
     {
         this.model = model;
         this.inputs = inputs;
     }
 
+    /**
+     * Method that effectively runs the game controller and redirects the user's options to the respective method that will execute said option.
+     */
     public void runGameMenu()
     {
         boolean returnFlag = true;
 
         while(returnFlag)
         {
+            View.clear();
             View.GameMenu();
             int option = this.inputs.nextInt();
 
@@ -52,6 +65,9 @@ public class GameMenuController implements Serializable
         }
     }
 
+    /**
+     * Auxiliary method of the game controller that simulates a game between two user chosen teams.
+     */
     private void runGame()
     {
         // Home team def.
@@ -183,20 +199,17 @@ public class GameMenuController implements Serializable
 
         this.model.updateTeamsHistory(homeTeam, awayTeam, new_game);
 
-        boolean go = true;
-
-        while(go)
-        {
-            View.printMessage("\nY/y to go back: ");
-            String yes = this.inputs.next();
-            this.inputs.nextLine();
-
-            if(yes.equals("Y") || yes.equals("y")) go = false;
-
-            View.clear();
-        }
+        Inputs.next(this.inputs);
     }
 
+    /**
+     * Auxiliary method of the methods runGame and substitute player that allows the user to choose a player to either play or to be put into the game by
+     * substitution.
+     * @param team_name Name of the team that the player will be chosen from.
+     * @param position Position of the player that is to be chosen.
+     * @param home_players A set of numbers that represent the shirt number of the already chosen players.
+     * @return The shirt number of the effective chosen player.
+     */
     private int choosePlayer(String team_name, String position, Set<Integer> home_players)
     {
         int result = 0;
@@ -213,7 +226,7 @@ public class GameMenuController implements Serializable
                 while(!done)
                 {
                     View.printMessage("\n");
-                    View.printAllTeamPos(this.model.getTeamGKAsStringArray(team_name), "goalkeeper");
+                    View.printAllTeamPos(this.model.getTeamGKAsStringArray(team_name,home_players), "goalkeeper");
 
                     try
                     {
@@ -249,7 +262,7 @@ public class GameMenuController implements Serializable
                 while(!done)
                 {
                     View.printMessage("\n");
-                    View.printAllTeamPos(this.model.getTeamWGAsStringArray(team_name), "winger");
+                    View.printAllTeamPos(this.model.getTeamWGAsStringArray(team_name, home_players), "winger");
 
                     try
                     {
@@ -285,7 +298,7 @@ public class GameMenuController implements Serializable
                 while(!done)
                 {
                     View.printMessage("\n");
-                    View.printAllTeamPos(this.model.getTeamExchangeableAsStringArray(team_name), "defender");
+                    View.printAllTeamPos(this.model.getTeamExchangeableAsStringArray(team_name, home_players), "defender");
 
                     try
                     {
@@ -321,7 +334,7 @@ public class GameMenuController implements Serializable
                 while(!done)
                 {
                     View.printMessage("\n");
-                    View.printAllTeamPos(this.model.getTeamExchangeableAsStringArray(team_name), "midfielder");
+                    View.printAllTeamPos(this.model.getTeamExchangeableAsStringArray(team_name, home_players), "midfielder");
 
                     try
                     {
@@ -357,7 +370,7 @@ public class GameMenuController implements Serializable
                 while(!done)
                 {
                     View.printMessage("\n");
-                    View.printAllTeamPos(this.model.getTeamExchangeableAsStringArray(team_name), "forward");
+                    View.printAllTeamPos(this.model.getTeamExchangeableAsStringArray(team_name, home_players), "forward");
 
                     try
                     {
@@ -392,6 +405,11 @@ public class GameMenuController implements Serializable
         return result;
     }
 
+    /**
+     * Auxiliary method of the method runGame that allows the user to replace one player with another during a game.
+     * @param part The part which the game is on.
+     * @param game The game where the substitution is to be effectuated.
+     */
     private void substitutePlayer(int part, Game game)
     {
         boolean go = true;
@@ -456,6 +474,8 @@ public class GameMenuController implements Serializable
                                 {
                                     View.clear();
                                     View.printMessage(game.executeHomeSubstitution(gk, replace));
+
+                                    Inputs.next(this.inputs);
                                 }
                                 catch (Exception e)
                                 {
@@ -472,6 +492,8 @@ public class GameMenuController implements Serializable
                                 {
                                     View.clear();
                                     View.printMessage(game.executeHomeSubstitution(wg, replace));
+
+                                    Inputs.next(this.inputs);
                                 }
                                 catch (Exception e)
                                 {
@@ -488,6 +510,8 @@ public class GameMenuController implements Serializable
                                 {
                                     View.clear();
                                     View.printMessage(game.executeHomeSubstitution(df, replace));
+
+                                    Inputs.next(this.inputs);
                                 }
                                 catch (Exception e)
                                 {
@@ -504,6 +528,8 @@ public class GameMenuController implements Serializable
                                 {
                                     View.clear();
                                     View.printMessage(game.executeHomeSubstitution(md, replace));
+
+                                    Inputs.next(this.inputs);
                                 }
                                 catch (Exception e)
                                 {
@@ -520,6 +546,8 @@ public class GameMenuController implements Serializable
                                 {
                                     View.clear();
                                     View.printMessage(game.executeHomeSubstitution(fw, replace));
+
+                                    Inputs.next(this.inputs);
                                 }
                                 catch (Exception e)
                                 {
@@ -541,6 +569,8 @@ public class GameMenuController implements Serializable
                         while(!done1) {
                             View.printMessage("\n");
                             View.printTeamPlayers(this.model.getTeamPlayingPlayersAsStringArray(game.getAwayTeam().getName(), away_players));
+
+                            View.printMessage("\nWhich player do you want to replace (number): ");
 
                             try {
                                 replace1 = this.inputs.nextInt();
@@ -570,6 +600,8 @@ public class GameMenuController implements Serializable
                                 {
                                     View.clear();
                                     View.printMessage(game.executeAwaySubstitution(gk, replace1));
+
+                                    Inputs.next(this.inputs);
                                 }
                                 catch (Exception e)
                                 {
@@ -586,6 +618,8 @@ public class GameMenuController implements Serializable
                                 {
                                     View.clear();
                                     View.printMessage(game.executeAwaySubstitution(wg, replace1));
+
+                                    Inputs.next(this.inputs);
                                 }
                                 catch (Exception e)
                                 {
@@ -602,6 +636,8 @@ public class GameMenuController implements Serializable
                                 {
                                     View.clear();
                                     View.printMessage(game.executeAwaySubstitution(df, replace1));
+
+                                    Inputs.next(this.inputs);
                                 }
                                 catch (Exception e)
                                 {
@@ -618,6 +654,8 @@ public class GameMenuController implements Serializable
                                 {
                                     View.clear();
                                     View.printMessage(game.executeAwaySubstitution(md, replace1));
+
+                                    Inputs.next(this.inputs);
                                 }
                                 catch (Exception e)
                                 {
@@ -634,6 +672,8 @@ public class GameMenuController implements Serializable
                                 {
                                     View.clear();
                                     View.printMessage(game.executeAwaySubstitution(fw, replace1));
+
+                                    Inputs.next(this.inputs);
                                 }
                                 catch (Exception e)
                                 {
@@ -660,11 +700,23 @@ public class GameMenuController implements Serializable
         }
     }
 
+    /**
+     * An utility method that evaluates if an integer is present in a set
+     * @param x Integer to be evaluated.
+     * @param set Set to evaluate if said integer is on.
+     * @throws ValueOutofBoundsException Exception that is thrown if said integer is in said set.
+     */
     private void contains(int x, Set<Integer> set) throws ValueOutofBoundsException
     {
         if(set.contains(x)) throw new ValueOutofBoundsException("The player you choose is already playing in a different position.");
     }
 
+    /**
+     * An utility method that evaluates if an integer is not present in a set
+     * @param x Integer to be evaluated.
+     * @param set Set to evaluate if said integer is not on.
+     * @throws ValueOutofBoundsException Exception that is thrown if said integer is not in said set.
+     */
     private void notContains(int x, Set<Integer> set) throws ValueOutofBoundsException
     {
         if(!set.contains(x)) throw new ValueOutofBoundsException("The player you choose does not exist.");

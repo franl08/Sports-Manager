@@ -625,7 +625,7 @@ public class Model implements Serializable{
      * @return Team non playing wingers as an array of strings
      */
     public String[] getTeamWGAsStringArray(String team_name, Set<Integer> players){
-        Set<Player> WingersList = getTeamExchangeable(team_name, getNonPlayingPlayers(team_name, players));
+        Set<Player> WingersList = getTeamWG(team_name, getNonPlayingPlayers(team_name, players));
         String[] result = new String[WingersList.size() * 4];
 
         int i = 0;

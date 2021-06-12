@@ -6,23 +6,35 @@ import View.View;
 import java.io.Serializable;
 import java.util.Scanner;
 
+/**
+ * Class that's in charge of controlling every aspect regarding teams.
+ */
 public class TeamMenuController implements Serializable
 {
+    /**
+     * Model that holds all the information.
+     */
     private final Model model;
+
+    /**
+     * Scanner that's in charge of taking in the user inputs.
+     */
     private final Scanner inputs;
 
-    public TeamMenuController()
-    {
-        this.model = new Model();
-        this.inputs = new Scanner(System.in);
-    }
-
+    /**
+     * Parameterized constructor that receives a model and a scanner.
+     * @param model Parameter that holds all the information.
+     * @param inputs Parameter that's in charge of taking in the user inputs.
+     */
     public TeamMenuController(Model model, Scanner inputs)
     {
         this.model = model;
         this.inputs = inputs;
     }
 
+    /**
+     * Method that effectively runs the team controller and redirects the user's options to the respective method that will execute said option.
+     */
     public void runTeamMenu()
     {
         View.clear();
@@ -30,6 +42,7 @@ public class TeamMenuController implements Serializable
 
         while(returnFlag)
         {
+            View.clear();
             View.TeamMenu();
             int option = this.inputs.nextInt();
             this.inputs.nextLine();
@@ -69,6 +82,9 @@ public class TeamMenuController implements Serializable
         }
     }
 
+    /**
+     * Method that's in charge of creating a new team.
+     */
     private void createTeam()
     {
         String teamName = Inputs.askForStringInput(this.inputs, "team_name");
@@ -86,76 +102,48 @@ public class TeamMenuController implements Serializable
 
         View.printSuccessfulCreatedPlayer();
 
-        boolean go = true;
-
-        while(go)
-        {
-            View.printMessage("\nY/y to go back: ");
-            String yes = this.inputs.next();
-            this.inputs.nextLine();
-
-            if(yes.equals("Y") || yes.equals("y")) go = false;
-        }
+        Inputs.next(this.inputs);
     }
 
+    /**
+     * Method that's in charge of showing the user a table like presentation of all the teams currently in the system.
+     */
     private void seeAllTeams()
     {
         String[] allTeams = this.model.getTeamsAsStringArray();
 
         View.printAllTeams(allTeams);
 
-        boolean go = true;
-
-        while(go)
-        {
-            View.printMessage("\nY/y to go back: ");
-            String yes = this.inputs.next();
-            this.inputs.nextLine();
-
-            if(yes.equals("Y") || yes.equals("y")) go = false;
-        }
+        Inputs.next(this.inputs);
     }
 
+    /**
+     * Method that's in charge of showing the user a table like presentation of all the players in a requested team.
+     */
     private void seeTeamPlayers()
     {
         String teamName = Inputs.askForStringInput(this.inputs, "team_name");
 
         View.printTeamPlayers(this.model.getPlayersTeamAsStringArray(teamName));
 
-        boolean go = true;
-
-        while(go)
-        {
-            View.printMessage("\nY/y to go back: ");
-            String yes = this.inputs.next();
-            this.inputs.nextLine();
-
-            if(yes.equals("Y") || yes.equals("y")) go = false;
-
-            View.clear();
-        }
+        Inputs.next(this.inputs);
     }
 
+    /**
+     * Method that's in charge of showing the user a table like presentation of all the games played by a requested team.
+     */
     private void seeTeamHistory()
     {
         String teamName = Inputs.askForStringInput(this.inputs, "team_name");
 
         View.printTeamHistory(this.model.getHistoryTeamAsStringArray(teamName));
 
-        boolean go = true;
-
-        while(go)
-        {
-            View.printMessage("\nY/y to go back: ");
-            String yes = this.inputs.next();
-            this.inputs.nextLine();
-
-            if(yes.equals("Y") || yes.equals("y")) go = false;
-
-            View.clear();
-        }
+        Inputs.next(this.inputs);
     }
 
+    /**
+     * Method that is in charge of deleting a requested team.
+     */
     private void deleteTeam()
     {
         String teamName = Inputs.askForStringInput(this.inputs, "team_name");
@@ -164,17 +152,6 @@ public class TeamMenuController implements Serializable
 
         View.printSuccessfulDeletedTeam();
 
-        boolean go = true;
-
-        while(go)
-        {
-            View.printMessage("\nY/y to go back: ");
-            String yes = this.inputs.next();
-            this.inputs.nextLine();
-
-            if(yes.equals("Y") || yes.equals("y")) go = false;
-
-            View.clear();
-        }
+        Inputs.next(this.inputs);
     }
 }

@@ -6,23 +6,35 @@ import View.View;
 import java.io.Serializable;
 import java.util.Scanner;
 
+/**
+ * Class that's in charge of controlling every aspect regarding players.
+ */
 public class PlayerMenuController implements Serializable
 {
+    /**
+     * Model that holds all the information.
+     */
     private final Model model;
+
+    /**
+     * Scanner that's in charge of taking in the user inputs.
+     */
     private final Scanner inputs;
 
-    public PlayerMenuController()
-    {
-        this.model = new Model();
-        this.inputs = new Scanner(System.in);
-    }
-
+    /**
+     * Parameterized constructor that receives a model and a scanner.
+     * @param model Parameter that holds all the information.
+     * @param inputs Parameter that's in charge of taking in the user inputs.
+     */
     public PlayerMenuController(Model model,Scanner inputs)
     {
         this.model = model;
         this.inputs = inputs;
     }
 
+    /**
+     * Method that effectively runs the player controller and redirects the user's options to the respective method that will execute said option.
+     */
     public void runPlayerMenu()
     {
         View.clear();
@@ -30,6 +42,7 @@ public class PlayerMenuController implements Serializable
 
         while(returnFlag)
         {
+            View.clear();
             View.PlayerMenu();
             int option = inputs.nextInt();
 
@@ -74,6 +87,13 @@ public class PlayerMenuController implements Serializable
         }
     }
 
+    /**
+     * Method that's in charge of creating a new player.
+     * @throws InvalidPositionException Exception that handles an invalid position input.
+     * @throws PlayerAlreadyExistsException Exception that handles the existence of another player with the same one as the input.
+     * @throws InvalidTeamException Exception that handles the non-existence of the team to which said player is to be inserted.
+     * @throws NumberAlreadyExistsInTeamException Exception that handles the occupancy of the number in the team of the input.
+     */
     private void createPlayerController() throws InvalidPositionException, PlayerAlreadyExistsException, InvalidTeamException, NumberAlreadyExistsInTeamException {
         Player newPlayer;
 
@@ -223,26 +243,21 @@ public class PlayerMenuController implements Serializable
         }
     }
 
+    /**
+     * Method that's in charge of showing the user a table like presentation of all the players currently in the system.
+     */
     private void seeAllPlayers()
     {
         String[] args = this.model.getPlayersAsStringArray();
 
         View.printAllPlayers(args);
 
-        boolean go = true;
-
-        while(go)
-        {
-            View.printMessage("\nY/y to go back: ");
-            String yes = this.inputs.next();
-            this.inputs.nextLine();
-
-            if(yes.equals("Y") || yes.equals("y")) go = false;
-
-            View.clear();
-        }
+        Inputs.next(this.inputs);
     }
 
+    /**
+     * Method that's in charge of showing the user the basic information of a requested player searching by its name.
+     */
     private void seePlayer()
     {
         String playerName = Inputs.askForStringInput(this.inputs, "player_name");
@@ -251,20 +266,12 @@ public class PlayerMenuController implements Serializable
 
         View.printMessage(playerInfo);
 
-        boolean go = true;
-
-        while(go)
-        {
-            View.printMessage("\nY/y to go back: ");
-            String yes = this.inputs.next();
-            this.inputs.nextLine();
-
-            if(yes.equals("Y") || yes.equals("y")) go = false;
-
-            View.clear();
-        }
+        Inputs.next(this.inputs);
     }
 
+    /**
+     * Method that's in charge of showing the user the team history of a requested player searching by its name.
+     */
     private void seePlayerHistory()
     {
         String playerName = Inputs.askForStringInput(this.inputs, "player_name");
@@ -274,20 +281,12 @@ public class PlayerMenuController implements Serializable
         View.clear();
         View.printAllTeams(playerHistory);
 
-        boolean go = true;
-
-        while(go)
-        {
-            View.printMessage("\nY/y to go back: ");
-            String yes = this.inputs.next();
-            this.inputs.nextLine();
-
-            if(yes.equals("Y") || yes.equals("y")) go = false;
-
-            View.clear();
-        }
+        Inputs.next(this.inputs);
     }
 
+    /**
+     * Method that's in charge of allowing the user to manage a player (i.e. transfer, updating).
+     */
     private void managePlayer()
     {
         String playerName = Inputs.askForStringInput(this.inputs, "player_name");
@@ -316,18 +315,7 @@ public class PlayerMenuController implements Serializable
                 case 3:
                     this.model.removePlayer(playerName);
                     View.printMessage("The player has been successfully deleted.");
-                    boolean go = true;
-
-                    while(go)
-                    {
-                        View.printMessage("\nY/y to go back: ");
-                        String yes = this.inputs.next();
-                        this.inputs.nextLine();
-
-                        if(yes.equals("Y") || yes.equals("y")) go = false;
-
-                        View.clear();
-                    }
+                    Inputs.next(this.inputs);
                     end = false;
                     break;
 
@@ -342,6 +330,10 @@ public class PlayerMenuController implements Serializable
         }
     }
 
+    /**
+     * Method that's in charge of allowing the user to transfer a player to another team.
+     * @param playerName The name of the player that is to be transferred.
+     */
     private void transferPlayer(String playerName)
     {
         String newTeam = Inputs.askForStringInput(this.inputs, "new_team_name");
@@ -354,19 +346,13 @@ public class PlayerMenuController implements Serializable
 
         View.printMessage("The player has been successfully transferred.");
 
-        boolean go = true;
-
-        while(go)
-        {
-            View.printMessage("\nY/y to go back: ");
-            String yes = this.inputs.next();
-
-            if(yes.equals("Y") || yes.equals("y")) go = false;
-
-            View.clear();
-        }
+        Inputs.next(this.inputs);
     }
 
+    /**
+     * Method that's in charge of allowing the user to update a player to another team.
+     * @param playerName The name of the player that is to be transferred.
+     */
     private void updatePlayer(String playerName)
     {
         boolean end = true;
@@ -402,17 +388,6 @@ public class PlayerMenuController implements Serializable
 
         View.printMessage("The player has been successfully updated.");
 
-        boolean go = true;
-
-        while(go)
-        {
-            View.printMessage("\nY/y to go back: ");
-            String yes = this.inputs.next();
-            this.inputs.nextLine();
-
-            if(yes.equals("Y") || yes.equals("y")) go = false;
-
-            View.clear();
-        }
+        Inputs.next(this.inputs);
     }
 }

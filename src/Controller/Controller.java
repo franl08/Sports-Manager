@@ -4,23 +4,49 @@ import View.*;
 
 import java.util.Scanner;
 
+/**
+ * Class that links the entire program making it work.
+ */
 public class Controller
 {
-    // Instance Variables
-
-    private Model model;                 // Model that holds all the information
-    private Scanner inputs;              // Scanner that's in charge of taking in the user inputs
-
-    private PlayerMenuController pmc;    // Controller that's in charge to manage the player related actions (i.e. Creating players, managing etc..)
-    private TeamMenuController tmc;      // Controller that's in charge to manage the team related actions (i.e. Creating teams, managing etc..)
-    private GameMenuController gmc;      // Controller that's in charge to manage the game related actions (i.e. Creating games)
-    private LoadFile lf;                 // Controller that's in charge to load the logs
-    private LoadSaveController lsc;      // Controller that's in charge to save and load the entire state of the program
-
-    // Constructors
+    /**
+     * Model that holds all the information.
+     */
+    private Model model;
 
     /**
-     *  Empty constructor
+     * Scanner that's in charge of taking in the user inputs.
+     */
+    private Scanner inputs;
+
+    /**
+     * Controller that's in charge of handling player related actions.
+     */
+    private PlayerMenuController pmc;
+
+    /**
+     * Controller that's in charge of handling team related actions.
+     */
+    private TeamMenuController tmc;
+
+    /**
+     * Controller that's in charge of handling game related actions.
+     */
+    private GameMenuController gmc;
+
+    /**
+     * Controller that's in charge of handling the read of the logs.
+     */
+    private LoadFile lf;
+
+    /**
+     * Controller that's in charge of handling saving and loading the state of the program.
+     */
+    private LoadSaveController lsc;
+
+
+    /**
+     *  Empty constructor.
      */
     public Controller()
     {
@@ -37,7 +63,7 @@ public class Controller
     }
 
     /**
-     *  Function that effectively runs the program printing the main menu and asking the user what he wants to do
+     *  Function that effectively runs the program printing the main menu and asking the user what he wants to do.
      */
     public void run()
     {
@@ -45,6 +71,7 @@ public class Controller
 
         while(exit)
         {
+            View.clear();
             View.MainMenu();                                        // Prints the main menu
             int option = this.inputs.nextInt();                     // Requests 1 of 7 possible user options:
 

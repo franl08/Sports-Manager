@@ -9,10 +9,20 @@ import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.util.*;
 
+/**
+ * Class that's in charge of reading the logs.
+ */
 public class LoadFile
 {
+    /**
+     * Model that holds all the information.
+     */
     private Model model;
 
+    /**
+     * Parameterized constructor that receives a model.
+     * @param m Parameter that holds all the information.
+     */
     public LoadFile(Model m)
     {
         this.model = m;
