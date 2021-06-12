@@ -3,19 +3,35 @@ package View;
 import java.io.Serializable;
 import java.util.Arrays;
 
+/**
+ * Utility class to help showing outputs from the user.
+ */
 public final class Outputs implements Serializable
 {
+    /**
+     * Method that clears the screen.
+     */
     public static void clear()
     {
         for(int i = 0; i < 100; i++)
             System.out.println();
     }
 
+    /**
+     * Method that shows a message on the screen.
+     * @param message Message to be shown.
+     */
     public static void showMessage(String message)
     {
         System.out.print(message);
     }
 
+    /**
+     * Method that prints a table like menu with option. Option 0 is always related to exit or return.
+     * @param menuArgs The different options available to the user in a array of Strings.
+     * @param menuTitle The title of the menu.
+     * @param isExit To assert whether it is the main menu or any other.
+     */
     public static void printMenu(String[] menuArgs, String menuTitle, boolean isExit)
     {
         System.out.println();
@@ -59,11 +75,16 @@ public final class Outputs implements Serializable
         System.out.print("Choose an option: ");
     }
 
-    public static void printOptionList(String[] menuArgs, String menuTitle)
+    /**
+     * Method that prints a table like list with option.
+     * @param menuArgs The different options available to the user in a array of Strings.
+     * @param listTitle The title of the list.
+     */
+    public static void printOptionList(String[] menuArgs, String listTitle)
     {
         System.out.println();
 
-        int length = menuTitle.length() + 10;
+        int length = listTitle.length() + 10;
 
         for (String line : menuArgs)
         {
@@ -72,7 +93,7 @@ public final class Outputs implements Serializable
 
         Outputs.printLine('-', length);
         System.out.print("|");
-        Outputs.printMenuTitle(menuTitle, length);
+        Outputs.printMenuTitle(listTitle, length);
         System.out.println("|");
         int size = menuArgs.length;
 
@@ -89,14 +110,11 @@ public final class Outputs implements Serializable
         System.out.print("\nChoose an option: ");
     }
 
-    public static void printMatrix(char[][] matrix, int lines)
-    {
-        for(int i = 0; i < lines; i++)
-        {
-            System.out.println(matrix[i]);
-        }
-    }
-
+    /**
+     * Method that prints a table like list.
+     * @param table The different information relevant to the user in a array of Strings.
+     * @param headArgs The head of each column of the table.
+     */
     public static void printStringArrayAsTable(String[] table, String[] headArgs)
     {
         int args = headArgs.length;
@@ -149,6 +167,11 @@ public final class Outputs implements Serializable
         Outputs.printLine('-', lineLength);
     }
 
+    /**
+     * Method that prints a menu title atop a menu.
+     * @param menuTitle Title of the menu.
+     * @param length Length of the table (x axis).
+     */
     private static void printMenuTitle(String menuTitle, int length)
     {
         int spaces = length - menuTitle.length() - 1;
@@ -166,6 +189,10 @@ public final class Outputs implements Serializable
             System.out.print(" ");
     }
 
+    /**
+     * Method that prints a set number of a character.
+     * @param length Number of characters to print.
+     */
     private static void printLine(char c, int length)
     {
         for(int i = 0; i < length; i++)
@@ -174,12 +201,21 @@ public final class Outputs implements Serializable
         System.out.println();
     }
 
+    /**
+     * Method that prints a set number of spaces.
+     * @param length Number of spaces to print.
+     */
     private static void printSpaces(int length)
     {
         for(int i = 0; i < length; i++)
             System.out.print(" ");
     }
 
+    /**
+     * Method that prints the excess on a table.
+     * @param strLength Length of the information that is to be present on that space of the table.
+     * @param length Length of that portion of the table (x axis).
+     */
     private static void printExcess(int strLength, int length)
     {
         for(int i = strLength + 4; i < length - 1; i++)

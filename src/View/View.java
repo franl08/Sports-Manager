@@ -2,8 +2,14 @@ package View;
 
 import java.io.Serializable;
 
-public class View implements Serializable
+/**
+ * Class responsible to show the user everything from menus to simple messages.
+ */
+public final class View implements Serializable
 {
+    /**
+     * Method that displays on the screen the main menu.
+     */
     public static void MainMenu()
     {
         MainMenu.printMainMenu();
@@ -12,7 +18,7 @@ public class View implements Serializable
     //Player GUI
 
     /**
-     * Function that displays on the screen th player menu.
+     * Method that displays on the screen the player menu.
      */
     public static void PlayerMenu()
     {
@@ -20,13 +26,18 @@ public class View implements Serializable
     }
 
     /**
-     * Function that displays on the screen the manage player menu.
+     * Method that displays on the screen the manage player menu.
      */
     public static void ManagePlayer()
     {
         ViewPlayer.printManagePlayerMenu();
     }
 
+    /**
+     * Method that displays on the screen a message related to a parameter.
+     * @param param Parameter.
+     * @param isGoalkeeper Necessary to know which attributes to display.
+     */
     public static void askParam(String param, boolean isGoalkeeper)
     {
         // Player
@@ -143,13 +154,16 @@ public class View implements Serializable
             LoadSaveMenu.askForPathToSave();
     }
 
+    /**
+     * Method that displays on the screen a successful created player message.
+     */
     public static void printSuccessfulCreatedPlayer()
     {
         ViewPlayer.printSuccessfulCreatedPlayer();
     }
 
     /**
-     * Function that displays on the screen a table like representation of all the players currently in the system.
+     * Method that displays on the screen a table like representation of all the players currently in the system.
      */
     public static void printAllPlayers(String[] allPlayers)
     {
@@ -158,23 +172,24 @@ public class View implements Serializable
 
     //Team GUI
 
+    /**
+     * Method that displays on the screen the team menu.
+     */
     public static void TeamMenu()
     {
         ViewTeam.printTeamMenu();
     }
 
-    public static void printSuccessfulCreatedTeam()
-    {
-        ViewTeam.printSuccessfulCreatedTeam();
-    }
-
+    /**
+     * Method that displays on the screen a successful deleted player team.
+     */
     public static void printSuccessfulDeletedTeam()
     {
         ViewTeam.printSuccessfulDeletedTeam();
     }
 
     /**
-     * Function that displays on the screen a table like representation of all the teams currently in the system.
+     * Method that displays on the screen a table like representation of all the teams currently in the system.
      */
     public static void printAllTeams(String[] allTeams)
     {
@@ -182,7 +197,7 @@ public class View implements Serializable
     }
 
     /**
-     * Function that displays on the screen a table like representation of the history of a team currently in the system.
+     * Method that displays on the screen a table like representation of the history of a team currently in the system.
      */
     public static void printTeamPlayers(String[] teamPlayers)
     {
@@ -190,7 +205,7 @@ public class View implements Serializable
     }
 
     /**
-     * Function that displays on the screen a table like representation of the history of a team currently in the system.
+     * Method that displays on the screen a table like representation of the history of a team currently in the system.
      */
     public static void printTeamHistory(String[] teamHistory)
     {
@@ -198,7 +213,7 @@ public class View implements Serializable
     }
 
     /**
-     * Function that displays on the screen a table like representation of the numbers currently available in the team.
+     * Method that displays on the screen a table like representation of the numbers currently available in the team.
      */
     public static void printTeamAvailableNumbers(String[] numbers)
     {
@@ -207,16 +222,28 @@ public class View implements Serializable
 
     //Game GUI
 
+    /**
+     * Method that displays on the screen the game menu.
+     */
     public static void GameMenu()
     {
         ViewGame.printGameMenu();
     }
 
+    /**
+     * Method that displays on the screen a table like with all the players capable of playing a certain position in a team.
+     * @param allPos Array of Strings with the players relevant information.
+     * @param position Position.
+     */
     public static void printAllTeamPos(String[] allPos, String position)
     {
         ViewGame.printAllTeamPos(allPos, position);
     }
 
+    /**
+     * Method that displays on the screen a table like with all the teams ina a game.
+     * @param teams Array of Strings with the teams names.
+     */
     public static void printTeams(String[] teams)
     {
         ViewGame.printTeams(teams);
@@ -224,11 +251,18 @@ public class View implements Serializable
 
     //Save/Load Menu GUI
 
+    /**
+     * Method that displays on the screen the team menu.
+     */
     public static void LoadSaveMenu()
     {
         LoadSaveMenu.printLoadSaveMenu();
     }
 
+    /**
+     * Method that displays on the screen a table like with all the filenames of a directory.
+     * @param fileNames Array of Strings with the filenames.
+     */
     public static void printLoadFiles(String[] fileNames)
     {
         LoadSaveMenu.printLoadFiles(fileNames);
@@ -236,11 +270,18 @@ public class View implements Serializable
 
     //Util
 
+    /**
+     * Method that displays on the screen a message.
+     * @param message The message to be displayed.
+     */
     public static void printMessage(String message)
     {
         Outputs.showMessage(message);
     }
 
+    /**
+     * Method that clears the screen.
+     */
     public static void clear()
     {
         Outputs.clear();
