@@ -69,7 +69,7 @@ public class Controller
                     break;
 
                 case 6:
-                    this.model = new Model();
+                    this.model.resetModel();
                     break;
 
                 case 0:

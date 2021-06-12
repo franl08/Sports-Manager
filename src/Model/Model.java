@@ -646,6 +646,12 @@ public class Model implements Serializable{
         this.teams.get(aT).addHistoryGame(hg);
     }
 
+    public void resetModel(){
+        this.teams = new HashMap<>();
+        this.players = new HashMap<>();
+        this.games = new ArrayList<>();
+    }
+
     /**
      * Method to save current object state
      * @param objectPath Path to the file to save
