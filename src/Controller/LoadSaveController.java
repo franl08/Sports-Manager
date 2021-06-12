@@ -158,6 +158,6 @@ public class LoadSaveController implements Serializable
 
     private void validOption(int option, int length) throws ValueOutofBoundsException
     {
-        if(option < 0 || option >= length) throw new ValueOutofBoundsException("The filename you chose is invalid. Please try again.");
+        if(option < 0 || (length > 0 && option >= length)) throw new ValueOutofBoundsException("The filename you chose is invalid. Please try again.");
     }
 }
