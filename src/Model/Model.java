@@ -417,6 +417,11 @@ public class Model implements Serializable{
         return result;
     }
 
+    /**
+     * Method to get players numbers from a set of players
+     * @param players Set of players
+     * @return Set of number from the given players
+     */
     public Set<Integer> getPlayersNum(Set<Player> players)
     {
         HashSet<Integer> players_num = new HashSet<>();
@@ -442,6 +447,11 @@ public class Model implements Serializable{
         return result;
     }
 
+    /**
+     * Method to get a team goalkeepers as an array of strings
+     * @param team_name Team's to check name
+     * @return Team goalkeepers as an array of strings
+     */
     public String[] getTeamGKAsStringArray(String team_name)
     {
         Set<Player> GKList = getTeamGK(team_name);
@@ -474,6 +484,11 @@ public class Model implements Serializable{
         return result;
     }
 
+    /**
+     * Method to get a team wingers as an array of strings
+     * @param team_name Team's to check name
+     * @return Team wingers as an array of strings
+     */
     public String[] getTeamWGAsStringArray(String team_name)
     {
         Set<Player> WGList = getTeamWG(team_name);
@@ -506,6 +521,11 @@ public class Model implements Serializable{
         return result;
     }
 
+    /**
+     * Method to get a team defenders, midfielders and forwards as an array of strings
+     * @param team_name Team's to check name
+     * @return Team defenders, midfielders and forwards as an array of strings
+     */
     public String[] getTeamExchangeableAsStringArray(String team_name)
     {
         Set<Player> ExchangeableList = getTeamExchangeable(team_name);
@@ -533,6 +553,12 @@ public class Model implements Serializable{
         return ans;
     }
 
+    /**
+     * Method to get a team non playing goalkeepers as an array of strings
+     * @param team_name Team's to check name
+     * @param players Set of numbers of playing players
+     * @return Team non playing goalkeepers as an array of strings
+     */
     public String[] getTeamGKAsStringArray(String team_name, Set<Integer> players){
         Set<Player> GoalkeepersList = getTeamGK(team_name, getNonPlayingPlayers(team_name, players));
         String[] result = new String[GoalkeepersList.size() * 4];
@@ -557,6 +583,11 @@ public class Model implements Serializable{
         return ans;
     }
 
+    /**
+     * Method to get a team non playing wingers as an array of strings
+     * @param players Set of numbers of playing players
+     * @return Team non playing wingers as an array of strings
+     */
     public String[] getTeamWGAsStringArray(String team_name, Set<Integer> players){
         Set<Player> WingersList = getTeamExchangeable(team_name, getNonPlayingPlayers(team_name, players));
         String[] result = new String[WingersList.size() * 4];
@@ -573,6 +604,12 @@ public class Model implements Serializable{
         return result;
     }
 
+    /**
+     * Method to get a set of a team non playing defenders, midfielders and forwards
+     * @param team_name Team's to check name
+     * @param players Set of numbers of playing players
+     * @return Set of a team non playing defenders, midfielders and forwards
+     */
     public Set<Player> getTeamExchangeable(String team_name, Set<Integer> players){
         Set<Player> ans = new HashSet<>();
         Team t = this.teams.get(team_name);
@@ -581,6 +618,12 @@ public class Model implements Serializable{
         return ans;
     }
 
+    /**
+     * Method to get a team non playing defenders, midfielders and forwards as an array of strings
+     * @param team_name Team's to check name
+     * @param players Set of numbers of playing players
+     * @return Team non playing defenders, midfielders and forwards as an array of strings
+     */
     public String[] getTeamExchangeableAsStringArray(String team_name, Set<Integer> players){
         Set<Player> ExchangeableList = getTeamExchangeable(team_name, getNonPlayingPlayers(team_name, players));
         String[] result = new String[ExchangeableList.size() * 4];
@@ -597,6 +640,12 @@ public class Model implements Serializable{
         return result;
     }
 
+    /**
+     * Method to get non playing players of a team
+     * @param team Team's to check name
+     * @param playingPlayers Set of numbers of the playing player
+     * @return Set of number of non playing players
+     */
     public Set<Integer> getNonPlayingPlayers(String team, Set<Integer> playingPlayers){
         Team t = this.teams.get(team);
         Set<Integer> ans = new HashSet<>();
@@ -605,6 +654,12 @@ public class Model implements Serializable{
         return ans;
     }
 
+    /**
+     * Method to get a team playing players as a string array
+     * @param team_name Team's to check name
+     * @param players Set with the numbers of playing players
+     * @return Playing players in an array of strings
+     */
     public String[] getTeamPlayingPlayersAsStringArray(String team_name, Set<Integer> players){
         Set<Player> PlayerList = getPlayingPlayers(team_name, players);
         String[] result = new String[PlayerList.size() * 4];
@@ -621,6 +676,12 @@ public class Model implements Serializable{
         return result;
     }
 
+    /**
+     * Method to get a set of the Players who are currently playing in a game
+     * @param team Team's to check name
+     * @param playingPlayers Set of numbers of the playing players
+     * @return Set of players playing
+     */
     public Set<Player> getPlayingPlayers(String team, Set<Integer> playingPlayers){
         Team t = this.teams.get(team);
         Set<Player> ans = new HashSet<>();
@@ -629,6 +690,12 @@ public class Model implements Serializable{
         return ans;
     }
 
+    /**
+     * Method to set a player position for a game
+     * @param team Name of the team of player
+     * @param nPlayer Number of the player
+     * @param posCode Code to represent position
+     */
     public void setPlayerPositionForGame(String team, int nPlayer, int posCode){
         Player p = this.teams.get(team).getPlayers().get(nPlayer);
         switch (posCode) {
@@ -640,12 +707,21 @@ public class Model implements Serializable{
         }
     }
 
+    /**
+     * Method to update team's game history from two teams who had disputed a game
+     * @param hT Home Team name
+     * @param aT Away Team name
+     * @param g Game
+     */
     public void updateTeamsHistory(String hT, String aT, Game g){
         HistoryGame hg = new HistoryGame(g);
         this.teams.get(hT).addHistoryGame(hg);
         this.teams.get(aT).addHistoryGame(hg);
     }
 
+    /**
+     * Method to reset model
+     */
     public void resetModel(){
         this.teams = new HashMap<>();
         this.players = new HashMap<>();

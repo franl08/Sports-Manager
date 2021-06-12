@@ -2,8 +2,31 @@ package Model;
 
 public enum Position
 {
-    GOALKEEPER, DEFENDER, WINGER, MIDFIELDER, FORWARD;
+    /**
+     * Goalkeeper position
+     */
+    GOALKEEPER,
+    /**
+     * Defender position
+     */
+    DEFENDER,
+    /**
+     * Winger position
+     */
+    WINGER,
+    /**
+     * Midfielder position
+     */
+    MIDFIELDER,
+    /**
+     * Forward position
+     */
+    FORWARD;
 
+    /**
+     * Method to get one position as a string
+     * @return Position in a String
+     */
     @Override
     public String toString()
     {

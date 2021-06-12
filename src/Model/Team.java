@@ -46,7 +46,7 @@ public class Team implements Serializable {
      * @param name Team name
      * @param players Team players
      */
-    public Team(String id, String name, Map<Integer, Player> players) {
+    public Team(String name, Map<Integer, Player> players) {
         this.name = name;
         try{
             this.setPlayers(players);
@@ -64,7 +64,7 @@ public class Team implements Serializable {
      * @param players Team Players
      * @param gamesHistory Team games history
      */
-    public Team(String id, String name, Map<Integer, Player> players, List<HistoryGame> gamesHistory) {
+    public Team(String name, Map<Integer, Player> players, List<HistoryGame> gamesHistory) {
         this.name = name;
         try{
             this.setPlayers(players);

@@ -10,7 +10,7 @@ public class NumberAlreadyExistsInTeamException extends Exception{
 
     /**
      * Constructor with a message for Exception to prevent players with the same number in the same team
-     * @param s
+     * @param s Message to show
      */
     public NumberAlreadyExistsInTeamException(String s){
         super(s);
