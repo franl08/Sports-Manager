@@ -13,6 +13,7 @@ public class Controller
     private TeamMenuController tmc;
     private GameMenuController gmc;
     private LoadFile lf;
+    private LoadSaveController lsc;
 
     public Controller()
     {
@@ -24,6 +25,8 @@ public class Controller
         this.gmc = new GameMenuController(this.model, this.inputs);
 
         this.lf = new LoadFile(this.model);
+
+        this.lsc = new LoadSaveController(this.model, this.inputs);
     }
 
     public Controller(Model m)
@@ -66,6 +69,7 @@ public class Controller
                     break;
 
                 case 5:
+                    this.lsc.run();
                     break;
 
                 case 6:
