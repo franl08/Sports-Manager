@@ -654,11 +654,12 @@ public class Model implements Serializable{
 
     /**
      * Method to save current object state
-     * @param objectPath Path to the file to save
+     * @param fileName Name to give the name to the file to save
      * @throws IOException Exception of I/O
      */
-    public void saveObject(String objectPath) throws IOException {
-        FileOutputStream fos = new FileOutputStream(objectPath);
+    public void saveObject(String fileName) throws IOException {
+        String filePath = "saves/" + fileName;
+        FileOutputStream fos = new FileOutputStream(filePath);
         BufferedOutputStream bos = new BufferedOutputStream(fos);
         ObjectOutputStream oos = new ObjectOutputStream(bos);
         oos.writeObject(this);
@@ -668,13 +669,14 @@ public class Model implements Serializable{
 
     /**
      * Method to read an object file
-     * @param filename Path to the file to read
-     * @return new Database
+     * @param fileName Path to the file to read
+     * @return A new Model
      * @throws IOException Exception of I/O
      * @throws ClassNotFoundException Exception of a class not found
      */
-    public Model readObject (String filename) throws IOException, ClassNotFoundException{
-        ObjectInputStream file = new ObjectInputStream((new FileInputStream(filename)));
+    public Model readObject (String fileName) throws IOException, ClassNotFoundException{
+        String filePath = "saves/" + fileName;
+        ObjectInputStream file = new ObjectInputStream((new FileInputStream(filePath)));
         Model t = (Model) file.readObject();
         file.close();
         return t;
