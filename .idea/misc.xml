@@ -2,6 +2,7 @@
 <project version="4">
   <component name="JavadocGenerationManager">
     <option name="OUTPUT_DIRECTORY" value="$PROJECT_DIR$/docs" />
+    <option name="LOCALE" value="docs" />
     <option name="OPTION_INCLUDE_LIBS" value="true" />
   </component>
   <component name="ProjectRootManager" version="2" project-jdk-name="15" project-jdk-type="JavaSDK">

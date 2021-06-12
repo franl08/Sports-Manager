@@ -135,6 +135,7 @@ public class WG extends FieldPlayer{
      * @param impulsion Player impulsion
      * @param heading Player heading
      * @param finishing Player finishing
+     * @param crossing Player crossing
      * @param passing Player passing
      */
     public WG(String name, int number, int velocity, int endurance, int skill, int impulsion, int heading, int finishing, int passing, int crossing) {
