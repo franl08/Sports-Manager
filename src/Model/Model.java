@@ -734,8 +734,10 @@ public class Model implements Serializable{
      * @throws IOException Exception of I/O
      */
     public void saveObject(String fileName) throws IOException {
-        String filePath = "\\saves\\" + fileName;
-        FileOutputStream fos = new FileOutputStream(filePath);
+        String filePath = "saves/" + fileName +".sc";
+        File save = new File(filePath);
+        if(!save.exists()) save.createNewFile();
+        FileOutputStream fos = new FileOutputStream(save);
         BufferedOutputStream bos = new BufferedOutputStream(fos);
         ObjectOutputStream oos = new ObjectOutputStream(bos);
         oos.writeObject(this);
@@ -751,7 +753,7 @@ public class Model implements Serializable{
      * @throws ClassNotFoundException Exception of a class not found
      */
     public Model readObject (String fileName) throws IOException, ClassNotFoundException{
-        String filePath = "\\saves\\" + fileName;
+        String filePath = "/saves/" + fileName + ".sc";
         ObjectInputStream file = new ObjectInputStream((new FileInputStream(filePath)));
         Model t = (Model) file.readObject();
         file.close();
