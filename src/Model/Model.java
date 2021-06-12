@@ -434,6 +434,11 @@ public class Model implements Serializable{
         return players_num;
     }
 
+    /**
+     * Method to get a set of a team goalkeepers
+     * @param team_name Team's to check name
+     * @return Set of a team goalkeepers
+     */
     public Set<Player> getTeamGK(String team_name)
     {
         HashSet<Player> result = new HashSet<>();
@@ -471,6 +476,11 @@ public class Model implements Serializable{
         return result;
     }
 
+    /**
+     * Method to get a set of a team wingers
+     * @param team_name Team's to check name
+     * @return Set of a team wingers
+     */
     public Set<Player> getTeamWG(String team_name)
     {
         HashSet<Player> result = new HashSet<>();
@@ -508,6 +518,11 @@ public class Model implements Serializable{
         return result;
     }
 
+    /**
+     * Method to get a set of a team defenders, midfielders and forwards
+     * @param team_name Team's to check name
+     * @return Set of a team defenders, midfielders and forwards
+     */
     public Set<Player> getTeamExchangeable(String team_name)
     {
         HashSet<Player> result = new HashSet<>();
@@ -545,6 +560,12 @@ public class Model implements Serializable{
         return result;
     }
 
+    /**
+     * Method to get a set of a team non playing goalkeepers
+     * @param team_name Team's to check name
+     * @param players Set of numbers of playing players
+     * @return Set of a team non playing goalkeepers
+     */
     public Set<Player> getTeamGK(String team_name, Set<Integer> players){
         Set<Player> ans = new HashSet<>();
         Team t = this.teams.get(team_name);
@@ -575,6 +596,12 @@ public class Model implements Serializable{
         return result;
     }
 
+    /**
+     * Method to get a set of a team non playing wingers
+     * @param team_name Team's to check name
+     * @param players Set of numbers of playing players
+     * @return Set of a team non playing wingers
+     */
     public Set<Player> getTeamWG(String team_name, Set<Integer> players){
         Set<Player> ans = new HashSet<>();
         Team t = this.teams.get(team_name);
@@ -729,12 +756,23 @@ public class Model implements Serializable{
     }
 
     /**
+     * Method to set a model given another model
+     * @param m Model to set
+     */
+    public void setModel(Model m){
+        resetModel();
+        this.players = m.getPlayers();
+        this.teams = m.getTeams();
+        this.games = m.getGames();
+    }
+
+    /**
      * Method to save current object state
      * @param fileName Name to give the name to the file to save
      * @throws IOException Exception of I/O
      */
     public void saveObject(String fileName) throws IOException {
-        String filePath = "saves/" + fileName +".sc";
+        String filePath = "saves/" + fileName +".sm";
         File save = new File(filePath);
         if(!save.exists()) save.createNewFile();
         FileOutputStream fos = new FileOutputStream(save);
@@ -753,7 +791,7 @@ public class Model implements Serializable{
      * @throws ClassNotFoundException Exception of a class not found
      */
     public Model readObject (String fileName) throws IOException, ClassNotFoundException{
-        String filePath = "/saves/" + fileName + ".sc";
+        String filePath = "saves/" + fileName;
         ObjectInputStream file = new ObjectInputStream((new FileInputStream(filePath)));
         Model t = (Model) file.readObject();
         file.close();

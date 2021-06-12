@@ -127,13 +127,14 @@ public class LoadSaveController implements Serializable
 
         if(option != 0)
         {
-            String filename = fileNames[option];
+            String filename = fileNames[option - 1];
 
             try
             {
-                this.model.readObject(filename);
+                this.model.setModel(this.model.readObject(filename));
                 View.clear();
                 View.printMessage("File successfully loaded.");
+
             }
             catch (Exception e)
             {
