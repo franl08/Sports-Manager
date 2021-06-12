@@ -1,5 +1,8 @@
 package Model;
 
+/**
+ * Exception to prevent incorrect lines on logs
+ */
 public class IncorrectLineException extends Exception{
     /**
      * Empty Constructor for Exception to prevent wrong lines from logs file
@@ -10,7 +13,7 @@ public class IncorrectLineException extends Exception{
 
     /**
      * Constructor for Exception to prevent wrong lines from logs file
-     * @param s
+     * @param s Message to show
      */
     public IncorrectLineException(String s){
         super(s);

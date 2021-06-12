@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * Class with methods used by different classes
+ */
 public class utils {
     private static final int max = 99;
 

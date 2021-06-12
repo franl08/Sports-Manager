@@ -1,5 +1,8 @@
 package Model;
 
+/**
+ * Exception to prevent invalid positions
+ */
 public class InvalidPositionException extends Exception{
     /**
      * Empty Constructor for Exception to prevent invalid positions

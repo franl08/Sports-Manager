@@ -3,6 +3,9 @@ package Model;
 import java.io.Serializable;
 import java.time.LocalDate;
 
+/**
+ * Game to be added to historic class
+ */
 public class HistoryGame implements Serializable {
     /**
      * Home team name

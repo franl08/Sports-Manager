@@ -3,6 +3,9 @@ package Model;
 import java.io.Serializable;
 import java.util.*;
 
+/**
+ * Player abstract class
+ */
 public abstract class Player implements Serializable {
     private String name;
     private int number;
@@ -247,6 +250,7 @@ public abstract class Player implements Serializable {
      * Method to change a player's attribute
      * @param attribute Attribute signature
      * @param newValue New value
+     * @throws InvalidAttributeException Exception to prevent invalid attributes
      */
     public abstract void updateAttribute(int attribute, int newValue) throws InvalidAttributeException;
 }

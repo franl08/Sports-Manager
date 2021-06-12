@@ -1,5 +1,8 @@
 package Model;
 
+/**
+ * Exception to prevent invalid players
+ */
 public class InvalidPlayerException extends Exception{
 
     /**

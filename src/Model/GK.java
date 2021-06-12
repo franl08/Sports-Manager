@@ -2,6 +2,9 @@ package Model;
 
 import java.util.List;
 
+/**
+ * Goalkeepers class
+ */
 public class GK extends Player {
     private int elasticity;
     private int reflexes;

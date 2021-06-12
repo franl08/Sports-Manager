@@ -1,5 +1,8 @@
 package Model;
 
+/**
+ * Enum of possible positions
+ */
 public enum Position
 {
     /**

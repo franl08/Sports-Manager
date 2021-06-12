@@ -1,5 +1,8 @@
 package Model;
 
+/**
+ * Enum of meteorology
+ */
 public enum Meteorology {
     /**
      * Meteorology for a sunny day or night

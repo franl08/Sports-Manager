@@ -2,6 +2,9 @@ package Model;
 
 import java.util.List;
 
+/**
+ * Field Players class
+ */
 public abstract class FieldPlayer extends Player {
     /**
      * Player's velocity

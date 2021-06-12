@@ -2,6 +2,9 @@ package Model;
 
 import java.util.List;
 
+/**
+ * Defenders Class
+ */
 public class DF extends FieldPlayer{
     private Position curPosition = Position.DEFENDER;
 

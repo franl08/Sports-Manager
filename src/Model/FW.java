@@ -2,6 +2,9 @@ package Model;
 
 import java.util.List;
 
+/**
+ * Forwards class
+ */
 public class FW extends FieldPlayer{
     private Position curPosition = Position.FORWARD;
 

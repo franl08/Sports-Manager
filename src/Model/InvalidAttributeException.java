@@ -1,5 +1,8 @@
 package Model;
 
+/**
+ * Exception to prevent invalid attributes
+ */
 public class InvalidAttributeException extends Exception
 {
     /**

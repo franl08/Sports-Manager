@@ -1,5 +1,8 @@
 package Model;
 
+/**
+ * Exception to prevent invalid teams
+ */
 public class InvalidTeamException extends Exception{
     /**
      * Empty Constructor for Exception to prevent invalid teams

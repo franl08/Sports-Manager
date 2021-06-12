@@ -38,6 +38,10 @@ public class Model implements Serializable{
         this.setGames(games);
     }
 
+    /**
+     * Copy Constructor
+     * @param m Model to copy
+     */
     public Model(Model m){
         this.setTeams(m.getTeams());
         this.setPlayers(m.getPlayers());
@@ -147,6 +151,7 @@ public class Model implements Serializable{
      * @param pName Player's to add name
      * @param t Player's new team
      * @throws InvalidPlayerException Exception to prevent cases of an nonexistent player
+     * @throws NumberAlreadyExistsInTeamException Exception to prevent repeated numbers
      */
     public void addPlayerToTeam(String pName, Team t) throws InvalidPlayerException, NumberAlreadyExistsInTeamException {
         Player p = this.players.get(pName);
@@ -373,6 +378,9 @@ public class Model implements Serializable{
      * @param playerName Player's name
      * @param attribute Code of the player's attribute to update
      * @param newValue New value for the attribute
+     * @throws InvalidAttributeException Exception to prevent invalid attributes
+     * @throws PlayerAlreadyExistsException Exception to prevent repeated players
+     * @throws InvalidTeamException Exception to prevent invalid teams
      */
     public void updatePlayer(String playerName , int attribute, int newValue) throws InvalidAttributeException, PlayerAlreadyExistsException, InvalidTeamException
     {
@@ -613,6 +621,7 @@ public class Model implements Serializable{
     /**
      * Method to get a team non playing wingers as an array of strings
      * @param players Set of numbers of playing players
+     * @param team_name Name of the team
      * @return Team non playing wingers as an array of strings
      */
     public String[] getTeamWGAsStringArray(String team_name, Set<Integer> players){

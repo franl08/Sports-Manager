@@ -3,6 +3,9 @@ package Model;
 import java.io.Serializable;
 import java.util.*;
 
+/**
+ * Team class
+ */
 public class Team implements Serializable {
     /**
      * Team's name

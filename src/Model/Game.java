@@ -9,6 +9,9 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+/**
+ * Game class
+ */
 public class Game implements Serializable {
     /**
      * Home Team
@@ -959,6 +962,10 @@ public class Game implements Serializable {
         return ocs.toString();
     }
 
+    /**
+     * Method to get a message after a part being simulated
+     * @return String with the message
+     */
     public String partGameMessage(){
         StringBuilder ocs = new StringBuilder("Current result at minute ").append(this.timer).append(": ")
                 .append(this.homeTeam.getName()).append(" ").append(this.homeGoals)
@@ -967,7 +974,11 @@ public class Game implements Serializable {
         return ocs.toString();
     }
 
-public String finalGameMessage(){
+    /**
+     * Method to get a final game message
+     * @return String with final game message
+     */
+    public String finalGameMessage(){
        StringBuilder ocs = new StringBuilder("That's it! End of the game and the final result is: ")
                 .append(this.homeTeam.getName()).append(" ").append(this.homeGoals)
                 .append(" vs ")
@@ -989,6 +1000,10 @@ public String finalGameMessage(){
         }
     }
 
+    /**
+     * Method to get a String telling the conditions at the begin of a game
+     * @return String telling the conditions at the begin of a game
+     */
     public String getInitialGameConditions(){
         StringBuilder sb = new StringBuilder("Hello everybody and welcome to a great day of football! And the game for today is:\n")
                 .append(homeTeam.getName()).append(" vs ").append(awayTeam.getName()).append("\n");

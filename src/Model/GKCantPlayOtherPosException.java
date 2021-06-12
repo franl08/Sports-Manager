@@ -1,5 +1,8 @@
 package Model;
 
+/**
+ * Exception to prevent goalkeepers to play out of position
+ */
 public class GKCantPlayOtherPosException extends Exception{
     /**
      * Empty Constructor for Exception to prevent Goalkeepers from playing on other positions

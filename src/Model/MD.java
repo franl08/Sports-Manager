@@ -2,6 +2,9 @@ package Model;
 
 import java.util.List;
 
+/**
+ * Midfielders class
+ */
 public class MD extends FieldPlayer{
     private final Position curPosition = Position.MIDFIELDER;
 
@@ -136,6 +139,7 @@ public class MD extends FieldPlayer{
      * @param heading Player heading
      * @param finishing Player finishing
      * @param passing Player passing
+     * @param crossing Player crossing
      */
     public MD(String name, int number, int velocity, int endurance, int skill, int impulsion, int heading, int finishing, int passing, int crossing) {
         super(name, number, velocity, endurance, skill, impulsion, heading, finishing, passing, crossing, Position.MIDFIELDER);
