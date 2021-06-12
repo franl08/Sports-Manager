@@ -1,5 +1,8 @@
 package Controller;
 
+/**
+ * Exception to prevent values out of bounds
+ */
 public class ValueOutofBoundsException extends Exception
 {
     /**

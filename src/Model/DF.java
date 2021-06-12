@@ -6,6 +6,9 @@ import java.util.List;
  * Defenders Class
  */
 public class DF extends FieldPlayer{
+    /**
+     * Defender's position
+     */
     private Position curPosition = Position.DEFENDER;
 
     /**

@@ -6,6 +6,9 @@ import java.util.List;
  * Forwards class
  */
 public class FW extends FieldPlayer{
+    /**
+     * Forward's current position
+     */
     private Position curPosition = Position.FORWARD;
 
     /**

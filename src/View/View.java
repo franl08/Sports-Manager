@@ -164,6 +164,7 @@ public final class View implements Serializable
 
     /**
      * Method that displays on the screen a table like representation of all the players currently in the system.
+     * @param allPlayers All players in the System
      */
     public static void printAllPlayers(String[] allPlayers)
     {
@@ -190,6 +191,7 @@ public final class View implements Serializable
 
     /**
      * Method that displays on the screen a table like representation of all the teams currently in the system.
+     * @param allTeams Teams on System
      */
     public static void printAllTeams(String[] allTeams)
     {
@@ -198,6 +200,7 @@ public final class View implements Serializable
 
     /**
      * Method that displays on the screen a table like representation of the history of a team currently in the system.
+     * @param teamPlayers Team's players
      */
     public static void printTeamPlayers(String[] teamPlayers)
     {
@@ -206,6 +209,7 @@ public final class View implements Serializable
 
     /**
      * Method that displays on the screen a table like representation of the history of a team currently in the system.
+     * @param teamHistory Team's history
      */
     public static void printTeamHistory(String[] teamHistory)
     {
@@ -214,6 +218,7 @@ public final class View implements Serializable
 
     /**
      * Method that displays on the screen a table like representation of the numbers currently available in the team.
+     * @param numbers Team available numbers
      */
     public static void printTeamAvailableNumbers(String[] numbers)
     {

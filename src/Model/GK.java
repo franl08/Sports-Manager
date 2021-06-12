@@ -6,14 +6,41 @@ import java.util.List;
  * Goalkeepers class
  */
 public class GK extends Player {
+    /**
+     * Goalkeeper's elasticity
+     */
     private int elasticity;
+    /**
+     * Goalkeeper's reflexes
+     */
     private int reflexes;
+    /**
+     * Goalkeeper's agility
+     */
     private int agility;
+    /**
+     * Goalkeeper's decisions
+     */
     private int decisions;
+    /**
+     * Goalkeeper's Velocity
+     */
     private int velocity;
+    /**
+     * Goalkeeper's passing
+     */
     private int passing;
+    /**
+     * Goalkeeper's courage
+     */
     private int courage;
+    /**
+     * Goalkeeper's endurance
+     */
     private int endurance;
+    /**
+     * Goalkeeper's position
+     */
     private final Position curPosition = Position.GOALKEEPER;
 
     /**

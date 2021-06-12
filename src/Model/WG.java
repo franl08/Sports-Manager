@@ -6,6 +6,9 @@ import java.util.List;
  * Winger class
  */
 public class WG extends FieldPlayer{
+    /**
+     * Current Position to Winger
+     */
     private final Position curPosition = Position.WINGER;
 
     /**

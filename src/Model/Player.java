@@ -7,11 +7,29 @@ import java.util.*;
  * Player abstract class
  */
 public abstract class Player implements Serializable {
+    /**
+     * Player's name
+     */
     private String name;
+    /**
+     * Player's number
+     */
     private int number;
+    /**
+     * Player's Current Team Name
+     */
     private String currentTeamName;
+    /**
+     * Player's overall
+     */
     private int overall;
+    /**
+     * Player's historic
+     */
     private List<String> historic;
+    /**
+     * Player's position
+     */
     private Position position;
 
     /**

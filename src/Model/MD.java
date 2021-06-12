@@ -6,6 +6,9 @@ import java.util.List;
  * Midfielders class
  */
 public class MD extends FieldPlayer{
+    /**
+     * Midfielder's position
+     */
     private final Position curPosition = Position.MIDFIELDER;
 
     /**

@@ -18,6 +18,7 @@ public final class ViewGame implements Serializable
 
     /**
      * Method that's in charge of printing the option list related to game tactics.
+     * @param teamName Team's name
      */
     public static void printGameTactics(String teamName)
     {
@@ -59,6 +60,8 @@ public final class ViewGame implements Serializable
 
     /**
      * Method that's in charge of printing the list of available substitutes.
+     * @param allPos Player's information
+     * @param position Player's position
      */
     public static void printAllTeamPos(String[] allPos, String position)
     {
@@ -70,6 +73,7 @@ public final class ViewGame implements Serializable
 
     /**
      * Method that's in charge of printing the option list of the playing teams.
+     * @param teams Playing teams
      */
     public static void printTeams(String[] teams)
     {

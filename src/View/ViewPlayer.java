@@ -27,6 +27,7 @@ public final class ViewPlayer implements Serializable
 
     /**
      * Method that's in charge of printing the menu related to players attributes.
+     * @param isGoalkeeper Boolean to check if is a goalkeeper
      */
     public static void printAttributesPlayerMenu(boolean isGoalkeeper)
     {

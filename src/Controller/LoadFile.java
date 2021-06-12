@@ -45,6 +45,8 @@ public class LoadFile
      * @throws IncorrectLineException Exception of an incorrect line on logs file
      * @throws NumberAlreadyExistsInTeamException Exception of a player with a certain number already exists in the team
      * @throws InvalidTeamException Exception of an invalid team (p.e. nonexistent team who played one (or more) game(s))
+     * @throws TeamAlreadyExistsException Exception to prevent repeated teams
+     * @throws PlayerAlreadyExistsException Exception to preven repeated players
      */
     public void parse() throws IncorrectLineException, NumberAlreadyExistsInTeamException, InvalidTeamException, PlayerAlreadyExistsException, TeamAlreadyExistsException
     {
