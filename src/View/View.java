@@ -1,7 +1,6 @@
 package View;
 
 import java.io.Serializable;
-import java.lang.reflect.Method;
 
 public class View implements Serializable
 {
@@ -137,6 +136,11 @@ public class View implements Serializable
 
         if(param.equals("parts"))
             ViewGame.askHowManyParts();
+
+        // Load/Save
+
+        if(param.equals("file_to_save"))
+            LoadSaveMenu.askForPathToSave();
     }
 
     public static void printSuccessfulCreatedPlayer()
@@ -208,11 +212,6 @@ public class View implements Serializable
         ViewGame.printGameMenu();
     }
 
-    public static void TacticsMenu(String teamName)
-    {
-        ViewGame.printGameTactics(teamName);
-    }
-
     public static void printAllTeamPos(String[] allPos, String position)
     {
         ViewGame.printAllTeamPos(allPos, position);
@@ -221,6 +220,18 @@ public class View implements Serializable
     public static void printTeams(String[] teams)
     {
         ViewGame.printTeams(teams);
+    }
+
+    //Save/Load Menu GUI
+
+    public static void LoadSaveMenu()
+    {
+        LoadSaveMenu.printLoadSaveMenu();
+    }
+
+    public static void printLoadFiles(String[] fileNames)
+    {
+        LoadSaveMenu.printLoadFiles(fileNames);
     }
 
     //Util
