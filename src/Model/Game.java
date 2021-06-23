@@ -760,9 +760,9 @@ public class Game implements Serializable {
         if(this.nAwaySubs >= 3) throw new NumberOfMaximumSubsException("Number of maximum substitutions for the home team already reached");
         if(this.awayPlayers.contains(numIn)) throw new InvalidPlayerException("Player with number " + numIn + " is playing");
         else if(!this.awayPlayers.contains(numOut)) throw new InvalidPlayerException("Player with number " + numOut + " isn't playing");
-        StringBuilder sb = new StringBuilder("Substitution on ").append(this.homeTeam.getName()).append(": ")
-                .append(this.homeTeam.getPlayers().get(numOut).getName()).append(" will be replaced by ")
-                .append(this.homeTeam.getPlayers().get(numIn).getName());
+        StringBuilder sb = new StringBuilder("Substitution on ").append(this.awayTeam.getName()).append(": ")
+                .append(this.awayTeam.getPlayers().get(numOut).getName()).append(" will be replaced by ")
+                .append(this.awayTeam.getPlayers().get(numIn).getName());
         this.awayPlayers.add(numIn);
         this.awayPlayers.remove(numOut);
         this.awaySubs.put(numOut, numIn);
@@ -940,7 +940,8 @@ public class Game implements Serializable {
         String aT = this.awayTeam.getName();
         int timeToAdv = (int) (gameTime / parts), numberOfActions = 1;
         advanceTime(timeToAdv, gameTime);
-        if(this.timer != gameTime) {
+        this.timer--;
+        if(this.timer++ != gameTime) {
             if (timeToAdv > 10) {
                 numberOfActions = utils.getRandNum(timeToAdv) + 1;
             }

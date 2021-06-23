@@ -738,11 +738,11 @@ public class Model implements Serializable{
     public void setPlayerPositionForGame(String team, int nPlayer, int posCode){
         Player p = this.teams.get(team).getPlayers().get(nPlayer);
         switch (posCode) {
-            case 0 -> p.setPosition(Position.GOALKEEPER);
-            case 1 -> p.setPosition(Position.DEFENDER);
-            case 2 -> p.setPosition(Position.WINGER);
-            case 3 -> p.setPosition(Position.MIDFIELDER);
-            case 4 -> p.setPosition(Position.FORWARD);
+            case 0 : p.setPosition(Position.GOALKEEPER);
+            case 1 : p.setPosition(Position.DEFENDER);
+            case 2 : p.setPosition(Position.WINGER);
+            case 3 : p.setPosition(Position.MIDFIELDER);
+            case 4 : p.setPosition(Position.FORWARD);
         }
     }
 
