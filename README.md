@@ -1,6 +1,6 @@
 # Sports Manager
 
-Application similar to sports management simulators (like "Football Manager") made in the context of OOP UC on Minho University.
+Application similar to sports management simulators (like "Football Manager") made in the context of OOP on Minho University.
 
 Made by:
 
